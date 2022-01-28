@@ -1,0 +1,473 @@
+import React, { useState } from "react";
+import styled from "styled-components";
+import Carousel from "react-multi-carousel";
+import { Row } from "react-bootstrap";
+import "react-multi-carousel/lib/styles.css";
+
+import college from "../../../assets/imageheaderphotos/college.jpg";
+import ImageHeader from "../../contents/ImageHeader";
+import Default from "../../../assets/default/default.png";
+import scienceImage from "../../../assets/collegePrograms/sciencelab.jpg";
+import managementImage from "../../../assets/collegePrograms/management.jpg";
+import educationImage from "../../../assets/collegePrograms/education.jpg";
+import Meta from "../../contents/Meta";
+import "./index.css";
+import ProgramModal from "../../contents/ProgramModal";
+
+const Section1 = styled.div`
+  padding: 20px 5px;
+  h3 {
+    color: #222222;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    position: relative;
+  }
+  p {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: justify;
+    color: #111;
+    font-weight: 400;
+  }
+`;
+
+const Message = styled.div`
+  padding: 27px 30px;
+`;
+
+const Title = styled.div`
+  color: #444444;
+  max-width: 420px;
+  margin: auto;
+  font-weight: 600;
+  position: relative;
+  font-size: 30px;
+  text-align: center;
+  &:before {
+    position: absolute;
+    content: "";
+    background: #05ab90;
+    width: 75px;
+    height: 1px;
+    bottom: -18px;
+    left: 50%;
+    margin-left: -45px;
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    background: #05ab90;
+    width: 75px;
+    height: 1px;
+    bottom: -22px;
+    left: 50%;
+    margin-left: -30px;
+  }
+`;
+
+const MessageCard = styled.div`
+  transition: 0.3s ease;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-top: 3px solid #e5e5e5;
+  padding: 16px 25px 25px;
+  border-radius: 12px;
+  margin: 30px 20px 0px 20px;
+  &:hover {
+    border-color: #05ab90;
+  }
+`;
+
+const Msg = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #969696;
+`;
+
+const Profile = styled.div`
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  img {
+    margin-top: 7px;
+    max-width: 90px;
+    max-height: 70px;
+    border-radius: 50%;
+    vertical-align: middle;
+    @media (max-width: 770px) {
+      margin: auto;
+    }
+  }
+  @media (max-width: 770px) {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+`;
+
+const ProfileDesc = styled.div`
+  h6 {
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  p {
+    font-size: 12px;
+  }
+`;
+
+const ProgramTitle = styled.h1`
+  font-weight: 700;
+  color: rgb(1, 34, 55);
+  font-size: 50px;
+  text-align: center;
+  padding: 10px;
+`;
+
+const CollegeProgram = styled.div`
+  margin-bottom: 50px;
+  h2 {
+    text-align: center;
+    color: #333366;
+    font-size: 40px;
+  }
+  p {
+    font-size: 20px;
+    text-align: center;
+  }
+`;
+
+const College = () => {
+  const [scienceModalShow, setScienceModalShow] = useState(false);
+  const [managementModalShow, setManagementModalShow] = useState(false);
+  const [educationModalShow, setEducationModalShow] = useState(false);
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+  return (
+    <>
+      <Meta title="College" />
+      <ImageHeader mtitle="College" title="About" image={college} />
+      <Section1 className="container">
+        <h3>Welcome To Heartland College</h3>
+        <p>
+          The Heartland College to be a premier institution for the provision of
+          quality education, training and research for sustainable national and
+          global development. It targets to generate, preserve and share
+          knowledge for effective leadership in higher education, training,
+          research and outreach through nurturing an intellectual culture that
+          integrates theory with practice and innovation for social cohesion,
+          human and economic development. It aims non-violent, practical
+          education based on providing opportunities for all levels of community
+          that is relevant and significant to Nepal. The students can have
+          multiple choices to select the subjective programs of Science,
+          Management and Education as per self-interest and ability with the
+          following mandates:
+          <ul>
+            <li>
+              Provision of higher education, knowledge and skills to citizens of
+              Nepal.
+            </li>
+            <li>
+              Participation in the discovery, transmission, preservation and
+              enhancement of knowledge.
+            </li>
+            <li>
+              Stimulation of economic, social, cultural, scientific and
+              technological development of Nepal.
+            </li>
+            <li>
+              Provision of university education, conferment of degrees and award
+              of diplomas and certificates in order to contribute to manpower
+              development.
+            </li>
+            <li>
+              Creating proposals for new faculties, schools, institutes,
+              departments, resource and research centers, degree programs and
+              courses of study.
+            </li>
+          </ul>
+        </p>
+      </Section1>
+      <ProgramTitle>I'm looking for....</ProgramTitle>
+      <CollegeProgram className="container">
+        <Row className="text-center py-3">
+          <div className="col-md-4 card-container">
+            <div className="card-flip">
+              <div className="card front">
+                <img
+                  src={scienceImage}
+                  alt="Science"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+                <h3>Science</h3>
+              </div>
+              <div className="card back">
+                <div className="card-block p-4">
+                  <h3 className="card-title">Science</h3>
+                  <p className="card-text">
+                    English, Nepali, Social/Mathematics, Physics, Chemistry,
+                    Biology, Computer Science, STEM project, Startup Project,
+                    Internship Program
+                  </p>
+                  <button
+                    className="btn btn-info"
+                    onClick={() => setScienceModalShow(true)}
+                  >
+                    Readmore
+                  </button>
+                  <ProgramModal
+                    show={scienceModalShow}
+                    onHide={() => setScienceModalShow(false)}
+                    title="Science"
+                    desc="English, Nepali, Social/Mathematics, Physics, Chemistry,
+                    Biology, Computer Science, STEM project, Startup Project, 
+                    Internship Program"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 card-container">
+            <div className="card-flip">
+              <div className="card front">
+                <img
+                  src={managementImage}
+                  alt="Management"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+                <h3>Management</h3>
+              </div>
+              <div className="card back">
+                <div className="card-block p-4">
+                  <h3 className="card-title">Management</h3>
+                  <p className="card-text">
+                    English, Nepali, Social, Accountancy, Economics, Computer
+                    Science, Hotel Management, Startup Project, Internship
+                    Program
+                  </p>
+                  <button
+                    className="btn btn-info"
+                    onClick={() => setManagementModalShow(true)}
+                  >
+                    Readmore
+                  </button>
+                  <ProgramModal
+                    show={managementModalShow}
+                    onHide={() => setManagementModalShow(false)}
+                    title="Management"
+                    desc="English, Nepali, Social, Accountancy, Economics, Computer
+                    Science, Hotel Management, Startup Project, Internship Program"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 card-container">
+            <div className="card-flip">
+              <div className="card front">
+                <img
+                  src={educationImage}
+                  alt="Education"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+                <h3>Education</h3>
+              </div>
+              <div className="card back">
+                <div className="card-block p-4">
+                  <h3 className="card-title">Education</h3>
+                  <p className="card-text">
+                    English, Nepali, Social, Child Development and Learning,
+                    Major English, Computer Science, Instructional Pedagogy &
+                    Evaluation, Teaching practice, Startup Project, Internship
+                    Program
+                  </p>
+                  <button
+                    className="btn btn-info"
+                    onClick={() => setEducationModalShow(true)}
+                  >
+                    Readmore
+                  </button>
+                  <ProgramModal
+                    show={educationModalShow}
+                    onHide={() => setEducationModalShow(false)}
+                    title="Education"
+                    desc="English, Nepali, Social, Child Development and Learning,
+                    Major English, Computer Science, Instructional Pedagogy & Evaluation,
+                    Teaching practice, Startup Project, Internship Program"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </Row>
+      </CollegeProgram>
+      <Message>
+        <Title>Some Awesome Words From Our Visitors</Title>
+        <Carousel
+          additionalTransfrom={0}
+          arrows={false}
+          autoPlay
+          autoPlaySpeed={3000}
+          centerMode={false}
+          className="message-card-college"
+          containerClass="carousel-container"
+          dotListClass=""
+          draggable={false}
+          focusOnSelect={false}
+          infinite
+          responsive={responsive}
+          keyBoardControl
+          minimumTouchDrag={80}
+          renderButtonGroupOutside={false}
+          renderDotsOutside={false}
+          itemClass="carousel-item-padding-50-px"
+        >
+          <MessageCard>
+            <Msg>
+              "I can't hope to properly express my gratitude for you allowing us
+              into your amazing school. . It's an unbelievable school with an
+              atmosphere that encourages creativity and a love of learning. I
+              feel very lucky to have spent those days at Heartland, and I
+              could've only wished to have been able to stay there longer."
+            </Msg>
+            <Profile>
+              <img src={Default} alt="student" />
+              <ProfileDesc>
+                <h6>JONNY</h6>
+                <p>A Volunteer from LBW Trust, Australia</p>
+              </ProfileDesc>
+            </Profile>
+          </MessageCard>
+          <MessageCard>
+            <Msg>
+              "I can't hope to properly express my gratitude for you allowing us
+              into your amazing school. . It's an unbelievable school with an
+              atmosphere that encourages creativity and a love of learning. I
+              feel very lucky to have spent those days at Heartland, and I
+              could've only wished to have been able to stay there longer."
+            </Msg>
+            <Profile>
+              <img src={Default} alt="student" />
+              <ProfileDesc>
+                <h6>JONNY</h6>
+                <p>A Volunteer from LBW Trust, Australia</p>
+              </ProfileDesc>
+            </Profile>
+          </MessageCard>
+          <MessageCard>
+            <Msg>
+              "I can't hope to properly express my gratitude for you allowing us
+              into your amazing school. . It's an unbelievable school with an
+              atmosphere that encourages creativity and a love of learning. I
+              feel very lucky to have spent those days at Heartland, and I
+              could've only wished to have been able to stay there longer."
+            </Msg>
+            <Profile>
+              <img src={Default} alt="student" />
+              <ProfileDesc>
+                <h6>JONNY</h6>
+                <p>A Volunteer from LBW Trust, Australia</p>
+              </ProfileDesc>
+            </Profile>
+          </MessageCard>
+          <MessageCard>
+            <Msg>
+              "I can't hope to properly express my gratitude for you allowing us
+              into your amazing school. . It's an unbelievable school with an
+              atmosphere that encourages creativity and a love of learning. I
+              feel very lucky to have spent those days at Heartland, and I
+              could've only wished to have been able to stay there longer."
+            </Msg>
+            <Profile>
+              <img src={Default} alt="student" />
+              <ProfileDesc>
+                <h6>JONNY</h6>
+                <p>A Volunteer from LBW Trust, Australia</p>
+              </ProfileDesc>
+            </Profile>
+          </MessageCard>
+          <MessageCard>
+            <Msg>
+              "I can't hope to properly express my gratitude for you allowing us
+              into your amazing school. . It's an unbelievable school with an
+              atmosphere that encourages creativity and a love of learning. I
+              feel very lucky to have spent those days at Heartland, and I
+              could've only wished to have been able to stay there longer."
+            </Msg>
+            <Profile>
+              <img src={Default} alt="student" />
+              <ProfileDesc>
+                <h6>JONNY</h6>
+                <p>A Volunteer from LBW Trust, Australia</p>
+              </ProfileDesc>
+            </Profile>
+          </MessageCard>
+          <MessageCard>
+            <Msg>
+              "I can't hope to properly express my gratitude for you allowing us
+              into your amazing school. . It's an unbelievable school with an
+              atmosphere that encourages creativity and a love of learning. I
+              feel very lucky to have spent those days at Heartland, and I
+              could've only wished to have been able to stay there longer."
+            </Msg>
+            <Profile>
+              <img src={Default} alt="student" />
+              <ProfileDesc>
+                <h6>JONNY</h6>
+                <p>A Volunteer from LBW Trust, Australia</p>
+              </ProfileDesc>
+            </Profile>
+          </MessageCard>
+          <MessageCard>
+            <Msg>
+              "I can't hope to properly express my gratitude for you allowing us
+              into your amazing school. . It's an unbelievable school with an
+              atmosphere that encourages creativity and a love of learning. I
+              feel very lucky to have spent those days at Heartland, and I
+              could've only wished to have been able to stay there longer."
+            </Msg>
+            <Profile>
+              <img src={Default} alt="student" />
+              <ProfileDesc>
+                <h6>JONNY</h6>
+                <p>A Volunteer from LBW Trust, Australia</p>
+              </ProfileDesc>
+            </Profile>
+          </MessageCard>
+        </Carousel>
+      </Message>
+    </>
+  );
+};
+
+export default College;
