@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-
-import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Button, Row, Col, Placeholder, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { listLatestNews, listNewsDetails } from "../../../actions/newsActions";
-import Loader from "../../contents/Loader";
-import Message from "../../contents/Message";
 
+import { listLatestNews, listNewsDetails } from "../../../actions/newsActions";
+import Message from "../../contents/Message";
 import Newspaper from "../../../assets/others/newspaper.jpg";
 import ImageHeader from "../../contents/ImageHeader";
-import { Link } from "react-router-dom";
+import defaultImage from "../../../assets/default/default-loading.png";
 import Meta from "../../contents/Meta";
 
 const Title = styled.h2`
@@ -24,20 +23,6 @@ const Title = styled.h2`
   }
 `;
 
-const Section1 = styled.div`
-  display: grid;
-  grid-template-columns: 70% 30%;
-  @media (max-width: 1000px) {
-    display: flex;
-    flex-direction: column;
-  }
-  margin-bottom: 80px;
-`;
-
-const News = styled.div`
-  margin-top: 30px;
-`;
-
 const ImageContainer = styled.div`
   img {
     display: block;
@@ -49,9 +34,9 @@ const ImageContainer = styled.div`
 `;
 
 const NewsInfo = styled.div`
-  padding: 0px 50px;
+  padding-left: 10px;
   h4 {
-    font-size: 20px;
+    font-size: 18px;
     color: blue;
   }
   h5 {
@@ -69,28 +54,6 @@ const NewsDetails = styled.p`
   @media (max-width: 510px) {
     font-size: 14px;
     font-weight: 500;
-  }
-`;
-
-// const LastSection = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   margin: 40px 0px;
-//   font-size: 30px;
-//   @media (max-width: 664px) {
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     font-size: 20px;
-//   }
-// `;
-
-const Latest = styled.div`
-  padding: 30px 30px;
-  h4 {
-    margin-bottom: 25px;
-    color: #012237;
-    margin-top: 30px;
   }
 `;
 
@@ -116,13 +79,6 @@ const LatestPostTitle = styled.div`
   }
 `;
 
-// const Section = styled.div`
-//   margin-top: 150px;
-//   i {
-//     float: right;
-//   }
-// `;
-
 const DetailedNews = ({ match }) => {
   const dispatch = useDispatch();
 
@@ -137,9 +93,25 @@ const DetailedNews = ({ match }) => {
     dispatch(listLatestNews());
   }, [dispatch, match]);
 
+  const LatestLoader = () => {
+    return (
+      <LatestPostCard className="pt-3">
+        <LatestPostImage>
+          <Image src={defaultImage} alt="default" fluid />
+        </LatestPostImage>
+        <LatestPostTitle style={{ width: "75%" }}>
+          <Placeholder as="p" animation="glow">
+            <Placeholder xs={6} size="lg" />
+          </Placeholder>
+        </LatestPostTitle>
+      </LatestPostCard>
+    );
+  };
+
   return (
     <>
       <ImageHeader mtitle="News" title="News Details" image={Newspaper} />
+      <Meta title={`News | ${news.title}`} />
       <Link to="/news">
         <Button className="btn btn-primary mt-4 ml-5">
           <i className="fas fa-caret-left"></i> Back
@@ -147,38 +119,68 @@ const DetailedNews = ({ match }) => {
       </Link>
 
       {loading ? (
-        <Loader />
+        <Row style={{ padding: 0, margin: 0 }}>
+          <Col md={8} className="my-5">
+            <Title className="text-center my-4">
+              <Placeholder as="h1" animation="glow">
+                <Placeholder xs={8} size="lg" />
+              </Placeholder>
+            </Title>
+            <ImageContainer>
+              <Image src={defaultImage} alt="default" fluid />
+            </ImageContainer>
+            <NewsInfo className="m-5">
+              <h4>
+                <Placeholder as="h4" animation="glow">
+                  <Placeholder xs={4} size="lg" />
+                </Placeholder>
+              </h4>
+              <NewsDetails>
+                <Placeholder as="h3" animation="glow">
+                  <Placeholder xs={12} /> <Placeholder xs={3} />{" "}
+                  <Placeholder xs={7} /> <Placeholder xs={4} />{" "}
+                  <Placeholder xs={6} /> <Placeholder xs={8} />{" "}
+                </Placeholder>
+              </NewsDetails>
+              <Placeholder as="p" animation="glow" style={{ width: "25%" }}>
+                <Placeholder xs={8} size="lg" />
+              </Placeholder>
+            </NewsInfo>
+          </Col>
+          <Col md={3} className="my-5">
+            <h4>
+              <Placeholder as="h3" animation="glow">
+                <Placeholder xs={5} size="lg" />
+              </Placeholder>
+            </h4>
+            <LatestLoader />
+            <LatestLoader />
+            <LatestLoader />
+          </Col>
+        </Row>
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Section1>
-          <News>
-            <Meta title={`News | ${news.title}`} />
+        <Row style={{ padding: 0, margin: 0 }}>
+          <Col md={8} className="my-4">
+            <Title className="text-center my-4">{news.title}</Title>
             <ImageContainer>
               {news.image && <img src={news.image} alt="sdfsdf" />}
             </ImageContainer>
-            <Title>{news.title}</Title>
-            <NewsInfo>
+            <NewsInfo className="m-5">
               <h4>16th Auguest</h4>
               <NewsDetails>{news.description}</NewsDetails>
               <h5>{news.author}</h5>
             </NewsInfo>
-          </News>
-          <Latest>
-            {/* <InputGroup className="mb-3">
-              <FormControl
-                placeholder="Search here..."
-                aria-label="Search here..."
-                aria-describedby="basic-addon2"
-              />
-              <Button variant="outline-secondary" id="button-addon2">
-                <i className="fas fa-search"></i>
-              </Button>
-            </InputGroup> */}
-
+          </Col>
+          <Col md={3} className="my-4">
             <h4>Latest Post</h4>
             {latestLoading ? (
-              <Loader />
+              <>
+                <LatestLoader />
+                <LatestLoader />
+                <LatestLoader />
+              </>
             ) : latestError ? (
               <Message variant="danger">{latestError}</Message>
             ) : (
@@ -228,8 +230,8 @@ const DetailedNews = ({ match }) => {
               </ListGroup>
               
             </Section> */}
-          </Latest>
-        </Section1>
+          </Col>
+        </Row>
       )}
     </>
   );

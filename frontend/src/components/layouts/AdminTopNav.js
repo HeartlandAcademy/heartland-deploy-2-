@@ -31,15 +31,16 @@ const NavListOne = styled.div`
 const LogoDetails = styled.div`
   display: flex;
   justify-content: space-around;
-  gap: 100px;
+  align-items: center;
+  gap: 120px;
   h4 {
     display: ${(props) => (props.sideBar ? "block" : "none")};
-    font-size: 30px;
+    font-size: 50px;
     margin-top: 10px;
     color: ${(props) => (props.darkmode ? "#fff" : "#111")};
   }
   i {
-    margin-top: 17px;
+    margin-top: 10px;
     font-size: 30px;
     cursor: pointer;
     color: ${(props) => (props.darkmode ? "#fff" : "#111")};
@@ -105,12 +106,6 @@ const Info = styled.div`
   }
 `;
 
-const Notification = styled.div`
-  margin: 8px 18px;
-  font-size: 23px;
-  cursor: pointer;
-`;
-
 const AdminTopNav = ({ location }) => {
   const [modalShow, setModalShow] = useState(false);
 
@@ -145,7 +140,7 @@ const AdminTopNav = ({ location }) => {
     <Navbar darkmode={darkMode}>
       <NavListOne>
         <LogoDetails darkmode={darkMode} sideBar={sidebarToggle}>
-          <h4>Admin</h4>
+          <h4>HA</h4>
           <i
             className={sidebarToggle ? "fas fa-bars" : "fas fa-times"}
             onClick={sideBarChanger}
@@ -159,8 +154,8 @@ const AdminTopNav = ({ location }) => {
       </NavListOne>
       <User darkmode={darkMode}>
         <Details darkmode={darkMode}>
-          <h3>Admin</h3>
-          <p>Organization</p>
+          <h3>Heartland</h3>
+          <p>{userInfo.name}</p>
         </Details>
         <Info>
           <i className="fas fa-sign-out-alt" onClick={logoutHandler}></i>

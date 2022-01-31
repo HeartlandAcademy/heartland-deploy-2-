@@ -71,8 +71,6 @@ const Section2 = styled.div`
   }
 `;
 
-const Section3 = styled.div``;
-
 const Section4 = styled.div`
   display: flex;
   margin-top: 30px;
@@ -211,7 +209,6 @@ const Extra = () => {
             </LinkContainer>
             <div></div>
           </Section2>
-          <Section3></Section3>
           <Section4>
             <span className="fa-stack">
               <i className="fas fa-circle fa-stack-2x"></i>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, InputGroup } from "react-bootstrap";
 
 import Logo from "../../../assets/others/Logo.jpg";
 import Message from "../../contents/Message";
@@ -65,6 +65,7 @@ const Login = ({ location, history }) => {
   const [validated, setValidated] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -79,7 +80,6 @@ const Login = ({ location, history }) => {
     : "/admin/home";
 
   useEffect(() => {
-    console.log("aaa", redirect);
     if (userInfo) {
       setValidated(false);
       history.push(redirect);
@@ -140,19 +140,30 @@ const Login = ({ location, history }) => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Please enter your password
-            </Form.Control.Feedback>
+            <InputGroup className="mb-3">
+              <Form.Control
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <InputGroup.Text id="basic-addon2">
+                <i
+                  onClick={(e) => setShowPassword(!showPassword)}
+                  className={
+                    showPassword ? "far fa-eye eye" : "far fa-eye-slash eye"
+                  }
+                ></i>
+              </InputGroup.Text>
+
+              <Form.Control.Feedback type="invalid">
+                Please enter your password
+              </Form.Control.Feedback>
+            </InputGroup>
           </Form.Group>
 
-          <Button variant="primary" type="submit" className="mt-2 btn-xl">
+          <Button variant="info" type="submit" className="mt-2 btn-xl">
             Login
           </Button>
         </Form>

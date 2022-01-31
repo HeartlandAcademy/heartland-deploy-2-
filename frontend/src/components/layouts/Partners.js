@@ -23,6 +23,7 @@ const Message = styled.h2`
   color: #fff;
   background-color: #111;
   padding: 80px;
+  text-align: center;
 `;
 
 const Title = styled.h2`
