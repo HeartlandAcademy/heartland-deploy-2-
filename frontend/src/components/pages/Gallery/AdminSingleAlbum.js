@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Gallery from "react-grid-gallery";
 import { gallerySingleAlbum } from "../../../actions/galleryActions";
@@ -7,7 +7,6 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Button, Placeholder } from "react-bootstrap";
 import Message from "../../contents/Message";
 
-import defaultImage from "../../../assets/default/default-loading.png";
 import CardLoader from "../../contents/CardLoader";
 
 const AlbumSection = styled.div`

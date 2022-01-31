@@ -6,7 +6,6 @@ import download from "downloadjs";
 import ImageHeader from "../../contents/ImageHeader";
 import School from "../../../assets/others/School4.jpg";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import PdfModal from "../../contents/PdfModal";
 import Meta from "../../contents/Meta";

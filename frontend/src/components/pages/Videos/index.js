@@ -1,16 +1,15 @@
 /* eslint-disable no-useless-escape */
 import React, { useEffect } from "react";
+import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
 
-import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
-import test from "../../../assets/imageheaderphotos/test.JPG";
 import ImageHeader from "../../contents/ImageHeader";
 import { listGalleryVideos } from "../../../actions/galleryActions";
 import CardLoader from "../../contents/CardLoader";
+import test from "../../../assets/imageheaderphotos/test.JPG";
 
 const Section = styled.div`
   padding: 40px 50px;

@@ -134,7 +134,7 @@ const PhotoCarousel = () => {
               <img
                 className="d-block w-100"
                 src={c.image}
-                alt="Carousel Image"
+                alt="Carousel Images"
               />
               <Carousel.Caption>
                 <CarouselHead>{c.title}</CarouselHead>

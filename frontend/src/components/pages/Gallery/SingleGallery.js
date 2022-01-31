@@ -25,20 +25,6 @@ const Cards = styled.div`
   padding: 0;
 `;
 
-const CardImage = styled.div`
-  height: 230px;
-  width: 400px;
-  @media (max-width: 484px) {
-    height: 200px;
-    width: 300px;
-  }
-  img {
-    height: auto;
-    max-width: 100%;
-    vertical-align: middle;
-  }
-`;
-
 const Title = styled.h2`
   margin: 28px;
   font-size: 60px;

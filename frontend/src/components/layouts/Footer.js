@@ -7,13 +7,6 @@ const SocialMedia = styled.div`
   }
 `;
 
-const SubmitBtn = styled.button`
-  color: #fff;
-  &:hover {
-    color: #111;
-  }
-`;
-
 const Footer = () => {
   const getYear = () => {
     const d = new Date();

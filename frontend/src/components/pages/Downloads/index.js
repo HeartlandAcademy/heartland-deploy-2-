@@ -9,7 +9,6 @@ import Meta from "../../contents/Meta";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Placeholder } from "react-bootstrap";
 import { listDownloads } from "../../../actions/downloadsActions";
-import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 
 const NoDownloads = styled.div`

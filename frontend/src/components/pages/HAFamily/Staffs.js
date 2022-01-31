@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-
 import { Table, Placeholder } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 
 import ImageHeader from "../../contents/ImageHeader";
 import test from "../../../assets/imageheaderphotos/test.JPG";
 import { listStaffs } from "../../../actions/staffsActions";
-import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
 

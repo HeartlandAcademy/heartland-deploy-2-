@@ -1,9 +1,10 @@
 /* eslint-disable no-useless-escape */
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import styled from "styled-components";
+
 import {
   addGalleryVideos,
   deleteGalleryVideos,
@@ -11,7 +12,6 @@ import {
 } from "../../../actions/galleryActions";
 import { GALLERY_VIDEOS_ADD_RESET } from "../../../actions/types";
 import CardLoader from "../../contents/CardLoader";
-import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 
 const Section = styled.div`

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import download from "downloadjs";
 
-import { Button, Placeholder } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteDownload,

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import download from "downloadjs";
-
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Placeholder } from "react-bootstrap";
-import Loader from "../../contents/Loader";
-import Message from "../../contents/Message";
-import { deleteNotices, listNotices } from "../../../actions/noticesActions";
-import PdfModal from "../../contents/PdfModal";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LinkContainer } from "react-router-bootstrap";
+
+import Message from "../../contents/Message";
+import { deleteNotices, listNotices } from "../../../actions/noticesActions";
+import PdfModal from "../../contents/PdfModal";
 
 const Whole = styled.div`
   margin: 30px 50px;

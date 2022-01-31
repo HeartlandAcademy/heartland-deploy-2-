@@ -11,7 +11,6 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import BlogPicture from "../../../assets/others/blogpicture.jpg";
 import { toast } from "react-toastify";
 import placeholder from "../../../assets/default/placeholder.png";
 import GalleryCardLoader from "./GalleryCardLoader";

@@ -47,6 +47,7 @@ const ImageHeader = ({ mtitle, title, image }) => {
         <h3>{mtitle}</h3>
         <h5>
           <StyledLink exact to="/">
+            {/* eslint-disable-next-line */}
             <a>Home</a>
           </StyledLink>
           / {title}

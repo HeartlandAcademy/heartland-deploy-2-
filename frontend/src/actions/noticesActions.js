@@ -12,8 +12,6 @@ import {
   NOTICES_DELETE_FAIL,
   NOTICES_DELETE_REQUEST,
   NOTICES_DELETE_SUCCESS,
-  UPCOMING_LATEST_EVENTS_FAIL,
-  UPCOMING_LATEST_EVENTS_SUCCESS,
 } from "./types";
 
 export const listNotices = () => async (dispatch) => {

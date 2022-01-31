@@ -5,7 +5,6 @@ import moment from "moment";
 import ImageHeader from "../../contents/ImageHeader";
 import calendar from "../../../assets/others/calendar.jpg";
 import { Card, Placeholder } from "react-bootstrap";
-import Loader from "../../contents/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";

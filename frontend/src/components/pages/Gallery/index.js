@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { Button, Container, Placeholder } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import test from "../../../assets/imageheaderphotos/test.JPG";
 import placeholder from "../../../assets/default/placeholder.png";
 
 import ImageHeader from "../../contents/ImageHeader";
-import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
 import { LinkContainer } from "react-router-bootstrap";

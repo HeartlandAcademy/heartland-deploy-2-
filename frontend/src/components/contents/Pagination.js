@@ -12,6 +12,7 @@ export const Pagination = ({ itemsPerPage, total, paginate }) => {
       <ul className="pagination">
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
+            {/* eslint-disable-next-line */}
             <a onClick={() => paginate(number)} className="page-link">
               {number}
             </a>
