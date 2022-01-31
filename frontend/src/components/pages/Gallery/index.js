@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Placeholder } from "react-bootstrap";
 import test from "../../../assets/imageheaderphotos/test.JPG";
+import placeholder from "../../../assets/default/placeholder.png";
 
 import ImageHeader from "../../contents/ImageHeader";
-import placeholder from "../../../assets/default/placeholder.png";
 import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { listGalleryAlbums } from "../../../actions/galleryActions";
+
+import GalleryCardLoader from "./GalleryCardLoader";
 
 const Title = styled.div`
   color: #444444;
@@ -85,6 +87,12 @@ const Card = styled.div`
 `;
 
 const CardImage = styled.div`
+  height: 270px;
+  width: 400px;
+  @media (max-width: 484px) {
+    height: 200px;
+    width: 300px;
+  }
   img {
     height: auto;
     max-width: 100%;
@@ -142,52 +150,58 @@ const HeartlandGallery = () => {
       <Meta title="Heartland Gallery | Albums" />
       <ImageHeader mtitle="Gallery" title="Albums" image={test} />
       <Container>
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant="danger">{error}</Message>
-        ) : (
-          <AlbumsSection>
-            <Title>Albums</Title>
-            {albums && albums.length === 0 ? (
-              <NoAlbums>Sorry we couldn't find any albums.</NoAlbums>
-            ) : (
-              ""
-            )}
+        <AlbumsSection>
+          <Title>Albums</Title>
+          {loading ? (
             <Cards>
-              {albums &&
-                albums.map((album) => (
-                  <CardItem key={album._id}>
-                    <Card>
-                      <CardImage>
-                        <img
-                          src={album.images[0]}
-                          alt="album"
-                          onError={(e) => {
-                            e.target.src = placeholder; //replacement image imported above
-                          }}
-                        />
-                      </CardImage>
-                      <CardContent>
-                        <LinkContainer to={`/gallery/albums/${albums._id}`}>
-                          <CardTitle>{album.name}</CardTitle>
-                        </LinkContainer>
-                        <CardInfo>
-                          {album.createdAt &&
-                            moment(album.createdAt).format("DD-MMM-YYYY")}
-                        </CardInfo>
-                        <ActionButton>
-                          <Link to={`/gallery/albums/${album._id}`}>
-                            <Button>View</Button>
-                          </Link>
-                        </ActionButton>
-                      </CardContent>
-                    </Card>
-                  </CardItem>
-                ))}
+              <GalleryCardLoader />
+              <GalleryCardLoader />
+              <GalleryCardLoader />
             </Cards>
-          </AlbumsSection>
-        )}
+          ) : error ? (
+            <Message variant="danger">{error}</Message>
+          ) : (
+            <>
+              {albums && albums.length === 0 ? (
+                <NoAlbums>Sorry we couldn't find any albums.</NoAlbums>
+              ) : (
+                ""
+              )}
+              <Cards>
+                {albums &&
+                  albums.map((album) => (
+                    <CardItem key={album._id}>
+                      <Card>
+                        <CardImage>
+                          <img
+                            src={album.images[0]}
+                            alt="album"
+                            onError={(e) => {
+                              e.target.src = placeholder; //replacement image imported above
+                            }}
+                          />
+                        </CardImage>
+                        <CardContent>
+                          <LinkContainer to={`/gallery/albums/${albums._id}`}>
+                            <CardTitle>{album.name}</CardTitle>
+                          </LinkContainer>
+                          <CardInfo>
+                            {album.createdAt &&
+                              moment(album.createdAt).format("DD-MMM-YYYY")}
+                          </CardInfo>
+                          <ActionButton>
+                            <Link to={`/gallery/albums/${album._id}`}>
+                              <Button>View</Button>
+                            </Link>
+                          </ActionButton>
+                        </CardContent>
+                      </Card>
+                    </CardItem>
+                  ))}
+              </Cards>
+            </>
+          )}
+        </AlbumsSection>
       </Container>
     </>
   );

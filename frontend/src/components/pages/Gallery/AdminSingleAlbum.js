@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../../contents/Loader";
 import Gallery from "react-grid-gallery";
 import { gallerySingleAlbum } from "../../../actions/galleryActions";
 import styled from "styled-components";
 import { LinkContainer } from "react-router-bootstrap";
-import { Button } from "react-bootstrap";
+import { Button, Placeholder } from "react-bootstrap";
 import Message from "../../contents/Message";
+
+import defaultImage from "../../../assets/default/default-loading.png";
+import CardLoader from "../../contents/CardLoader";
 
 const AlbumSection = styled.div`
   padding: 20px 40px;
@@ -17,6 +19,19 @@ const Title = styled.h2`
   margin-top: 18px;
   color: ${(props) => (props.darkmode ? "#fff" : "#111")};
   text-align: center;
+`;
+
+const LoaderHeader = styled.h1`
+  text-align: center;
+  padding: 2px;
+`;
+
+const Cards = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 `;
 
 const ImagesContainer = styled.div`
@@ -54,13 +69,25 @@ const AdminSingleAlbum = ({ match }) => {
       setImageCollection(data);
     }
   }, [albumImages]);
+
   return (
     <AlbumSection>
       <LinkContainer to="/admin/albums/all">
         <Button className="btn-dark mt-3">Back</Button>
       </LinkContainer>
       {loading ? (
-        <Loader />
+        <>
+          <LoaderHeader>
+            <Placeholder as={LoaderHeader} animation="wave">
+              <Placeholder xs={4} />
+            </Placeholder>
+          </LoaderHeader>
+          <Cards>
+            <CardLoader />
+            <CardLoader />
+            <CardLoader />
+          </Cards>
+        </>
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (

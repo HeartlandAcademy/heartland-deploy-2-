@@ -92,7 +92,7 @@ const AdminImages = ({ history }) => {
       setFileError(false);
       setUploading(false);
     } catch (error) {
-      console.error(error);
+      console.log(error);
       setFileError(true);
       setUploading(false);
     }

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-import { Table } from "react-bootstrap";
+import { Table, Placeholder } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 
 import ImageHeader from "../../contents/ImageHeader";
@@ -33,6 +33,90 @@ const Staffs = () => {
     dispatch(listStaffs());
   }, [dispatch]);
 
+  const TableLoader = () => {
+    return (
+      <Table striped bordered hover responsive>
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={4} />
+              </Placeholder>
+            </td>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={9} />
+              </Placeholder>
+            </td>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={4} />
+              </Placeholder>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={4} />
+              </Placeholder>
+            </td>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={9} />
+              </Placeholder>
+            </td>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={4} />
+              </Placeholder>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={4} />
+              </Placeholder>
+            </td>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={9} />
+              </Placeholder>
+            </td>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={4} />
+              </Placeholder>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={4} />
+              </Placeholder>
+            </td>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={9} />
+              </Placeholder>
+            </td>
+            <td>
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={4} />
+              </Placeholder>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
+    );
+  };
+
   return (
     <>
       <Meta title="HA Family | Staffs" />
@@ -40,7 +124,7 @@ const Staffs = () => {
       <Section1 className="container">
         <h3>STAFFS</h3>
         {loading ? (
-          <Loader />
+          <TableLoader />
         ) : error ? (
           <Message varaint="danger">{error}</Message>
         ) : (

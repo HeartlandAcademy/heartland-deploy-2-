@@ -4,7 +4,7 @@ import moment from "moment";
 
 import ImageHeader from "../../contents/ImageHeader";
 import calendar from "../../../assets/others/calendar.jpg";
-import { Card } from "react-bootstrap";
+import { Card, Placeholder } from "react-bootstrap";
 import Loader from "../../contents/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../contents/Message";
@@ -71,6 +71,29 @@ const Events = () => {
     dispatch(listEvents());
   }, [dispatch]);
 
+  const EventCardLoader = () => {
+    return (
+      <EventCard className="card">
+        <Card.Body>
+          <h4>
+            <Placeholder as="h4" animation="glow">
+              <Placeholder xs={6} />
+            </Placeholder>
+          </h4>
+          <h5>
+            <Placeholder as="h5" animation="glow">
+              <Placeholder xs={4} />
+            </Placeholder>
+          </h5>
+          <h6>
+            <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{" "}
+            <Placeholder xs={6} /> <Placeholder xs={8} />
+          </h6>
+        </Card.Body>
+      </EventCard>
+    );
+  };
+
   return (
     <>
       <Meta title="Heartland Events" />
@@ -80,7 +103,11 @@ const Events = () => {
         <EventSection>
           <AllEvents className="container">
             {loading ? (
-              <Loader />
+              <AllEvents>
+                <EventCardLoader />
+                <EventCardLoader />
+                <EventCardLoader />
+              </AllEvents>
             ) : error ? (
               <Message variant="danger">{error}</Message>
             ) : (

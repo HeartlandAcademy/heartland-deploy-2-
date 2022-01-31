@@ -6,8 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import heartland from "../../assets/carousel/heartland.jpg";
 import { LinkContainer } from "react-router-bootstrap";
 import { listCarousel } from "../../actions/carouselActions";
-import Loader from "./Loader";
 import Message from "./Message";
+
+import default2 from "../../assets/default/default2.png";
 
 const fadeInTop = keyframes` 
   from {
@@ -85,10 +86,24 @@ const PhotoCarousel = () => {
     dispatch(listCarousel());
   }, [dispatch]);
 
+  const CarouselLoader = () => {
+    return (
+      <Carousel>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 slideImg"
+            src={default2}
+            alt="default"
+          />
+        </Carousel.Item>
+      </Carousel>
+    );
+  };
+
   return (
     <>
       {loading ? (
-        <Loader />
+        <CarouselLoader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
@@ -115,8 +130,12 @@ const PhotoCarousel = () => {
             </Carousel.Caption>
           </Carousel.Item>
           {carousel.map((c) => (
-            <Carousel.Item interval={33300} key={c._id}>
-              <img className="d-block w-100" src={c.image} alt="Second slide" />
+            <Carousel.Item interval={3300} key={c._id}>
+              <img
+                className="d-block w-100"
+                src={c.image}
+                alt="Carousel Image"
+              />
               <Carousel.Caption>
                 <CarouselHead>{c.title}</CarouselHead>
                 <CarouselInfo>{c.description}</CarouselInfo>

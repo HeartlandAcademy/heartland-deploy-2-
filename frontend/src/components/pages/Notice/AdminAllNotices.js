@@ -3,7 +3,7 @@ import styled from "styled-components";
 import download from "downloadjs";
 
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "react-bootstrap";
+import { Button, Placeholder } from "react-bootstrap";
 import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import { deleteNotices, listNotices } from "../../../actions/noticesActions";
@@ -86,6 +86,34 @@ const NoticeButton = styled.div`
   }
 `;
 
+const NoticeCardLoader = () => {
+  return (
+    <Available>
+      <NoticeDetails>
+        <h4>
+          <Placeholder as="h1" animation="glow">
+            <Placeholder xs={6} />
+          </Placeholder>
+        </h4>
+        <p>
+          <Placeholder as="h3" animation="glow">
+            <Placeholder xs={3} />
+          </Placeholder>
+        </p>
+        <p>
+          <Placeholder as="h3" animation="glow">
+            <Placeholder xs={2} />
+          </Placeholder>
+        </p>
+      </NoticeDetails>
+      <NoticeButton>
+        <Placeholder xs={1} size="xs" /> <Placeholder xs={1} size="xs" />
+        <Placeholder xs={1} size="xs" />
+      </NoticeButton>
+    </Available>
+  );
+};
+
 const AdminAllNotices = ({ history }) => {
   const [modalShow, setModalShow] = useState(false);
   const [selectedNoticeFile, setSelectedNoticeFile] = useState(null);
@@ -154,7 +182,7 @@ const AdminAllNotices = ({ history }) => {
         </ButtonContent>
       </Title>
       <Notice>
-        {notices && notices.length === 0 ? (
+        {notices && notices.length === 0 && (
           <NoNotices>
             Sorry we couldn't find any notices. Please stay updated.
             <div>
@@ -169,12 +197,14 @@ const AdminAllNotices = ({ history }) => {
               </Link>
             </div>
           </NoNotices>
-        ) : (
-          ""
         )}
         {deleteError ? <Message variant="danger">{deleteError}</Message> : ""}
         {loading ? (
-          <Loader />
+          <>
+            <NoticeCardLoader />
+            <NoticeCardLoader />
+            <NoticeCardLoader />
+          </>
         ) : error ? (
           <Message variant="danger">{error}</Message>
         ) : (

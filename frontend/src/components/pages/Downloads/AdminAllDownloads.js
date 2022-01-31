@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import download from "downloadjs";
 
-import { Button } from "react-bootstrap";
+import { Button, Placeholder } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteDownload,
@@ -135,7 +135,6 @@ const AdminAllDownloads = ({ history }) => {
     const blob = await res.blob();
     download(blob, fileNameGenerator(10));
   };
-
   return (
     <Whole>
       <Title darkmode={darkMode}>
@@ -158,7 +157,7 @@ const AdminAllDownloads = ({ history }) => {
           <Message variant="danger">{error}</Message>
         ) : (
           <>
-            {downloads && downloads.length === 0 ? (
+            {downloads && downloads.length === 0 && (
               <NoDownload>
                 Sorry we couldn't find any available downloads. Please stay
                 updated.
@@ -174,31 +173,31 @@ const AdminAllDownloads = ({ history }) => {
                   </Link>
                 </div>
               </NoDownload>
-            ) : (
-              ""
             )}
-            {downloads.map((download) => (
-              <Available darkmode={darkMode}>
-                <DownloadDetails darkmode={darkMode}>
-                  <h4>{download.title}</h4>
-                  <h5>{download.originalFile}</h5>
-                  <p>
-                    Added:{" "}
-                    {download.createdAt && download.createdAt.substring(0, 10)}
-                  </p>
-                </DownloadDetails>
-                <DownloadButton>
-                  <i
-                    className="fas fa-trash"
-                    onClick={() => downloadDeleteHandler(download._id)}
-                  ></i>
-                  <i
-                    className="fas fa-arrow-circle-down"
-                    onClick={() => downloadFileHandler(download._id)}
-                  ></i>
-                </DownloadButton>
-              </Available>
-            ))}
+            {downloads &&
+              downloads.map((download) => (
+                <Available darkmode={darkMode}>
+                  <DownloadDetails darkmode={darkMode}>
+                    <h4>{download.title}</h4>
+                    <h5>{download.originalFile}</h5>
+                    <p>
+                      Added:{" "}
+                      {download.createdAt &&
+                        download.createdAt.substring(0, 10)}
+                    </p>
+                  </DownloadDetails>
+                  <DownloadButton>
+                    <i
+                      className="fas fa-trash"
+                      onClick={() => downloadDeleteHandler(download._id)}
+                    ></i>
+                    <i
+                      className="fas fa-arrow-circle-down"
+                      onClick={() => downloadFileHandler(download._id)}
+                    ></i>
+                  </DownloadButton>
+                </Available>
+              ))}
           </>
         )}
       </AllDownloads>

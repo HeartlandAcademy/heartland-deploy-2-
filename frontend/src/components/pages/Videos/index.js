@@ -10,6 +10,7 @@ import Meta from "../../contents/Meta";
 import test from "../../../assets/imageheaderphotos/test.JPG";
 import ImageHeader from "../../contents/ImageHeader";
 import { listGalleryVideos } from "../../../actions/galleryActions";
+import CardLoader from "../../contents/CardLoader";
 
 const Section = styled.div`
   padding: 40px 50px;
@@ -34,6 +35,14 @@ const VideosSection = styled.div`
     background: ${(props) => (props.selected ? "red" : "black")};
     border-radius: 23px;
   }
+`;
+
+const Cards = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 `;
 
 const Title = styled.div`
@@ -94,7 +103,11 @@ const Videos = () => {
           <Title>Videos</Title>
           <Row className="text-center py-3" style={{ minHeight: "100vh" }}>
             {videoLoading ? (
-              <Loader />
+              <Cards>
+                <CardLoader />
+                <CardLoader />
+                <CardLoader />
+              </Cards>
             ) : videoError ? (
               <Message variant="danger">{videoError}</Message>
             ) : (

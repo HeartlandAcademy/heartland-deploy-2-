@@ -6,7 +6,6 @@ import {
   deleteGalleryAlbums,
   listGalleryAlbums,
 } from "../../../actions/galleryActions";
-import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +14,7 @@ import { Link } from "react-router-dom";
 import BlogPicture from "../../../assets/others/blogpicture.jpg";
 import { toast } from "react-toastify";
 import placeholder from "../../../assets/default/placeholder.png";
+import GalleryCardLoader from "./GalleryCardLoader";
 
 const AlbumsContainer = styled.div`
   padding: 10px 20px;
@@ -164,7 +164,11 @@ const AdminAllAlbums = ({ history }) => {
       </Title>
       {deleteError ? <Message variant="danger">{deleteError}</Message> : ""}
       {loading ? (
-        <Loader />
+        <Cards>
+          <GalleryCardLoader />
+          <GalleryCardLoader />
+          <GalleryCardLoader />
+        </Cards>
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (

@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Placeholder } from "react-bootstrap";
 
 import newspaper from "../../../assets/others/newspaper.jpg";
 import BlogPicture from "../../../assets/others/blogpicture.jpg";
 import ImageHeader from "../../contents/ImageHeader";
 import { listNews } from "../../../actions/newsActions";
-import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
 import { Pagination } from "../../contents/Pagination";
+import defaultImage from "../../../assets/default/default-loading.png";
 import "./index.css";
 
 const Title = styled.h2`
@@ -149,6 +150,46 @@ const News = ({ match }) => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const NewsCardLoader = () => {
+    return (
+      <CardItem>
+        <Card>
+          <CardImage>
+            <img src={defaultImage} alt="default" />
+          </CardImage>
+          <CardContent>
+            <CardInfo>
+              <p>
+                <Placeholder as="p" animation="glow">
+                  <Placeholder xs={2} />
+                </Placeholder>
+              </p>
+              <p>
+                <Placeholder as="p" animation="glow">
+                  <Placeholder xs={2} />
+                </Placeholder>
+              </p>
+            </CardInfo>
+
+            <CardTitle>
+              <Placeholder as={Card.Title} animation="glow">
+                <Placeholder xs={12} />
+              </Placeholder>
+            </CardTitle>
+
+            <CardText>
+              <Placeholder as={Card.Text} animation="glow">
+                <Placeholder xs={9} />
+              </Placeholder>
+            </CardText>
+
+            <Placeholder.Button variant="primary" xs={5} />
+          </CardContent>
+        </Card>
+      </CardItem>
+    );
+  };
+
   return (
     <>
       <Meta title="Heartland News" />
@@ -163,7 +204,11 @@ const News = ({ match }) => {
       </SearchBox>
 
       {loading ? (
-        <Loader />
+        <Cards>
+          <NewsCardLoader />
+          <NewsCardLoader />
+          <NewsCardLoader />
+        </Cards>
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { darkModeChanger, sidebarToggler } from "../../actions/settingActions";
 import useWindowDimensions from "../helpers/windowLength";
 
@@ -20,7 +20,6 @@ export default function SettingsModal(props) {
 
   const { width } = useWindowDimensions();
   useEffect(() => {
-    console.log(width);
     if (width < 600) {
       setDisableToggle(true);
     } else {

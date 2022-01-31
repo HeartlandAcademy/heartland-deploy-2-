@@ -7,7 +7,7 @@ import ImageHeader from "../../contents/ImageHeader";
 import School from "../../../assets/others/School4.jpg";
 import Meta from "../../contents/Meta";
 import { useSelector, useDispatch } from "react-redux";
-import { Container } from "react-bootstrap";
+import { Container, Placeholder } from "react-bootstrap";
 import { listDownloads } from "../../../actions/downloadsActions";
 import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
@@ -76,6 +76,32 @@ const Downloads = () => {
     download(blob, fileNameGenerator(10));
   };
 
+  const DownloadCardLoader = () => {
+    return (
+      <DownloadCard className="card">
+        <h4>
+          <Placeholder as="h1" animation="glow">
+            <Placeholder xs={6} />
+          </Placeholder>
+        </h4>
+        <h6>
+          <Placeholder as="h3" animation="glow">
+            <Placeholder xs={3} />
+          </Placeholder>
+        </h6>
+        <h5>
+          <Placeholder as="h2" animation="glow">
+            <Placeholder xs={4} />
+          </Placeholder>
+        </h5>
+
+        <DownloadButton>
+          <Placeholder xs={1} size="xs" />
+        </DownloadButton>
+      </DownloadCard>
+    );
+  };
+
   return (
     <>
       <Meta title="Downloads" />
@@ -84,7 +110,11 @@ const Downloads = () => {
       <Container>
         <DownloadSection className="container">
           {loading ? (
-            <Loader />
+            <>
+              <DownloadCardLoader />
+              <DownloadCardLoader />
+              <DownloadCardLoader />
+            </>
           ) : error ? (
             <Message variant="danger">{error}</Message>
           ) : (

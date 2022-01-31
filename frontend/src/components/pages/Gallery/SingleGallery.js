@@ -3,13 +3,40 @@ import { useSelector, useDispatch } from "react-redux";
 import Gallery from "react-grid-gallery";
 import styled from "styled-components";
 import { LinkContainer } from "react-router-bootstrap";
-import { Button } from "react-bootstrap";
-import Loader from "../../contents/Loader";
+import { Button, Placeholder } from "react-bootstrap";
 import Message from "../../contents/Message";
 import { gallerySingleAlbum } from "../../../actions/galleryActions";
+import CardLoader from "../../contents/CardLoader";
 
 const AlbumSection = styled.div`
   padding: 20px 40px;
+`;
+
+const LoaderHeader = styled.h1`
+  text-align: center;
+  padding: 2px;
+`;
+
+const Cards = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const CardImage = styled.div`
+  height: 230px;
+  width: 400px;
+  @media (max-width: 484px) {
+    height: 200px;
+    width: 300px;
+  }
+  img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+  }
 `;
 
 const Title = styled.h2`
@@ -58,7 +85,18 @@ const SingleAlbum = ({ match }) => {
         <Button className="btn-dark mt-3">Back</Button>
       </LinkContainer>
       {loading ? (
-        <Loader />
+        <>
+          <LoaderHeader>
+            <Placeholder as={LoaderHeader} animation="wave">
+              <Placeholder xs={4} />
+            </Placeholder>
+          </LoaderHeader>
+          <Cards>
+            <CardLoader />
+            <CardLoader />
+            <CardLoader />
+          </Cards>
+        </>
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (

@@ -107,8 +107,8 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
   : null;
 
 const defaultSettings = {
-  sidebarToggle: false,
-  darkMode: false,
+  sidebarToggle: true,
+  darkMode: true,
   adminMode: false,
 };
 

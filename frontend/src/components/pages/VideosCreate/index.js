@@ -10,6 +10,7 @@ import {
   listGalleryVideos,
 } from "../../../actions/galleryActions";
 import { GALLERY_VIDEOS_ADD_RESET } from "../../../actions/types";
+import CardLoader from "../../contents/CardLoader";
 import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 
@@ -44,6 +45,19 @@ const Title = styled.div`
   justify-content: space-between;
   @media (max-width: 479px) {
     flex-direction: column;
+  }
+`;
+
+const Cards = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  @media (max-width: 764px) {
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -185,7 +199,11 @@ const AdminVideos = () => {
         <Row className="text-center py-3" style={{ minHeight: "100vh" }}>
           {deleteError ? <Message variant="danger">{deleteError}</Message> : ""}
           {videoLoading ? (
-            <Loader />
+            <Cards>
+              <CardLoader />
+              <CardLoader />
+              <CardLoader />
+            </Cards>
           ) : videoError ? (
             <Message variant="danger">{videoError}</Message>
           ) : (
