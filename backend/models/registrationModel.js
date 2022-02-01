@@ -5,12 +5,12 @@ const registrationSchema = mongoose.Schema(
     firstName: {
       type: String,
       required: [true, "First Name field cannot be empty"],
-      maxlength: 10,
+      maxlength: 20,
     },
     lastName: {
       type: String,
       required: [true, "Last Name field cannot be empty"],
-      maxlength: 10,
+      maxlength: 20,
     },
     email: {
       type: String,

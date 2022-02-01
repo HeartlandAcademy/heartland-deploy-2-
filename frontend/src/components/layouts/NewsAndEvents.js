@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import moment from "moment";
 
-import { Card } from "react-bootstrap";
+import { Card, Placeholder } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Background from "../../assets/others/Background.jpg";
+import defaultloader from "../../assets/default/default-loading.png";
 import { listLatestNews } from "../../actions/newsActions";
-import Loader from "../contents/Loader";
 import Message from "../contents/Message";
 import { listUpcomingLatestEvents } from "../../actions/eventsActions";
 
 const News = styled.div`
-  padding: 40px 45px;
+  padding: 50px 45px;
   span {
     color: rgb(0, 148, 68);
   }
@@ -88,7 +88,7 @@ const EventHeader = styled.div`
 const EventBody = styled.div`
   display: flex;
   gap: 40px;
-  padding: 20px 40px;
+  padding: 20px 40px 0px 40px;
   justify-content: center;
   @media (max-width: 590px) {
     flex-direction: column;
@@ -103,13 +103,58 @@ const NoEvents = styled.div`
 `;
 
 const SingleEvent = styled.div`
+  overflow: hidden;
   display: flex;
+  margin: 0px;
+  gap: 20px;
   &:hover {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     cursor: pointer;
   }
 `;
+
+const NewsLoader = () => {
+  return (
+    <Card className="news">
+      <Card.Body>
+        <Date>
+          <Placeholder as="h3" animation="glow">
+            <Placeholder xs={8} />
+          </Placeholder>
+        </Date>
+        <h4>
+          <Placeholder as="h4" animation="glow">
+            <Placeholder xs={10} />
+          </Placeholder>
+        </h4>
+        <NewsArea>
+          <Placeholder as="p" animation="glow">
+            <Placeholder xs={5} />
+          </Placeholder>
+        </NewsArea>
+      </Card.Body>
+    </Card>
+  );
+};
+
+const EventLoader = () => {
+  return (
+    <Card style={{ width: "21rem" }}>
+      <Card.Img variant="top" src={defaultloader} alt="default" />
+      <Card.Body>
+        <Placeholder as={Card.Title} animation="glow">
+          <Placeholder xs={9} />
+        </Placeholder>
+
+        <Placeholder as={Card.Text} animation="glow">
+          <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{" "}
+          <Placeholder xs={6} /> <Placeholder xs={8} />
+        </Placeholder>
+      </Card.Body>
+    </Card>
+  );
+};
 
 const NewsAndEvents = () => {
   const dispatch = useDispatch();
@@ -141,17 +186,18 @@ const NewsAndEvents = () => {
             </LinkContainer>
           </NewsHeader>
           {loading ? (
-            <Loader />
+            <>
+              <NewsLoader />
+              <NewsLoader />
+            </>
           ) : error ? (
             <Message variant="danger">{error}</Message>
           ) : (
             <>
-              {newsLatest && newsLatest.length === 0 ? (
+              {newsLatest && newsLatest.length === 0 && (
                 <NoNews>
                   Sorry we couldn't find any latest news. Please stay updated.
                 </NoNews>
-              ) : (
-                ""
               )}
               {newsLatest &&
                 newsLatest.map((news) => (
@@ -185,28 +231,30 @@ const NewsAndEvents = () => {
           </EventHeader>
           <EventBody>
             {eventLoading ? (
-              <Loader />
+              <SingleEvent>
+                <EventLoader />
+                <EventLoader />
+              </SingleEvent>
             ) : eventError ? (
               <Message variant="danger">{eventError}</Message>
             ) : (
               <>
-                {events && events.length === 0 ? (
+                {events && events.length === 0 && (
                   <NoEvents>
                     Sorry we couldn't find any upcoming events. Please stay
                     updated.
                   </NoEvents>
-                ) : (
-                  ""
                 )}
                 {events &&
                   events.map((event) => (
                     <SingleEvent key={event._id}>
                       <Card style={{ width: "21rem" }}>
                         <Card.Img
+                          style={{ height: "60%" }}
                           variant="top"
                           src={event.image ? event.image : Background}
                         />
-                        <Card.Body>
+                        <Card.Body style={{ height: 0 }}>
                           <Card.Title>
                             {event.date &&
                               moment(event.date).format("DD-MMM-YYYY")}

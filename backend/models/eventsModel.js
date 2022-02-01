@@ -9,7 +9,7 @@ const eventsSchema = mongoose.Schema({
   title: {
     type: String,
     required: [true, "Please add a title"],
-    maxlength: 20,
+    maxlength: 50,
   },
   description: {
     type: String,

@@ -144,7 +144,7 @@ const News = () => {
       </SearchBox>
 
       {loading ? (
-        <Row className="g-4 p-4 m-3">
+        <Row className="g-4 p-4 m-4">
           <NewsCardLoader />
           <NewsCardLoader />
           <NewsCardLoader />
@@ -158,7 +158,7 @@ const News = () => {
               Sorry we couldn't find any latest News. Please stay updated.
             </NoNews>
           )}
-          <Row className="g-4 p-4 m-3">
+          <Row className="g-4 p-4 m-4">
             {searchInput.length > 1
               ? filteredResults.map((n) => (
                   <Col lg={4} xl={4} md={6}>

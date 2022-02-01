@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const albumSchema = mongoose.Schema(
   {
-    name: { type: String, required: true, maxlength: 15 },
+    name: { type: String, required: true, maxlength: 50 },
     images: {
       type: Array,
       required: true,

@@ -4,12 +4,12 @@ const carouselSchema = mongoose.Schema({
   title: {
     type: String,
     required: [true, "Please add a title"],
-    maxlength: 10,
+    maxlength: 50,
   },
   description: {
     type: String,
     required: [true, "Please add a description"],
-    maxlength: 100,
+    maxlength: 500,
   },
   image: {
     type: String,
