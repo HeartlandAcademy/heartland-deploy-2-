@@ -108,7 +108,6 @@ const AdminNav = () => {
   const { sidebarToggle, darkMode } = settings;
 
   useEffect(() => {
-    console.log(width);
     if (width < 600) {
       dispatch(sidebarToggler());
     }

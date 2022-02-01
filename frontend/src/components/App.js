@@ -68,6 +68,7 @@ const Whole = styled.div`
   margin-left: ${(props) => (props.sidebar ? "280px" : "80px")};
   transition: 0.3s;
   margin-top: 60px;
+  overflow: hidden;
 `;
 
 const App = () => {

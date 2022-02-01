@@ -34,6 +34,7 @@ const registrationSchema = mongoose.Schema(
     queries: {
       type: String,
       required: true,
+      maxlength: 1000,
     },
   },
   {

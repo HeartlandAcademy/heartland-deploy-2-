@@ -132,9 +132,14 @@ const AdminAllNews = () => {
                   }
                   key={n._id}
                 >
-                  <div className="ms-2 me-auto">
+                  <div
+                    className="ms-2 me-auto"
+                    style={{ overflow: "hidden", wordWrap: "break-word" }}
+                  >
                     <div className="fw-bold">{n.title}</div>
-                    {n.description && n.description.substring(0, 299)}.......
+                    <p>
+                      {n.description && n.description.substring(0, 299)}.......
+                    </p>
                   </div>
                   <LinkContainer to={`/admin/news/${n._id}/edit`}>
                     <i className="fas fa-pencil-alt"></i>

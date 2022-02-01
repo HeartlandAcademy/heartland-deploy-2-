@@ -151,7 +151,10 @@ const AdminAllEvents = ({ history }) => {
                   }
                   key={e._id}
                 >
-                  <div className="ms-2 me-auto">
+                  <div
+                    className="ms-2 me-auto"
+                    style={{ overflow: "hidden", wordWrap: "break-word" }}
+                  >
                     <div className="fw-bold">{e.title}</div>
                     <div>
                       {new Date(e.date).toLocaleDateString("en-US", options)}

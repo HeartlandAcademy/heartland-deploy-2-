@@ -9,11 +9,11 @@ const eventsSchema = mongoose.Schema({
   title: {
     type: String,
     required: [true, "Please add a title"],
-    maxlength: 100,
+    maxlength: 20,
   },
   description: {
     type: String,
-    required: [true, "Please add a description"],
+    required: [true, "Please add description"],
     maxlength: 1000,
   },
   date: {

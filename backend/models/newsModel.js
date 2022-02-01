@@ -18,7 +18,8 @@ const newsSchema = mongoose.Schema(
     },
     description: {
       type: String,
-      required: [true, "Please add a name"],
+      required: [true, "Please add description"],
+      maxlength: [5000, "Description can not be more than 5000 characters"],
     },
     section: {
       type: String,

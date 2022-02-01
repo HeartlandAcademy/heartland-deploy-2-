@@ -78,6 +78,12 @@ const Card = styled.div`
 `;
 
 const CardImage = styled.div`
+  height: 270px;
+  width: 400px;
+  @media (max-width: 484px) {
+    height: 200px;
+    width: 300px;
+  }
   img {
     height: auto;
     max-width: 100%;

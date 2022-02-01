@@ -63,10 +63,27 @@ const Card = styled.div`
 `;
 
 const CardImage = styled.div`
+  /* height: 300px;
+  width: 400px;
+  background-position: center;
+  @media (max-width: 484px) {
+    height: 200px;
+    width: 300px;
+  } */
+  width: 400px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
   img {
-    height: auto;
+    /* height: auto;
     max-width: 100%;
-    vertical-align: middle;
+    vertical-align: middle; */
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
   }
 `;
 
@@ -111,6 +128,7 @@ const CardText = styled.div`
   font-weight: 500;
   text-align: justify;
   padding-top: 10px;
+  overflow: hidden;
 `;
 
 const News = ({ match }) => {

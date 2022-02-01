@@ -5,7 +5,7 @@ const fileDownloadSchema = mongoose.Schema(
     title: {
       type: String,
       required: [true, "Please add a title"],
-      maxlength: 100,
+      maxlength: 20,
     },
     originalFile: {
       type: String,

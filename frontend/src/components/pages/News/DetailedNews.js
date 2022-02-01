@@ -51,6 +51,8 @@ const NewsDetails = styled.p`
   line-height: 30px;
   text-align: justify;
   font-size: 20px;
+  overflow: hidden;
+  word-wrap: break-word;
   @media (max-width: 510px) {
     font-size: 14px;
     font-weight: 500;

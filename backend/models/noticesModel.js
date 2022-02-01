@@ -4,7 +4,7 @@ const noticesSchema = mongoose.Schema({
   title: {
     type: String,
     required: [true, "Please add a title"],
-    maxlength: 100,
+    maxlength: 50,
   },
   description: {
     type: String,
