@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Placeholder } from "react-bootstrap";
+import { Placeholder, Row, Col, Card } from "react-bootstrap";
 
 import newspaper from "../../../assets/others/newspaper.jpg";
 import BlogPicture from "../../../assets/others/blogpicture.jpg";
@@ -20,11 +20,11 @@ const Title = styled.h2`
   position: relative;
   font-size: 50px;
   text-align: center;
-  margin: 17px;
+  margin: 25px;
 `;
 
 const Section2 = styled.div`
-  margin: 30px 30px;
+  margin: 20px 5px;
 `;
 
 const SearchBox = styled.div`
@@ -34,61 +34,10 @@ const SearchBox = styled.div`
   }
 `;
 
-const Cards = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`;
-
-const CardItem = styled.div`
-  display: flex;
-  padding: 1rem;
-  @media (min-width: 40rem) {
-    width: 50%;
-  }
-  @media (min-width: 56rem) {
-    width: 33.333%;
-  }
-`;
-
-const Card = styled.div`
-  background-color: white;
-  border-radius: 0.25rem;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
-
-const CardImage = styled.div`
-  /* height: 300px;
-  width: 400px;
-  background-position: center;
-  @media (max-width: 484px) {
-    height: 200px;
-    width: 300px;
-  } */
-  width: 400px;
-  height: 300px;
-  position: relative;
-  overflow: hidden;
-  img {
-    /* height: auto;
-    max-width: 100%;
-    vertical-align: middle; */
-    position: absolute;
-    top: -9999px;
-    bottom: -9999px;
-    left: -9999px;
-    right: -9999px;
-    margin: auto;
-  }
-`;
-
-const CardContent = styled.div`
-  padding: 1rem;
+const NoNews = styled.p`
+  font-size: 23px;
+  text-align: center;
+  padding: 60px 0px 100px 0px;
 `;
 
 const CardInfo = styled.div`
@@ -101,37 +50,7 @@ const CardInfo = styled.div`
   }
 `;
 
-const CardTitle = styled.div`
-  color: #111;
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  margin: 0px;
-  &:hover {
-    color: red;
-    cursor: pointer;
-  }
-`;
-
-const NoNews = styled.p`
-  font-size: 23px;
-  text-align: center;
-  padding: 60px 0px 100px 0px;
-`;
-
-const CardText = styled.div`
-  color: #111;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
-  font-weight: 500;
-  text-align: justify;
-  padding-top: 10px;
-  overflow: hidden;
-`;
-
-const News = ({ match }) => {
+const News = () => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -170,12 +89,16 @@ const News = ({ match }) => {
 
   const NewsCardLoader = () => {
     return (
-      <CardItem>
-        <Card>
-          <CardImage>
-            <img src={defaultImage} alt="default" />
-          </CardImage>
-          <CardContent>
+      <Col lg={4} xl={4} md={6}>
+        <Card style={{ height: "100%" }}>
+          <Card.Img
+            style={{ height: "100%" }}
+            variant="top"
+            src={defaultImage}
+            alt="default"
+          />
+
+          <Card.Body style={{ padding: "13px" }}>
             <CardInfo>
               <p>
                 <Placeholder as="p" animation="glow">
@@ -188,23 +111,21 @@ const News = ({ match }) => {
                 </Placeholder>
               </p>
             </CardInfo>
-
-            <CardTitle>
+            <Card.Title>
               <Placeholder as={Card.Title} animation="glow">
                 <Placeholder xs={12} />
               </Placeholder>
-            </CardTitle>
-
-            <CardText>
+            </Card.Title>
+            <Card.Text>
               <Placeholder as={Card.Text} animation="glow">
                 <Placeholder xs={9} />
               </Placeholder>
-            </CardText>
+            </Card.Text>
 
             <Placeholder.Button variant="primary" xs={5} />
-          </CardContent>
+          </Card.Body>
         </Card>
-      </CardItem>
+      </Col>
     );
   };
 
@@ -213,6 +134,7 @@ const News = ({ match }) => {
       <Meta title="Heartland News" />
       <ImageHeader mtitle="News" title="News" image={newspaper} />
       <Title>Heartland News</Title>
+
       <SearchBox className="container">
         <input
           type="text"
@@ -222,35 +144,36 @@ const News = ({ match }) => {
       </SearchBox>
 
       {loading ? (
-        <Cards>
+        <Row className="g-4 p-4 m-3">
           <NewsCardLoader />
           <NewsCardLoader />
           <NewsCardLoader />
-        </Cards>
+        </Row>
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
         <Section2>
-          {news && news.length === 0 ? (
+          {news && news.length === 0 && (
             <NoNews>
               Sorry we couldn't find any latest News. Please stay updated.
             </NoNews>
-          ) : (
-            ""
           )}
-          <Cards>
+          <Row className="g-4 p-4 m-3">
             {searchInput.length > 1
               ? filteredResults.map((n) => (
-                  <CardItem key={n._id}>
-                    <Card>
-                      <CardImage>
-                        {n.image ? (
-                          <img src={n.image} alt="sdf" />
-                        ) : (
-                          <img src={BlogPicture} alt="sdf" />
-                        )}
-                      </CardImage>
-                      <CardContent>
+                  <Col lg={4} xl={4} md={6}>
+                    <Card style={{ height: "100%" }}>
+                      {n.image ? (
+                        <Card.Img
+                          style={{ height: "100%" }}
+                          variant="top"
+                          src={n.image}
+                          alt="sdf"
+                        />
+                      ) : (
+                        <img src={BlogPicture} alt="sdf" />
+                      )}
+                      <Card.Body style={{ padding: "13px" }}>
                         <CardInfo>
                           <p>
                             <i className="fas fa-calendar-alt"></i>{" "}
@@ -260,32 +183,33 @@ const News = ({ match }) => {
                             <i className="far fa-user"></i> {n.author}
                           </p>
                         </CardInfo>
-                        <LinkContainer to={`/news/${news._id}`}>
-                          <CardTitle>{n.title}</CardTitle>
-                        </LinkContainer>
-                        <CardText>
+                        <Card.Title>{n.title}</Card.Title>
+                        <Card.Text>
                           {n.description && n.description.substring(0, 299)}
                           .......
-                        </CardText>
+                        </Card.Text>
                         <LinkContainer to={`/news/${n._id}`}>
                           <button className="btn btn-warning">Read More</button>
                         </LinkContainer>
-                      </CardContent>
+                      </Card.Body>
                     </Card>
-                  </CardItem>
+                  </Col>
                 ))
               : news &&
                 currentNews.map((n) => (
-                  <CardItem key={n._id}>
-                    <Card>
-                      <CardImage>
-                        {n.image ? (
-                          <img src={n.image} alt="sdf" />
-                        ) : (
-                          <img src={BlogPicture} alt="sdf" />
-                        )}
-                      </CardImage>
-                      <CardContent>
+                  <Col lg={4} xl={4} md={6}>
+                    <Card style={{ height: "100%" }}>
+                      {n.image ? (
+                        <Card.Img
+                          style={{ height: "100%" }}
+                          variant="top"
+                          src={n.image}
+                          alt="sdf"
+                        />
+                      ) : (
+                        <img src={BlogPicture} alt="sdf" />
+                      )}
+                      <Card.Body style={{ padding: "13px" }}>
                         <CardInfo>
                           <p>
                             <i className="fas fa-calendar-alt"></i>{" "}
@@ -295,26 +219,26 @@ const News = ({ match }) => {
                             <i className="far fa-user"></i> {n.author}
                           </p>
                         </CardInfo>
-                        <LinkContainer to={`/news/${news._id}`}>
-                          <CardTitle>{n.title}</CardTitle>
-                        </LinkContainer>
-                        <CardText>
+                        <Card.Title>{n.title}</Card.Title>
+                        <Card.Text>
                           {n.description && n.description.substring(0, 299)}
                           .......
-                        </CardText>
+                        </Card.Text>
                         <LinkContainer to={`/news/${n._id}`}>
                           <button className="btn btn-warning">Read More</button>
                         </LinkContainer>
-                      </CardContent>
+                      </Card.Body>
                     </Card>
-                  </CardItem>
+                  </Col>
                 ))}
-          </Cards>
-          <Pagination
-            itemsPerPage={newsPerPage}
-            total={news.length}
-            paginate={paginate}
-          />
+          </Row>
+          <div className="mx-5 px-2">
+            <Pagination
+              itemsPerPage={newsPerPage}
+              total={news.length}
+              paginate={paginate}
+            />
+          </div>
         </Section2>
       )}
     </>

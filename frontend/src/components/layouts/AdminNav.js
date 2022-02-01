@@ -20,10 +20,10 @@ const StyledLink = styled(NavLink)`
 const Sidebar = styled.div`
   height: 100%;
   position: fixed;
-  width: ${(props) => (props.sideBar ? "280px" : "80px")};
-  padding: 12px 14px;
+  width: ${(props) => (props.sideBar ? "280px" : "84px")};
+  padding: 5px 10px;
   overflow-x: hidden;
-  overflow-y: auto
+  overflow-y: auto;
   transition: all 0.5s ease;
   background: ${(props) => (props.darkmode ? "#202124" : "#fff")};
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -36,7 +36,7 @@ const Sidebar = styled.div`
   }
   @media (max-width: 400px) {
     width: ${(props) => (props.sideBar ? "80px" : "80px")};
-  } 
+  }
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
     box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
