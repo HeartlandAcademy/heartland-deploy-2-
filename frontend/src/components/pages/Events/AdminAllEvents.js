@@ -21,6 +21,7 @@ const NewsContainer = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 30px 0px;
   @media (max-width: 479px) {
     flex-direction: column;

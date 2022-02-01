@@ -20,8 +20,8 @@ const StyledLink = styled(NavLink)`
 const Sidebar = styled.div`
   height: 100%;
   position: fixed;
-  width: ${(props) => (props.sideBar ? "280px" : "84px")};
-  padding: 5px 10px;
+  width: ${(props) => (props.sideBar ? "280px" : "80px")};
+  padding: 5px 15px;
   overflow-x: hidden;
   overflow-y: auto;
   transition: all 0.5s ease;

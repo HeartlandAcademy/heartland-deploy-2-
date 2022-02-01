@@ -122,7 +122,7 @@ const App = () => {
                     exact
                   />
                   <Route
-                    path="/admin/album/:id"
+                    path="/admin/albums/all/:id"
                     component={AdminSingleAlbum}
                     exact
                   />

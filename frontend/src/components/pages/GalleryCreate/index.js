@@ -9,6 +9,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { addGalleryAlbums } from "../../../actions/galleryActions";
 import Message from "../../contents/Message";
+import Loader from "../../contents/Loader";
 import { GALLERY_ALBUM_CREATE_RESET } from "../../../actions/types";
 
 const Section = styled.div`
@@ -70,7 +71,7 @@ const AdminImages = ({ history }) => {
   }, [successCreate, history]);
 
   const uploadFileHandler = async (e) => {
-    console.log(e.target.files);
+    console.log("sdfsdfsdf");
     var formData = new FormData();
     for (const key of Object.keys(e.target.files)) {
       formData.append("images", e.target.files[key]);
@@ -125,7 +126,7 @@ const AdminImages = ({ history }) => {
         </ButtonContent>
       </Title>
       <>
-        {successError ? <Message variant="danger">{successError}</Message> : ""}
+        {successError && <Message variant="danger">{successError}</Message>}
         <Form
           noValidate
           validated={validated}
@@ -167,10 +168,11 @@ const AdminImages = ({ history }) => {
               Please Select Images
             </Form.Control.Feedback>
           </Form.Group>
+          {uploading && <Loader />}
 
           <Button
             variant="primary"
-            disabled={fileError}
+            disabled={fileError || uploading}
             type="submit"
             className={
               darkMode ? "btn-dark mt-3 btn-lg" : "btn-primary mt-3 btn-lg"

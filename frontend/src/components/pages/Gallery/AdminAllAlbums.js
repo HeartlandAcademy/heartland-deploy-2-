@@ -23,6 +23,7 @@ const AlbumsContainer = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 25px 0px;
   @media (max-width: 479px) {
     flex-direction: column;
@@ -211,7 +212,7 @@ const AdminAllAlbums = ({ history }) => {
                       />
                     </CardImage>
                     <CardContent>
-                      <LinkContainer to={`/admin/album/${album._id}`}>
+                      <LinkContainer to={`/admin/albums/all/${album._id}`}>
                         <CardTitle darkmode={darkMode}>{album.name}</CardTitle>
                       </LinkContainer>
                       <CardInfo darkmode={darkMode}>
@@ -219,7 +220,7 @@ const AdminAllAlbums = ({ history }) => {
                           moment(album.createdAt).format("DD-MMM-YYYY")}
                       </CardInfo>
                       <ActionButton>
-                        <Link to={`/admin/album/${album._id}`}>
+                        <Link to={`/admin/albums/all/${album._id}`}>
                           <Button>View</Button>
                         </Link>
                         <Button onClick={() => albumDeleteHandler(album._id)}>

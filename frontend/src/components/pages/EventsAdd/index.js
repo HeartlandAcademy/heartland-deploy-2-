@@ -19,6 +19,7 @@ const Section = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 13px;
   @media (max-width: 479px) {
     flex-direction: column;
@@ -175,6 +176,7 @@ const AdminEvents = ({ history }) => {
               </span>
             </Form.Text>
           )}
+          {uploading && <Loader />}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicTitle">
@@ -194,7 +196,7 @@ const AdminEvents = ({ history }) => {
 
         <Button
           variant="primary"
-          disabled={fileError}
+          disabled={fileError || uploading}
           type="submit"
           className={
             darkMode ? "btn-dark mt-4 btn-lg" : "btn-primary mt-4 btn-lg"

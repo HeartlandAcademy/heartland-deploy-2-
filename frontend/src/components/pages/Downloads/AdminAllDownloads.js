@@ -21,6 +21,7 @@ const Whole = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 5px;
   @media (max-width: 479px) {
     flex-direction: column;

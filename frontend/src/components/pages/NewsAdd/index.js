@@ -18,6 +18,7 @@ const Section = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 13px;
   @media (max-width: 479px) {
     flex-direction: column;
@@ -211,11 +212,15 @@ const AdminNews = ({ history }) => {
               </span>
             </Form.Text>
           )}
+          <Form.Control.Feedback type="invalid">
+            Please Select Image File
+          </Form.Control.Feedback>
+          {uploading && <Loader />}
         </Form.Group>
 
         <Button
           variant="primary"
-          disabled={fileError}
+          disabled={fileError || uploading}
           type="submit"
           className={
             darkMode ? "btn-dark mt-4 btn-lg" : "btn-primary mt-4 btn-lg"

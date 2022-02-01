@@ -22,6 +22,7 @@ const Section = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   @media (max-width: 479px) {
     flex-direction: column;
   }
@@ -180,7 +181,7 @@ const AdminDownloads = ({ history }) => {
 
           <Button
             variant="primary"
-            disabled={fileError}
+            disabled={fileError || uploading}
             type="submit"
             className={
               darkMode ? "btn-dark mt-4 btn-lg" : "btn-primary mt-4 btn-lg"

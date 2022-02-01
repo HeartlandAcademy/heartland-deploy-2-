@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -18,6 +18,7 @@ const Section = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 13px;
   @media (max-width: 479px) {
     flex-direction: column;
@@ -43,6 +44,7 @@ const AdminEditNews = ({ history, match }) => {
   const [description, setDescription] = useState("");
   const [section, setSection] = useState("");
   const [image, setImage] = useState("");
+  const [fileError, setFileError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [validated, setValidated] = useState(false);
 
@@ -61,6 +63,12 @@ const AdminEditNews = ({ history, match }) => {
 
   const dispatch = useDispatch();
 
+  const ref = useRef();
+
+  const reset = () => {
+    ref.current.value = "";
+  };
+
   function clearForm() {
     setTitle("");
     setDescription("");
@@ -68,6 +76,7 @@ const AdminEditNews = ({ history, match }) => {
     setDescription("");
     setUploading(false);
     setImage("");
+    reset();
   }
 
   useEffect(() => {
@@ -104,9 +113,11 @@ const AdminEditNews = ({ history, match }) => {
       const { data } = await axios.post("/api/uploads", formData, config);
 
       setImage(data);
+      setFileError(false);
       setUploading(false);
     } catch (error) {
       console.error(error);
+      setFileError(true);
       setUploading(false);
     }
   };
@@ -210,12 +221,30 @@ const AdminEditNews = ({ history, match }) => {
 
         <Form.Group controlId="image" className="mb-3">
           <Form.Label>Select New Image (If Any)</Form.Label>
-          <Form.Control type="file" onChange={uploadFileHandler} />
+          <Form.Control
+            type="file"
+            onChange={uploadFileHandler}
+            ref={ref}
+            required
+          />
+          {fileError && (
+            <Form.Text id="passwordHelpBlock" muted>
+              <span className="text-danger ">
+                <i className="fas fa-exclamation-circle"></i> Only image file
+                can be added.
+              </span>
+            </Form.Text>
+          )}
+          <Form.Control.Feedback type="invalid">
+            Please Select Image File
+          </Form.Control.Feedback>
+          {uploading && <Loader />}
         </Form.Group>
 
         <Button
           variant="primary"
           type="submit"
+          disabled={fileError || uploading}
           className={
             darkMode ? "btn-dark mt-4 btn-lg" : "btn-danger mt-4 btn-lg"
           }

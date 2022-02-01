@@ -43,6 +43,7 @@ const Title = styled.div`
   display: flex;
   text-align: center;
   justify-content: space-between;
+  align-items: center;
   @media (max-width: 479px) {
     flex-direction: column;
   }
