@@ -45,7 +45,7 @@ const Available = styled.div`
   margin-top: 30px;
   border-radius: 30px;
   h5 {
-    color: red;
+    color: ${(props) => (props.darkmode ? "#e1d9d1" : "#181A18")};
     font-style: italic;
   }
   p {
@@ -78,7 +78,7 @@ const DownloadButton = styled.div`
     margin-left: 20px;
     cursor: pointer;
     &:hover {
-      color: red;
+      color: ${(props) => (props.darkmode ? "#e1d9d1" : "#181A18")};
     }
   }
 `;
@@ -187,7 +187,7 @@ const AdminAllDownloads = ({ history }) => {
                         download.createdAt.substring(0, 10)}
                     </p>
                   </DownloadDetails>
-                  <DownloadButton>
+                  <DownloadButton darkmode={darkMode}>
                     <i
                       className="fas fa-trash"
                       onClick={() => downloadDeleteHandler(download._id)}

@@ -21,9 +21,9 @@ const Sidebar = styled.div`
   height: 100%;
   position: fixed;
   width: ${(props) => (props.sideBar ? "280px" : "80px")};
-  padding: 5px 15px;
+  padding: 5px 13px;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: inherit;
   transition: all 0.5s ease;
   background: ${(props) => (props.darkmode ? "#202124" : "#fff")};
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);

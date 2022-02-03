@@ -160,7 +160,10 @@ const AdminAllCarousel = ({ history }) => {
             )}
             {carousel.map((c) => (
               <Available darkmode={darkMode} key={c._id}>
-                <CarouselDetails darkmode={darkMode}>
+                <CarouselDetails
+                  darkmode={darkMode}
+                  style={{ overflow: "hidden", wordWrap: "break-word" }}
+                >
                   <h4>{c.title}</h4>
                   <h5>{c.description}</h5>
                 </CarouselDetails>

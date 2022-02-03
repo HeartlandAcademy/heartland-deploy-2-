@@ -9,7 +9,7 @@ const noticesSchema = mongoose.Schema({
   description: {
     type: String,
     required: [true, "Please add a description"],
-    maxlength: 1000,
+    maxlength: 10000,
   },
   date: {
     type: Date,

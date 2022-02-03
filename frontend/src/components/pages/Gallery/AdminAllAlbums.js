@@ -81,6 +81,7 @@ const Card = styled.div`
 const CardImage = styled.div`
   height: 270px;
   width: 400px;
+  padding: 2px;
   @media (max-width: 484px) {
     height: 200px;
     width: 300px;
@@ -109,7 +110,7 @@ const CardTitle = styled.div`
   text-transform: capitalize;
   margin: 0px;
   &:hover {
-    color: red;
+    color: ${(props) => (props.darkmode ? "#e1d9d1" : "#181A18")};
     cursor: pointer;
   }
 `;
@@ -220,12 +221,16 @@ const AdminAllAlbums = ({ history }) => {
                           moment(album.createdAt).format("DD-MMM-YYYY")}
                       </CardInfo>
                       <ActionButton>
-                        <Link to={`/admin/albums/all/${album._id}`}>
-                          <Button>View</Button>
-                        </Link>
-                        <Button onClick={() => albumDeleteHandler(album._id)}>
-                          Delete
-                        </Button>
+                        <div>
+                          <Link to={`/admin/albums/all/${album._id}`}>
+                            <Button>View</Button>
+                          </Link>
+                        </div>
+                        <div>
+                          <Button onClick={() => albumDeleteHandler(album._id)}>
+                            Delete
+                          </Button>
+                        </div>
                       </ActionButton>
                     </CardContent>
                   </Card>

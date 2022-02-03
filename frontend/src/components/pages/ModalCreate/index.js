@@ -34,7 +34,6 @@ const ModalSection = styled.div`
 `;
 
 const EmptyModal = styled.div`
-  min-height: 100vh;
   font-size: 28px;
   margin-top: 100px;
 `;
@@ -146,9 +145,10 @@ const AdminModal = () => {
               <Form.Control.Feedback type="invalid">
                 Please add valid image
               </Form.Control.Feedback>
+              {uploading && <Loader />}
             </Form.Group>
             <Button
-              disabled={fileUploadError}
+              disabled={fileUploadError || uploading}
               variant="primary"
               type="submit"
               className={

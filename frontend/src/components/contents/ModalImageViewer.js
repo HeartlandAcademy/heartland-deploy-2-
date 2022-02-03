@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const ModalContainer = styled.div`
-  margin-top: 50px;
+  margin: 50px 40px 30px 40px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   padding: 15px 15px;
 `;
 
 const ModalImage = styled.img`
-  height: 360px;
-  width: 570px;
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 const ModalImageViewer = ({ url }) => {

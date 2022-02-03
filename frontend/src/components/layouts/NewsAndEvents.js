@@ -254,7 +254,7 @@ const NewsAndEvents = () => {
                           variant="top"
                           src={event.image ? event.image : Background}
                         />
-                        <Card.Body style={{ height: 0 }}>
+                        <Card.Body>
                           <Card.Title>
                             {event.date &&
                               moment(event.date).format("DD-MMM-YYYY")}

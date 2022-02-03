@@ -31,6 +31,10 @@ const Title = styled.div`
   }
 `;
 
+const EventTitle = styled.h4`
+  color: ${(props) => (props.darkmode ? "#fff" : "#111")};
+`;
+
 const NoEvents = styled.div`
   font-size: 20px;
   display: flex;
@@ -156,9 +160,13 @@ const AdminAllEvents = ({ history }) => {
                     className="ms-2 me-auto"
                     style={{ overflow: "hidden", wordWrap: "break-word" }}
                   >
-                    <div className="fw-bold">{e.title}</div>
+                    <div className="fw-bold">
+                      <EventTitle darkmode={darkMode}>{e.title}</EventTitle>
+                    </div>
                     <div>
-                      {new Date(e.date).toLocaleDateString("en-US", options)}
+                      <p style={{ margin: 0, textDecoration: "underline" }}>
+                        {new Date(e.date).toLocaleDateString("en-US", options)}
+                      </p>
                     </div>
                     {e.description && e.description.substring(0, 299)}.......
                     {e.isOutdated && (

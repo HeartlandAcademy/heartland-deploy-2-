@@ -52,9 +52,9 @@ router.route("/videos/:id").delete(protect, deleteVideos);
 
 router.post("/uploads", upload.array("images"), (req, res, next) => {
   const reqFiles = [];
-  const url = req.protocol + "://" + req.get("host");
+  // const url = req.protocol + "://" + req.get("host");
   for (var i = 0; i < req.files.length; i++) {
-    reqFiles.push(url + "/uploads/gallery/" + req.files[i].filename);
+    reqFiles.push("/uploads/gallery/" + req.files[i].filename);
   }
   // for (var i = 0; i < req.files.length; i++) {
   //   reqFiles.push("/" + req.files[i].path);

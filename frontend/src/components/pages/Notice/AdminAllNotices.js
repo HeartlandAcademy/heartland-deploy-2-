@@ -62,7 +62,7 @@ const Available = styled.div`
 `;
 
 const NoticeDetails = styled.div`
-  h4 {
+  h3 {
     color: ${(props) => (props.darkmode ? "#fff" : "#111")};
   }
   p {
@@ -80,7 +80,7 @@ const NoticeButton = styled.div`
     margin-left: 20px;
     cursor: pointer;
     &:hover {
-      color: red;
+      color: ${(props) => (props.darkmode ? "#e1d9d1" : "#181A18")};
     }
   }
 `;
@@ -212,14 +212,17 @@ const AdminAllNotices = ({ history }) => {
               notices.map((notice) => (
                 <Available darkmode={darkMode} key={notice._id}>
                   <NoticeDetails darkmode={darkMode}>
-                    <h4>{notice.title}</h4>
+                    <h3>{notice.title}</h3>
                     <p>{notice.description}</p>
                     <p>
                       Added Date: {notice.date && notice.date.substring(0, 10)}
                     </p>
-                    <p>File: {notice.originalFile}</p>
+                    <p>
+                      File: {notice.originalFile}{" "}
+                      <i className="fas fa-file-pdf"></i>
+                    </p>
                   </NoticeDetails>
-                  <NoticeButton>
+                  <NoticeButton darkmode={darkMode}>
                     <i
                       className="far fa-eye"
                       onClick={() => {

@@ -200,6 +200,7 @@ const AdminEditNews = ({ history, match }) => {
             Please provide Description
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="formBasicSection">
           <Form.Label>Section</Form.Label>
           <Form.Control
@@ -221,12 +222,7 @@ const AdminEditNews = ({ history, match }) => {
 
         <Form.Group controlId="image" className="mb-3">
           <Form.Label>Select New Image (If Any)</Form.Label>
-          <Form.Control
-            type="file"
-            onChange={uploadFileHandler}
-            ref={ref}
-            required
-          />
+          <Form.Control type="file" onChange={uploadFileHandler} ref={ref} />
           {fileError && (
             <Form.Text id="passwordHelpBlock" muted>
               <span className="text-danger ">

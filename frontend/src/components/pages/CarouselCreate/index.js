@@ -170,9 +170,9 @@ const AdminCarousel = ({ history }) => {
         <Form.Group className="mb-3" controlId="formBasicDesc">
           <Form.Label>Description</Form.Label>
           <Form.Control
-            type="textarea"
+            as="textarea"
             placeholder="Enter description"
-            style={{ height: "90px" }}
+            style={{ minHeight: "90px" }}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
@@ -181,6 +181,7 @@ const AdminCarousel = ({ history }) => {
             Please provide Description
           </Form.Control.Feedback>
         </Form.Group>
+
         <Button
           variant="primary"
           disabled={fileError || uploading}
