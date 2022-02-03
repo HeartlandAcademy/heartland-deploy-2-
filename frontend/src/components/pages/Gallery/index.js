@@ -53,7 +53,7 @@ const AlbumsSection = styled.div`
 
 const NoAlbums = styled.div`
   font-size: 40px;
-  margin-top: 200px;
+  margin: 150px 0px;
   text-align: center;
 `;
 

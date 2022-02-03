@@ -77,9 +77,8 @@ const Title = styled.div`
 `;
 
 const EmptyVideo = styled.p`
-  min-height: 100vh;
   font-size: 28px;
-  margin-top: 100px;
+  margin: 100px 0px;
 `;
 
 const Videos = () => {
@@ -100,7 +99,7 @@ const Videos = () => {
       <Section>
         <VideosSection className="container">
           <Title>Videos</Title>
-          <Row className="text-center py-3" style={{ minHeight: "100vh" }}>
+          <Row className="text-center py-3">
             {videoLoading ? (
               <Cards>
                 <CardLoader />

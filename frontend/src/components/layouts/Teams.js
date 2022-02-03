@@ -53,11 +53,11 @@ const Teams = () => {
       items: 4,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
+      breakpoint: { max: 1024, min: 564 },
+      items: 3,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 564, min: 0 },
       items: 1,
     },
   };
@@ -68,26 +68,22 @@ const Teams = () => {
       </Team>
 
       <Carousel
-        additionalTransfrom={0}
-        arrows
-        autoPlay
-        autoPlaySpeed={2000}
-        centerMode={true}
-        className="message-card"
-        containerClass="carousel-container name-card"
-        dotListClass=""
+        swipeable={false}
         draggable={false}
-        focusOnSelect={false}
-        infinite
+        arrows
         responsive={responsive}
-        keyBoardControl
-        minimumTouchDrag={80}
-        renderButtonGroupOutside={false}
-        renderDotsOutside={false}
-        itemClass="single"
+        ssr={true} // means to render carousel on server-side.
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={2000}
+        containerClass="carousel-container name-card"
+        customTransition="all .5"
+        transitionDuration={500}
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        itemClass="carousel-item-padding-30-px single"
       >
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem", margin: "20px" }}>
             <Card.Img variant="top" src={one} />
             <Card.Body>
               <Card.Title>Mr. Karan Singh Goyala</Card.Title>
@@ -96,7 +92,7 @@ const Teams = () => {
           </Card>
         </Heartland>
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={two} />
             <Card.Body>
               <Card.Title>Miss Hasina Maharjan</Card.Title>
@@ -105,7 +101,7 @@ const Teams = () => {
           </Card>
         </Heartland>
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={three} />
             <Card.Body>
               <Card.Title>Mr. Patrick Frank Price</Card.Title>
@@ -114,7 +110,7 @@ const Teams = () => {
           </Card>
         </Heartland>
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={four} />
             <Card.Body>
               <Card.Title>Mrs. Chanda Koirala</Card.Title>
@@ -123,7 +119,7 @@ const Teams = () => {
           </Card>
         </Heartland>
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={five} />
             <Card.Body>
               <Card.Title>Mr. Bhim Singh Saud</Card.Title>
@@ -132,7 +128,7 @@ const Teams = () => {
           </Card>
         </Heartland>
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={six} />
             <Card.Body>
               <Card.Title>Mr. Man BDR. Ale</Card.Title>
@@ -141,7 +137,7 @@ const Teams = () => {
           </Card>
         </Heartland>
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={seven} />
             <Card.Body>
               <Card.Title>Mr. Ram Datta Mishra</Card.Title>
@@ -150,7 +146,7 @@ const Teams = () => {
           </Card>
         </Heartland>
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={eight} />
             <Card.Body>
               <Card.Title>Miss Indira Karki</Card.Title>
@@ -159,7 +155,7 @@ const Teams = () => {
           </Card>
         </Heartland>
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={nine} />
             <Card.Body>
               <Card.Title>Mrs. Merisha Shrestha</Card.Title>
@@ -168,7 +164,7 @@ const Teams = () => {
           </Card>
         </Heartland>
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={ten} />
             <Card.Body>
               <Card.Title>Mr. Prem Gaudel</Card.Title>
@@ -177,7 +173,7 @@ const Teams = () => {
           </Card>
         </Heartland>
         <Heartland>
-          <Card style={{ width: "15rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={eleven} />
             <Card.Body>
               <Card.Title>Mr. Ram PD. Upadhayaya</Card.Title>

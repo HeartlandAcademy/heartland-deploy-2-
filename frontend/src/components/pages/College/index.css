@@ -63,9 +63,8 @@
 }
 
 .single {
-  margin: 20px;
-}
-
-.message-card-college {
-  margin: 30px 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

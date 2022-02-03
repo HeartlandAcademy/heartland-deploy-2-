@@ -19,6 +19,7 @@ const Section = styled.div`
 `;
 
 const VideosSection = styled.div`
+  min-height: 100%;
   h2 {
     color: ${(props) => (props.darkmode ? "#fff" : "#111")};
   }
@@ -67,7 +68,6 @@ const ButtonContent = styled.div`
 `;
 
 const EmptyVideo = styled.p`
-  min-height: 100vh;
   font-size: 28px;
   margin-top: 100px;
 `;
