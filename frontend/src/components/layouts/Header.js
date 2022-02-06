@@ -27,9 +27,16 @@ const Number = styled.span`
 
 const ApplyNow = styled.div`
   display: flex;
-  cursor: pointer;
-  span {
-    margin-right: 30px;
+  padding-right: 20px;
+  /* span {
+    padding-right: 30px;
+  } */
+  gap: 30px;
+`;
+
+const CareerField = styled.span`
+  @media (max-width: 500px) {
+    display: none;
   }
 `;
 
@@ -189,6 +196,12 @@ const Header = () => {
         <span>
           {" "}
           <ApplyNow>
+            <Link
+              to="/careers"
+              style={{ textDecoration: "none", color: "#fff" }}
+            >
+              <CareerField>Careers</CareerField>
+            </Link>
             <Link
               to="/registration"
               style={{ textDecoration: "none", color: "#fff" }}

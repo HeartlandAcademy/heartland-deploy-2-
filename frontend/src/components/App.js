@@ -29,6 +29,9 @@ import AdminAllEvents from "./pages/Events/AdminAllEvents";
 import AdminAllCarousel from "./pages/Carousel";
 import AdminAllAlbums from "./pages/Gallery/AdminAllAlbums";
 import AdminSingleAlbum from "./pages/Gallery/AdminSingleAlbum";
+import AdminAllCareers from "./pages/CareersAdd/AdminAllCareers";
+import CareersAdd from "./pages/CareersAdd";
+
 import Admin404 from "./contents/Admin404";
 
 import Header from "./layouts/Header";
@@ -43,6 +46,7 @@ import News from "./pages/News";
 import DetailedNews from "./pages/News/DetailedNews";
 import Login from "./pages/Login";
 import HeartlandGallery from "./pages/Gallery";
+import Videos from "./pages/Videos";
 import SingleGallery from "./pages/Gallery/SingleGallery";
 import Notice from "./pages/Notice";
 import Downloads from "./pages/Downloads";
@@ -53,9 +57,11 @@ import Scholarship from "./pages/Scholarship";
 import Events from "./pages/Events";
 import College from "./pages/College";
 import NotFoundPage from "./contents/404";
+import Careers from "./pages/Careers";
+import CareersInfo from "./pages/CareersInfo";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Videos from "./pages/Videos";
+import AdminCareers from "./pages/CareersInfo/AdminCareers";
 
 const Menu = styled.div`
   display: flex;
@@ -155,6 +161,21 @@ const App = () => {
                     component={AdminAllDownloads}
                     exact
                   />
+                  <Route
+                    path="/admin/careers"
+                    component={AdminAllCareers}
+                    exact
+                  />
+                  <Route
+                    path="/admin/careers/add/:id"
+                    component={AdminCareers}
+                    exact
+                  />
+                  <Route
+                    path="/admin/careers/add"
+                    component={CareersAdd}
+                    exact
+                  />
                   <Route exact component={Admin404} />
                 </Switch>
               </Whole>
@@ -193,6 +214,8 @@ const App = () => {
                 <Route path="/news/:id" component={DetailedNews} exact />
                 <Route path="/notice" component={Notice} exact />
                 <Route path="/downloads" component={Downloads} exact />
+                <Route path="/careers" component={Careers} exact />
+                <Route path="/careers/:id" component={CareersInfo} exact />
 
                 {/* Admin */}
                 <Route path="/admin/login" component={Login} exact />

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
 const SocialMedia = styled.div`
   a {
     color: #fff;
@@ -83,26 +85,35 @@ const Footer = () => {
               <h5 className="text-uppercase text-white">Useful Links</h5>
 
               <ul className="list-unstyled mb-0">
-                <li>
-                  <a href={"/"} className="text-white">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href={"/about"} className="text-white">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href={"/news"} className="text-white">
-                    News
-                  </a>
-                </li>
-                <li>
-                  <a href={"/gallery"} className="text-white">
-                    Gallery
-                  </a>
-                </li>
+                <Link to="/">
+                  <li>
+                    <a className="text-white">Home</a>
+                  </li>
+                </Link>
+
+                <Link to="/careers">
+                  <li>
+                    <a className="text-white">Careers</a>
+                  </li>
+                </Link>
+
+                <Link to="/about">
+                  <li>
+                    <a className="text-white">About Us</a>
+                  </li>
+                </Link>
+
+                <Link to="/news">
+                  <li>
+                    <a className="text-white">News</a>
+                  </li>
+                </Link>
+
+                <Link to="/gallery/albums">
+                  <li>
+                    <a className="text-white">Gallery</a>
+                  </li>
+                </Link>
               </ul>
             </div>
             <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
@@ -110,12 +121,21 @@ const Footer = () => {
 
               <ul className="list-unstyled mb-0">
                 <li>
-                  <a href="#!" className="text-white">
+                  <a
+                    href="https://www.forchildrights.org"
+                    target="_blank"
+                    className="text-white"
+                  >
                     Introduction To CLCR
                   </a>
                 </li>
+
                 <li>
-                  <a href="#!" className="text-white">
+                  <a
+                    href="https://www.forchildrights.org"
+                    target="_blank"
+                    className="text-white"
+                  >
                     Learn more about CLCR
                   </a>
                 </li>
@@ -128,6 +148,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#!"
+                    target="_blank"
                     className="text-white"
                     style={{ textDecoration: "none" }}
                   >
@@ -137,6 +158,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#!"
+                    target="_blank"
                     className="text-white"
                     style={{ textDecoration: "none" }}
                   >
@@ -146,6 +168,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#!"
+                    target="_blank"
                     className="text-white"
                     style={{ textDecoration: "none" }}
                   >
@@ -155,6 +178,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#!"
+                    target="_blank"
                     className="text-white"
                     style={{ textDecoration: "none" }}
                   >

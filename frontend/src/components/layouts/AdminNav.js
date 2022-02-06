@@ -227,6 +227,17 @@ const AdminNav = () => {
               </a>
             </StyledLink>
           </li>
+          <li>
+            <StyledLink
+              to="/admin/careers"
+              activeClassName={darkMode ? "active" : "ractive"}
+            >
+              <a>
+                <i className="fas fa-suitcase"></i>
+                <h4>Careers</h4>
+              </a>
+            </StyledLink>
+          </li>
         </NavList>
       </Sidebar>
     </>

@@ -148,8 +148,6 @@
   margin-bottom: 50px;
 }
 
-
-
 /* Register */
 
 .form-control {
@@ -271,7 +269,7 @@ input:checked + .darkModeSlider {
   color: #fff;
   font-weight: 400;
   font-size: 20px;
-  border: 2px solid #303134
+  border: 2px solid #303134;
 }
 
 .dark-modal .modal-content h2 {
@@ -352,20 +350,24 @@ input:checked + .darkModeSlider {
   padding-top: 108px;
 }
 
-
-.pagination > li > a, .pagination > li > span{
-  color:#111 !Important;    
-  background-color: #fff !important;   
+.pagination > li > a,
+.pagination > li > span {
+  color: #111 !important;
+  background-color: #fff !important;
 }
 
 .input-group-text {
   border: 2px solid rgb(0, 148, 68) !important;
 }
 
+.careerCard {
+  border-left: 4px solid rgb(0, 148, 68);
+  cursor: pointer;
+  margin: 23px;
+}
 
-
-
-
-
-
-
+.careerCard:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  cursor: pointer;
+}
