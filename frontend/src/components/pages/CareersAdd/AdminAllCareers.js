@@ -64,7 +64,43 @@ const AdminAllCareers = () => {
         </ButtonContent>
       </Title>
       <Row xs={1} sm={3} md={4} className="p-4 justify-content-center">
-        <CareerCard className="col card p-3 m-4" darkmode={darkMode}>
+        <CareerCard className="col card p-4 m-4" darkmode={darkMode}>
+          <h4>This is Job Title</h4>
+          <p>
+            <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
+          </p>
+          <ButtonContainer>
+            <LinkContainer to={"/admin/careers/add/11111"}>
+              <Button variant="light">View</Button>
+            </LinkContainer>
+          </ButtonContainer>
+        </CareerCard>
+
+        <CareerCard className="col card p-4 m-4" darkmode={darkMode}>
+          <h4>This is Job Title</h4>
+          <p>
+            <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
+          </p>
+          <ButtonContainer>
+            <LinkContainer to={"/admin/careers/add/11111"}>
+              <Button variant="light">View</Button>
+            </LinkContainer>
+          </ButtonContainer>
+        </CareerCard>
+
+        <CareerCard className="col card p-4 m-4" darkmode={darkMode}>
+          <h4>This is Job Title</h4>
+          <p>
+            <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
+          </p>
+          <ButtonContainer>
+            <LinkContainer to={"/admin/careers/add/11111"}>
+              <Button variant="light">View</Button>
+            </LinkContainer>
+          </ButtonContainer>
+        </CareerCard>
+
+        <CareerCard className="col card p-4 m-4" darkmode={darkMode}>
           <h4>This is Job Title</h4>
           <p>
             <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
@@ -88,31 +124,7 @@ const AdminAllCareers = () => {
           </ButtonContainer>
         </CareerCard>
 
-        <CareerCard className="col card p-3 m-4" darkmode={darkMode}>
-          <h4>This is Job Title</h4>
-          <p>
-            <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
-          </p>
-          <ButtonContainer>
-            <LinkContainer to={"/admin/careers/add/11111"}>
-              <Button variant="light">View</Button>
-            </LinkContainer>
-          </ButtonContainer>
-        </CareerCard>
-
-        <CareerCard className="col card p-3 m-4" darkmode={darkMode}>
-          <h4>This is Job Title</h4>
-          <p>
-            <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
-          </p>
-          <ButtonContainer>
-            <LinkContainer to={"/admin/careers/add/11111"}>
-              <Button variant="light">View</Button>
-            </LinkContainer>
-          </ButtonContainer>
-        </CareerCard>
-
-        <CareerCard className="col card p-3 m-4" darkmode={darkMode}>
+        <CareerCard className="col card p-4 m-4" darkmode={darkMode}>
           <h4>This is Job Title</h4>
           <p>
             <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal

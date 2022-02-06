@@ -196,7 +196,7 @@ const index = () => {
               <Button size="lg">Apply</Button>
             </div>
             <div>
-              <Button size="lg">Back</Button>
+              <Button size="lg">Cancel</Button>
             </div>
           </ButtonContainer>
         </Container>

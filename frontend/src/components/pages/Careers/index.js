@@ -11,6 +11,9 @@ const Title = styled.div`
   color: rgb(1, 34, 55);
   font-size: 50px;
   margin: 50px 0;
+  span {
+    border-bottom: 3px solid rgb(0, 148, 68);
+  }
 `;
 
 const index = () => {
@@ -19,8 +22,10 @@ const index = () => {
       <Meta title="HA Careers" />
       <ImageHeader mtitle="Heartland" title="Careers" image={heartland} />
       <Container>
-        <Title>Career At HA</Title>
-        <h5>
+        <Title>
+          <span>Career At HA</span>
+        </Title>
+        <h5 style={{ textAlign: "justify" }}>
           Join Us. For over two decades, we’ve worked with Lorem, ipsum dolor
           sit amet consectetur adipisicing elit. Corporis error ut provident vel
           repellendus nihil atque possimus aliquam, mollitia tempora neque
