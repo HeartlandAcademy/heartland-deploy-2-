@@ -81,15 +81,23 @@ const Card = styled.div`
 const CardImage = styled.div`
   height: 270px;
   width: 400px;
-  padding: 2px;
+  overflow: hidden;
   @media (max-width: 484px) {
     height: 200px;
     width: 300px;
   }
   img {
-    height: auto;
+    /* height: auto;
     max-width: 100%;
-    vertical-align: middle;
+    vertical-align: middle; */
+    /* width: 100%;
+    object-fit: contain;
+    background-size: cover; */
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    height: 100%;
+    width: 100%;
   }
 `;
 

@@ -93,9 +93,14 @@ const CardImage = styled.div`
     width: 300px;
   }
   img {
-    height: auto;
+    /* height: auto;
     max-width: 100%;
-    vertical-align: middle;
+    vertical-align: middle; */
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    height: 100%;
+    width: 100%;
   }
 `;
 
