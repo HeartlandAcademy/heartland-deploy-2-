@@ -9,6 +9,7 @@ import News from "./models/newsModel.js";
 import Events from "./models/eventsModel.js";
 import connectDB from "./config/db.js";
 import Album from "./models/albumModel.js";
+import Teams from "./models/teamsModel.js";
 import Video from "./models/videoModel.js";
 import videos from "./data/videos.js";
 import events from "./data/events.js";
@@ -24,6 +25,9 @@ import Registration from "./models/registrationModel.js";
 import registration from "./data/registration.js";
 import Modal from "./models/modalModel.js";
 import modal from "./data/modal.js";
+import teams from "./data/teams.js";
+import testimonials from "./data/testimonials.js";
+import Testimonials from "./models/testimonialsModel.js";
 
 dotenv.config();
 
@@ -42,6 +46,8 @@ const importData = async () => {
     await FileDownload.deleteMany();
     await Carousel.deleteMany();
     await Modal.deleteMany();
+    await Teams.deleteMany();
+    await Testimonials.deleteMany();
     const createdUsers = await User.insertMany(users);
     const adminUser = createdUsers[0]._id;
 
@@ -63,6 +69,8 @@ const importData = async () => {
     await Carousel.insertMany(carousel);
     await Modal.insertMany(modal);
     await Registration.insertMany(registration);
+    await Teams.insertMany(teams);
+    await Testimonials.insertMany(testimonials);
 
     console.log("Data Imported".blue.bold);
   } catch (error) {

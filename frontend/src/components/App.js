@@ -47,6 +47,7 @@ import DetailedNews from "./pages/News/DetailedNews";
 import Login from "./pages/Login";
 import HeartlandGallery from "./pages/Gallery";
 import Videos from "./pages/Videos";
+import TestimonailCreate from "./pages/TestimonialCreate";
 import SingleGallery from "./pages/Gallery/SingleGallery";
 import Notice from "./pages/Notice";
 import Downloads from "./pages/Downloads";
@@ -145,6 +146,11 @@ const App = () => {
                   />
                   <Route path="/admin/staffs" component={AdminStaffs} exact />
                   <Route path="/admin/videos" component={AdminVideos} exact />
+                  <Route
+                    path="/admin/testimonials"
+                    component={TestimonailCreate}
+                    exact
+                  />
                   <Route path="/admin/notices" component={AdminNotices} exact />
                   <Route
                     path="/admin/notices/all"

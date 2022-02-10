@@ -4,7 +4,7 @@ const staffsSchema = mongoose.Schema({
   fullName: {
     type: String,
     required: [true, "Please add full name"],
-    maxlength: 40,
+    maxlength: 50,
   },
   email: {
     type: String,

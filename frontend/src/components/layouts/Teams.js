@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
+import { Card } from "react-bootstrap";
+
 import one from "../../assets/executives/one.jpg";
 import two from "../../assets/executives/two.jpg";
 import three from "../../assets/executives/three.JPG";
@@ -14,8 +16,6 @@ import eight from "../../assets/executives/eight.jpg";
 import nine from "../../assets/executives/nine.jpg";
 import ten from "../../assets/executives/ten.jpg";
 import eleven from "../../assets/executives/eleven.png";
-
-import { Card } from "react-bootstrap";
 
 const Team = styled.div`
   background-color: #111;

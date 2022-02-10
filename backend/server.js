@@ -12,6 +12,8 @@ import modalRoutes from "./routes/modalRoutes.js";
 import galleryRoutes from "./routes/galleryRoutes.js";
 import staffsRoutes from "./routes/staffsRoutes.js";
 import noticesRoutes from "./routes/noticesRoutes.js";
+import teamsRoutes from "./routes/teamsRoutes.js";
+import testimonialsRoutes from "./routes/testimonialsRoutes.js";
 import fileDownloadRoutes from "./routes/fileDownloadRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
@@ -34,6 +36,8 @@ app.use("/api/staffs", staffsRoutes);
 app.use("/api/notices", noticesRoutes);
 app.use("/api/downloads", fileDownloadRoutes);
 app.use("/api/registrations", registrationRoutes);
+app.use("/api/teams", teamsRoutes);
+app.use("/api/testimonials", testimonialsRoutes);
 
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

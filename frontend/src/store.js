@@ -59,6 +59,19 @@ import {
   modalCreateReducer,
   modalDeleteReducer,
 } from "./reducers/modalReducers";
+import {
+  addedTeamsReducer,
+  teamsCreateReducer,
+  teamsDeleteReducer,
+} from "./reducers/teamsReducers";
+import {
+  addedStudentsTestimonialsReducer,
+  addedVisitorsTestimonialsReducer,
+  studentsTestimonialsCreateReducer,
+  studentsTestimonialsDeleteReducer,
+  visitorsTestimonialsCreateReducer,
+  visitorsTestimonialsDeleteReducer,
+} from "./reducers/testimonialsReducers";
 
 const reducer = combineReducers({
   newsList: newsListReducer,
@@ -73,6 +86,15 @@ const reducer = combineReducers({
   addedModal: addedModalReducer,
   modalCreate: modalCreateReducer,
   modalDelete: modalDeleteReducer,
+  addedTeams: addedTeamsReducer,
+  teamsCreate: teamsCreateReducer,
+  teamsDelete: teamsDeleteReducer,
+  addedStudentsTestimonials: addedStudentsTestimonialsReducer,
+  studentsTestimonialsCreate: studentsTestimonialsCreateReducer,
+  studentsTestimonialsDelete: studentsTestimonialsDeleteReducer,
+  addedVisitorsTestimonials: addedVisitorsTestimonialsReducer,
+  visitorsTestimonialsCreate: visitorsTestimonialsCreateReducer,
+  visitorsTestimonialsDelete: visitorsTestimonialsDeleteReducer,
   upcomingEvents: upcomingEventsReducer,
   upcomingAdminEvents: upcomingAdminEventsReducer,
   upcomingLatestEvents: upcomingLatestEventsReducer,

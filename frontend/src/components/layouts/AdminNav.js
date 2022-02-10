@@ -197,6 +197,17 @@ const AdminNav = () => {
           </li>
           <li>
             <StyledLink
+              to="/admin/testimonials"
+              activeClassName={darkMode ? "active" : "ractive"}
+            >
+              <a>
+                <i className="fas fa-comment"></i>
+                <h4>Testimonials</h4>
+              </a>
+            </StyledLink>
+          </li>
+          <li>
+            <StyledLink
               to="/admin/staffs"
               activeClassName={darkMode ? "active" : "ractive"}
             >

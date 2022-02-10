@@ -115,7 +115,6 @@ const RegistrationBody = styled.div`
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   align-items: center;
   margin-top: 5px;
-  border-radius: 30px;
   word-break: break-all;
   padding: 20px 15px;
   margin-right: 15px;
@@ -167,6 +166,61 @@ const Description = styled.div`
   }
   @media (max-width: 570px) {
     display: none;
+  }
+`;
+
+const CareerSection = styled.div`
+  background: ${(props) => (props.darkmode ? "#202124" : "#fff")};
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 30px;
+  margin: 20px 30px;
+  border-radius: 20px;
+  height: 500px;
+  h4 {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #111;
+    color: ${(props) => (props.darkmode ? "#fff" : "#111")};
+  }
+`;
+
+const AllCareers = styled.div`
+  padding-top: 5px;
+  overflow-y: auto;
+  height: 410px;
+  &::-webkit-scrollbar-track {
+    border-radius: 30px;
+  }
+  &::-webkit-scrollbar {
+    width: 7px;
+    background-color: ${(props) => (props.darkmode ? "#202124" : "#f5f5f5")};
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: ${(props) => (props.darkmode ? "#fff" : "#111")};
+  }
+`;
+
+const CareerBody = styled.div`
+  background: ${(props) => (props.darkmode ? "#303134" : "#fff")};
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  word-break: break-all;
+  padding: 7px 12px;
+  margin: 10px 5px;
+  cursor: pointer;
+  h5 {
+    margin-bottom: 0;
+    color: ${(props) => (props.darkmode ? "#fff" : "#111")};
+  }
+  p {
+    margin-bottom: 0;
+  }
+  &:hover {
+    -webkit-transform: scale(1.01);
+    transform: scale(1.01);
   }
 `;
 
@@ -355,6 +409,46 @@ const AdminHome = () => {
           )}
         </AllNotifications>
       </NotificationSection>
+      <CareerSection darkmode={darkMode}>
+        <h4>
+          Careers <i className="fas fa-suitcase"></i>
+        </h4>
+        <AllCareers darkmode={darkMode}>
+          <CareerBody darkmode={darkMode}>
+            <div>
+              <h5>Career Alert from Random User</h5>
+              <p>27th December, 2022</p>
+            </div>
+            <div>
+              <span>
+                <i className="fas fa-times"></i>
+              </span>
+            </div>
+          </CareerBody>
+          <CareerBody darkmode={darkMode}>
+            <div>
+              <h5>Career Alert from Random User</h5>
+              <p>27th December, 2022</p>
+            </div>
+            <div>
+              <span>
+                <i className="fas fa-times"></i>
+              </span>
+            </div>
+          </CareerBody>
+          <CareerBody darkmode={darkMode}>
+            <div>
+              <h5>Career Alert from Random User</h5>
+              <p>27th December, 2022</p>
+            </div>
+            <div>
+              <span>
+                <i className="fas fa-times"></i>
+              </span>
+            </div>
+          </CareerBody>
+        </AllCareers>
+      </CareerSection>
       <Description darkmode={darkMode}>
         <p>
           Heartland Academy (HA) is an internationally supported higher
