@@ -16,25 +16,25 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, "uploads/notices");
+    cb(null, "uploads/testimonials");
   },
   filename(req, file, cb) {
     cb(
       null,
-      `${file.originalname}-${Date.now()}${path.extname(file.originalname)}`
+      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
     );
   },
 });
 
 function checkFileType(file, cb) {
-  const filetypes = /pdf/;
+  const filetypes = /jpg|jpeg|png/;
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = filetypes.test(file.mimetype);
 
   if (extname && mimetype) {
     return cb(null, true);
   } else {
-    return cb(new Error("Only PDF can be uploaded"));
+    return cb(new Error("Only Image file can be uploaded"));
   }
 }
 
@@ -50,7 +50,7 @@ router
   .get(getStudentsTestimonials)
   .post(protect, createStudentTestimonials);
 
-router.route("/students/:id").delete(protect, deleteStudentTestimonial);
+router.route("/students/:id").delete(deleteStudentTestimonial);
 
 router
   .route("/visitors")
@@ -58,5 +58,9 @@ router
   .post(protect, createVisitorsTestimonials);
 
 router.route("/visitors/:id").delete(protect, deleteVisitorsTestimonials);
+
+router.post("/uploads", upload.single("formFile"), (req, res) => {
+  res.send(`/${req.file.path}`);
+});
 
 export default router;

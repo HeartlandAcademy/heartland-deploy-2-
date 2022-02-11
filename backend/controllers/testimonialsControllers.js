@@ -21,9 +21,10 @@ const createStudentTestimonials = asyncHandler(async (req, res) => {
   const studentTestimonialData = { fullName, image, desc, message };
 
   const studentsTestimonials = await Testimonials.find({}).updateOne({
-    $addToSet: {
+    $push: {
       students: {
         $each: [studentTestimonialData],
+        $position: 0,
       },
     },
   });
@@ -53,13 +54,15 @@ const createStudentTestimonials = asyncHandler(async (req, res) => {
 // @route   DELETE /api/testimonials/students/:id
 // @access  Private
 const deleteStudentTestimonial = asyncHandler(async (req, res) => {
-  const testId = req.params.id;
-  console.log(testId);
+  console.log("test");
   const studentsTestimonials = await Testimonials.find({}).updateMany({
     $pull: {
       students: { _id: req.params.id },
     },
   });
+
+  console.log("random");
+  console.log(studentsTestimonials);
 
   if (studentsTestimonials) {
     res.status(201).json({ message: "Testimonial Deleted" });
@@ -88,9 +91,10 @@ const createVisitorsTestimonials = asyncHandler(async (req, res) => {
   const visitorTestimonialData = { fullName, image, desc, message };
 
   const visitorsTestimonials = await Testimonials.find({}).updateOne({
-    $addToSet: {
+    $push: {
       visitors: {
         $each: [visitorTestimonialData],
+        $position: 0,
       },
     },
   });
@@ -112,7 +116,7 @@ const deleteVisitorsTestimonials = asyncHandler(async (req, res) => {
     },
   });
 
-  if (studentsTestimonials) {
+  if (visitorsTestimonials) {
     res.status(201).json({ message: "Testimonial Deleted" });
   } else {
     res.json("Testimonial Not Found");

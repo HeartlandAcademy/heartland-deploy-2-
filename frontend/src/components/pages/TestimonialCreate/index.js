@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { Button } from "react-bootstrap";
-import { toast } from "react-toastify";
-
-import { useDispatch, useSelector } from "react-redux";
-
-import { Card } from "react-bootstrap";
-
-import Default from "../../../assets/default/default.png";
-import Loader from "../../contents/Loader";
-import { deleteTeams, listTeams } from "../../../actions/teamsActions";
-import TeamsModal from "../../contents/TeamsModal";
-import { TEAMS_CREATE_RESET } from "../../../actions/types";
-import {
-  listStudentsTestimonails,
-  listVisitorsTestimonails,
-} from "../../../actions/testimonialsActions";
-
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
+
+import { Button, Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
+import StudentsModal from "../../contents/StudentsModal";
+import VisitorsModal from "../../contents/VisitorsModal";
+import Message from "../../contents/Message";
+import Default from "../../../assets/default/default.png";
+import Loader from "../../contents/Loader";
+
+import { deleteTeams, listTeams } from "../../../actions/teamsActions";
+import TeamsModal from "../../contents/TeamsModal";
+import {
+  TEAMS_CREATE_RESET,
+  TESTIMONIALS_STUDENTS_CREATE_RESET,
+  TESTIMONIALS_VISITORS_CREATE_RESET,
+} from "../../../actions/types";
+import {
+  deleteStudentsTestimonials,
+  listStudentsTestimonials,
+  listVisitorsTestimonials,
+  deleteVisitorsTestimonials,
+} from "../../../actions/testimonialsActions";
 
 const Section = styled.div`
   padding: 30px 40px;
@@ -54,17 +59,35 @@ const TeamsContainer = styled.div`
   }
 `;
 
+const NoContent = styled.div`
+  margin: 20px 0;
+  h5 {
+    text-align: center;
+    font-size: 27px;
+    color: ${(props) => (props.darkmode ? "#fff" : "#111")};
+  }
+`;
+
 const Heartland = styled.div`
   img {
     height: 200px;
   }
   span {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
   }
 `;
 
 const MessageCard = styled.div`
   margin: 30px;
+  span {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+  }
 `;
 
 const Top = styled.div`
@@ -107,19 +130,22 @@ const Profile = styled.div`
   display: grid;
   justify-content: center;
   text-align: center;
+  margin-bottom: 20px;
 `;
 
 const ImageCard = styled.div`
   img {
-    width: 58px;
-    border-radius: 50%;
     margin-bottom: 20px;
+    width: 55px;
+    height: 54px;
+    border-radius: 50%;
+    vertical-align: middle;
   }
 `;
 
 const Name = styled.div`
   font-size: 18px;
-  color: #012237;
+  color: ${(props) => (props.darkmode ? "#fff" : "#012237")};
   font-weight: 600;
   line-height: 1em;
   margin: 0 0 10px;
@@ -140,8 +166,8 @@ const VisitorProfile = styled.div`
   margin-top: 20px;
   img {
     margin-top: 7px;
-    max-width: 90px;
-    max-height: 70px;
+    max-width: 55px;
+    max-height: 52px;
     border-radius: 50%;
     vertical-align: middle;
     @media (max-width: 770px) {
@@ -159,6 +185,7 @@ const ProfileDesc = styled.div`
   h6 {
     margin-top: 10px;
     font-weight: 600;
+    color: ${(props) => (props.darkmode ? "#fff" : "#111")};
   }
   p {
     font-size: 12px;
@@ -173,8 +200,9 @@ const VisitorMsg = styled.div`
 
 const VisitorMessageCard = styled.div`
   transition: 0.3s ease;
-  background: #fff;
-  border: 1px solid #e5e5e5;
+  background: ${(props) => (props.darkmode ? "#202124" : "#fff")};
+  border: ${(props) =>
+    props.darkmode ? "1px solid #202124" : "1px solid #e5e5e5"};
   border-top: 3px solid #e5e5e5;
   padding: 16px 25px 25px;
   border-radius: 12px;
@@ -184,6 +212,7 @@ const VisitorMessageCard = styled.div`
     justify-content: center;
     font-size: 20px;
     padding: 10px 0;
+    cursor: pointer;
   }
   &:hover {
     border-color: #05ab90;
@@ -192,6 +221,8 @@ const VisitorMessageCard = styled.div`
 
 const TestimonialCreate = ({ history }) => {
   const [modalShow, setModalShow] = useState(false);
+  const [studentModalShow, setStudentModalShow] = useState(false);
+  const [visitorModalShow, setVisitorModalShow] = useState(false);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -200,13 +231,13 @@ const TestimonialCreate = ({ history }) => {
   const { darkMode } = settings;
 
   const addedTeams = useSelector((state) => state.addedTeams);
-  const { loading, teams, error: addedError } = addedTeams;
+  const { loading: addTeamLoading, teams, error: addErrorLoading } = addedTeams;
 
   const teamsCreate = useSelector((state) => state.teamsCreate);
-  const { success, error } = teamsCreate;
+  const { success: teamCreateSuccess, error: teamCreateError } = teamsCreate;
 
   const teamsDelete = useSelector((state) => state.teamsDelete);
-  const { success: deleteSuccess, error: deleteError } = teamsDelete;
+  const { success: teamDeleteSuccess, error: teamDeleteError } = teamsDelete;
 
   const addedStudentsTestimonials = useSelector(
     (state) => state.addedStudentsTestimonials
@@ -217,6 +248,18 @@ const TestimonialCreate = ({ history }) => {
     studentsTestimonials,
   } = addedStudentsTestimonials;
 
+  const studentsTestimonialsCreate = useSelector(
+    (state) => state.studentsTestimonialsCreate
+  );
+  const { success: studentCreateSuccess, error: studentCreateError } =
+    studentsTestimonialsCreate;
+
+  const studentsTestimonialsDelete = useSelector(
+    (state) => state.studentsTestimonialsDelete
+  );
+  const { success: studentDeleteSuccess, error: studentDeleteError } =
+    studentsTestimonialsDelete;
+
   const addedVisitorsTestimonials = useSelector(
     (state) => state.addedVisitorsTestimonials
   );
@@ -226,25 +269,63 @@ const TestimonialCreate = ({ history }) => {
     visitorsTestimonials,
   } = addedVisitorsTestimonials;
 
+  const visitorsTestimonialsCreate = useSelector(
+    (state) => state.visitorsTestimonialsCreate
+  );
+  const { success: visitorCreateSuccess, error: visitorCreateError } =
+    visitorsTestimonialsCreate;
+
+  const visitorsTestimonialsDelete = useSelector(
+    (state) => state.visitorsTestimonialsDelete
+  );
+  const { success: visitorDeleteSuccess, error: visitorDeleteError } =
+    visitorsTestimonialsDelete;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (userInfo) {
       dispatch(listTeams());
-      dispatch(listStudentsTestimonails());
-      dispatch(listVisitorsTestimonails());
-      if (deleteSuccess) {
+      dispatch(listStudentsTestimonials());
+      dispatch(listVisitorsTestimonials());
+      if (teamDeleteSuccess) {
         dispatch(listTeams());
       }
-      if (success) {
+      if (studentDeleteSuccess) {
+        dispatch(listStudentsTestimonials());
+      }
+      if (visitorDeleteSuccess) {
+        dispatch(listVisitorsTestimonials());
+      }
+      if (teamCreateSuccess) {
         dispatch(listTeams());
         dispatch({ type: TEAMS_CREATE_RESET });
         setModalShow(false);
       }
+      if (studentCreateSuccess) {
+        dispatch(listStudentsTestimonials());
+        dispatch({ type: TESTIMONIALS_STUDENTS_CREATE_RESET });
+        setStudentModalShow(false);
+      }
+      if (visitorCreateSuccess) {
+        dispatch(listVisitorsTestimonials());
+        dispatch({ type: TESTIMONIALS_VISITORS_CREATE_RESET });
+        setVisitorModalShow(false);
+      }
     } else {
       history.push("/admin/login");
     }
-  }, [dispatch, history, userInfo, success, deleteSuccess]);
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    teamDeleteSuccess,
+    studentDeleteSuccess,
+    visitorDeleteSuccess,
+    teamCreateSuccess,
+    studentCreateSuccess,
+    visitorCreateSuccess,
+  ]);
 
   const responsive = {
     0: { items: 1 },
@@ -266,7 +347,20 @@ const TestimonialCreate = ({ history }) => {
     }
   };
 
-  const visitorDeleteHandler = (id) => {};
+  const visitorDeleteHandler = (id) => {
+    if (window.confirm("Are you sure")) {
+      dispatch(deleteVisitorsTestimonials(id));
+      toast.success("Testimonial Deleted Successfully");
+    }
+  };
+
+  const studentDeleteHandler = (id) => {
+    if (window.confirm("Are you sure")) {
+      console.log(id);
+      dispatch(deleteStudentsTestimonials(id));
+      toast.success("Testimonial Deleted Successfully");
+    }
+  };
 
   return (
     <Section className="container">
@@ -284,38 +378,51 @@ const TestimonialCreate = ({ history }) => {
           <TeamsModal show={modalShow} onHide={() => setModalShow(false)} />
         </Title>
 
-        {loading ? (
+        {teamCreateError && (
+          <Message variant="danger">{teamCreateError}</Message>
+        )}
+        {teamDeleteError && (
+          <Message variant="danger">{teamDeleteError}</Message>
+        )}
+        {addTeamLoading ? (
           <Loader />
-        ) : error ? (
-          <h3>dsdfsdf</h3>
+        ) : addErrorLoading ? (
+          <Message variant="danger">{addErrorLoading}</Message>
         ) : (
-          <AliceCarousel
-            mouseTracking
-            responsive={teamResponsive}
-            controlsStrategy="alternate"
-          >
-            {teams &&
-              teams.map((team) => (
-                <Heartland>
-                  <Card style={{ width: "14rem", margin: "20px" }}>
-                    <Card.Img variant="top" src={team.image} />
-                    <Card.Body
-                      style={{
-                        backgroundColor: darkMode ? "#202124" : "#fff",
-                      }}
-                    >
-                      <Card.Title>{team.fullName}</Card.Title>
-                      <Card.Text>
-                        <p>{team.desc}</p>
-                        <span onClick={() => teamDeleteHandler(team._id)}>
-                          <i class="fas fa-trash"></i>
-                        </span>
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Heartland>
-              ))}
-          </AliceCarousel>
+          <>
+            {teams && teams.length === 0 && (
+              <NoContent darkmode={darkMode}>
+                <h5>Team Section is Empty......</h5>
+              </NoContent>
+            )}
+            <AliceCarousel
+              mouseTracking
+              responsive={teamResponsive}
+              controlsStrategy="alternate"
+            >
+              {teams &&
+                teams.map((team) => (
+                  <Heartland>
+                    <Card style={{ width: "15rem", margin: "20px" }}>
+                      <Card.Img variant="top" src={team.image} />
+                      <Card.Body
+                        style={{
+                          backgroundColor: darkMode ? "#202124" : "#fff",
+                        }}
+                      >
+                        <Card.Title>{team.fullName}</Card.Title>
+                        <Card.Text>
+                          <p>{team.desc}</p>
+                          <span onClick={() => teamDeleteHandler(team._id)}>
+                            <i class="fas fa-trash"></i>
+                          </span>
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Heartland>
+                ))}
+            </AliceCarousel>
+          </>
         )}
       </TeamsContainer>
 
@@ -324,42 +431,63 @@ const TestimonialCreate = ({ history }) => {
           <h3>Students</h3>
           <ButtonContent>
             <Button
-              onClick={() => setModalShow(true)}
+              onClick={() => setStudentModalShow(true)}
               className={darkMode ? "btn-dark" : "btn-primary"}
             >
               <i className="fas fa-plus"></i> New
             </Button>
           </ButtonContent>
-          <TeamsModal show={modalShow} onHide={() => setModalShow(false)} />
+          <StudentsModal
+            show={studentModalShow}
+            onHide={() => setStudentModalShow(false)}
+          />
         </Title>
 
+        {studentCreateError && (
+          <Message variant="danger">{studentCreateError}</Message>
+        )}
+        {studentDeleteError && (
+          <Message variant="danger">{studentDeleteError}</Message>
+        )}
         {studentLoading ? (
           <Loader />
         ) : studentError ? (
-          <h3>sfsdsdf</h3>
+          <Message variant="danger">{studentError}</Message>
         ) : (
-          <AliceCarousel
-            mouseTracking
-            responsive={responsive}
-            controlsStrategy="alternate"
-          >
+          <>
             {studentsTestimonials &&
-              studentsTestimonials.students.map((student) => (
-                <>
-                  <Top>
-                    <i className="fas fa-quote-left"></i>
-                  </Top>
-                  <Msg>{student.message}</Msg>
-                  <Profile>
-                    <ImageCard>
-                      <img src={Default} alt="student" />
-                    </ImageCard>
-                    <Name>{student.fullName}</Name>
-                    <Desc>{student.desc}</Desc>
-                  </Profile>
-                </>
-              ))}
-          </AliceCarousel>
+              studentsTestimonials.students.length === 0 && (
+                <NoContent darkmode={darkMode}>
+                  <h5>Students Testimonial is Empty......</h5>
+                </NoContent>
+              )}
+
+            <AliceCarousel
+              mouseTracking
+              responsive={responsive}
+              controlsStrategy="alternate"
+            >
+              {studentsTestimonials &&
+                studentsTestimonials.students.map((student) => (
+                  <MessageCard>
+                    <Top>
+                      <i className="fas fa-quote-left"></i>
+                    </Top>
+                    <Msg>{student.message}</Msg>
+                    <Profile>
+                      <ImageCard>
+                        <img src={student.image} alt="student" />
+                      </ImageCard>
+                      <Name darkmode={darkMode}>{student.fullName}</Name>
+                      <Desc>{student.desc}</Desc>
+                    </Profile>
+                    <span onClick={() => studentDeleteHandler(student._id)}>
+                      <i class="fas fa-trash"></i>
+                    </span>
+                  </MessageCard>
+                ))}
+            </AliceCarousel>
+          </>
         )}
       </div>
       <div>
@@ -367,49 +495,59 @@ const TestimonialCreate = ({ history }) => {
           <h3>Visitors</h3>
           <ButtonContent>
             <Button
-              onClick={() => setModalShow(true)}
+              onClick={() => setVisitorModalShow(true)}
               className={darkMode ? "btn-dark" : "btn-primary"}
             >
               <i className="fas fa-plus"></i> New
             </Button>
           </ButtonContent>
-          <TeamsModal show={modalShow} onHide={() => setModalShow(false)} />
+          <VisitorsModal
+            show={visitorModalShow}
+            onHide={() => setVisitorModalShow(false)}
+          />
         </Title>
 
+        {visitorCreateError && (
+          <Message variant="danger">{visitorCreateError}</Message>
+        )}
+        {visitorDeleteError && (
+          <Message variant="danger">{visitorDeleteError}</Message>
+        )}
         {visitorLoading ? (
           <Loader />
-        ) : error ? (
-          <h3>asdasd</h3>
+        ) : visitorError ? (
+          <Message variant="danger">{visitorError}</Message>
         ) : (
           <>
-            {visitorLoading ? (
-              <Loader />
-            ) : visitorError ? (
-              <h3>dsdfsdf</h3>
-            ) : (
-              <AliceCarousel
-                mouseTracking
-                responsive={responsive}
-                controlsStrategy="alternate"
-              >
-                {visitorsTestimonials &&
-                  visitorsTestimonials.visitors.map((visitor) => (
-                    <VisitorMessageCard>
-                      <VisitorMsg>{visitor.message}</VisitorMsg>
-                      <VisitorProfile>
-                        <img src={Default} alt="student" />
-                        <ProfileDesc>
-                          <h6>{visitor.fullName}</h6>
-                          <p>{visitor.desc}</p>
-                        </ProfileDesc>
-                      </VisitorProfile>
-                      <span onClick={() => visitorDeleteHandler()}>
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    </VisitorMessageCard>
-                  ))}
-              </AliceCarousel>
-            )}
+            {visitorsTestimonials &&
+              visitorsTestimonials.visitors.length === 0 && (
+                <NoContent darkmode={darkMode}>
+                  <h5>Visitors Testimonial is Empty......</h5>
+                </NoContent>
+              )}
+
+            <AliceCarousel
+              mouseTracking
+              responsive={responsive}
+              controlsStrategy="alternate"
+            >
+              {visitorsTestimonials &&
+                visitorsTestimonials.visitors.map((visitor) => (
+                  <VisitorMessageCard darkmode={darkMode}>
+                    <VisitorMsg>{visitor.message}</VisitorMsg>
+                    <VisitorProfile>
+                      <img src={visitor.image} alt="student" />
+                      <ProfileDesc darkmode={darkMode}>
+                        <h6>{visitor.fullName}</h6>
+                        <p>{visitor.desc}</p>
+                      </ProfileDesc>
+                    </VisitorProfile>
+                    <span onClick={() => visitorDeleteHandler(visitor._id)}>
+                      <i class="fas fa-trash"></i>
+                    </span>
+                  </VisitorMessageCard>
+                ))}
+            </AliceCarousel>
           </>
         )}
       </div>

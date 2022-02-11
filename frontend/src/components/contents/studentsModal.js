@@ -3,16 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 import { Modal, Button, Form, Container } from "react-bootstrap";
-import { createStaffs } from "../../actions/staffsActions";
 import { toast } from "react-toastify";
 import Message from "./Message";
-import { createTeams } from "../../actions/teamsActions";
 import Loader from "./Loader";
+import { createStudentsTestimonials } from "../../actions/testimonialsActions";
 
-export default function TeamsModal(props) {
+export default function StudentsModal(props) {
   const [fullName, setFullName] = useState("");
   const [desc, setDesc] = useState("");
-  const [teamImage, setTeamImage] = useState("");
+  const [studentImage, setStudentImage] = useState("");
   const [message, setMessage] = useState("");
   const [uploading, setUploading] = useState(false);
   const [fileError, setFileError] = useState(false);
@@ -21,8 +20,10 @@ export default function TeamsModal(props) {
   const settings = useSelector((state) => state.settings);
   const { darkMode } = settings;
 
-  const teamsCreate = useSelector((state) => state.teamsCreate);
-  const { success, error } = teamsCreate;
+  const studentsTestimonialsCreate = useSelector(
+    (state) => state.studentsTestimonialsCreate
+  );
+  const { success, error } = studentsTestimonialsCreate;
 
   const dispatch = useDispatch();
 
@@ -39,12 +40,12 @@ export default function TeamsModal(props) {
         },
       };
       const { data } = await axios.post(
-        "/api/testimonials/students",
+        "/api/testimonials/uploads",
         formData,
         config
       );
 
-      setTeamImage(data);
+      setStudentImage(data);
       setFileError(false);
       setUploading(false);
     } catch (error) {
@@ -63,14 +64,15 @@ export default function TeamsModal(props) {
   function clearForm() {
     setFullName("");
     setDesc("");
-    setTeamImage("");
+    setStudentImage("");
+    setMessage("");
     reset();
   }
 
   useEffect(() => {
     if (success) {
       clearForm();
-      toast.success("Team Added Successfully");
+      toast.success("Testimonial Added Successfully");
       setValidated(false);
     }
   }, [success]);
@@ -82,7 +84,9 @@ export default function TeamsModal(props) {
       event.preventDefault();
       event.stopPropagation();
     } else {
-      dispatch(createTeams(fullName, desc, teamImage));
+      dispatch(
+        createStudentsTestimonials(fullName, desc, studentImage, message)
+      );
     }
     setValidated(true);
   };
@@ -97,7 +101,7 @@ export default function TeamsModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <h2>Add New Team</h2>
+          <h2>Add Student Testimonial</h2>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -143,6 +147,21 @@ export default function TeamsModal(props) {
                 placeholder="Enter description"
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Please provide Description
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicMessage">
+              <Form.Label>Message</Form.Label>
+              <Form.Control
+                as="textarea"
+                placeholder="Enter Message"
+                style={{ height: "90px" }}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 required
               />
               <Form.Control.Feedback type="invalid">

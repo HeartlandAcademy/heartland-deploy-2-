@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Tab, Row, Col, Nav } from "react-bootstrap";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import { Tab, Row, Col, Nav, Placeholder } from "react-bootstrap";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
+
+import { useDispatch, useSelector } from "react-redux";
+import Message from "../../contents/Message";
 
 import ImageHeader from "../../contents/ImageHeader";
 import test from "../../../assets/imageheaderphotos/test.JPG";
 import Back from "../../../assets/others/Background.jpg";
-import Default from "../../../assets/default/default.png";
 import Meta from "../../contents/Meta";
+import { listStudentsTestimonials } from "../../../actions/testimonialsActions";
 
 const Section1 = styled.div`
   margin-top: 20px;
@@ -42,7 +45,7 @@ const Section3 = styled.div`
   background-image: url(${Back});
 `;
 
-const Message = styled.div`
+const MainMessage = styled.div`
   background-color: rgba(24, 43, 73);
   opacity: 0.98;
   display: flex;
@@ -160,25 +163,50 @@ const Section6 = styled.div`
 `;
 
 const School = () => {
+  const addedStudentsTestimonials = useSelector(
+    (state) => state.addedStudentsTestimonials
+  );
+  const { loading, studentsTestimonials, error } = addedStudentsTestimonials;
+
   const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
+    0: { items: 1 },
+    568: { items: 2 },
+    1024: { items: 3 },
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(listStudentsTestimonials());
+  }, [dispatch]);
+
+  const SchoolTestimonialsLoader = () => {
+    return (
+      <MessageCard>
+        <Top>
+          <i className="fas fa-quote-left"></i>
+        </Top>
+
+        <Msg>
+          <Placeholder as="h2" animation="glow">
+            <Placeholder xs={6} /> <Placeholder xs={4} /> <Placeholder xs={4} />{" "}
+            <Placeholder xs={5} /> <Placeholder xs={7} />
+          </Placeholder>
+        </Msg>
+
+        <Placeholder as="h4" animation="wave">
+          <Placeholder xs={2} />
+        </Placeholder>
+
+        <Desc>
+          <Placeholder as="p" animation="wave">
+            <Placeholder xs={4} size="lg" />
+          </Placeholder>
+        </Desc>
+      </MessageCard>
+    );
+  };
+
   return (
     <>
       <Meta title="School" />
@@ -255,7 +283,7 @@ const School = () => {
         </Tab.Container>
       </Section2>
       <Section3>
-        <Message>
+        <MainMessage>
           <Info>
             <h4>
               <span>MESSAGE</span> FROM THE CEO OF CLCR AUSTRALIA
@@ -265,160 +293,59 @@ const School = () => {
             <button className="btn btn-warning">More Videos</button>
           </Info>
           <VideoSection>Video Section</VideoSection>
-        </Message>
+        </MainMessage>
       </Section3>
       <Section6>
         <h3>Lets See What Our Valuable Students Think About Us. </h3>
-        <Carousel
-          additionalTransfrom={0}
-          arrows
-          autoPlay
-          autoPlaySpeed={3000}
-          centerMode={false}
-          className="message-card"
-          containerClass="carousel-container"
-          dotListClass=""
-          draggable={false}
-          focusOnSelect={false}
-          infinite
-          responsive={responsive}
-          keyBoardControl
-          minimumTouchDrag={80}
-          renderButtonGroupOutside={false}
-          renderDotsOutside={false}
-          itemClass="carousel-item-padding-50-px"
-        >
-          <MessageCard>
-            <Top>
-              <i className="fas fa-quote-left"></i>
-            </Top>
-            <Msg>
-              The supportive, opportunity-rich environment at Heartland Academy
-              has inspired me to reach for the stars, and work hard to achieve
-              my goals. At HA, nothing is out of reach. Here, impossible becomes
-              possible, and dreams become realities.
-            </Msg>
-            <Profile>
-              <ImageCard>
-                <img src={Default} alt="student" />
-              </ImageCard>
-              <Name>Raj Shrestha</Name>
-              <Desc>Student</Desc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Top>
-              <i className="fas fa-quote-left"></i>
-            </Top>
-            <Msg>
-              From the first day I started to go to Heartland Academy, I felt
-              very welcomed. The students are very co-operative and
-              communicative. Also, the faculty are very respectful of their
-              students and they are willing to lend a helping hand when students
-              are in need.
-            </Msg>
-            <Profile>
-              <ImageCard>
-                <img src={Default} alt="student" />
-              </ImageCard>
-              <Name>Pushkar Thagunna</Name>
-              <Desc>Student</Desc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Top>
-              <i className="fas fa-quote-left"></i>
-            </Top>
-            <Msg>
-              I can't hope to properly express my gratitude for you allowing us
-              into your amazing school. . It's an unbelievable school with an
-              atmosphere that encourages creativity and a love of learning. I
-              feel very lucky to have spent those days at Heartland, and I
-              could've only wished to have been able to stay there longer.
-            </Msg>
-            <Profile>
-              <ImageCard>
-                <img src={Default} alt="student" />
-              </ImageCard>
-              <Name>JONNY</Name>
-              <Desc>A Volunteer from LBW Trust, Australia</Desc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Top>
-              <i className="fas fa-quote-left"></i>
-            </Top>
-            <Msg>
-              Heartland Academy for me is always a very comfortable place to be,
-              mostly because I have been associated to the school for so long. I
-              honestly can look back now and see how my confidence grew
-              exponentially over the years. This is in large part because I am
-              given multiple opportunities to try new things — in academics or
-              extra-curricular activities —and find where I fit best.
-            </Msg>
-            <Profile>
-              <ImageCard>
-                <img src={Default} alt="student" />
-              </ImageCard>
-              <Name>Dikshya Khadgi</Name>
-              <Desc>Student</Desc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Top>
-              <i className="fas fa-quote-left"></i>
-            </Top>
-            <Msg>
-              The supportive, opportunity-rich environment at Heartland Academy
-              has inspired me to reach for the stars, and work hard to achieve
-              my goals. At HA, nothing is out of reach. Here, impossible becomes
-              possible, and dreams become realities.
-            </Msg>
-            <Profile>
-              <ImageCard>
-                <img src={Default} alt="student" />
-              </ImageCard>
-              <Name>Raj Shrestha</Name>
-              <Desc>Student</Desc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Top>
-              <i className="fas fa-quote-left"></i>
-            </Top>
-            <Msg>
-              The supportive, opportunity-rich environment at Heartland Academy
-              has inspired me to reach for the stars, and work hard to achieve
-              my goals. At HA, nothing is out of reach. Here, impossible becomes
-              possible, and dreams become realities.
-            </Msg>
-            <Profile>
-              <ImageCard>
-                <img src={Default} alt="student" />
-              </ImageCard>
-              <Name>Raj Shrestha</Name>
-              <Desc>Student</Desc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Top>
-              <i className="fas fa-quote-left"></i>
-            </Top>
-            <Msg>
-              The supportive, opportunity-rich environment at Heartland Academy
-              has inspired me to reach for the stars, and work hard to achieve
-              my goals. At HA, nothing is out of reach. Here, impossible becomes
-              possible, and dreams become realities.
-            </Msg>
-            <Profile>
-              <ImageCard>
-                <img src={Default} alt="student" />
-              </ImageCard>
-              <Name>Raj Shrestha</Name>
-              <Desc>Student</Desc>
-            </Profile>
-          </MessageCard>
-        </Carousel>
+
+        {loading ? (
+          <AliceCarousel
+            mouseTracking
+            responsive={responsive}
+            controlsStrategy="alternate"
+            autoPlay
+            autoPlayStrategy="none"
+            autoPlayInterval={2000}
+            animationDuration={2000}
+            animationType="fadeout"
+            infinite
+          >
+            <SchoolTestimonialsLoader />
+            <SchoolTestimonialsLoader />
+            <SchoolTestimonialsLoader />
+          </AliceCarousel>
+        ) : error ? (
+          <Message variant="danger">{error}</Message>
+        ) : (
+          <AliceCarousel
+            mouseTracking
+            responsive={responsive}
+            controlsStrategy="alternate"
+            autoPlay
+            autoPlayStrategy="none"
+            autoPlayInterval={2000}
+            animationDuration={2000}
+            animationType="fadeout"
+            infinite
+          >
+            {studentsTestimonials &&
+              studentsTestimonials.students.map((student) => (
+                <MessageCard>
+                  <Top>
+                    <i className="fas fa-quote-left"></i>
+                  </Top>
+                  <Msg>"{student.message}"</Msg>
+                  <Profile>
+                    <ImageCard>
+                      <img src={student.image} alt="student" />
+                    </ImageCard>
+                    <Name>{student.fullName}</Name>
+                    <Desc>{student.desc}</Desc>
+                  </Profile>
+                </MessageCard>
+              ))}
+          </AliceCarousel>
+        )}
       </Section6>
     </>
     //   <div>

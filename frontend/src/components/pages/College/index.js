@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Carousel from "react-multi-carousel";
-import { Row } from "react-bootstrap";
-import "react-multi-carousel/lib/styles.css";
+import { Row, Placeholder } from "react-bootstrap";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
+
+import { useDispatch, useSelector } from "react-redux";
+import ProgramModal from "../../contents/ProgramModal";
+
+import Message from "../../contents/Message";
+import Meta from "../../contents/Meta";
+import { listVisitorsTestimonials } from "../../../actions/testimonialsActions";
 
 import college from "../../../assets/imageheaderphotos/college.jpg";
 import ImageHeader from "../../contents/ImageHeader";
-import Default from "../../../assets/default/default.png";
 import scienceImage from "../../../assets/collegePrograms/sciencelab.jpg";
 import managementImage from "../../../assets/collegePrograms/management.jpg";
 import educationImage from "../../../assets/collegePrograms/education.jpg";
-import Meta from "../../contents/Meta";
 import "./index.css";
-import ProgramModal from "../../contents/ProgramModal";
 
 const Section1 = styled.div`
   padding: 20px 5px;
@@ -33,7 +37,7 @@ const Section1 = styled.div`
   }
 `;
 
-const Message = styled.div`
+const MainMessage = styled.div`
   padding: 27px 30px;
 `;
 
@@ -74,7 +78,7 @@ const MessageCard = styled.div`
   border-top: 3px solid #e5e5e5;
   padding: 16px 25px 25px;
   border-radius: 12px;
-  margin: 30px 20px 0px 20px;
+  margin: 60px 20px 0px 20px;
   &:hover {
     border-color: #05ab90;
   }
@@ -142,24 +146,48 @@ const College = () => {
   const [scienceModalShow, setScienceModalShow] = useState(false);
   const [managementModalShow, setManagementModalShow] = useState(false);
   const [educationModalShow, setEducationModalShow] = useState(false);
+
+  const addedVisitorsTestimonials = useSelector(
+    (state) => state.addedVisitorsTestimonials
+  );
+  const { loading, visitorsTestimonials, error } = addedVisitorsTestimonials;
+
   const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
+    0: { items: 1 },
+    568: { items: 2 },
+    1024: { items: 3 },
+  };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(listVisitorsTestimonials());
+  }, [dispatch]);
+
+  const VisitorTestimonialLoader = () => {
+    return (
+      <MessageCard>
+        <Msg>
+          <Placeholder as="h4" animation="glow">
+            <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{" "}
+            <Placeholder xs={6} /> <Placeholder xs={7} /> <Placeholder xs={4} />{" "}
+            <Placeholder xs={4} />
+          </Placeholder>
+        </Msg>
+        <ProfileDesc>
+          <h6>
+            <Placeholder as="h5" animation="glow">
+              <Placeholder xs={3} />
+            </Placeholder>
+          </h6>
+          <p>
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={8} />
+            </Placeholder>
+          </p>
+        </ProfileDesc>
+      </MessageCard>
+    );
   };
   return (
     <>
@@ -331,141 +359,54 @@ const College = () => {
           </div>
         </Row>
       </CollegeProgram>
-      <Message>
+      <MainMessage>
         <Title>Some Awesome Words From Our Visitors</Title>
-        <Carousel
-          additionalTransfrom={0}
-          arrows={false}
-          autoPlay
-          autoPlaySpeed={3000}
-          centerMode={false}
-          className="message-card-college"
-          containerClass="carousel-container"
-          dotListClass=""
-          draggable={false}
-          focusOnSelect={false}
-          infinite
-          responsive={responsive}
-          keyBoardControl
-          minimumTouchDrag={80}
-          renderButtonGroupOutside={false}
-          renderDotsOutside={false}
-          itemClass="carousel-item-padding-50-px"
-        >
-          <MessageCard>
-            <Msg>
-              "I can't hope to properly express my gratitude for you allowing us
-              into your amazing school. . It's an unbelievable school with an
-              atmosphere that encourages creativity and a love of learning. I
-              feel very lucky to have spent those days at Heartland, and I
-              could've only wished to have been able to stay there longer."
-            </Msg>
-            <Profile>
-              <img src={Default} alt="student" />
-              <ProfileDesc>
-                <h6>JONNY</h6>
-                <p>A Volunteer from LBW Trust, Australia</p>
-              </ProfileDesc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Msg>
-              "I can't hope to properly express my gratitude for you allowing us
-              into your amazing school. . It's an unbelievable school with an
-              atmosphere that encourages creativity and a love of learning. I
-              feel very lucky to have spent those days at Heartland, and I
-              could've only wished to have been able to stay there longer."
-            </Msg>
-            <Profile>
-              <img src={Default} alt="student" />
-              <ProfileDesc>
-                <h6>JONNY</h6>
-                <p>A Volunteer from LBW Trust, Australia</p>
-              </ProfileDesc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Msg>
-              "I can't hope to properly express my gratitude for you allowing us
-              into your amazing school. . It's an unbelievable school with an
-              atmosphere that encourages creativity and a love of learning. I
-              feel very lucky to have spent those days at Heartland, and I
-              could've only wished to have been able to stay there longer."
-            </Msg>
-            <Profile>
-              <img src={Default} alt="student" />
-              <ProfileDesc>
-                <h6>JONNY</h6>
-                <p>A Volunteer from LBW Trust, Australia</p>
-              </ProfileDesc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Msg>
-              "I can't hope to properly express my gratitude for you allowing us
-              into your amazing school. . It's an unbelievable school with an
-              atmosphere that encourages creativity and a love of learning. I
-              feel very lucky to have spent those days at Heartland, and I
-              could've only wished to have been able to stay there longer."
-            </Msg>
-            <Profile>
-              <img src={Default} alt="student" />
-              <ProfileDesc>
-                <h6>JONNY</h6>
-                <p>A Volunteer from LBW Trust, Australia</p>
-              </ProfileDesc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Msg>
-              "I can't hope to properly express my gratitude for you allowing us
-              into your amazing school. . It's an unbelievable school with an
-              atmosphere that encourages creativity and a love of learning. I
-              feel very lucky to have spent those days at Heartland, and I
-              could've only wished to have been able to stay there longer."
-            </Msg>
-            <Profile>
-              <img src={Default} alt="student" />
-              <ProfileDesc>
-                <h6>JONNY</h6>
-                <p>A Volunteer from LBW Trust, Australia</p>
-              </ProfileDesc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Msg>
-              "I can't hope to properly express my gratitude for you allowing us
-              into your amazing school. . It's an unbelievable school with an
-              atmosphere that encourages creativity and a love of learning. I
-              feel very lucky to have spent those days at Heartland, and I
-              could've only wished to have been able to stay there longer."
-            </Msg>
-            <Profile>
-              <img src={Default} alt="student" />
-              <ProfileDesc>
-                <h6>JONNY</h6>
-                <p>A Volunteer from LBW Trust, Australia</p>
-              </ProfileDesc>
-            </Profile>
-          </MessageCard>
-          <MessageCard>
-            <Msg>
-              "I can't hope to properly express my gratitude for you allowing us
-              into your amazing school. . It's an unbelievable school with an
-              atmosphere that encourages creativity and a love of learning. I
-              feel very lucky to have spent those days at Heartland, and I
-              could've only wished to have been able to stay there longer."
-            </Msg>
-            <Profile>
-              <img src={Default} alt="student" />
-              <ProfileDesc>
-                <h6>JONNY</h6>
-                <p>A Volunteer from LBW Trust, Australia</p>
-              </ProfileDesc>
-            </Profile>
-          </MessageCard>
-        </Carousel>
-      </Message>
+        {loading ? (
+          <AliceCarousel
+            mouseTracking
+            responsive={responsive}
+            controlsStrategy="alternate"
+            autoPlay
+            autoPlayStrategy="none"
+            autoPlayInterval={2000}
+            animationDuration={2000}
+            animationType="fadeout"
+            infinite
+          >
+            <VisitorTestimonialLoader />
+            <VisitorTestimonialLoader />
+            <VisitorTestimonialLoader />
+          </AliceCarousel>
+        ) : error ? (
+          <Message variant="danger">{error}</Message>
+        ) : (
+          <AliceCarousel
+            mouseTracking
+            responsive={responsive}
+            controlsStrategy="alternate"
+            autoPlay
+            autoPlayStrategy="none"
+            autoPlayInterval={2000}
+            animationDuration={2000}
+            animationType="fadeout"
+            infinite
+          >
+            {visitorsTestimonials &&
+              visitorsTestimonials.visitors.map((visitor) => (
+                <MessageCard>
+                  <Msg>"{visitor.message}"</Msg>
+                  <Profile>
+                    <img src={visitor.image} alt="student" />
+                    <ProfileDesc>
+                      <h6>{visitor.fullName}</h6>
+                      <p>{visitor.desc}</p>
+                    </ProfileDesc>
+                  </Profile>
+                </MessageCard>
+              ))}
+          </AliceCarousel>
+        )}
+      </MainMessage>
     </>
   );
 };

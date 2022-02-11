@@ -20,7 +20,7 @@ import {
   TESTIMONIALS_VISITORS_DELETE_SUCCESS,
 } from "./types";
 
-export const listStudentsTestimonails = () => async (dispatch) => {
+export const listStudentsTestimonials = () => async (dispatch) => {
   try {
     dispatch({ type: ADDED_TESTIMONIALS_STUDENTS_REQUEST });
 
@@ -41,7 +41,7 @@ export const listStudentsTestimonails = () => async (dispatch) => {
   }
 };
 
-export const createStudentsTestimonails =
+export const createStudentsTestimonials =
   (fullName, desc, image, message) => async (dispatch, getState) => {
     try {
       dispatch({ type: TESTIMONIALS_STUDENTS_CREATE_REQUEST });
@@ -78,7 +78,7 @@ export const createStudentsTestimonails =
     }
   };
 
-export const deleteStudentsTestimonails =
+export const deleteStudentsTestimonials =
   (id) => async (dispatch, getState) => {
     try {
       dispatch({ type: TESTIMONIALS_STUDENTS_DELETE_REQUEST });
@@ -107,7 +107,7 @@ export const deleteStudentsTestimonails =
     }
   };
 
-export const listVisitorsTestimonails = () => async (dispatch) => {
+export const listVisitorsTestimonials = () => async (dispatch) => {
   try {
     dispatch({ type: ADDED_TESTIMONIALS_VISITORS_REQUEST });
 
@@ -128,7 +128,7 @@ export const listVisitorsTestimonails = () => async (dispatch) => {
   }
 };
 
-export const createVisitorsTestimonails =
+export const createVisitorsTestimonials =
   (fullName, desc, image, message) => async (dispatch, getState) => {
     try {
       dispatch({ type: TESTIMONIALS_VISITORS_CREATE_REQUEST });
@@ -165,7 +165,7 @@ export const createVisitorsTestimonails =
     }
   };
 
-export const deleteVisitorsTestimonails =
+export const deleteVisitorsTestimonials =
   (id) => async (dispatch, getState) => {
     try {
       dispatch({ type: TESTIMONIALS_VISITORS_DELETE_REQUEST });
