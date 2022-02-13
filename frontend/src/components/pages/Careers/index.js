@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col, Placeholder } from "react-bootstrap";
 import styled from "styled-components";
 import { LinkContainer } from "react-router-bootstrap";
 
+import { useDispatch, useSelector } from "react-redux";
+
 import Meta from "../../contents/Meta";
 import heartland from "../../../assets/carousel/heartland.jpg";
 import ImageHeader from "../../contents/ImageHeader";
+import { listCareers } from "../../../actions/careersActions";
+import Message from "../../contents/Message";
 
 const Title = styled.div`
   color: rgb(1, 34, 55);
@@ -35,7 +39,15 @@ const CareerLoader = () => {
   );
 };
 
-const index = () => {
+const Careers = () => {
+  const careersList = useSelector((state) => state.careersList);
+  const { loading, careers, error } = careersList;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(listCareers());
+  }, [dispatch]);
   return (
     <>
       <Meta title="HA Careers" />
@@ -53,65 +65,41 @@ const index = () => {
           id. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas
           nulla sequi pariatur quam animi ipsum molestias assumenda cumque
         </h5>
-        {/* <NotAvailable>
-          Sorry, there are no positions available at this time....
-        </NotAvailable> */}
 
-        <Row xs={1} sm={3} md={4} className="p-4 justify-content-center">
-          <CareerLoader />
-          <CareerLoader />
-          <CareerLoader />
-        </Row>
-
-        {/* <Row xs={1} sm={3} md={4} className="p-4 justify-content-center">
-          <LinkContainer to={"/careers/12333"}>
-            <Col className="card p-3 careerCard">
-              <h4>This is Job Title</h4>
-              <p>
-                <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
-              </p>
-            </Col>
-          </LinkContainer>
-
-          <LinkContainer to={"/careers/12333"}>
-            <Col className="card p-3 careerCard">
-              <h4>This is Job Title</h4>
-              <p>
-                <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
-              </p>
-            </Col>
-          </LinkContainer>
-
-          <LinkContainer to={"/careers/12333"}>
-            <Col className="card p-3 careerCard">
-              <h4>This is Job Title</h4>
-              <p>
-                <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
-              </p>
-            </Col>
-          </LinkContainer>
-
-          <LinkContainer to={"/careers/12333"}>
-            <Col className="card p-3 careerCard">
-              <h4>This is Job Title</h4>
-              <p>
-                <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
-              </p>
-            </Col>
-          </LinkContainer>
-
-          <LinkContainer to={"/careers/12333"}>
-            <Col className="card p-3 careerCard">
-              <h4>This is Job Title</h4>
-              <p>
-                <i className="fas fa-map-marker-alt"></i> Kathmandu, Nepal
-              </p>
-            </Col>
-          </LinkContainer>
-        </Row> */}
+        {loading ? (
+          <Row xs={1} sm={3} md={4} className="p-4 justify-content-center">
+            <CareerLoader />
+            <CareerLoader />
+            <CareerLoader />
+          </Row>
+        ) : error ? (
+          <Message variant="danger">{error}</Message>
+        ) : (
+          <>
+            {careers && careers.length === 0 && (
+              <NotAvailable>
+                Sorry, there are no positions available at this time....
+              </NotAvailable>
+            )}
+            <Row xs={1} sm={3} md={4} className="p-4 justify-content-center">
+              {careers &&
+                careers.map((career) => (
+                  <LinkContainer to={`/careers/${career._id}`}>
+                    <Col className="card p-3 careerCard">
+                      <h4>{career.title}</h4>
+                      <p>
+                        <i className="fas fa-map-marker-alt"></i>{" "}
+                        {career.location}
+                      </p>
+                    </Col>
+                  </LinkContainer>
+                ))}
+            </Row>
+          </>
+        )}
       </Container>
     </>
   );
 };
 
-export default index;
+export default Careers;

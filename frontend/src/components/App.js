@@ -173,12 +173,12 @@ const App = () => {
                     exact
                   />
                   <Route
-                    path="/admin/careers/add/:id"
+                    path="/admin/careers/:id"
                     component={AdminCareers}
                     exact
                   />
                   <Route
-                    path="/admin/careers/add"
+                    path="/admin/careers/add/new"
                     component={CareersAdd}
                     exact
                   />

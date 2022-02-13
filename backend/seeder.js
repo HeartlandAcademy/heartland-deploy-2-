@@ -26,8 +26,10 @@ import registration from "./data/registration.js";
 import Modal from "./models/modalModel.js";
 import modal from "./data/modal.js";
 import teams from "./data/teams.js";
+import career from "./data/careers.js";
 import testimonials from "./data/testimonials.js";
 import Testimonials from "./models/testimonialsModel.js";
+import Career from "./models/careerModel.js";
 
 dotenv.config();
 
@@ -48,6 +50,7 @@ const importData = async () => {
     await Modal.deleteMany();
     await Teams.deleteMany();
     await Testimonials.deleteMany();
+    await Career.deleteMany();
     const createdUsers = await User.insertMany(users);
     const adminUser = createdUsers[0]._id;
 
@@ -70,6 +73,7 @@ const importData = async () => {
     await Modal.insertMany(modal);
     await Registration.insertMany(registration);
     await Teams.insertMany(teams);
+    await Career.insertMany(career);
     await Testimonials.insertMany(testimonials);
 
     console.log("Data Imported".blue.bold);

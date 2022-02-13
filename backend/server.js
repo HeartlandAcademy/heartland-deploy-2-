@@ -13,6 +13,7 @@ import galleryRoutes from "./routes/galleryRoutes.js";
 import staffsRoutes from "./routes/staffsRoutes.js";
 import noticesRoutes from "./routes/noticesRoutes.js";
 import teamsRoutes from "./routes/teamsRoutes.js";
+import careerRoutes from "./routes/careerRoutes.js";
 import testimonialsRoutes from "./routes/testimonialsRoutes.js";
 import fileDownloadRoutes from "./routes/fileDownloadRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
@@ -37,6 +38,7 @@ app.use("/api/notices", noticesRoutes);
 app.use("/api/downloads", fileDownloadRoutes);
 app.use("/api/registrations", registrationRoutes);
 app.use("/api/teams", teamsRoutes);
+app.use("/api/careers", careerRoutes);
 app.use("/api/testimonials", testimonialsRoutes);
 
 const __dirname = path.resolve();

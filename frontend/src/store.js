@@ -72,6 +72,13 @@ import {
   visitorsTestimonialsCreateReducer,
   visitorsTestimonialsDeleteReducer,
 } from "./reducers/testimonialsReducers";
+import {
+  careerCreateReducer,
+  careerDeleteReducer,
+  careerDetailsReducer,
+  careersListReducer,
+  careerUpdateReducer,
+} from "./reducers/careerReducers";
 
 const reducer = combineReducers({
   newsList: newsListReducer,
@@ -118,6 +125,11 @@ const reducer = combineReducers({
   downloadCreate: downloadCreateReducer,
   downloadDelete: downloadDeleteReducer,
   singleDownloadCreate: singleDownloadCreateReducer,
+  careersList: careersListReducer,
+  careerDetails: careerDetailsReducer,
+  careerCreate: careerCreateReducer,
+  careerDelete: careerDeleteReducer,
+  careerUpdate: careerUpdateReducer,
   createRegistrations: createRegistrationsReducer,
   submittedRegistrations: submittedRegistrationsReducer,
   userLogin: userLoginReducer,

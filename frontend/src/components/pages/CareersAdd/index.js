@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { createCareer } from "../../../actions/careersActions";
+import { CAREERS_CREATE_RESET } from "../../../actions/types";
+import Loader from "../../contents/Loader";
+import Message from "../../contents/Message";
 
 const Section = styled.div`
   padding: 50px 100px;
@@ -19,6 +24,11 @@ const Title = styled.h2`
   margin: 5px 0 20px 0;
 `;
 
+const OtherTitle = styled.h4`
+  color: ${(props) => (props.darkmode ? "#fff" : "#111")};
+  padding: 15px 0;
+`;
+
 const CareerContainer = styled.div`
   margin: 30px 0;
   h2 {
@@ -27,15 +37,90 @@ const CareerContainer = styled.div`
 `;
 
 const CareerAdd = () => {
-  const [desValue, setDesValue] = useState("");
-  const [reqValue, setReqValue] = useState("");
+  const [title, setTitle] = useState("");
+  const [careerCategory, setCareerCategory] = useState("");
+  const [noOfVacancy, setNoOfVacancy] = useState("");
+  const [employmentType, setEmploymentType] = useState("");
+  const [location, setLocation] = useState("");
+  const [offeredSalary, setOfferedSalary] = useState("");
+  const [applyBefore, setApplyBefore] = useState();
+  const [educationLevel, setEducationLevel] = useState("");
+  const [experienceRequired, setExperienceRequired] = useState("");
+  const [careerSpecs, setCareerSpecs] = useState("");
+  const [careerDesc, setCareerDesc] = useState("");
+  const [note, setNote] = useState("");
+  const [validated, setValidated] = useState(false);
 
   const settings = useSelector((state) => state.settings);
   const { darkMode } = settings;
 
+  const careerCreate = useSelector((state) => state.careerCreate);
+  const { loading, career, error } = careerCreate;
+
+  const dispatch = useDispatch();
+
+  function clearForm() {
+    setTitle("");
+    setCareerCategory("");
+    setNoOfVacancy("");
+    setEmploymentType("");
+    setLocation("");
+    setOfferedSalary("");
+    setApplyBefore("");
+    setEducationLevel("");
+    setExperienceRequired("");
+    setCareerSpecs("");
+    setCareerDesc("");
+    setNote("");
+  }
+
+  useEffect(() => {
+    if (career) {
+      toast.success("Career Added Successfully");
+      dispatch({ type: CAREERS_CREATE_RESET });
+      clearForm();
+      setValidated(false);
+    }
+  }, [career, dispatch]);
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      dispatch(
+        createCareer(
+          title,
+          careerCategory,
+          noOfVacancy,
+          employmentType,
+          location,
+          offeredSalary,
+          applyBefore,
+          educationLevel,
+          experienceRequired,
+          careerSpecs,
+          careerDesc,
+          note,
+          validated
+        )
+      );
+    }
+    setValidated(true);
+  };
+
   return (
     <Section className="container">
-      <Form>
+      {error && <Message variant="danger">{error}</Message>}
+      {loading && <Loader />}
+      <Form
+        noValidate
+        validated={validated}
+        className="container p-4 form-group"
+        onSubmit={submitHandler}
+      >
         <LinkContainer to={"/admin/careers"}>
           <Button variant="outline-dark" className="float-right">
             Back
@@ -45,19 +130,37 @@ const CareerAdd = () => {
         <Title darkmode={darkMode}>Add Career</Title>
         <Form.Group className="mb-3" controlId="formCareerTitle">
           <Form.Label>Career Title</Form.Label>
-          <Form.Control type="text" placeholder="Enter Career Title" />
+          <Form.Control
+            type="text"
+            placeholder="Enter Career Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
         </Form.Group>
         <Row className="g-2">
           <Col md>
             <Form.Group className="mb-3" controlId="formDepartmentName">
-              <Form.Label>Department Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter Department Name" />
+              <Form.Label>Career Category</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Category Name"
+                value={careerCategory}
+                onChange={(e) => setCareerCategory(e.target.value)}
+                required
+              />
             </Form.Group>
           </Col>
           <Col md>
-            <Form.Group className="mb-3" controlId="formExperience">
-              <Form.Label>Work Experience</Form.Label>
-              <Form.Control type="number" placeholder="Enter Work Experience" />
+            <Form.Group className="mb-3" controlId="formDepartmentName">
+              <Form.Label>No. of Vacancy/s</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter No. of Vacancy/s"
+                value={noOfVacancy}
+                onChange={(e) => setNoOfVacancy(e.target.value)}
+                required
+              />
             </Form.Group>
           </Col>
         </Row>
@@ -65,27 +168,111 @@ const CareerAdd = () => {
         <Row className="g-2">
           <Col md>
             <Form.Group className="mb-3" controlId="formCity">
-              <Form.Label>City</Form.Label>
-              <Form.Control type="text" placeholder="Enter City Name" />
+              <Form.Label>Offered Salary</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Offered Salary"
+                value={offeredSalary}
+                onChange={(e) => setOfferedSalary(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col md>
+            <Form.Group className="mb-3" controlId="formDepartmentName">
+              <Form.Label>Employment Type</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Emplyment Type"
+                value={employmentType}
+                onChange={(e) => setEmploymentType(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+
+        <Row className="g-2">
+          <Col md>
+            <Form.Group className="mb-3" controlId="formExperience">
+              <Form.Label>Location</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Location Name"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                required
+              />
             </Form.Group>
           </Col>
           <Col md>
             <Form.Group className="mb-3" controlId="formState">
-              <Form.Label>State/Province</Form.Label>
-              <Form.Control type="number" placeholder="Enter Province No." />
+              <Form.Label>Apply Before</Form.Label>
+              <Form.Control
+                type="date"
+                value={applyBefore}
+                onChange={(e) => setApplyBefore(e.target.value)}
+                required
+              />
             </Form.Group>
           </Col>
         </Row>
+
         <CareerContainer darkmode={darkMode}>
-          <h2>Career Description</h2>
-          <ReactQuill theme="snow" value={desValue} onChange={setDesValue} />
+          <h2>Career Specification</h2>
+          <Row className="g-2">
+            <Col md>
+              <Form.Group className="mb-3" controlId="formCity">
+                <Form.Label>Education Level</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Education Level"
+                  value={educationLevel}
+                  onChange={(e) => setEducationLevel(e.target.value)}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col md>
+              <Form.Group className="mb-3" controlId="formState">
+                <Form.Label>Experience Required</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Experience Required"
+                  value={experienceRequired}
+                  onChange={(e) => setExperienceRequired(e.target.value)}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <OtherTitle darkmode={darkMode}>Other Specifications</OtherTitle>
+          <ReactQuill
+            theme="snow"
+            value={careerSpecs}
+            onChange={setCareerSpecs}
+            required
+          />
         </CareerContainer>
 
         <CareerContainer darkmode={darkMode}>
-          <h2>Career Requirements</h2>
-          <ReactQuill theme="snow" value={reqValue} onChange={setReqValue} />
+          <h2>Career Description</h2>
+          <ReactQuill
+            theme="snow"
+            value={careerDesc}
+            onChange={setCareerDesc}
+            required
+          />
         </CareerContainer>
-        <Button variant="outline-dark">Add</Button>
+
+        <CareerContainer darkmode={darkMode}>
+          <h2>Note</h2>
+          <ReactQuill theme="snow" value={note} onChange={setNote} required />
+        </CareerContainer>
+        <Button type="submit" variant={darkMode ? "secondary" : "outline-dark"}>
+          Add
+        </Button>
       </Form>
     </Section>
   );
