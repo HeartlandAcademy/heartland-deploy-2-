@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import parse from "html-react-parser";
 import DOMPurify from "dompurify";
+import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../contents/Loader";
@@ -39,16 +40,6 @@ const Desc = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
-  margin: 40px 0;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  button {
-    width: 100%;
-  }
-`;
-
 const CareerTitle = styled.h2`
   margin: 20px 0 40px 0;
   span {
@@ -57,6 +48,14 @@ const CareerTitle = styled.h2`
 `;
 
 const CareersInfo = ({ match }) => {
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [cv, setCv] = useState("");
+  const [validated, setValidated] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [fileError, setFileError] = useState(false);
+
   const dispatch = useDispatch();
 
   const careerDetails = useSelector((state) => state.careerDetails);
@@ -72,6 +71,81 @@ const CareersInfo = ({ match }) => {
     });
     const html = parse(cleanHtmlString);
     return html;
+  };
+
+  var options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  const dateCalculator = (applyDate) => {
+    var currentDate = new Date();
+    // get total seconds between the times
+    var delta = Math.abs(applyDate - currentDate) / 1000;
+
+    // calculate (and subtract) whole days
+    var days = Math.floor(delta / 86400);
+    delta -= days * 86400;
+
+    // calculate (and subtract) whole hours
+    var hours = Math.floor(delta / 3600) % 24;
+    delta -= hours * 3600;
+
+    return [days + " days, " + hours + " hours from now"];
+  };
+
+  const ref = useRef();
+
+  const reset = () => {
+    ref.current.value = "";
+  };
+
+  function clearForm() {
+    setFullName("");
+    setPhoneNumber("");
+    setCv("");
+    reset();
+  }
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post(
+        "/api/events/uploads",
+        formData,
+        config
+      );
+
+      setCv(data);
+      setFileError(false);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setFileError(true);
+      setUploading(false);
+    }
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      console.log("dsfdsf");
+    }
+    setValidated(true);
   };
 
   return (
@@ -96,7 +170,12 @@ const CareersInfo = ({ match }) => {
               <h5>Location: {career.location}</h5>
               <h5>Offered Salary: {career.offeredSalary}</h5>
               <h5>
-                Appply Before: {career.applyBefore} (4 days, 11 hours from now){" "}
+                Appply Before:{" "}
+                {new Date(career.applyBefore).toLocaleDateString(
+                  "en-US",
+                  options
+                )}{" "}
+                ({`${dateCalculator(Date.parse(career.applyBefore))}`})
               </h5>
             </Desc>
             <Desc>
@@ -143,12 +222,26 @@ const CareersInfo = ({ match }) => {
               <CareerTitle>
                 <span>Apply For This Post</span>
               </CareerTitle>
-              <Form>
+              <Form
+                noValidate
+                validated={validated}
+                className="container p-4 form-group"
+                onSubmit={submitHandler}
+              >
                 <Row className="g-2">
                   <Col md>
                     <Form.Group className="mb-3" controlId="formBasicName">
                       <Form.Label>Full Name</Form.Label>
-                      <Form.Control type="text" placeholder="Enter fullname" />
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter fullname"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        required
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Please provide Full Name
+                      </Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                   <Col md>
@@ -157,7 +250,13 @@ const CareersInfo = ({ match }) => {
                       <Form.Control
                         type="number"
                         placeholder="Enter phone number"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        required
                       />
+                      <Form.Control.Feedback type="invalid">
+                        Please provide Valid Phone Number
+                      </Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                 </Row>
@@ -167,28 +266,39 @@ const CareersInfo = ({ match }) => {
                   <Form.Control
                     type="email"
                     placeholder="Enter email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide Email Address
+                  </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="formFile" className="mb-3">
                   <Form.Label>Resume / CV</Form.Label>
-                  <Form.Control type="file" />
+                  <Form.Control
+                    type="file"
+                    ref={ref}
+                    onChange={uploadFileHandler}
+                    required
+                  />
+                  {fileError && (
+                    <Form.Text id="passwordHelpBlock" muted>
+                      <span className="text-danger ">
+                        <i className="fas fa-exclamation-circle"></i> Only image
+                        file can be added.
+                      </span>
+                    </Form.Text>
+                  )}
+                  {uploading && <Loader />}
                 </Form.Group>
 
-                <Form.Group controlId="formFile" className="mb-3">
-                  <Form.Label>Cover Letter</Form.Label>
-                  <Form.Control type="file" />
-                </Form.Group>
+                <Button size="lg" className="my-3" type="submit">
+                  Apply
+                </Button>
               </Form>
             </>
-            <ButtonContainer>
-              <div>
-                <Button size="lg">Apply</Button>
-              </div>
-              <div>
-                <Button size="lg">Cancel</Button>
-              </div>
-            </ButtonContainer>
           </Container>
         </Container>
       )}

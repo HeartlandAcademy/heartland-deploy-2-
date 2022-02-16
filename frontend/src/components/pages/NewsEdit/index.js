@@ -80,7 +80,9 @@ const AdminEditNews = ({ history, match }) => {
   }
 
   useEffect(() => {
-    if (Object.keys(news).length === 0) {
+    console.log(news);
+    console.log(newsId);
+    if (!news || news._id !== newsId) {
       dispatch(listNewsDetails(newsId));
     } else {
       setTitle(news.title);

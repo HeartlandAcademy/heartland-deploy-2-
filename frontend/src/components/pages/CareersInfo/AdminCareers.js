@@ -44,11 +44,6 @@ const CareerContainer = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 20px;
-`;
-
 const CareerEdit = ({ match, history }) => {
   const careerId = match.params.id;
 
@@ -97,9 +92,8 @@ const CareerEdit = ({ match, history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (career && career.length === 0) {
+    if (!career || career._id !== careerId) {
       dispatch(listCareerDetails(careerId));
-      console.log(careerId);
     } else {
       setTitle(career.title);
       setCareerCategory(career.careerCategory);
@@ -131,7 +125,6 @@ const CareerEdit = ({ match, history }) => {
       event.preventDefault();
       event.stopPropagation();
     } else {
-      setShowError(false);
       dispatch(
         updateCareer({
           careerId,
@@ -164,189 +157,180 @@ const CareerEdit = ({ match, history }) => {
 
         <Title darkmode={darkMode}>Edit Career</Title>
         {loadingUpdate && <Loader />}
+        {loading && <Loader />}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant="danger">{error}</Message>
-        ) : (
-          <>
-            <Form.Group className="mb-3" controlId="formCareerTitle">
-              <Form.Label>Career Title</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Career Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide Title
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Row className="g-2">
-              <Col md>
-                <Form.Group className="mb-3" controlId="formDepartmentName">
-                  <Form.Label>Career Category</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter Category Name"
-                    value={careerCategory}
-                    onChange={(e) => setCareerCategory(e.target.value)}
-                    required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please provide Category
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col md>
-                <Form.Group className="mb-3" controlId="formDepartmentName">
-                  <Form.Label>No. of Vacancy/s</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Enter No. of Vacancy/s"
-                    value={noOfVacancy}
-                    onChange={(e) => setNoOfVacancy(e.target.value)}
-                    required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please provide No Of Vacancy/s
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-            </Row>
+        {error && <Message variant="danger">{error}</Message>}
+        <>
+          <Form.Group className="mb-3" controlId="formCareerTitle">
+            <Form.Label>Career Title</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Career Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide Title
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Row className="g-2">
+            <Col md>
+              <Form.Group className="mb-3" controlId="formDepartmentName">
+                <Form.Label>Career Category</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Category Name"
+                  value={careerCategory}
+                  onChange={(e) => setCareerCategory(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide Category
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col md>
+              <Form.Group className="mb-3" controlId="formDepartmentName">
+                <Form.Label>No. of Vacancy/s</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter No. of Vacancy/s"
+                  value={noOfVacancy}
+                  onChange={(e) => setNoOfVacancy(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide No Of Vacancy/s
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
 
+          <Row className="g-2">
+            <Col md>
+              <Form.Group className="mb-3" controlId="formCity">
+                <Form.Label>Offered Salary</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Offered Salary"
+                  value={offeredSalary}
+                  onChange={(e) => setOfferedSalary(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide Offered Salary
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col md>
+              <Form.Group className="mb-3" controlId="formDepartmentName">
+                <Form.Label>Employment Type</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Employment Type"
+                  value={employmentType}
+                  onChange={(e) => setEmploymentType(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide Employment Type
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="g-2">
+            <Col md>
+              <Form.Group className="mb-3" controlId="formExperience">
+                <Form.Label>Location</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Location Name"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide Location
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col md>
+              <Form.Group className="mb-3" controlId="formState">
+                <Form.Label>Apply Before</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={applyBefore}
+                  onChange={(e) => setApplyBefore(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide Valida Date
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <CareerContainer darkmode={darkMode}>
+            <h2>Career Specification</h2>
             <Row className="g-2">
               <Col md>
                 <Form.Group className="mb-3" controlId="formCity">
-                  <Form.Label>Offered Salary</Form.Label>
+                  <Form.Label>Education Level</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter Offered Salary"
-                    value={offeredSalary}
-                    onChange={(e) => setOfferedSalary(e.target.value)}
+                    placeholder="Enter Education Level"
+                    value={educationLevel}
+                    onChange={(e) => setEducationLevel(e.target.value)}
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Please provide Offered Salary
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col md>
-                <Form.Group className="mb-3" controlId="formDepartmentName">
-                  <Form.Label>Employment Type</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter Employment Type"
-                    value={employmentType}
-                    onChange={(e) => setEmploymentType(e.target.value)}
-                    required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please provide Employment Type
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-            </Row>
-
-            <Row className="g-2">
-              <Col md>
-                <Form.Group className="mb-3" controlId="formExperience">
-                  <Form.Label>Location</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter Location Name"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please provide Location
+                    Please provide Education Level
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
               <Col md>
                 <Form.Group className="mb-3" controlId="formState">
-                  <Form.Label>Apply Before</Form.Label>
+                  <Form.Label>Experience Required</Form.Label>
                   <Form.Control
                     type="text"
-                    value={applyBefore}
-                    onChange={(e) => setApplyBefore(e.target.value)}
+                    placeholder="Enter Experience Required"
+                    value={experienceRequired}
+                    onChange={(e) => setExperienceRequired(e.target.value)}
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Please provide Valida Date
+                    Please provide Experience
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
 
-            <CareerContainer darkmode={darkMode}>
-              <h2>Career Specification</h2>
-              <Row className="g-2">
-                <Col md>
-                  <Form.Group className="mb-3" controlId="formCity">
-                    <Form.Label>Education Level</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Education Level"
-                      value={educationLevel}
-                      onChange={(e) => setEducationLevel(e.target.value)}
-                      required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      Please provide Education Level
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Col>
-                <Col md>
-                  <Form.Group className="mb-3" controlId="formState">
-                    <Form.Label>Experience Required</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Experience Required"
-                      value={experienceRequired}
-                      onChange={(e) => setExperienceRequired(e.target.value)}
-                      required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      Please provide Experience
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Col>
-              </Row>
+            <OtherTitle darkmode={darkMode}>Other Specifications</OtherTitle>
+            <ReactQuill
+              theme="snow"
+              value={careerSpecs}
+              onChange={setCareerSpecs}
+              required
+            />
+          </CareerContainer>
 
-              <OtherTitle darkmode={darkMode}>Other Specifications</OtherTitle>
-              <ReactQuill
-                theme="snow"
-                value={careerSpecs}
-                onChange={setCareerSpecs}
-                required
-              />
-            </CareerContainer>
+          <CareerContainer darkmode={darkMode}>
+            <h2>Career Description</h2>
+            <ReactQuill
+              theme="snow"
+              value={careerDesc}
+              onChange={setCareerDesc}
+              required
+            />
+          </CareerContainer>
 
-            <CareerContainer darkmode={darkMode}>
-              <h2>Career Description</h2>
-              <ReactQuill
-                theme="snow"
-                value={careerDesc}
-                onChange={setCareerDesc}
-                required
-              />
-            </CareerContainer>
-
-            <CareerContainer darkmode={darkMode}>
-              <h2>Note</h2>
-              <ReactQuill
-                theme="snow"
-                value={note}
-                onChange={setNote}
-                required
-              />
-            </CareerContainer>
-          </>
-        )}
+          <CareerContainer darkmode={darkMode}>
+            <h2>Note</h2>
+            <ReactQuill theme="snow" value={note} onChange={setNote} required />
+          </CareerContainer>
+        </>
 
         <Button type="submit" variant={darkMode ? "secondary" : "outline-dark"}>
           Save

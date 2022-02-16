@@ -3,6 +3,7 @@ import path from "path";
 import dotenv from "dotenv";
 import colors from "colors";
 import connectDB from "./config/db.js";
+import cors from "cors";
 
 import newsRoutes from "./routes/newsRoutes.js";
 import eventsRoutes from "./routes/eventsRoutes.js";
@@ -17,6 +18,7 @@ import careerRoutes from "./routes/careerRoutes.js";
 import testimonialsRoutes from "./routes/testimonialsRoutes.js";
 import fileDownloadRoutes from "./routes/fileDownloadRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -26,6 +28,7 @@ connectDB();
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/users", userRoutes);
 app.use("/api/news", newsRoutes);
@@ -40,6 +43,7 @@ app.use("/api/registrations", registrationRoutes);
 app.use("/api/teams", teamsRoutes);
 app.use("/api/careers", careerRoutes);
 app.use("/api/testimonials", testimonialsRoutes);
+app.use("/api/contact", contactRoutes);
 
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

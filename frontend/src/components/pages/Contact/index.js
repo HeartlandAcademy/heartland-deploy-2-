@@ -112,22 +112,60 @@ const Section2 = styled.div`
 `;
 
 const Contact = () => {
-  const [validated, setValidated] = useState(false);
-  const [fullname, setFullname] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
+  const [mailerState, setMailerState] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
 
-  const handleSubmit = (e) => {
+  function handleStateChange(e) {
+    setMailerState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  }
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const form = e.currentTarget;
+  //   if (form.checkValidity() === false) {
+  //     e.preventDefault();
+  //     e.stopPropagation();
+  //   } else {
+  //     // Do something
+  //   }
+  //   setValidated(true);
+  // };
+
+  const submitEmail = async (e) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    } else {
-      // Do something
-    }
-    setValidated(true);
+    console.log({ mailerState });
+    const response = await fetch("/api/contact/send", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ mailerState }),
+    })
+      .then((res) => res.json())
+      .then(async (res) => {
+        const resData = await res;
+
+        if (resData.status === "success") {
+          alert("Message Sent");
+        } else if (resData.status === "fail") {
+          alert("Message failed to send");
+        }
+      })
+      .then(() => {
+        setMailerState({
+          email: "",
+          name: "",
+          subject: "",
+          message: "",
+        });
+      });
   };
 
   return (
@@ -176,15 +214,16 @@ const Contact = () => {
         </Findus>
         <InputForm>
           <h3>Get in Touch</h3>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form onSubmit={submitEmail}>
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridName">
                 <Form.Label>Your Name</Form.Label>
                 <Form.Control
                   type="text"
+                  name="name"
                   placeholder="Full Name"
-                  value={fullname}
-                  onChange={(e) => setFullname(e.target.value)}
+                  value={mailerState.name}
+                  onChange={handleStateChange}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -197,9 +236,10 @@ const Contact = () => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
-                  value={email}
+                  name="email"
+                  value={mailerState.email}
                   placeholder="Enter email"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handleStateChange}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -213,9 +253,10 @@ const Contact = () => {
               <Form.Label>Subject</Form.Label>
               <Form.Control
                 type="text"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
                 placeholder="Subject"
+                name="subject"
+                value={mailerState.subject}
+                onChange={handleStateChange}
                 required
               />
               <Form.Control.Feedback type="invalid">
@@ -229,9 +270,10 @@ const Contact = () => {
               <Form.Control
                 as="textarea"
                 placeholder="Leave a message here"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                value={mailerState.message}
+                onChange={handleStateChange}
                 required
+                name="message"
                 style={{ height: "100px" }}
               />
               <Form.Control.Feedback type="invalid">

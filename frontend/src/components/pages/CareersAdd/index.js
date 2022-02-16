@@ -31,12 +31,12 @@ const OtherTitle = styled.h4`
 
 const CareerContainer = styled.div`
   margin: 30px 0;
-  h2 {
+  h3 {
     color: ${(props) => (props.darkmode ? "#fff" : "#111")};
   }
 `;
 
-const CareerAdd = () => {
+const CareerAdd = ({ history }) => {
   const [title, setTitle] = useState("");
   const [careerCategory, setCareerCategory] = useState("");
   const [noOfVacancy, setNoOfVacancy] = useState("");
@@ -50,6 +50,7 @@ const CareerAdd = () => {
   const [careerDesc, setCareerDesc] = useState("");
   const [note, setNote] = useState("");
   const [validated, setValidated] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const settings = useSelector((state) => state.settings);
   const { darkMode } = settings;
@@ -72,10 +73,12 @@ const CareerAdd = () => {
     setCareerSpecs("");
     setCareerDesc("");
     setNote("");
+    setShowError(false);
   }
 
   useEffect(() => {
     if (career) {
+      history.push("/admin/careers");
       toast.success("Career Added Successfully");
       dispatch({ type: CAREERS_CREATE_RESET });
       clearForm();
@@ -108,12 +111,14 @@ const CareerAdd = () => {
         )
       );
     }
+
     setValidated(true);
   };
 
   return (
     <Section className="container">
       {error && <Message variant="danger">{error}</Message>}
+
       {loading && <Loader />}
       <Form
         noValidate
@@ -137,6 +142,9 @@ const CareerAdd = () => {
             onChange={(e) => setTitle(e.target.value)}
             required
           />
+          <Form.Control.Feedback type="invalid">
+            Please provide Career Title
+          </Form.Control.Feedback>
         </Form.Group>
         <Row className="g-2">
           <Col md>
@@ -149,6 +157,9 @@ const CareerAdd = () => {
                 onChange={(e) => setCareerCategory(e.target.value)}
                 required
               />
+              <Form.Control.Feedback type="invalid">
+                Please provide Career Category
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
           <Col md>
@@ -161,6 +172,9 @@ const CareerAdd = () => {
                 onChange={(e) => setNoOfVacancy(e.target.value)}
                 required
               />
+              <Form.Control.Feedback type="invalid">
+                Please provide No Of Vacancy
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
         </Row>
@@ -176,6 +190,9 @@ const CareerAdd = () => {
                 onChange={(e) => setOfferedSalary(e.target.value)}
                 required
               />
+              <Form.Control.Feedback type="invalid">
+                Please provide Offered Salary
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
           <Col md>
@@ -188,6 +205,9 @@ const CareerAdd = () => {
                 onChange={(e) => setEmploymentType(e.target.value)}
                 required
               />
+              <Form.Control.Feedback type="invalid">
+                Please provide Employment Type
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
         </Row>
@@ -203,6 +223,9 @@ const CareerAdd = () => {
                 onChange={(e) => setLocation(e.target.value)}
                 required
               />
+              <Form.Control.Feedback type="invalid">
+                Please provide Location Name
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
           <Col md>
@@ -214,12 +237,15 @@ const CareerAdd = () => {
                 onChange={(e) => setApplyBefore(e.target.value)}
                 required
               />
+              <Form.Control.Feedback type="invalid">
+                Please provide valid date
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
         </Row>
 
         <CareerContainer darkmode={darkMode}>
-          <h2>Career Specification</h2>
+          <h3>Career Specification</h3>
           <Row className="g-2">
             <Col md>
               <Form.Group className="mb-3" controlId="formCity">
@@ -231,6 +257,9 @@ const CareerAdd = () => {
                   onChange={(e) => setEducationLevel(e.target.value)}
                   required
                 />
+                <Form.Control.Feedback type="invalid">
+                  Please provide Education Level
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
             <Col md>
@@ -243,32 +272,35 @@ const CareerAdd = () => {
                   onChange={(e) => setExperienceRequired(e.target.value)}
                   required
                 />
+                <Form.Control.Feedback type="invalid">
+                  Please provide Experience Required
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
 
-          <OtherTitle darkmode={darkMode}>Other Specifications</OtherTitle>
+          <OtherTitle darkmode={darkMode}>
+            <h3>Other Specifications</h3>
+          </OtherTitle>
           <ReactQuill
             theme="snow"
             value={careerSpecs}
             onChange={setCareerSpecs}
-            required
           />
         </CareerContainer>
 
         <CareerContainer darkmode={darkMode}>
-          <h2>Career Description</h2>
+          <h3>Career Description</h3>
           <ReactQuill
             theme="snow"
             value={careerDesc}
             onChange={setCareerDesc}
-            required
           />
         </CareerContainer>
 
         <CareerContainer darkmode={darkMode}>
-          <h2>Note</h2>
-          <ReactQuill theme="snow" value={note} onChange={setNote} required />
+          <h3>(Note) If Any</h3>
+          <ReactQuill theme="snow" value={note} onChange={setNote} />
         </CareerContainer>
         <Button type="submit" variant={darkMode ? "secondary" : "outline-dark"}>
           Add
