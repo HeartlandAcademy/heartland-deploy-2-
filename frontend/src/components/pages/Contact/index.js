@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import { toast, ToastContainer } from "react-toastify";
 
 import Map from "../../../assets/others/map.jpg";
 import ImageHeader from "../../contents/ImageHeader";
@@ -118,6 +119,7 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+  const [validated, setValidated] = useState(false);
 
   function handleStateChange(e) {
     setMailerState((prevState) => ({
@@ -126,52 +128,54 @@ const Contact = () => {
     }));
   }
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const form = e.currentTarget;
-  //   if (form.checkValidity() === false) {
-  //     e.preventDefault();
-  //     e.stopPropagation();
-  //   } else {
-  //     // Do something
-  //   }
-  //   setValidated(true);
-  // };
-
-  const submitEmail = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ mailerState });
-    const response = await fetch("/api/contact/send", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ mailerState }),
-    })
-      .then((res) => res.json())
-      .then(async (res) => {
-        const resData = await res;
-
-        if (resData.status === "success") {
-          alert("Message Sent");
-        } else if (resData.status === "fail") {
-          alert("Message failed to send");
-        }
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      await fetch("/api/contact/send", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ mailerState }),
       })
-      .then(() => {
-        setMailerState({
-          email: "",
-          name: "",
-          subject: "",
-          message: "",
+        .then((res) => res.json())
+        .then(async (res) => {
+          const resData = await res;
+
+          if (resData.status === "success") {
+            toast.success("Thanks. We will contact you soon!");
+          } else if (resData.status === "fail") {
+            toast.success(
+              "Seems like there was problem. Please try again later."
+            );
+          }
+        })
+        .then(() => {
+          setMailerState({
+            email: "",
+            name: "",
+            subject: "",
+            message: "",
+          });
         });
-      });
+    }
+    setValidated(true);
   };
 
   return (
     <>
       <Meta title="Contact Us" />
       <ImageHeader mtitle="Contact" title="Contact" image={Map} />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        theme="dark"
+        limit={3}
+      />
       <ContactCard className="container">
         <Findus>
           <h3>Contact Info</h3>
@@ -214,7 +218,7 @@ const Contact = () => {
         </Findus>
         <InputForm>
           <h3>Get in Touch</h3>
-          <Form onSubmit={submitEmail}>
+          <Form onSubmit={handleSubmit} noValidate validated={validated}>
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridName">
                 <Form.Label>Your Name</Form.Label>
@@ -229,7 +233,6 @@ const Contact = () => {
                 <Form.Control.Feedback type="invalid">
                   Please enter your fullname.
                 </Form.Control.Feedback>
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridEmail">
@@ -245,7 +248,6 @@ const Contact = () => {
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid email address.
                 </Form.Control.Feedback>
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
             </Row>
 
@@ -262,7 +264,6 @@ const Contact = () => {
               <Form.Control.Feedback type="invalid">
                 Subject field cannot be empty.
               </Form.Control.Feedback>
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formGridMessage">
@@ -279,7 +280,6 @@ const Contact = () => {
               <Form.Control.Feedback type="invalid">
                 Message field cannot be empty.
               </Form.Control.Feedback>
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
 
             <Button variant="primary" type="submit" className="btn-custom">

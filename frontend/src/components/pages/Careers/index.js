@@ -84,7 +84,7 @@ const Careers = () => {
             <Row xs={1} sm={3} md={4} className="p-4 justify-content-center">
               {careers &&
                 careers.map((career) => (
-                  <LinkContainer to={`/careers/${career._id}`}>
+                  <LinkContainer to={`/careers/${career._id}`} key={career._id}>
                     <Col className="card p-3 careerCard">
                       <h4>{career.title}</h4>
                       <p>

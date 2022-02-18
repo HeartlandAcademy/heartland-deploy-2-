@@ -13,6 +13,8 @@ import heartland from "../../../assets/carousel/heartland.jpg";
 import Meta from "../../contents/Meta";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import { listCareerDetails } from "../../../actions/careersActions";
+import { toast } from "react-toastify";
+import { CAREERS_CREATE_RESET } from "../../../actions/types";
 
 const Title = styled.div`
   color: rgb(1, 34, 55);
@@ -48,10 +50,12 @@ const CareerTitle = styled.h2`
 `;
 
 const CareersInfo = ({ match }) => {
+  const [careerTitle, setCareerTitle] = useState("");
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [cv, setCv] = useState("");
+  const [originalFile, setOriginalFile] = useState("");
   const [validated, setValidated] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [fileError, setFileError] = useState(false);
@@ -61,9 +65,17 @@ const CareersInfo = ({ match }) => {
   const careerDetails = useSelector((state) => state.careerDetails);
   const { loading, singleCareer: career, error } = careerDetails;
 
+  const careerId = match.params.id;
+
   useEffect(() => {
-    dispatch(listCareerDetails(match.params.id));
-  }, [dispatch, match]);
+    if (!career._id || career._id !== careerId) {
+      dispatch(listCareerDetails(careerId));
+      dispatch({ type: CAREERS_CREATE_RESET });
+    }
+    if (career) {
+      setCareerTitle(career.title);
+    }
+  }, [dispatch, careerId, career]);
 
   const htmlFrom = (htmlString) => {
     const cleanHtmlString = DOMPurify.sanitize(htmlString, {
@@ -110,8 +122,9 @@ const CareersInfo = ({ match }) => {
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
+    const fileName = e.target.files[0].name;
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("formFile", file);
     setUploading(true);
 
     try {
@@ -121,13 +134,14 @@ const CareersInfo = ({ match }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/events/uploads",
+        "/api/careers/uploads",
         formData,
         config
       );
 
       setCv(data);
       setFileError(false);
+      setOriginalFile(fileName);
       setUploading(false);
     } catch (error) {
       console.error(error);
@@ -136,14 +150,38 @@ const CareersInfo = ({ match }) => {
     }
   };
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
+  const handleSubmit = async (e) => {
+    const careerData = {
+      fullName,
+      originalFile,
+      phoneNumber,
+      email,
+      cv,
+      careerTitle,
+    };
+    e.preventDefault();
+    const form = e.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
     } else {
-      console.log("dsfdsf");
+      await fetch("/api/careers/send", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ careerData }),
+      })
+        .then((res) => res.json())
+        .then(async (res) => {
+          const resData = await res;
+
+          if (resData.status === "success") {
+            alert("Success");
+          } else if (resData.status === "fail") {
+            alert("Error");
+          }
+        });
     }
     setValidated(true);
   };
@@ -222,12 +260,7 @@ const CareersInfo = ({ match }) => {
               <CareerTitle>
                 <span>Apply For This Post</span>
               </CareerTitle>
-              <Form
-                noValidate
-                validated={validated}
-                className="container p-4 form-group"
-                onSubmit={submitHandler}
-              >
+              <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Row className="g-2">
                   <Col md>
                     <Form.Group className="mb-3" controlId="formBasicName">
@@ -286,8 +319,8 @@ const CareersInfo = ({ match }) => {
                   {fileError && (
                     <Form.Text id="passwordHelpBlock" muted>
                       <span className="text-danger ">
-                        <i className="fas fa-exclamation-circle"></i> Only image
-                        file can be added.
+                        <i className="fas fa-exclamation-circle"></i> Please add
+                        valid file
                       </span>
                     </Form.Text>
                   )}
