@@ -11,10 +11,19 @@ import Message from "../../contents/Message";
 import ImageHeader from "../../contents/ImageHeader";
 import heartland from "../../../assets/carousel/heartland.jpg";
 import Meta from "../../contents/Meta";
-import { Container, Form, Row, Col, Button } from "react-bootstrap";
+import { toast, ToastContainer } from "react-toastify";
+import {
+  Container,
+  Form,
+  Row,
+  Col,
+  Button,
+  Placeholder,
+} from "react-bootstrap";
 import { listCareerDetails } from "../../../actions/careersActions";
-import { toast } from "react-toastify";
+
 import { CAREERS_CREATE_RESET } from "../../../actions/types";
+import { Link } from "react-router-dom";
 
 const Title = styled.div`
   color: rgb(1, 34, 55);
@@ -56,7 +65,6 @@ const CareersInfo = ({ match }) => {
   const [email, setEmail] = useState("");
   const [cv, setCv] = useState("");
   const [originalFile, setOriginalFile] = useState("");
-  const [validated, setValidated] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [fileError, setFileError] = useState(false);
 
@@ -114,9 +122,13 @@ const CareersInfo = ({ match }) => {
   };
 
   function clearForm() {
+    setCareerTitle("");
     setFullName("");
     setPhoneNumber("");
+    setEmail("");
     setCv("");
+    setOriginalFile("");
+    setUploading(false);
     reset();
   }
 
@@ -159,6 +171,7 @@ const CareersInfo = ({ match }) => {
       cv,
       careerTitle,
     };
+
     e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -177,25 +190,116 @@ const CareersInfo = ({ match }) => {
           const resData = await res;
 
           if (resData.status === "success") {
-            alert("Success");
+            toast.success("Thanks. We will contact you soon!");
+            clearForm();
           } else if (resData.status === "fail") {
-            alert("Error");
+            toast.error(
+              "Seems like there was a problem. Please try again later."
+            );
           }
         });
     }
-    setValidated(true);
+  };
+
+  const CareerLoader = () => {
+    return (
+      <Container>
+        <Placeholder as="h1" animation="glow">
+          <Placeholder xs={7} />
+        </Placeholder>
+        <Container>
+          <Desc>
+            <h2>
+              <span>Basic Career Info</span>
+            </h2>
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={6} size="lg" />
+            </Placeholder>
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={8} size="lg" />
+            </Placeholder>
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={5} size="lg" />
+            </Placeholder>
+
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={7} size="lg" />
+            </Placeholder>
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={5} size="lg" />
+            </Placeholder>
+          </Desc>
+          <Desc>
+            <h2>
+              <span>About HA</span>
+            </h2>
+            <Placeholder as="h4" animation="glow">
+              <Placeholder xs={7} /> <Placeholder xs={4} />{" "}
+              <Placeholder xs={4} /> <Placeholder xs={6} />{" "}
+              <Placeholder xs={8} />
+            </Placeholder>
+          </Desc>
+          <Desc>
+            <h2>
+              <span>Career Specification</span>
+            </h2>
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={8} size="lg" />
+            </Placeholder>
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={5} size="lg" />
+            </Placeholder>
+
+            <h4>
+              <span>Other Specification</span>
+            </h4>
+            <Placeholder as="h4" animation="glow">
+              <Placeholder xs={7} /> <Placeholder xs={4} />{" "}
+              <Placeholder xs={4} /> <Placeholder xs={6} />{" "}
+              <Placeholder xs={8} />
+            </Placeholder>
+          </Desc>
+          <Desc>
+            <h2>
+              <span>Career Description</span>
+            </h2>
+            <Placeholder as="h4" animation="glow">
+              <Placeholder xs={7} /> <Placeholder xs={4} />{" "}
+              <Placeholder xs={4} /> <Placeholder xs={6} />{" "}
+              <Placeholder xs={8} />
+            </Placeholder>
+          </Desc>
+          <Desc>
+            <h2>
+              <span>Note: </span>
+            </h2>
+            <Placeholder as="h4" animation="glow">
+              <Placeholder xs={7} /> <Placeholder xs={4} />{" "}
+              <Placeholder xs={4} /> <Placeholder xs={6} />{" "}
+              <Placeholder xs={8} />
+            </Placeholder>
+          </Desc>
+        </Container>
+      </Container>
+    );
   };
 
   return (
     <>
-      <Meta title="HA Careers | Title" />
       <ImageHeader mtitle="Heartland" title="Careers" image={heartland} />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        theme="dark"
+        limit={3}
+      />
       {loading ? (
-        <Loader />
+        <CareerLoader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
         <Container>
+          <Meta title={`HA Careers | ${career.title}`} />
           <Title>{career.title}</Title>
           <Container>
             <Desc>
@@ -256,85 +360,97 @@ const CareersInfo = ({ match }) => {
               </h2>
               {htmlFrom(career.note)}
             </Desc>
-            <>
-              <CareerTitle>
-                <span>Apply For This Post</span>
-              </CareerTitle>
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <Row className="g-2">
-                  <Col md>
-                    <Form.Group className="mb-3" controlId="formBasicName">
-                      <Form.Label>Full Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter fullname"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide Full Name
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                  <Col md>
-                    <Form.Group className="mb-3" controlId="formBasicNumber">
-                      <Form.Label>Phone Number</Form.Label>
-                      <Form.Control
-                        type="number"
-                        placeholder="Enter phone number"
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide Valid Phone Number
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                </Row>
-
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please provide Email Address
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group controlId="formFile" className="mb-3">
-                  <Form.Label>Resume / CV</Form.Label>
-                  <Form.Control
-                    type="file"
-                    ref={ref}
-                    onChange={uploadFileHandler}
-                    required
-                  />
-                  {fileError && (
-                    <Form.Text id="passwordHelpBlock" muted>
-                      <span className="text-danger ">
-                        <i className="fas fa-exclamation-circle"></i> Please add
-                        valid file
-                      </span>
-                    </Form.Text>
-                  )}
-                  {uploading && <Loader />}
-                </Form.Group>
-
-                <Button size="lg" className="my-3" type="submit">
-                  Apply
-                </Button>
-              </Form>
-            </>
           </Container>
         </Container>
       )}
+      <Container>
+        <CareerTitle>
+          <span>Apply For This Post</span>
+        </CareerTitle>
+        <Form onSubmit={handleSubmit}>
+          <Row className="g-2">
+            <Col md>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Label>Full Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter fullname"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide Full Name
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col md>
+              <Form.Group className="mb-3" controlId="formBasicNumber">
+                <Form.Label>Phone Number</Form.Label>
+                <Form.Control
+                  type="text"
+                  pattern="^\d{10}$"
+                  title="Please enter valid Phone Number"
+                  placeholder="Enter phone number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide Valid Phone Number
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide Email Address
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Resume / CV</Form.Label>
+            <Form.Control
+              type="file"
+              ref={ref}
+              onChange={uploadFileHandler}
+              required
+            />
+            {fileError && (
+              <Form.Text id="passwordHelpBlock" muted>
+                <span className="text-danger ">
+                  <i className="fas fa-exclamation-circle"></i> Please add valid
+                  file
+                </span>
+              </Form.Text>
+            )}
+            {uploading && <Loader />}
+          </Form.Group>
+
+          <Button
+            size="lg"
+            disabled={fileError || uploading}
+            className="my-3 mb-4"
+            type="submit"
+          >
+            Apply
+          </Button>
+          <Link to={"/careers"}>
+            <Button variant="danger" size="lg" className="my-3 mb-4 mx-3">
+              Cancel
+            </Button>
+          </Link>
+        </Form>
+      </Container>
     </>
   );
 };

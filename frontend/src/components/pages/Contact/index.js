@@ -149,8 +149,8 @@ const Contact = () => {
           if (resData.status === "success") {
             toast.success("Thanks. We will contact you soon!");
           } else if (resData.status === "fail") {
-            toast.success(
-              "Seems like there was problem. Please try again later."
+            toast.error(
+              "Seems like there was a problem. Please try again later."
             );
           }
         })

@@ -402,7 +402,7 @@ const TestimonialCreate = ({ history }) => {
             >
               {teams &&
                 teams.map((team) => (
-                  <Heartland>
+                  <Heartland key={team._id}>
                     <Card style={{ width: "15rem", margin: "20px" }}>
                       <Card.Img variant="top" src={team.image} />
                       <Card.Body
@@ -469,7 +469,7 @@ const TestimonialCreate = ({ history }) => {
             >
               {studentsTestimonials &&
                 studentsTestimonials.students.map((student) => (
-                  <MessageCard>
+                  <MessageCard key={student._id}>
                     <Top>
                       <i className="fas fa-quote-left"></i>
                     </Top>
@@ -533,7 +533,7 @@ const TestimonialCreate = ({ history }) => {
             >
               {visitorsTestimonials &&
                 visitorsTestimonials.visitors.map((visitor) => (
-                  <VisitorMessageCard darkmode={darkMode}>
+                  <VisitorMessageCard darkmode={darkMode} key={visitor._id}>
                     <VisitorMsg>{visitor.message}</VisitorMsg>
                     <VisitorProfile>
                       <img src={visitor.image} alt="student" />

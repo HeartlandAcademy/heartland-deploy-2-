@@ -73,7 +73,7 @@ const Teams = () => {
         >
           {teams &&
             teams.map((team) => (
-              <Heartland>
+              <Heartland key={team._id}>
                 <Card style={{ width: "14rem", margin: "20px" }}>
                   <Card.Img variant="top" src={team.image} />
                   <Card.Body>
