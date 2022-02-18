@@ -393,7 +393,7 @@ const College = () => {
           >
             {visitorsTestimonials &&
               visitorsTestimonials.visitors.map((visitor) => (
-                <MessageCard>
+                <MessageCard key={visitor._id}>
                   <Msg>"{visitor.message}"</Msg>
                   <Profile>
                     <img src={visitor.image} alt="student" />

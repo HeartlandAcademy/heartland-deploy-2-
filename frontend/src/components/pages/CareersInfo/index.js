@@ -66,6 +66,7 @@ const CareersInfo = ({ match }) => {
   const [cv, setCv] = useState("");
   const [originalFile, setOriginalFile] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [fileValidationError, setFileValidationError] = useState(false);
   const [fileError, setFileError] = useState(false);
 
   const dispatch = useDispatch();
@@ -133,32 +134,38 @@ const CareersInfo = ({ match }) => {
   }
 
   const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
-    const fileName = e.target.files[0].name;
-    const formData = new FormData();
-    formData.append("formFile", file);
-    setUploading(true);
+    const fileSize = e.target.files[0].size / 1024 / 1024;
+    if (fileSize < 2) {
+      const file = e.target.files[0];
+      const fileName = e.target.files[0].name;
+      const formData = new FormData();
+      formData.append("formFile", file);
+      setUploading(true);
+      setFileValidationError(false);
 
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
-      const { data } = await axios.post(
-        "/api/careers/uploads",
-        formData,
-        config
-      );
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        };
+        const { data } = await axios.post(
+          "/api/careers/uploads",
+          formData,
+          config
+        );
 
-      setCv(data);
-      setFileError(false);
-      setOriginalFile(fileName);
-      setUploading(false);
-    } catch (error) {
-      console.error(error);
-      setFileError(true);
-      setUploading(false);
+        setCv(data);
+        setFileError(false);
+        setOriginalFile(fileName);
+        setUploading(false);
+      } catch (error) {
+        console.error(error);
+        setFileError(true);
+        setUploading(false);
+      }
+    } else {
+      setFileValidationError(true);
     }
   };
 
@@ -367,6 +374,11 @@ const CareersInfo = ({ match }) => {
         <CareerTitle>
           <span>Apply For This Post</span>
         </CareerTitle>
+        {fileValidationError && (
+          <Message variant="danger">
+            File size cant be greater than 2 MB
+          </Message>
+        )}
         <Form onSubmit={handleSubmit}>
           <Row className="g-2">
             <Col md>

@@ -31,7 +31,7 @@ const createRegistrations = asyncHandler(async (req, res) => {
       phone,
       queries,
     });
-  
+
     if (registration) {
       res.status(201).json({
         _id: registration._id,
@@ -47,11 +47,8 @@ const createRegistrations = asyncHandler(async (req, res) => {
     }
   } else {
     res.status(400);
-      throw new Error("Verification Failed. Please Try Again");
-    }
+    throw new Error("Verification Failed. Please Try Again");
   }
-
-  
 });
 
 export { getRegistrations, createRegistrations };

@@ -332,6 +332,12 @@ const Header = () => {
           </NavDropDownItem>
 
           <NavDropDownItem>
+            <StyledLink exact activeClassName="drop-active" to="/college">
+              <a>College</a>
+            </StyledLink>
+          </NavDropDownItem>
+
+          <NavDropDownItem>
             <a
               onClick={FamilyShowHandler}
               className="navDropDownHead"
