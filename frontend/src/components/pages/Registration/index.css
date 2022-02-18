@@ -14,3 +14,7 @@
   .registerForm .form-floating {
     margin-bottom: 40px;
   }
+
+  .registerForm .form-select {
+    font-size: 17px;
+  }

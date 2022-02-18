@@ -366,6 +366,10 @@ input:checked + .darkModeSlider {
   margin: 23px;
 }
 
+.form-select {
+  border: 2px solid rgb(0, 148, 68) !important;
+}
+
 .careerCard:hover {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);

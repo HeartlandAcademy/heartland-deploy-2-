@@ -6,9 +6,12 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import Background from "../../../assets/others/Background.jpg";
+import { toast, ToastContainer } from "react-toastify";
 import Meta from "../../contents/Meta";
+import Message from "../../contents/Message";
 import { createNewRegistrations } from "../../../actions/registrationActions";
 import "./index.css";
+import { REGISTRATION_CREATE_RESET } from "../../../actions/types";
 
 const RegisterHeader = styled.div`
   text-align: center;
@@ -54,6 +57,7 @@ const Registration = ({ history }) => {
   const [phone, setPhone] = useState("");
   const [queries, setQueries] = useState("");
   const [token, setToken] = useState("");
+  const [showError, setShowError] = useState(false);
   const [validated, setValidated] = useState(false);
 
   const createRegistrations = useSelector((state) => state.createRegistrations);
@@ -70,8 +74,8 @@ const Registration = ({ history }) => {
 
   useEffect(() => {
     if (success) {
-      alert("Thanks for Registration");
-      history.push("/");
+      toast.success("Thanks for Registration!");
+      dispatch({ type: REGISTRATION_CREATE_RESET });
       clearForm();
     }
   }, [success, history]);
@@ -83,23 +87,27 @@ const Registration = ({ history }) => {
   const dispatch = useDispatch();
 
   const registrationHandler = (event) => {
-    console.log(token);
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     } else {
-      dispatch(
-        createNewRegistrations(
-          firstName,
-          lastName,
-          email,
-          phone,
-          queries,
-          token
-        )
-      );
+      if (token === "") {
+        setShowError(true);
+      } else {
+        setShowError(false);
+        dispatch(
+          createNewRegistrations(
+            firstName,
+            lastName,
+            email,
+            phone,
+            queries,
+            token
+          )
+        );
+      }
     }
     setValidated(true);
   };
@@ -107,6 +115,12 @@ const Registration = ({ history }) => {
   return (
     <>
       <Meta title="Registration" />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        theme="dark"
+        limit={3}
+      />
       <RegisterHeader>
         <RegisterInfo>
           <h3>BE A PART OF US</h3>
@@ -115,6 +129,10 @@ const Registration = ({ history }) => {
       </RegisterHeader>
       <Container>
         <Section1 className="container registerForm">
+          {showError && (
+            <Message variant="danger">Please fill out the reCAPTCHA </Message>
+          )}
+
           <Form noValidate validated={validated} onSubmit={registrationHandler}>
             <Row className="g-2">
               <Col md>
@@ -158,19 +176,47 @@ const Registration = ({ history }) => {
                 Please provide Email Address.
               </Form.Control.Feedback>
             </FloatingLabel>
-            <FloatingLabel controlId="floatingNumber" label="Phone Number">
-              <Form.Control
-                type="number"
-                placeholder="Phone Number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                isInvalid={error}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide valid Phone Number.
-              </Form.Control.Feedback>
+            <Row className="g-2">
+              <Col md>
+                <FloatingLabel controlId="floatingNumber" label="Phone Number">
+                  <Form.Control
+                    type="number"
+                    placeholder="Phone Number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    isInvalid={error}
+                    required
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide valid Phone Number.
+                  </Form.Control.Feedback>
+                </FloatingLabel>
+              </Col>
+              <Col md>
+                <FloatingLabel controlId="floatingInputGrid" label="Address">
+                  <Form.Control
+                    type="text"
+                    placeholder="Address Name"
+                    required
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide valid Address.
+                  </Form.Control.Feedback>
+                </FloatingLabel>
+              </Col>
+            </Row>
+
+            <FloatingLabel
+              controlId="floatingSelect"
+              label="I want to know about"
+            >
+              <Form.Select aria-label="Floating label select example">
+                <option value="1">School</option>
+                <option value="2">College</option>
+                <option value="3">Scholarship</option>
+              </Form.Select>
             </FloatingLabel>
+
             <FloatingLabel controlId="floatingTextarea2" label="Queries">
               <Form.Control
                 as="textarea"

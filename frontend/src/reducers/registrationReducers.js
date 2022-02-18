@@ -1,6 +1,7 @@
 import {
   REGISTRATION_CREATE_FAIL,
   REGISTRATION_CREATE_REQUEST,
+  REGISTRATION_CREATE_RESET,
   REGISTRATION_CREATE_SUCCESS,
   SUBMITTED_REGISTRATION_FAIL,
   SUBMITTED_REGISTRATION_REQUEST,
@@ -39,6 +40,8 @@ export const createRegistrationsReducer = (state = {}, action) => {
       return { loading: false, success: true, registrations: action.payload };
     case REGISTRATION_CREATE_FAIL:
       return { loading: false, error: action.payload };
+    case REGISTRATION_CREATE_RESET:
+      return {};
     default:
       return state;
   }
