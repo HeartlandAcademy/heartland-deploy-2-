@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Form, Row, Col, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import Background from "../../../assets/others/Background.jpg";
 import Meta from "../../contents/Meta";
@@ -52,6 +53,7 @@ const Registration = ({ history }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [queries, setQueries] = useState("");
+  const [token, setToken] = useState("");
   const [validated, setValidated] = useState(false);
 
   const createRegistrations = useSelector((state) => state.createRegistrations);
@@ -74,9 +76,14 @@ const Registration = ({ history }) => {
     }
   }, [success, history]);
 
+  let handleChange = (value) => {
+    setToken(value);
+  };
+
   const dispatch = useDispatch();
 
   const registrationHandler = (event) => {
+    console.log(token);
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -84,11 +91,19 @@ const Registration = ({ history }) => {
       event.stopPropagation();
     } else {
       dispatch(
-        createNewRegistrations(firstName, lastName, email, phone, queries)
+        createNewRegistrations(
+          firstName,
+          lastName,
+          email,
+          phone,
+          queries,
+          token
+        )
       );
     }
     setValidated(true);
   };
+
   return (
     <>
       <Meta title="Registration" />
@@ -169,6 +184,13 @@ const Registration = ({ history }) => {
                 Queries field cannot be empty.
               </Form.Control.Feedback>
             </FloatingLabel>
+            <div className="my-4">
+              <ReCAPTCHA
+                sitekey="6Lc8c4ceAAAAAIeF4KptKI2I5b9Otiui2EwI0DlN"
+                onChange={handleChange}
+              />
+            </div>
+
             <RegisterBtn className="btn btn-custom" type="submit">
               Submit
             </RegisterBtn>

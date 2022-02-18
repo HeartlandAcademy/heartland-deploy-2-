@@ -39,7 +39,7 @@ export const listRegistrations = () => async (dispatch, getState) => {
 };
 
 export const createNewRegistrations =
-  (firstName, lastName, email, phone, queries) => async (dispatch) => {
+  (firstName, lastName, email, phone, queries, token) => async (dispatch) => {
     try {
       dispatch({ type: REGISTRATION_CREATE_REQUEST });
       const config = {
@@ -50,7 +50,7 @@ export const createNewRegistrations =
 
       const { data } = await axios.post(
         "/api/registrations",
-        { firstName, lastName, email, phone, queries },
+        { firstName, lastName, email, phone, queries, token },
         config
       );
 
