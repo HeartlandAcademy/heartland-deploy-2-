@@ -149,6 +149,7 @@ const Contact = () => {
           if (resData.status === "success") {
             toast.success("Thanks. We will contact you soon!");
           } else if (resData.status === "fail") {
+            console.log(resData);
             toast.error(
               "Seems like there was a problem. Please try again later."
             );
@@ -179,6 +180,7 @@ const Contact = () => {
       <ContactCard className="container">
         <Findus>
           <h3>Contact Info</h3>
+          <img width="100px" height="100px" src="/Logo.svg" />
           <Location>
             <span>
               <i className="fas fa-map-marker-alt"></i>

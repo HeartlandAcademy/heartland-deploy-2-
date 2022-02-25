@@ -9,9 +9,10 @@ import Background from "../../../assets/others/Background.jpg";
 import { toast, ToastContainer } from "react-toastify";
 import Meta from "../../contents/Meta";
 import Message from "../../contents/Message";
-import { createNewRegistrations } from "../../../actions/registrationActions";
-import "./index.css";
 import { REGISTRATION_CREATE_RESET } from "../../../actions/types";
+import { createNewRegistrations } from "../../../actions/registrationActions";
+
+import "./index.css";
 
 const RegisterHeader = styled.div`
   text-align: center;
@@ -134,6 +135,20 @@ const Registration = ({ history }) => {
           )}
 
           <Form noValidate validated={validated} onSubmit={registrationHandler}>
+            <div>
+              <p>
+                Please fill out the form to apply or you can also download the
+                admission application presented below and email it at
+                <strong> info@heartlandacademy.edu.np</strong>.
+              </p>
+
+              <a href="/assets/admission.pdf" download>
+                Admission Form <i className="fas fa-arrow-circle-down" />
+              </a>
+            </div>
+
+            <h4 className="mt-3">Contact Details</h4>
+
             <Row className="g-2">
               <Col md>
                 <FloatingLabel controlId="floatingInputGrid" label="First Name">
@@ -194,11 +209,7 @@ const Registration = ({ history }) => {
               </Col>
               <Col md>
                 <FloatingLabel controlId="floatingInputGrid" label="Address">
-                  <Form.Control
-                    type="text"
-                    placeholder="Address Name"
-                    required
-                  />
+                  <Form.Control type="text" placeholder="Address" required />
                   <Form.Control.Feedback type="invalid">
                     Please provide valid Address.
                   </Form.Control.Feedback>
@@ -206,30 +217,65 @@ const Registration = ({ history }) => {
               </Col>
             </Row>
 
-            <FloatingLabel
-              controlId="floatingSelect"
-              label="I want to know about"
-            >
+            <h4>Course Preference</h4>
+
+            <FloatingLabel controlId="floatingSelect" label="Level">
               <Form.Select aria-label="Floating label select example">
-                <option value="1">School</option>
-                <option value="2">College</option>
-                <option value="3">Scholarship</option>
+                <option value="1">Preschool</option>
+                <option value="2">Primary</option>
+                <option value="3">Lower Secondary</option>
+                <option value="4">Junior Higher Secondary</option>
+                <option value="5">Senior Higher Secondary</option>
               </Form.Select>
             </FloatingLabel>
 
-            <FloatingLabel controlId="floatingTextarea2" label="Queries">
+            <FloatingLabel controlId="floatingSelect" label="Faculty">
+              <Form.Select aria-label="Floating label select example">
+                <option value="1">Science</option>
+                <option value="2">Management</option>
+                <option value="3">Education</option>
+              </Form.Select>
+            </FloatingLabel>
+
+            <h4>Additional Information</h4>
+
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>A copy of Marksheet/Gradesheet (Latest)</Form.Label>
+              <Form.Control type="file" />
+            </Form.Group>
+
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>A copy of Character Certificate</Form.Label>
+              <Form.Control type="file" />
+            </Form.Group>
+
+            <Form.Group controlId="formFile" className="mb-5">
+              <Form.Label>PP Size Photo</Form.Label>
+              <Form.Control type="file" />
+            </Form.Group>
+
+            <h4>Application Form</h4>
+
+            <FloatingLabel
+              controlId="floatingTextarea2"
+              label="Write an application"
+            >
               <Form.Control
                 as="textarea"
-                placeholder="Place your queries here (if any)"
-                style={{ height: "100px" }}
+                style={{ height: "200px" }}
                 value={queries}
                 onChange={(e) => setQueries(e.target.value)}
                 required
               />
-              <Form.Control.Feedback type="invalid">
-                Queries field cannot be empty.
-              </Form.Control.Feedback>
             </FloatingLabel>
+
+            <h5 style={{ textAlign: "center" }}>OR</h5>
+
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Attach Application Letter</Form.Label>
+              <Form.Control type="file" />
+            </Form.Group>
+
             <div className="my-4">
               <ReCAPTCHA
                 sitekey="6Lc8c4ceAAAAAIeF4KptKI2I5b9Otiui2EwI0DlN"

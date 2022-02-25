@@ -87,6 +87,7 @@ router.post("/send", function (req, res) {
     `;
 
     console.log(__dirname);
+    console.log(req.body.careerData.cv);
 
     var mailOptions = {
       from: "heartlandacademy123@gmail.com",
