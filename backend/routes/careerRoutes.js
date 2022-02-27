@@ -84,6 +84,11 @@ router.post("/send", function (req, res) {
       <h3>Name: ${req.body.careerData.fullName}</h3>
       <h3>Phone Number: ${req.body.careerData.phoneNumber}</h3>
       <h3>Email: ${req.body.careerData.email}</h3>
+      <div>
+        <h3><span style='border-bottom: 1px solid #111'>Message: </span></h3>
+        <p>${req.body.careerData.message}</p>
+      </div>
+      
     `;
 
     console.log(__dirname);

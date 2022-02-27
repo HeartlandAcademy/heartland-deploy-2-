@@ -63,6 +63,7 @@ const CareersInfo = ({ match }) => {
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [cv, setCv] = useState("");
   const [originalFile, setOriginalFile] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -127,6 +128,7 @@ const CareersInfo = ({ match }) => {
     setFullName("");
     setPhoneNumber("");
     setEmail("");
+    setMessage("");
     setCv("");
     setOriginalFile("");
     setUploading(false);
@@ -175,6 +177,7 @@ const CareersInfo = ({ match }) => {
       originalFile,
       phoneNumber,
       email,
+      message,
       cv,
       careerTitle,
     };
@@ -426,6 +429,21 @@ const CareersInfo = ({ match }) => {
             />
             <Form.Control.Feedback type="invalid">
               Please provide Email Address
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formGridMessage">
+            <Form.Label>Message</Form.Label>
+            <Form.Control
+              as="textarea"
+              placeholder="Leave a message here"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+              style={{ height: "100px" }}
+            />
+            <Form.Control.Feedback type="invalid">
+              Message field cannot be empty.
             </Form.Control.Feedback>
           </Form.Group>
 

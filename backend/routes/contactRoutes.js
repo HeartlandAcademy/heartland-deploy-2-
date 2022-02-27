@@ -20,10 +20,10 @@ router.post("/send", function (req, res) {
   const message = `
     <div style='background-color:powderblue;height:100vh;'>
       <div style='background-color:white;width: 60%;margin:0 auto;padding:10px 5px 30px 5px;'>
-        <div style='border-bottom:1px solid #b5aac6; text-align:center;'>
+      <div style='border-bottom:1px solid #b5aac6; text-align:center;'>
         <img height="100px" width="100px" src="cid:logo">
-        </div>
-        <h2 style='color:#b961ff;text-align:center;'>Contact Details</h2>
+        </div>  
+      <h2 style='color:#b961ff;text-align:center;'>Contact Details</h2>
         <h3 style='text-align:center;'>From: ${req.body.mailerState.name}</h3>
         <div style='margin-left:20px;'> 
           <h4>Email: ${req.body.mailerState.email}</h4>
@@ -37,7 +37,7 @@ router.post("/send", function (req, res) {
   var mailOptions = {
     from: "heartlandacademy123@gmail.com",
     to: "heartlandacademy123@gmail.com",
-    subject: "Contact Request",
+    subject: `Contact Request from ${req.body.mailerState.name}`,
     html: message,
     attachments: [
       {
