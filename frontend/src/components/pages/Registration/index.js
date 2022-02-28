@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
+
 import { Form, Row, Col, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -13,6 +15,7 @@ import { REGISTRATION_CREATE_RESET } from "../../../actions/types";
 import { createNewRegistrations } from "../../../actions/registrationActions";
 
 import "./index.css";
+import Loader from "../../contents/Loader";
 
 const RegisterHeader = styled.div`
   text-align: center;
@@ -56,7 +59,17 @@ const Registration = ({ history }) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [queries, setQueries] = useState("");
+  const [address, setAddress] = useState("");
+  const [preference, setPreference] = useState(1);
+  const [faculty, setFaculty] = useState("");
+  const [markSheet, setMarkSheet] = useState("");
+  const [markSheetUpload, setMarkSheetUpload] = useState(false);
+  const [characterCerf, setCharacterCerf] = useState("");
+  const [characterCerfUpload, setcharacterCerfUpload] = useState(false);
+  const [ppPhoto, setPpPhoto] = useState("");
+  const [ppPhotoUpload, setPpPhotoUpload] = useState(false);
+  const [application, setApplication] = useState("");
+  const [attachApplication, setAttachApplication] = useState("");
   const [token, setToken] = useState("");
   const [showError, setShowError] = useState(false);
   const [validated, setValidated] = useState(false);
@@ -69,7 +82,6 @@ const Registration = ({ history }) => {
     setLastName("");
     setEmail("");
     setPhone("");
-    setQueries("");
     setValidated(false);
   }
 
@@ -87,30 +99,112 @@ const Registration = ({ history }) => {
 
   const dispatch = useDispatch();
 
+  const markSheetFileHandler = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("marksheet", file);
+    setMarkSheetUpload(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post(
+        "/api/registrations/uploads/marksheet",
+        formData,
+        config
+      );
+
+      setMarkSheet(data);
+      setMarkSheetUpload(false);
+    } catch (error) {
+      console.log(error);
+      setMarkSheetUpload(false);
+    }
+  };
+
+  const pppPhotoFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("ppphoto", file);
+    setPpPhotoUpload(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post(
+        "/api/registrations/uploads/ppphoto",
+        formData,
+        config
+      );
+
+      setPpPhoto(data);
+      setPpPhotoUpload(false);
+    } catch (error) {
+      console.log(error);
+      setPpPhotoUpload(false);
+    }
+  };
+
+  const characterCfFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("characterCf", file);
+    setcharacterCerfUpload(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post(
+        "/api/registrations/uploads/characterCf",
+        formData,
+        config
+      );
+
+      setCharacterCerf(data);
+      setcharacterCerfUpload(false);
+    } catch (error) {
+      console.log(error);
+      setcharacterCerfUpload(false);
+    }
+  };
+
   const registrationHandler = (event) => {
     event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    } else {
-      if (token === "") {
-        setShowError(true);
-      } else {
-        setShowError(false);
-        dispatch(
-          createNewRegistrations(
-            firstName,
-            lastName,
-            email,
-            phone,
-            queries,
-            token
-          )
-        );
-      }
-    }
-    setValidated(true);
+    console.log(markSheet);
+    console.log("dfssdfdfs");
+    // const form = event.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    // } else {
+    //   if (token === "") {
+    //     setShowError(true);
+    //   } else {
+    //     setShowError(false);
+    //     console.log(preference);
+    //     dispatch(
+    //       createNewRegistrations(
+    //         firstName,
+    //         lastName,
+    //         email,
+    //         phone,
+    //         application,
+    //         token
+    //       )
+    //     );
+    //   }
+    // }
+    // setValidated(true);
   };
 
   return (
@@ -220,39 +314,57 @@ const Registration = ({ history }) => {
             <h4>Course Preference</h4>
 
             <FloatingLabel controlId="floatingSelect" label="Level">
-              <Form.Select aria-label="Floating label select example">
-                <option value="1">Preschool</option>
-                <option value="2">Primary</option>
-                <option value="3">Lower Secondary</option>
-                <option value="4">Junior Higher Secondary</option>
-                <option value="5">Senior Higher Secondary</option>
+              <Form.Select
+                aria-label="Floating label select example"
+                value={preference}
+                onChange={(e) => setPreference(e.target.value)}
+              >
+                <option value="Preschool">
+                  Preschool (Nursery-Kindergarten)
+                </option>
+                <option value="Primary">Primary (1-5)</option>
+                <option value="Lower Secondary">Lower Secondary (6-8)</option>
+                <option value="Junior Higher Secondary">
+                  Junior Higher Secondary (9-10)
+                </option>
+                <option value="Senior Higher Secondary">
+                  Senior Higher Secondary (11-12)
+                </option>
               </Form.Select>
             </FloatingLabel>
 
-            <FloatingLabel controlId="floatingSelect" label="Faculty">
-              <Form.Select aria-label="Floating label select example">
-                <option value="1">Science</option>
-                <option value="2">Management</option>
-                <option value="3">Education</option>
-              </Form.Select>
-            </FloatingLabel>
+            {preference === "Senior Higher Secondary" && (
+              <FloatingLabel controlId="floatingSelect" label="Faculty">
+                <Form.Select
+                  aria-label="Floating label select example"
+                  value={faculty}
+                  onChange={(e) => setFaculty(e.target.value)}
+                >
+                  <option value="Science">Science</option>
+                  <option value="Management">Management</option>
+                  <option value="Education">Education</option>
+                </Form.Select>
+              </FloatingLabel>
+            )}
 
-            <h4>Additional Information</h4>
-
-            <Form.Group controlId="formFile" className="mb-3">
+            <Form.Group controlId="marksheet" className="mb-3">
               <Form.Label>A copy of Marksheet/Gradesheet (Latest)</Form.Label>
-              <Form.Control type="file" />
+              <Form.Control type="file" onChange={markSheetFileHandler} />
             </Form.Group>
 
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>A copy of Character Certificate</Form.Label>
-              <Form.Control type="file" />
-            </Form.Group>
+            {markSheetUpload && <Loader />}
 
-            <Form.Group controlId="formFile" className="mb-5">
+            <Form.Group controlId="ppphoto" className="mb-3">
               <Form.Label>PP Size Photo</Form.Label>
-              <Form.Control type="file" />
+              <Form.Control type="file" onChange={pppPhotoFileHandler} />
             </Form.Group>
+
+            {preference === "Senior Higher Secondary" && (
+              <Form.Group controlId="characterCf" className="mb-5">
+                <Form.Label>A copy of Character Certificate</Form.Label>
+                <Form.Control type="file" onChange={characterCfFileHandler} />
+              </Form.Group>
+            )}
 
             <h4>Application Form</h4>
 
@@ -263,8 +375,8 @@ const Registration = ({ history }) => {
               <Form.Control
                 as="textarea"
                 style={{ height: "200px" }}
-                value={queries}
-                onChange={(e) => setQueries(e.target.value)}
+                value={application}
+                onChange={(e) => setApplication(e.target.value)}
                 required
               />
             </FloatingLabel>

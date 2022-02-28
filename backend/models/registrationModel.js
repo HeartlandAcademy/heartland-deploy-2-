@@ -31,10 +31,44 @@ const registrationSchema = mongoose.Schema(
         "Please provide valid phone number",
       ],
     },
-    queries: {
+    address: {
+      type: String,
+      required: [true, "Address is required"],
+    },
+    preference: {
+      type: String,
+      enum: [
+        "Preschool",
+        "Primary",
+        "Lower Secondary",
+        "Junior Higher Secondary",
+        "Senior Higher Secondary",
+      ],
+    },
+    faculty: {
+      type: String,
+      enum: ["Science", "Management", "Education"],
+    },
+    markSheet: {
       type: String,
       required: true,
-      maxlength: 1000,
+    },
+    characterCerf: {
+      type: String,
+      required: true,
+    },
+    ppPhoto: {
+      type: String,
+      required: true,
+    },
+    application: {
+      type: String,
+      required: true,
+      maxlength: [5000, "Application letter must be at least 5000 characters"],
+    },
+    attachApplication: {
+      type: String,
+      required: true,
     },
   },
   {

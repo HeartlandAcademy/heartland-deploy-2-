@@ -69,6 +69,7 @@ const CareersInfo = ({ match }) => {
   const [uploading, setUploading] = useState(false);
   const [fileValidationError, setFileValidationError] = useState(false);
   const [fileError, setFileError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -131,6 +132,7 @@ const CareersInfo = ({ match }) => {
     setMessage("");
     setCv("");
     setOriginalFile("");
+    setIsLoading(false);
     setUploading(false);
     reset();
   }
@@ -188,6 +190,7 @@ const CareersInfo = ({ match }) => {
       e.preventDefault();
       e.stopPropagation();
     } else {
+      setIsLoading(true);
       await fetch("/api/careers/send", {
         method: "POST",
         headers: {
@@ -200,9 +203,11 @@ const CareersInfo = ({ match }) => {
           const resData = await res;
 
           if (resData.status === "success") {
+            setIsLoading(false);
             toast.success("Thanks. We will contact you soon!");
             clearForm();
           } else if (resData.status === "fail") {
+            setIsLoading(false);
             toast.error(
               "Seems like there was a problem. Please try again later."
             );
@@ -465,6 +470,8 @@ const CareersInfo = ({ match }) => {
             )}
             {uploading && <Loader />}
           </Form.Group>
+
+          {isLoading && <Loader />}
 
           <Button
             size="lg"

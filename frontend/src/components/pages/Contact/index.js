@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Map from "../../../assets/others/map.jpg";
 import ImageHeader from "../../contents/ImageHeader";
 import Meta from "../../contents/Meta";
+import Loader from "../../contents/Loader";
 
 const ContactCard = styled.div`
   display: flex;
@@ -119,7 +120,7 @@ const Contact = () => {
     subject: "",
     message: "",
   });
-  const [validated, setValidated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleStateChange(e) {
     setMailerState((prevState) => ({
@@ -135,6 +136,7 @@ const Contact = () => {
       e.preventDefault();
       e.stopPropagation();
     } else {
+      setIsLoading(true);
       await fetch("/api/contact/send", {
         method: "POST",
         headers: {
@@ -147,9 +149,11 @@ const Contact = () => {
           const resData = await res;
 
           if (resData.status === "success") {
+            setIsLoading(false);
             toast.success("Thanks. We will contact you soon!");
           } else if (resData.status === "fail") {
             console.log(resData);
+            setIsLoading(false);
             toast.error(
               "Seems like there was a problem. Please try again later."
             );
@@ -164,7 +168,6 @@ const Contact = () => {
           });
         });
     }
-    setValidated(true);
   };
 
   return (
@@ -220,7 +223,7 @@ const Contact = () => {
         </Findus>
         <InputForm>
           <h3>Get in Touch</h3>
-          <Form onSubmit={handleSubmit} noValidate validated={validated}>
+          <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridName">
                 <Form.Label>Your Name</Form.Label>
@@ -283,6 +286,7 @@ const Contact = () => {
                 Message field cannot be empty.
               </Form.Control.Feedback>
             </Form.Group>
+            {isLoading && <Loader />}
 
             <Button variant="primary" type="submit" className="btn-custom">
               Submit
