@@ -6,6 +6,12 @@ import {
   SUBMITTED_REGISTRATION_FAIL,
   SUBMITTED_REGISTRATION_REQUEST,
   SUBMITTED_REGISTRATION_SUCCESS,
+  REGISTRATION_DETAILS_REQUEST,
+  REGISTRATION_DETAILS_SUCCESS,
+  REGISTRATION_DETAILS_FAIL,
+  REGISTRATION_DELETE_REQUEST,
+  REGISTRATION_DELETE_FAIL,
+  REGISTRATION_DELETE_SUCCESS,
 } from "./types";
 
 export const listRegistrations = () => async (dispatch, getState) => {
@@ -39,7 +45,22 @@ export const listRegistrations = () => async (dispatch, getState) => {
 };
 
 export const createNewRegistrations =
-  (firstName, lastName, email, phone, queries, token) => async (dispatch) => {
+  (
+    firstName,
+    lastName,
+    email,
+    phone,
+    address,
+    preference,
+    faculty,
+    markSheet,
+    ppPhoto,
+    characterCerf,
+    application,
+    attachApplication,
+    token
+  ) =>
+  async (dispatch) => {
     try {
       dispatch({ type: REGISTRATION_CREATE_REQUEST });
       const config = {
@@ -50,7 +71,21 @@ export const createNewRegistrations =
 
       const { data } = await axios.post(
         "/api/registrations",
-        { firstName, lastName, email, phone, queries, token },
+        {
+          firstName,
+          lastName,
+          email,
+          phone,
+          address,
+          preference,
+          faculty,
+          markSheet,
+          ppPhoto,
+          characterCerf,
+          application,
+          attachApplication,
+          token,
+        },
         config
       );
 
@@ -68,3 +103,61 @@ export const createNewRegistrations =
       });
     }
   };
+
+export const listRegistrationDetails = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: REGISTRATION_DETAILS_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/registrations/${id}`, config);
+
+    dispatch({
+      type: REGISTRATION_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: REGISTRATION_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteRegistration = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: REGISTRATION_DELETE_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/registrations/${id}`, config);
+
+    dispatch({ type: REGISTRATION_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: REGISTRATION_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

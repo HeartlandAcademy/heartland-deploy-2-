@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -60,8 +60,8 @@ const Registration = ({ history }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [preference, setPreference] = useState(1);
-  const [faculty, setFaculty] = useState("");
+  const [preference, setPreference] = useState("Preschool");
+  const [faculty, setFaculty] = useState("Science");
   const [markSheet, setMarkSheet] = useState("");
   const [markSheetUpload, setMarkSheetUpload] = useState(false);
   const [characterCerf, setCharacterCerf] = useState("");
@@ -70,19 +70,40 @@ const Registration = ({ history }) => {
   const [ppPhotoUpload, setPpPhotoUpload] = useState(false);
   const [application, setApplication] = useState("");
   const [attachApplication, setAttachApplication] = useState("");
+  const [attachApplicationUpload, setAttachApplicationUpload] = useState(false);
   const [token, setToken] = useState("");
   const [showError, setShowError] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [fileError1, setFileError1] = useState(false);
+  const [fileError2, setFileError2] = useState(false);
+  const [fileError3, setFileError3] = useState(false);
+  const [fileError4, setFileError4] = useState(false);
 
   const createRegistrations = useSelector((state) => state.createRegistrations);
   const { success, error } = createRegistrations;
+
+  const ref = useRef();
+  const ref1 = useRef();
+  const ref3 = useRef();
 
   function clearForm() {
     setFirstName("");
     setLastName("");
     setEmail("");
     setPhone("");
+    setAddress("");
+    setPreference("Preschool");
+    setFaculty("");
+    setMarkSheet("");
+    setCharacterCerf("");
+    setPpPhoto("");
+    setApplication("");
+    setAttachApplication("");
     setValidated(false);
+    setToken("");
+    ref.current.value = "";
+    ref1.current.value = "";
+    ref3.current.value = "";
   }
 
   useEffect(() => {
@@ -110,6 +131,7 @@ const Registration = ({ history }) => {
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
+          boundary: "XXX",
         },
       };
       const { data } = await axios.post(
@@ -119,9 +141,11 @@ const Registration = ({ history }) => {
       );
 
       setMarkSheet(data);
+      setFileError1(false);
       setMarkSheetUpload(false);
     } catch (error) {
       console.log(error);
+      setFileError1(true);
       setMarkSheetUpload(false);
     }
   };
@@ -145,9 +169,11 @@ const Registration = ({ history }) => {
       );
 
       setPpPhoto(data);
+      setFileError2(false);
       setPpPhotoUpload(false);
     } catch (error) {
       console.log(error);
+      setFileError2(true);
       setPpPhotoUpload(false);
     }
   };
@@ -171,40 +197,74 @@ const Registration = ({ history }) => {
       );
 
       setCharacterCerf(data);
+      setFileError3(false);
       setcharacterCerfUpload(false);
     } catch (error) {
       console.log(error);
+      setFileError3(true);
       setcharacterCerfUpload(false);
+    }
+  };
+
+  const applicationFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("application", file);
+    setAttachApplicationUpload(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post(
+        "/api/registrations/uploads/application",
+        formData,
+        config
+      );
+
+      setAttachApplication(data);
+      setFileError4(false);
+      setAttachApplicationUpload(false);
+    } catch (error) {
+      console.log(error);
+      setFileError4(true);
+      setAttachApplicationUpload(false);
     }
   };
 
   const registrationHandler = (event) => {
     event.preventDefault();
-    console.log(markSheet);
-    console.log("dfssdfdfs");
-    // const form = event.currentTarget;
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    // } else {
-    //   if (token === "") {
-    //     setShowError(true);
-    //   } else {
-    //     setShowError(false);
-    //     console.log(preference);
-    //     dispatch(
-    //       createNewRegistrations(
-    //         firstName,
-    //         lastName,
-    //         email,
-    //         phone,
-    //         application,
-    //         token
-    //       )
-    //     );
-    //   }
-    // }
-    // setValidated(true);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      if (token === "") {
+        setShowError(true);
+      } else {
+        setShowError(false);
+        dispatch(
+          createNewRegistrations(
+            firstName,
+            lastName,
+            email,
+            phone,
+            address,
+            preference,
+            faculty,
+            markSheet,
+            ppPhoto,
+            characterCerf,
+            application,
+            attachApplication,
+            token
+          )
+        );
+      }
+    }
+    setValidated(true);
   };
 
   return (
@@ -227,6 +287,7 @@ const Registration = ({ history }) => {
           {showError && (
             <Message variant="danger">Please fill out the reCAPTCHA </Message>
           )}
+          {error && <Message variant="danger">{error}</Message>}
 
           <Form noValidate validated={validated} onSubmit={registrationHandler}>
             <div>
@@ -303,7 +364,13 @@ const Registration = ({ history }) => {
               </Col>
               <Col md>
                 <FloatingLabel controlId="floatingInputGrid" label="Address">
-                  <Form.Control type="text" placeholder="Address" required />
+                  <Form.Control
+                    type="text"
+                    placeholder="Address"
+                    required
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
                   <Form.Control.Feedback type="invalid">
                     Please provide valid Address.
                   </Form.Control.Feedback>
@@ -349,20 +416,53 @@ const Registration = ({ history }) => {
 
             <Form.Group controlId="marksheet" className="mb-3">
               <Form.Label>A copy of Marksheet/Gradesheet (Latest)</Form.Label>
-              <Form.Control type="file" onChange={markSheetFileHandler} />
+              <Form.Control
+                type="file"
+                ref={ref}
+                onChange={markSheetFileHandler}
+              />
+              {fileError1 && (
+                <Form.Text id="passwordHelpBlock" muted>
+                  <span className="text-danger ">
+                    <i className="fas fa-exclamation-circle"></i> Please add
+                    valid file
+                  </span>
+                </Form.Text>
+              )}
+              {markSheetUpload && <Loader />}
             </Form.Group>
-
-            {markSheetUpload && <Loader />}
 
             <Form.Group controlId="ppphoto" className="mb-3">
               <Form.Label>PP Size Photo</Form.Label>
-              <Form.Control type="file" onChange={pppPhotoFileHandler} />
+              <Form.Control
+                type="file"
+                ref={ref1}
+                onChange={pppPhotoFileHandler}
+              />
+              {fileError2 && (
+                <Form.Text id="passwordHelpBlock" muted>
+                  <span className="text-danger ">
+                    <i className="fas fa-exclamation-circle"></i> Please add
+                    valid file
+                  </span>
+                </Form.Text>
+              )}
+              {ppPhotoUpload && <Loader />}
             </Form.Group>
 
             {preference === "Senior Higher Secondary" && (
               <Form.Group controlId="characterCf" className="mb-5">
                 <Form.Label>A copy of Character Certificate</Form.Label>
                 <Form.Control type="file" onChange={characterCfFileHandler} />
+                {fileError3 && (
+                  <Form.Text id="passwordHelpBlock" muted>
+                    <span className="text-danger ">
+                      <i className="fas fa-exclamation-circle"></i> Please add
+                      valid file
+                    </span>
+                  </Form.Text>
+                )}
+                {characterCerfUpload && <Loader />}
               </Form.Group>
             )}
 
@@ -377,7 +477,6 @@ const Registration = ({ history }) => {
                 style={{ height: "200px" }}
                 value={application}
                 onChange={(e) => setApplication(e.target.value)}
-                required
               />
             </FloatingLabel>
 
@@ -385,7 +484,20 @@ const Registration = ({ history }) => {
 
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label>Attach Application Letter</Form.Label>
-              <Form.Control type="file" />
+              <Form.Control
+                type="file"
+                ref={ref3}
+                onChange={applicationFileHandler}
+              />
+              {fileError4 && (
+                <Form.Text id="passwordHelpBlock" muted>
+                  <span className="text-danger ">
+                    <i className="fas fa-exclamation-circle"></i> Please add
+                    valid file
+                  </span>
+                </Form.Text>
+              )}
+              {attachApplicationUpload && <Loader />}
             </Form.Group>
 
             <div className="my-4">
@@ -395,7 +507,20 @@ const Registration = ({ history }) => {
               />
             </div>
 
-            <RegisterBtn className="btn btn-custom" type="submit">
+            <RegisterBtn
+              className="btn btn-custom"
+              disabled={
+                fileError1 ||
+                fileError2 ||
+                fileError3 ||
+                fileError4 ||
+                markSheetUpload ||
+                characterCerfUpload ||
+                ppPhotoUpload ||
+                attachApplicationUpload
+              }
+              type="submit"
+            >
               Submit
             </RegisterBtn>
           </Form>

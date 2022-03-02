@@ -5,12 +5,12 @@ const registrationSchema = mongoose.Schema(
     firstName: {
       type: String,
       required: [true, "First Name field cannot be empty"],
-      maxlength: 20,
+      maxlength: 30,
     },
     lastName: {
       type: String,
       required: [true, "Last Name field cannot be empty"],
-      maxlength: 20,
+      maxlength: 30,
     },
     email: {
       type: String,
@@ -47,13 +47,11 @@ const registrationSchema = mongoose.Schema(
     },
     faculty: {
       type: String,
-      enum: ["Science", "Management", "Education"],
+      required: function () {
+        return true ? this.preference === "Senior Higher Secondary" : false;
+      },
     },
     markSheet: {
-      type: String,
-      required: true,
-    },
-    characterCerf: {
       type: String,
       required: true,
     },
@@ -61,14 +59,21 @@ const registrationSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    characterCerf: {
+      type: String,
+      required: function () {
+        return true ? this.preference === "Senior Higher Secondary" : false;
+      },
+    },
     application: {
       type: String,
-      required: true,
       maxlength: [5000, "Application letter must be at least 5000 characters"],
     },
     attachApplication: {
       type: String,
-      required: true,
+      required: function () {
+        return true ? this.application === "" : false;
+      },
     },
   },
   {

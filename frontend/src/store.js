@@ -52,6 +52,8 @@ import {
 } from "./reducers/carouselReducers";
 import {
   createRegistrationsReducer,
+  registrationDetailsReducer,
+  registrationsDeleteReducer,
   submittedRegistrationsReducer,
 } from "./reducers/registrationReducers";
 import {
@@ -132,6 +134,8 @@ const reducer = combineReducers({
   careerUpdate: careerUpdateReducer,
   createRegistrations: createRegistrationsReducer,
   submittedRegistrations: submittedRegistrationsReducer,
+  registrationDetails: registrationDetailsReducer,
+  registrationsDelete: registrationsDeleteReducer,
   userLogin: userLoginReducer,
   settings: settingReducers,
 });

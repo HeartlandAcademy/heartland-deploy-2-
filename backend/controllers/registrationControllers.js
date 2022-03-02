@@ -51,8 +51,8 @@ const createRegistrations = asyncHandler(async (req, res) => {
     preference,
     faculty,
     markSheet,
-    characterCerf,
     ppPhoto,
+    characterCerf,
     application,
     attachApplication,
     token,
@@ -64,45 +64,40 @@ const createRegistrations = asyncHandler(async (req, res) => {
     `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`
   );
 
-  if (res1.data.success) {
-    const registration = await Registration.create({
-      firstName,
-      lastName,
-      email,
-      phone,
-      address,
-      preference,
-      faculty,
-      markSheet,
-      characterCerf,
-      ppPhoto,
-      application,
-      attachApplication,
-    });
+  const registration = await Registration.create({
+    firstName,
+    lastName,
+    email,
+    phone,
+    address,
+    preference,
+    faculty,
+    markSheet,
+    ppPhoto,
+    characterCerf,
+    application,
+    attachApplication,
+  });
 
-    if (registration) {
-      res.status(201).json({
-        _id: registration._id,
-        firstName: registration.firstName,
-        lastName: registration.lastName,
-        email: registration.email,
-        phone: registration.phone,
-        address: registration.address,
-        preference: registration.preference,
-        faculty: registration.faculty,
-        markSheet: registration.markSheet,
-        characterCerf: registration.characterCerf,
-        ppPhoto: registration.ppPhoto,
-        application: registration.application,
-        attachApplication: registration.attachApplication,
-      });
-    } else {
-      res.status(400);
-      throw new Error("Invalid Registration Data");
-    }
+  if (registration) {
+    res.status(201).json({
+      _id: registration._id,
+      firstName: registration.firstName,
+      lastName: registration.lastName,
+      email: registration.email,
+      phone: registration.phone,
+      address: registration.address,
+      preference: registration.preference,
+      faculty: registration.faculty,
+      markSheet: registration.markSheet,
+      ppPhoto: registration.ppPhoto,
+      characterCerf: registration.characterCerf,
+      application: registration.application,
+      attachApplication: registration.attachApplication,
+    });
   } else {
     res.status(400);
-    throw new Error("Verification Failed. Please Try Again");
+    throw new Error("Invalid Registration Data");
   }
 });
 
