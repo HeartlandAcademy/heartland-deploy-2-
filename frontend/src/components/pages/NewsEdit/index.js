@@ -10,6 +10,7 @@ import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import { toast } from "react-toastify";
 import { NEWS_DETAILS_RESET, NEWS_UPDATE_RESET } from "../../../actions/types";
+import { BASE_URL } from "../../../api";
 
 const Section = styled.div`
   padding: 30px 40px;
@@ -112,7 +113,11 @@ const AdminEditNews = ({ history, match }) => {
           "Content-Type": "multipart/form-data",
         },
       };
-      const { data } = await axios.post("/api/uploads", formData, config);
+      const { data } = await axios.post(
+        `${BASE_URL}/api/uploads`,
+        formData,
+        config
+      );
 
       setImage(data);
       setFileError(false);

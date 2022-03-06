@@ -5,6 +5,7 @@ import {
   REGISTRATION_CREATE_SUCCESS,
   REGISTRATION_DELETE_FAIL,
   REGISTRATION_DELETE_REQUEST,
+  REGISTRATION_DELETE_RESET,
   REGISTRATION_DELETE_SUCCESS,
   REGISTRATION_DETAILS_FAIL,
   REGISTRATION_DETAILS_REQUEST,
@@ -80,6 +81,8 @@ export const registrationsDeleteReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case REGISTRATION_DELETE_FAIL:
       return { loading: false, error: action.payload };
+    case REGISTRATION_DELETE_RESET:
+      return {};
     default:
       return state;
   }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   ADDED_TEAMS_FAIL,
   ADDED_TEAMS_REQUEST,
@@ -15,7 +16,7 @@ export const listTeams = () => async (dispatch) => {
   try {
     dispatch({ type: ADDED_TEAMS_REQUEST });
 
-    const { data } = await axios.get("/api/teams");
+    const { data } = await axios.get(`${BASE_URL}/api/teams`);
 
     dispatch({
       type: ADDED_TEAMS_SUCCESS,
@@ -49,7 +50,7 @@ export const createTeams =
       };
 
       const { data } = await axios.post(
-        "/api/teams",
+        `${BASE_URL}/api/teams`,
         { fullName, desc, image },
         config
       );
@@ -83,7 +84,7 @@ export const deleteTeams = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/teams/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/teams/${id}`, config);
 
     dispatch({ type: TEAMS_DELETE_SUCCESS });
   } catch (error) {

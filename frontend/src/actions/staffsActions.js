@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   AVAILABLE_STAFFS_FAIL,
   AVAILABLE_STAFFS_REQUEST,
@@ -15,7 +16,7 @@ export const listStaffs = () => async (dispatch) => {
   try {
     dispatch({ type: AVAILABLE_STAFFS_REQUEST });
 
-    const { data } = await axios.get("/api/staffs");
+    const { data } = await axios.get(`${BASE_URL}/api/staffs`);
 
     dispatch({
       type: AVAILABLE_STAFFS_SUCCESS,
@@ -49,7 +50,7 @@ export const createStaffs =
       };
 
       const { data } = await axios.post(
-        "/api/staffs",
+        `${BASE_URL}/api/staffs`,
         { fullName, email, phone },
         config
       );
@@ -83,7 +84,7 @@ export const deleteStaffs = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/staffs/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/staffs/${id}`, config);
 
     dispatch({ type: STAFFS_DELETE_SUCCESS });
   } catch (error) {

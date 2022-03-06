@@ -8,9 +8,18 @@ import { listNews } from "../../../actions/newsActions";
 import { listNotices } from "../../../actions/noticesActions";
 import { listStaffs } from "../../../actions/staffsActions";
 import { listGalleryAlbums } from "../../../actions/galleryActions";
-import { listRegistrations } from "../../../actions/registrationActions";
+import {
+  deleteRegistration,
+  listRegistrations,
+} from "../../../actions/registrationActions";
 import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
+import { toast } from "react-toastify";
+import { LinkContainer } from "react-router-bootstrap";
+import {
+  REGISTRATION_DELETE_RESET,
+  REGISTRATION_DETAILS_RESET,
+} from "../../../actions/types";
 
 const Section = styled.div`
   margin: 60px 10px;
@@ -112,45 +121,28 @@ const AllNotifications = styled.div`
 
 const RegistrationBody = styled.div`
   background: ${(props) => (props.darkmode ? "#303134" : "#fff")};
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  align-items: center;
-  margin-top: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   word-break: break-all;
-  padding: 20px 15px;
-  margin-right: 15px;
-
-  p {
-    color: ${(props) => (props.darkmode ? "#fff" : "#111")};
-    line-height: 5px;
-  }
-  i {
-    font-size: 20px;
-    cursor: pointer;
-  }
-`;
-
-const QueryContainer = styled.div`
-  p {
-    font-weight: 600;
-  }
-`;
-
-const QueryHead = styled.div`
+  padding: 10px 13px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #111;
+  margin-bottom: 15px;
+  i {
+    font-size: 25px;
+    cursor: pointer;
+  }
+  p {
+    margin: 0;
+  }
   h5 {
     color: ${(props) => (props.darkmode ? "#fff" : "#111")};
+    cursor: pointer;
   }
-`;
-
-const QueryBox = styled.div`
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  padding: 10px 20px;
-  color: ${(props) => (props.darkmode ? "#fff" : "#111")};
-  border-radius: 30px;
-  margin-top: 20px;
+  &:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
 `;
 
 const Description = styled.div`
@@ -169,64 +161,8 @@ const Description = styled.div`
   }
 `;
 
-const CareerSection = styled.div`
-  background: ${(props) => (props.darkmode ? "#202124" : "#fff")};
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  padding: 30px;
-  margin: 20px 30px;
-  border-radius: 20px;
-  height: 500px;
-  h4 {
-    padding-bottom: 10px;
-    border-bottom: 2px solid #111;
-    color: ${(props) => (props.darkmode ? "#fff" : "#111")};
-  }
-`;
-
-const AllCareers = styled.div`
-  padding-top: 5px;
-  overflow-y: auto;
-  height: 410px;
-  &::-webkit-scrollbar-track {
-    border-radius: 30px;
-  }
-  &::-webkit-scrollbar {
-    width: 7px;
-    background-color: ${(props) => (props.darkmode ? "#202124" : "#f5f5f5")};
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: ${(props) => (props.darkmode ? "#fff" : "#111")};
-  }
-`;
-
-const CareerBody = styled.div`
-  background: ${(props) => (props.darkmode ? "#303134" : "#fff")};
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 5px;
-  word-break: break-all;
-  padding: 7px 12px;
-  margin: 10px 5px;
-  cursor: pointer;
-  h5 {
-    margin-bottom: 0;
-    color: ${(props) => (props.darkmode ? "#fff" : "#111")};
-  }
-  p {
-    margin-bottom: 0;
-  }
-  &:hover {
-    -webkit-transform: scale(1.01);
-    transform: scale(1.01);
-  }
-`;
-
 const AdminHome = () => {
   const [value, setValue] = useState(new Date());
-  const [showQuery, setShowQuery] = useState(false);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -249,9 +185,19 @@ const AdminHome = () => {
   const submittedRegistrations = useSelector(
     (state) => state.submittedRegistrations
   );
+
+  const registrationsDelete = useSelector((state) => state.registrationsDelete);
+  const { success: deleteSuccess, error: deleteError } = registrationsDelete;
+
   const { loading, registrations, error } = submittedRegistrations;
 
   const dispatch = useDispatch();
+
+  var options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
 
   useEffect(() => {
     if (userInfo) {
@@ -261,12 +207,17 @@ const AdminHome = () => {
       dispatch(listGalleryAlbums());
       dispatch(listRegistrations());
     }
+    if (deleteSuccess) {
+      dispatch(listRegistrations());
+      dispatch({ type: REGISTRATION_DETAILS_RESET });
+      dispatch({ type: REGISTRATION_DELETE_RESET });
+    }
 
     const interval = setInterval(() => setValue(new Date()), 1000);
     return () => {
       clearInterval(interval);
     };
-  }, [dispatch, userInfo]);
+  }, [dispatch, userInfo, deleteSuccess]);
 
   function abbrNum(number, decPlaces) {
     // 2 decimal places => 100, 3 => 1000, etc
@@ -303,8 +254,11 @@ const AdminHome = () => {
     return number;
   }
 
-  const queryHandler = () => {
-    setShowQuery(!showQuery);
+  const registrationDeleteHandler = (id) => {
+    if (window.confirm("Are you sure")) {
+      dispatch(deleteRegistration(id));
+      toast.success("Registration Deleted Successfully");
+    }
   };
 
   return (
@@ -361,13 +315,14 @@ const AdminHome = () => {
           Notifications <i className="fas fa-bell"></i>
         </h4>
         <AllNotifications darkmode={darkMode}>
+          {deleteError && <Message variant="danger">{deleteError}</Message>}
           {loading ? (
             <Loader />
           ) : error ? (
             <Message variant="danger">{error}</Message>
           ) : (
             <>
-              {registrations.length === 0 ? (
+              {registrations.length === 0 && (
                 <span>
                   <i className="far fa-bell fa-9x"></i>
                   <p>
@@ -375,80 +330,40 @@ const AdminHome = () => {
                     Check back for new notifications :(
                   </p>
                 </span>
-              ) : (
-                ""
               )}
               {registrations.map((registration) => (
                 <RegistrationBody darkmode={darkMode}>
-                  <p>
-                    {registration.firstName} {registration.lastName}
-                  </p>
-                  <p>{registration.email}</p>
-                  <p>{registration.phone}</p>
-                  <QueryContainer>
-                    <QueryHead darkmode={darkMode}>
-                      <h5>{registration.firstName}'s Query</h5>
-                      <i
-                        className={
-                          showQuery ? "fas fa-caret-up" : "fas fa-caret-down"
-                        }
-                        onClick={queryHandler}
-                      ></i>
-                    </QueryHead>
-                    {showQuery ? (
-                      <QueryBox darkmode={darkMode}>
-                        {registration.queries}
-                      </QueryBox>
-                    ) : (
-                      ""
-                    )}
-                  </QueryContainer>
+                  <div>
+                    <LinkContainer
+                      to={`/admin/home/registration/${registration._id}`}
+                    >
+                      <h5>
+                        New Registration from {registration.firstName}{" "}
+                        {registration.lastName}
+                      </h5>
+                    </LinkContainer>
+                    <p>
+                      {new Date(registration.createdAt).toLocaleDateString(
+                        "en-US",
+                        options
+                      )}
+                    </p>
+                  </div>
+                  <div>
+                    <i
+                      onClick={() =>
+                        registrationDeleteHandler(registration._id)
+                      }
+                      className="fas fa-times"
+                    ></i>
+                  </div>
                 </RegistrationBody>
               ))}
             </>
           )}
         </AllNotifications>
       </NotificationSection>
-      <CareerSection darkmode={darkMode}>
-        <h4>
-          Careers <i className="fas fa-suitcase"></i>
-        </h4>
-        <AllCareers darkmode={darkMode}>
-          <CareerBody darkmode={darkMode}>
-            <div>
-              <h5>Career Alert from Random User</h5>
-              <p>27th December, 2022</p>
-            </div>
-            <div>
-              <span>
-                <i className="fas fa-times"></i>
-              </span>
-            </div>
-          </CareerBody>
-          <CareerBody darkmode={darkMode}>
-            <div>
-              <h5>Career Alert from Random User</h5>
-              <p>27th December, 2022</p>
-            </div>
-            <div>
-              <span>
-                <i className="fas fa-times"></i>
-              </span>
-            </div>
-          </CareerBody>
-          <CareerBody darkmode={darkMode}>
-            <div>
-              <h5>Career Alert from Random User</h5>
-              <p>27th December, 2022</p>
-            </div>
-            <div>
-              <span>
-                <i className="fas fa-times"></i>
-              </span>
-            </div>
-          </CareerBody>
-        </AllCareers>
-      </CareerSection>
+
       <Description darkmode={darkMode}>
         <p>
           Heartland Academy (HA) is an internationally supported higher

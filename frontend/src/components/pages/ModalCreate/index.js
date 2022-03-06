@@ -10,6 +10,7 @@ import Message from "../../contents/Message";
 import ModalImageViewer from "../../contents/ModalImageViewer";
 import { deleteModal } from "../../../actions/modalActions";
 import { createModal, listModal } from "../../../actions/modalActions";
+import { BASE_URL } from "../../../api";
 
 const ModalContainer = styled.div`
   padding: 10px 20px;
@@ -69,7 +70,11 @@ const AdminModal = () => {
           "Content-Type": "multipart/form-data",
         },
       };
-      const { data } = await axios.post("/api/modal/uploads", formData, config);
+      const { data } = await axios.post(
+        `${BASE_URL}/api/modal/uploads`,
+        formData,
+        config
+      );
 
       setModalImage(data);
       setUploading(false);

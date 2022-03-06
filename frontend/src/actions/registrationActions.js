@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   REGISTRATION_CREATE_FAIL,
   REGISTRATION_CREATE_REQUEST,
@@ -27,7 +28,7 @@ export const listRegistrations = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/registrations`, config);
+    const { data } = await axios.get(`${BASE_URL}/api/registrations`, config);
 
     dispatch({
       type: SUBMITTED_REGISTRATION_SUCCESS,
@@ -70,7 +71,7 @@ export const createNewRegistrations =
       };
 
       const { data } = await axios.post(
-        "/api/registrations",
+        `${BASE_URL}/api/registrations`,
         {
           firstName,
           lastName,
@@ -117,7 +118,10 @@ export const listRegistrationDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/registrations/${id}`, config);
+    const { data } = await axios.get(
+      `${BASE_URL}/api/registrations/${id}`,
+      config
+    );
 
     dispatch({
       type: REGISTRATION_DETAILS_SUCCESS,
@@ -148,7 +152,7 @@ export const deleteRegistration = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/registrations/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/registrations/${id}`, config);
 
     dispatch({ type: REGISTRATION_DELETE_SUCCESS });
   } catch (error) {

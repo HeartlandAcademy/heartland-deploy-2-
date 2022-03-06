@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   ALL_ADMIN_EVENTS_FAIL,
   ALL_ADMIN_EVENTS_REQUEST,
@@ -21,7 +22,7 @@ export const listEvents = () => async (dispatch) => {
   try {
     dispatch({ type: UPCOMING_EVENTS_REQUEST });
 
-    const { data } = await axios.get("/api/events/upcomingevents");
+    const { data } = await axios.get(`${BASE_URL}/api/events/upcomingevents`);
 
     dispatch({
       type: UPCOMING_EVENTS_SUCCESS,
@@ -51,7 +52,7 @@ export const listEventsAdmin = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/events`, config);
+    const { data } = await axios.get(`${BASE_URL}/api/events`, config);
 
     dispatch({
       type: ALL_ADMIN_EVENTS_SUCCESS,
@@ -85,7 +86,7 @@ export const createEvents =
       };
 
       const { data } = await axios.post(
-        "/api/events",
+        `${BASE_URL}/api/events`,
         { user, title, description, date, image },
         config
       );
@@ -119,7 +120,7 @@ export const deleteEvents = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/events/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/events/${id}`, config);
 
     dispatch({ type: EVENTS_DELETE_SUCCESS });
   } catch (error) {
@@ -137,7 +138,7 @@ export const listUpcomingLatestEvents = () => async (dispatch) => {
   try {
     dispatch({ type: UPCOMING_LATEST_EVENTS_REQUEST });
 
-    const { data } = await axios.get("/api/events/upcoming");
+    const { data } = await axios.get(`${BASE_URL}/api/events/upcoming`);
 
     dispatch({
       type: UPCOMING_LATEST_EVENTS_SUCCESS,

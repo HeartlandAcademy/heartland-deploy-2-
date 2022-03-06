@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   AVAILABLE_NOTICES_FAIL,
   AVAILABLE_NOTICES_REQUEST,
@@ -18,7 +19,7 @@ export const listNotices = () => async (dispatch) => {
   try {
     dispatch({ type: AVAILABLE_NOTICES_REQUEST });
 
-    const { data } = await axios.get("/api/notices");
+    const { data } = await axios.get(`${BASE_URL}/api/notices`);
 
     dispatch({
       type: AVAILABLE_NOTICES_SUCCESS,
@@ -53,7 +54,7 @@ export const createNotices =
       };
 
       const { data } = await axios.post(
-        "/api/notices",
+        `${BASE_URL}/api/notices`,
         { title, description, date, file, originalFile },
         config
       );
@@ -87,7 +88,7 @@ export const deleteNotices = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/notices/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/notices/${id}`, config);
 
     dispatch({ type: NOTICES_DELETE_SUCCESS });
   } catch (error) {
@@ -105,7 +106,7 @@ export const listLatestNotices = () => async (dispatch) => {
   try {
     dispatch({ type: LATEST_NOTICES_REQUEST });
 
-    const { data } = await axios.get("/api/notices/latest");
+    const { data } = await axios.get(`${BASE_URL}/api/notices/latest`);
 
     dispatch({
       type: LATEST_NOTICES_SUCCESS,

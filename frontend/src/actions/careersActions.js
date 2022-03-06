@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   CAREERS_CREATE_FAIL,
   CAREERS_CREATE_REQUEST,
@@ -21,7 +22,7 @@ export const listCareers = () => async (dispatch) => {
   try {
     dispatch({ type: CAREERS_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/careers`);
+    const { data } = await axios.get(`${BASE_URL}/api/careers`);
 
     dispatch({
       type: CAREERS_LIST_SUCCESS,
@@ -42,7 +43,7 @@ export const listCareerDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: CAREERS_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/careers/${id}`);
+    const { data } = await axios.get(`${BASE_URL}/api/careers/${id}`);
 
     dispatch({
       type: CAREERS_DETAILS_SUCCESS,
@@ -90,7 +91,7 @@ export const createCareer =
       };
 
       const { data } = await axios.post(
-        "/api/careers",
+        `${BASE_URL}/api/careers`,
         {
           title,
           careerCategory,
@@ -137,7 +138,7 @@ export const deleteCareer = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/careers/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/careers/${id}`, config);
 
     dispatch({ type: CAREERS_DELETE_SUCCESS });
   } catch (error) {
@@ -167,7 +168,7 @@ export const updateCareer = (career) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/careers/${career.careerId}`,
+      `${BASE_URL}/api/careers/${career.careerId}`,
       { career },
       config
     );

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   AVAILABLE_CAROUSEL_FAIL,
   AVAILABLE_CAROUSEL_REQUEST,
@@ -15,7 +16,7 @@ export const listCarousel = () => async (dispatch) => {
   try {
     dispatch({ type: AVAILABLE_CAROUSEL_REQUEST });
 
-    const { data } = await axios.get("/api/carousel");
+    const { data } = await axios.get(`${BASE_URL}/api/carousel`);
 
     dispatch({
       type: AVAILABLE_CAROUSEL_SUCCESS,
@@ -49,7 +50,7 @@ export const createCarousel =
       };
 
       const { data } = await axios.post(
-        "/api/carousel",
+        `${BASE_URL}/api/carousel`,
         { title, description, image },
         config
       );
@@ -83,7 +84,7 @@ export const deleteCarousel = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/carousel/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/carousel/${id}`, config);
 
     dispatch({ type: CAROUSEL_DELETE_SUCCESS });
   } catch (error) {

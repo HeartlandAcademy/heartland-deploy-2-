@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   GALLERY_VIDEOS_ADD_FAIL,
   GALLERY_VIDEOS_ADD_REQUEST,
@@ -27,7 +28,7 @@ export const listGalleryAlbums = () => async (dispatch) => {
   try {
     dispatch({ type: GALLERY_ALBUMS_REQUEST });
 
-    const { data } = await axios.get("/api/gallery/albums");
+    const { data } = await axios.get(`${BASE_URL}/api/gallery/albums`);
 
     dispatch({
       type: GALLERY_ALBUMS_SUCCESS,
@@ -61,7 +62,7 @@ export const addGalleryAlbums =
       };
 
       const { data } = await axios.post(
-        "/api/gallery/albums",
+        `${BASE_URL}/api/gallery/albums`,
         { name, images },
         config
       );
@@ -95,7 +96,7 @@ export const deleteGalleryAlbums = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/gallery/albums/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/gallery/albums/${id}`, config);
 
     dispatch({ type: GALLERY_ALBUM_DELETE_SUCCESS });
   } catch (error) {
@@ -134,7 +135,7 @@ export const listGalleryVideos = () => async (dispatch) => {
   try {
     dispatch({ type: GALLERY_VIDEOS_REQUEST });
 
-    const { data } = await axios.get("/api/gallery/videos");
+    const { data } = await axios.get(`${BASE_URL}/api/gallery/videos`);
 
     dispatch({
       type: GALLERY_VIDEOS_SUCCESS,
@@ -166,7 +167,11 @@ export const addGalleryVideos = (src) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post("/api/gallery/videos", { src }, config);
+    const { data } = await axios.post(
+      `${BASE_URL}/api/gallery/videos`,
+      { src },
+      config
+    );
 
     dispatch({
       type: GALLERY_VIDEOS_ADD_SUCCESS,
@@ -197,7 +202,7 @@ export const deleteGalleryVideos = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/gallery/videos/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/gallery/videos/${id}`, config);
 
     dispatch({ type: GALLERY_VIDEOS_DELETE_SUCCESS });
   } catch (error) {

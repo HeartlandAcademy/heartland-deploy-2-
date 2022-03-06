@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   FILE_CREATE_FAIL,
   FILE_CREATE_REQUEST,
@@ -17,7 +18,7 @@ import {
 export const listDownloads = () => async (dispatch) => {
   try {
     dispatch({ type: FILE_DOWNLOAD_REQUEST });
-    const { data } = await axios.get(`/api/downloads`);
+    const { data } = await axios.get(`${BASE_URL}/api/downloads`);
 
     dispatch({
       type: FILE_DOWNLOAD_SUCCESS,
@@ -51,7 +52,7 @@ export const createDownload =
       };
 
       const { data } = await axios.post(
-        "/api/downloads",
+        `${BASE_URL}/api/downloads`,
         { title, originalFile, file },
         config
       );
@@ -85,7 +86,7 @@ export const deleteDownload = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/downloads/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/downloads/${id}`, config);
 
     dispatch({ type: FILE_DELETE_SUCCESS });
   } catch (error) {

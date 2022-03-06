@@ -11,6 +11,7 @@ import Newspaper from "../../../assets/others/newspaper.jpg";
 import ImageHeader from "../../contents/ImageHeader";
 import defaultImage from "../../../assets/default/default-loading.png";
 import Meta from "../../contents/Meta";
+import { BASE_URL } from "../../../api";
 
 const Title = styled.h2`
   margin-bottom: 28px;
@@ -167,7 +168,9 @@ const DetailedNews = ({ match }) => {
           <Col md={8} className="my-4">
             <Title className="text-center my-4">{news.title}</Title>
             <ImageContainer>
-              {news.image && <img src={news.image} alt="sdfsdf" />}
+              {news.image && (
+                <img src={`${BASE_URL}${news.image}`} alt="sdfsdf" />
+              )}
             </ImageContainer>
             <NewsInfo className="m-5">
               <h4>16th Auguest</h4>

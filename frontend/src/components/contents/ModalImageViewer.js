@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { BASE_URL } from "../../api";
 
 const ModalContainer = styled.div`
   margin: 50px 40px 30px 40px;
@@ -15,7 +16,7 @@ const ModalImage = styled.img`
 const ModalImageViewer = ({ url }) => {
   return (
     <ModalContainer>
-      <ModalImage src={url} alt="Modal Image" />
+      <ModalImage src={`${BASE_URL}${url}`} alt="Modal Image" />
     </ModalContainer>
   );
 };

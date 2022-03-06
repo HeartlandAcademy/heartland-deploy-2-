@@ -10,6 +10,7 @@ import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import { toast } from "react-toastify";
 import { NEWS_CREATE_RESET } from "../../../actions/types";
+import { BASE_URL } from "../../../api";
 
 const Section = styled.div`
   padding: 30px 40px;
@@ -66,7 +67,11 @@ const AdminNews = ({ history }) => {
           "Content-Type": "multipart/form-data",
         },
       };
-      const { data } = await axios.post("/api/news/uploads", formData, config);
+      const { data } = await axios.post(
+        `${BASE_URL}/api/news/uploads`,
+        formData,
+        config
+      );
 
       setImage(data);
       setFileError(false);

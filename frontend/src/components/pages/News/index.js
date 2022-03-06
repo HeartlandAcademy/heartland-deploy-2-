@@ -13,6 +13,7 @@ import Meta from "../../contents/Meta";
 import { Pagination } from "../../contents/Pagination";
 import defaultImage from "../../../assets/default/default-loading.png";
 import "./index.css";
+import { BASE_URL } from "../../../api";
 
 const Title = styled.h2`
   font-weight: 700;
@@ -167,7 +168,7 @@ const News = () => {
                         <Card.Img
                           style={{ height: "100%" }}
                           variant="top"
-                          src={n.image}
+                          src={`${BASE_URL}${n.image}`}
                           alt="sdf"
                         />
                       ) : (

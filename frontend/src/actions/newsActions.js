@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 
 import {
   LATEST_NEWS_FAIL,
@@ -25,7 +26,7 @@ export const listNews = () => async (dispatch) => {
   try {
     dispatch({ type: NEWS_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/news`);
+    const { data } = await axios.get(`${BASE_URL}/api/news`);
 
     dispatch({
       type: NEWS_LIST_SUCCESS,
@@ -46,7 +47,7 @@ export const listNewsDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: NEWS_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/news/${id}`);
+    const { data } = await axios.get(`${BASE_URL}/api/news/${id}`);
 
     dispatch({
       type: NEWS_DETAILS_SUCCESS,
@@ -81,7 +82,7 @@ export const createNews =
       };
 
       const { data } = await axios.post(
-        "/api/news",
+        `${BASE_URL}/api/news`,
         { user, title, author, description, section, image },
         config
       );
@@ -115,7 +116,7 @@ export const deleteNews = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/news/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/news/${id}`, config);
 
     dispatch({ type: NEWS_DELETE_SUCCESS });
   } catch (error) {
@@ -145,7 +146,7 @@ export const updateNews = (news) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/news/${news.newsId}`,
+      `${BASE_URL}/api/news/${news.newsId}`,
       { news },
       config
     );
@@ -169,7 +170,7 @@ export const listLatestNews = () => async (dispatch) => {
   try {
     dispatch({ type: LATEST_NEWS_REQUEST });
 
-    const { data } = await axios.get("/api/news/latest");
+    const { data } = await axios.get(`${BASE_URL}/api/news/latest`);
 
     dispatch({
       type: LATEST_NEWS_SUCCESS,

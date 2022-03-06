@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   ADDED_TESTIMONIALS_STUDENTS_FAIL,
   ADDED_TESTIMONIALS_STUDENTS_REQUEST,
@@ -24,7 +25,7 @@ export const listStudentsTestimonials = () => async (dispatch) => {
   try {
     dispatch({ type: ADDED_TESTIMONIALS_STUDENTS_REQUEST });
 
-    const { data } = await axios.get("/api/testimonials/students");
+    const { data } = await axios.get(`${BASE_URL}/api/testimonials/students`);
 
     dispatch({
       type: ADDED_TESTIMONIALS_STUDENTS_SUCCESS,
@@ -58,7 +59,7 @@ export const createStudentsTestimonials =
       };
 
       const { data } = await axios.post(
-        "/api/testimonials/students",
+        `${BASE_URL}/api/testimonials/students`,
         { fullName, desc, image, message },
         config
       );
@@ -93,7 +94,7 @@ export const deleteStudentsTestimonials =
         },
       };
 
-      await axios.delete(`/api/testimonials/students/${id}`, config);
+      await axios.delete(`${BASE_URL}/api/testimonials/students/${id}`, config);
 
       dispatch({ type: TESTIMONIALS_STUDENTS_DELETE_SUCCESS });
     } catch (error) {
@@ -111,7 +112,7 @@ export const listVisitorsTestimonials = () => async (dispatch) => {
   try {
     dispatch({ type: ADDED_TESTIMONIALS_VISITORS_REQUEST });
 
-    const { data } = await axios.get("/api/testimonials/visitors");
+    const { data } = await axios.get(`${BASE_URL}/api/testimonials/visitors`);
 
     dispatch({
       type: ADDED_TESTIMONIALS_VISITORS_SUCCESS,
@@ -145,7 +146,7 @@ export const createVisitorsTestimonials =
       };
 
       const { data } = await axios.post(
-        "/api/testimonials/visitors",
+        `${BASE_URL}/api/testimonials/visitors`,
         { fullName, desc, image, message },
         config
       );
@@ -180,7 +181,7 @@ export const deleteVisitorsTestimonials =
         },
       };
 
-      await axios.delete(`/api/testimonials/visitors/${id}`, config);
+      await axios.delete(`${BASE_URL}/api/testimonials/visitors/${id}`, config);
 
       dispatch({ type: TESTIMONIALS_VISITORS_DELETE_SUCCESS });
     } catch (error) {

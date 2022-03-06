@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import {
   BrowserRouter as Router,
   Route,
@@ -8,8 +9,12 @@ import {
 } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // Admin
 import AdminHome from "./pages/Home/AdminHome";
+import AdminRegistration from "./pages/Registration/AdminRegistration";
 import AdminModal from "./pages/ModalCreate";
 import AdminImages from "./pages/GalleryCreate";
 import AdminTopNav from "./layouts/AdminTopNav";
@@ -30,8 +35,8 @@ import AdminAllCarousel from "./pages/Carousel";
 import AdminAllAlbums from "./pages/Gallery/AdminAllAlbums";
 import AdminSingleAlbum from "./pages/Gallery/AdminSingleAlbum";
 import AdminAllCareers from "./pages/CareersAdd/AdminAllCareers";
+import AdminCareers from "./pages/CareersInfo/AdminCareers";
 import CareersAdd from "./pages/CareersAdd";
-
 import Admin404 from "./contents/Admin404";
 
 import Header from "./layouts/Header";
@@ -60,9 +65,6 @@ import College from "./pages/College";
 import NotFoundPage from "./contents/404";
 import Careers from "./pages/Careers";
 import CareersInfo from "./pages/CareersInfo";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import AdminCareers from "./pages/CareersInfo/AdminCareers";
 
 const Menu = styled.div`
   display: flex;
@@ -105,6 +107,11 @@ const App = () => {
                     <Redirect to="/admin/home" />
                   </Route>
                   <Route path="/admin/home" component={AdminHome} exact />
+                  <Route
+                    path="/admin/home/registration/:id"
+                    component={AdminRegistration}
+                    exact
+                  />
                   <Route path="/admin/modal" component={AdminModal} exact />
                   <Route
                     path="/admin/carousel"

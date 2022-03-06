@@ -81,7 +81,7 @@ const registrationSchema = mongoose.Schema(
   }
 );
 
-registrationSchema.index({ createdAt: 1 }, { expireAfterSeconds: 3600 });
+registrationSchema.index({ createdAt: 1 }, { expireAfterSeconds: 36000 });
 
 const Registration = mongoose.model("Registration", registrationSchema);
 

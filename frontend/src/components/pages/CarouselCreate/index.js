@@ -10,6 +10,7 @@ import Message from "../../contents/Message";
 import { createCarousel } from "../../../actions/carouselActions";
 import { toast } from "react-toastify";
 import { CAROUSEL_CREATE_RESET } from "../../../actions/types";
+import { BASE_URL } from "../../../api";
 
 const Section = styled.div`
   padding: 90px 40px;
@@ -60,7 +61,7 @@ const AdminCarousel = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/carousel/uploads",
+        `${BASE_URL}/api/carousel/uploads`,
         formData,
         config
       );

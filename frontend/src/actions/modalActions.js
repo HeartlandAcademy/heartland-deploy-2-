@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   ADDED_MODAL_FAIL,
   ADDED_MODAL_REQUEST,
@@ -15,7 +16,7 @@ export const listModal = () => async (dispatch) => {
   try {
     dispatch({ type: ADDED_MODAL_REQUEST });
 
-    const { data } = await axios.get("/api/modal");
+    const { data } = await axios.get(`${BASE_URL}/api/modal`);
 
     dispatch({
       type: ADDED_MODAL_SUCCESS,
@@ -47,7 +48,11 @@ export const createModal = (image) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post("/api/modal", { image }, config);
+    const { data } = await axios.post(
+      `${BASE_URL}/api/modal`,
+      { image },
+      config
+    );
 
     dispatch({
       type: MODAL_CREATE_SUCCESS,
@@ -78,7 +83,7 @@ export const deleteModal = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/modal/${id}`, config);
+    await axios.delete(`${BASE_URL}/api/modal/${id}`, config);
 
     dispatch({ type: MODAL_DELETE_SUCCESS });
   } catch (error) {

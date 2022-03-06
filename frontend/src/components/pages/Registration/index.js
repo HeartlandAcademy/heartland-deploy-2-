@@ -16,6 +16,7 @@ import { createNewRegistrations } from "../../../actions/registrationActions";
 
 import "./index.css";
 import Loader from "../../contents/Loader";
+import { BASE_URL } from "../../../api";
 
 const RegisterHeader = styled.div`
   text-align: center;
@@ -61,7 +62,7 @@ const Registration = ({ history }) => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [preference, setPreference] = useState("Preschool");
-  const [faculty, setFaculty] = useState("Science");
+  const [faculty, setFaculty] = useState("");
   const [markSheet, setMarkSheet] = useState("");
   const [markSheetUpload, setMarkSheetUpload] = useState(false);
   const [characterCerf, setCharacterCerf] = useState("");
@@ -135,7 +136,7 @@ const Registration = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/registrations/uploads/marksheet",
+        `${BASE_URL}/api/registrations/uploads/marksheet`,
         formData,
         config
       );
@@ -163,7 +164,7 @@ const Registration = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/registrations/uploads/ppphoto",
+        `${BASE_URL}/api/registrations/uploads/ppphoto`,
         formData,
         config
       );
@@ -191,7 +192,7 @@ const Registration = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/registrations/uploads/characterCf",
+        `${BASE_URL}/api/registrations/uploads/characterCf`,
         formData,
         config
       );
@@ -219,7 +220,7 @@ const Registration = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/registrations/uploads/application",
+        `${BASE_URL}/api/registrations/uploads/application`,
         formData,
         config
       );
@@ -407,6 +408,7 @@ const Registration = ({ history }) => {
                   value={faculty}
                   onChange={(e) => setFaculty(e.target.value)}
                 >
+                  <option>Select Faculty</option>
                   <option value="Science">Science</option>
                   <option value="Management">Management</option>
                   <option value="Education">Education</option>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
@@ -20,7 +21,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/api/users/login",
+      `${BASE_URL}/api/users/login`,
       { email, password },
       config
     );
