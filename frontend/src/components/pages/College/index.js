@@ -17,6 +17,7 @@ import scienceImage from "../../../assets/collegePrograms/sciencelab.jpg";
 import managementImage from "../../../assets/collegePrograms/management.jpg";
 import educationImage from "../../../assets/collegePrograms/education.jpg";
 import "./index.css";
+import { BASE_URL } from "../../../api";
 
 const Section1 = styled.div`
   padding: 20px 5px;
@@ -389,6 +390,7 @@ const College = () => {
             autoPlayInterval={2000}
             animationDuration={2000}
             animationType="fadeout"
+            disableButtonsControls
             infinite
           >
             {visitorsTestimonials &&
@@ -396,7 +398,7 @@ const College = () => {
                 <MessageCard key={visitor._id}>
                   <Msg>"{visitor.message}"</Msg>
                   <Profile>
-                    <img src={visitor.image} alt="student" />
+                    <img src={`${BASE_URL}${visitor.image}`} alt="student" />
                     <ProfileDesc>
                       <h6>{visitor.fullName}</h6>
                       <p>{visitor.desc}</p>

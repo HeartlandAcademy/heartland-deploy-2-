@@ -13,6 +13,7 @@ import Message from "../../contents/Message";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LinkContainer } from "react-router-bootstrap";
+import { BASE_URL } from "../../../api";
 
 const Whole = styled.div`
   margin: 30px 50px;
@@ -132,7 +133,7 @@ const AdminAllDownloads = ({ history }) => {
   };
 
   const downloadFileHandler = async (id) => {
-    const res = await fetch(`/api/downloads/${id}/download`);
+    const res = await fetch(`${BASE_URL}/api/downloads/${id}/download`);
     const blob = await res.blob();
     download(blob, fileNameGenerator(10));
   };

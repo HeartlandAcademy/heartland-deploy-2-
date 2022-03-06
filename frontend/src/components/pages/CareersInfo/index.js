@@ -24,6 +24,7 @@ import { listCareerDetails } from "../../../actions/careersActions";
 
 import { CAREERS_CREATE_RESET } from "../../../actions/types";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../../api";
 
 const Title = styled.div`
   color: rgb(1, 34, 55);
@@ -154,7 +155,7 @@ const CareersInfo = ({ match }) => {
           },
         };
         const { data } = await axios.post(
-          "/api/careers/uploads",
+          `${BASE_URL}/api/careers/uploads`,
           formData,
           config
         );
@@ -191,7 +192,7 @@ const CareersInfo = ({ match }) => {
       e.stopPropagation();
     } else {
       setIsLoading(true);
-      await fetch("/api/careers/send", {
+      await fetch(`${BASE_URL}/api/careers/send`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -369,12 +370,16 @@ const CareersInfo = ({ match }) => {
               </h2>
               {htmlFrom(career.careerDesc)}
             </Desc>
-            <Desc>
-              <h2>
-                <span>Note: </span>
-              </h2>
-              {htmlFrom(career.note)}
-            </Desc>
+            {career.note && career.note !== "" ? (
+              <Desc>
+                <h2>
+                  <span>Note: </span>
+                </h2>
+                {htmlFrom(career.note)}
+              </Desc>
+            ) : (
+              ""
+            )}
           </Container>
         </Container>
       )}

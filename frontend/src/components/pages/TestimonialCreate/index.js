@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import StudentsModal from "../../contents/StudentsModal";
 import VisitorsModal from "../../contents/VisitorsModal";
 import Message from "../../contents/Message";
-import Default from "../../../assets/default/default.png";
 import Loader from "../../contents/Loader";
 
 import { deleteTeams, listTeams } from "../../../actions/teamsActions";
@@ -26,6 +25,7 @@ import {
   listVisitorsTestimonials,
   deleteVisitorsTestimonials,
 } from "../../../actions/testimonialsActions";
+import { BASE_URL } from "../../../api";
 
 const Section = styled.div`
   padding: 30px 40px;
@@ -335,9 +335,9 @@ const TestimonialCreate = ({ history }) => {
 
   const teamResponsive = {
     0: { items: 1 },
-    568: { items: 2 },
-    924: { items: 3 },
-    1024: { items: 4 },
+    568: { items: 1 },
+    924: { items: 2 },
+    1024: { items: 3 },
   };
 
   const teamDeleteHandler = (id) => {
@@ -399,12 +399,16 @@ const TestimonialCreate = ({ history }) => {
               mouseTracking
               responsive={teamResponsive}
               controlsStrategy="alternate"
+              disableButtonsControls
             >
               {teams &&
                 teams.map((team) => (
                   <Heartland key={team._id}>
                     <Card style={{ width: "15rem", margin: "20px" }}>
-                      <Card.Img variant="top" src={team.image} />
+                      <Card.Img
+                        variant="top"
+                        src={`${BASE_URL}${team.image}`}
+                      />
                       <Card.Body
                         style={{
                           backgroundColor: darkMode ? "#202124" : "#fff",
@@ -466,6 +470,7 @@ const TestimonialCreate = ({ history }) => {
               mouseTracking
               responsive={responsive}
               controlsStrategy="alternate"
+              disableButtonsControls
             >
               {studentsTestimonials &&
                 studentsTestimonials.students.map((student) => (
@@ -476,7 +481,10 @@ const TestimonialCreate = ({ history }) => {
                     <Msg>{student.message}</Msg>
                     <Profile>
                       <ImageCard>
-                        <img src={student.image} alt="student" />
+                        <img
+                          src={`${BASE_URL}${student.image}`}
+                          alt="student"
+                        />
                       </ImageCard>
                       <Name darkmode={darkMode}>{student.fullName}</Name>
                       <Desc>{student.desc}</Desc>
@@ -530,13 +538,14 @@ const TestimonialCreate = ({ history }) => {
               mouseTracking
               responsive={responsive}
               controlsStrategy="alternate"
+              disableButtonsControls
             >
               {visitorsTestimonials &&
                 visitorsTestimonials.visitors.map((visitor) => (
                   <VisitorMessageCard darkmode={darkMode} key={visitor._id}>
                     <VisitorMsg>{visitor.message}</VisitorMsg>
                     <VisitorProfile>
-                      <img src={visitor.image} alt="student" />
+                      <img src={`${BASE_URL}${visitor.image}`} alt="student" />
                       <ProfileDesc darkmode={darkMode}>
                         <h6>{visitor.fullName}</h6>
                         <p>{visitor.desc}</p>

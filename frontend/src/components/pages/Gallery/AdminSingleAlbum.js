@@ -8,6 +8,7 @@ import { Button, Placeholder } from "react-bootstrap";
 import Message from "../../contents/Message";
 
 import CardLoader from "../../contents/CardLoader";
+import { BASE_URL } from "../../../api";
 
 const AlbumSection = styled.div`
   padding: 20px 40px;
@@ -59,8 +60,8 @@ const AdminSingleAlbum = ({ match }) => {
       let data = [];
       albumImages.images.forEach((img, index) => {
         data[index] = {
-          src: img,
-          thumbnail: img,
+          src: `${BASE_URL}${img}`,
+          thumbnail: `${BASE_URL}${img}`,
           thumbnailWidth: 320,
           thumbnailHeight: 174,
         };

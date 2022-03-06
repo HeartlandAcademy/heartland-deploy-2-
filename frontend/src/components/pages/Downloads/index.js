@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Container, Placeholder } from "react-bootstrap";
 import { listDownloads } from "../../../actions/downloadsActions";
 import Message from "../../contents/Message";
+import { BASE_URL } from "../../../api";
 
 const NoDownloads = styled.div`
   padding: 140px 60px;
@@ -70,7 +71,7 @@ const Downloads = () => {
   };
 
   const singleFileDownloadHandler = async (id) => {
-    const res = await fetch(`/api/downloads/${id}/download`);
+    const res = await fetch(`${BASE_URL}/api/downloads/${id}/download`);
     const blob = await res.blob();
     download(blob, fileNameGenerator(10));
   };

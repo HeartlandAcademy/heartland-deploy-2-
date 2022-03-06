@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import Message from "./Message";
 import { createTeams } from "../../actions/teamsActions";
 import Loader from "./Loader";
+import { BASE_URL } from "../../api";
 
 export default function TeamsModal(props) {
   const [fullName, setFullName] = useState("");
@@ -37,7 +38,11 @@ export default function TeamsModal(props) {
           "Content-Type": "multipart/form-data",
         },
       };
-      const { data } = await axios.post("/api/teams/uploads", formData, config);
+      const { data } = await axios.post(
+        `${BASE_URL}/api/teams/uploads`,
+        formData,
+        config
+      );
 
       setTeamImage(data);
       setFileError(false);

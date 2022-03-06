@@ -12,6 +12,7 @@ import test from "../../../assets/imageheaderphotos/test.JPG";
 import Back from "../../../assets/others/Background.jpg";
 import Meta from "../../contents/Meta";
 import { listStudentsTestimonials } from "../../../actions/testimonialsActions";
+import { BASE_URL } from "../../../api";
 
 const Section1 = styled.div`
   margin-top: 20px;
@@ -326,6 +327,7 @@ const School = () => {
             autoPlayInterval={2000}
             animationDuration={2000}
             animationType="fadeout"
+            disableButtonsControls
             infinite
           >
             {studentsTestimonials &&
@@ -337,7 +339,7 @@ const School = () => {
                   <Msg>"{student.message}"</Msg>
                   <Profile>
                     <ImageCard>
-                      <img src={student.image} alt="student" />
+                      <img src={`${BASE_URL}${student.image}`} alt="student" />
                     </ImageCard>
                     <Name>{student.fullName}</Name>
                     <Desc>{student.desc}</Desc>

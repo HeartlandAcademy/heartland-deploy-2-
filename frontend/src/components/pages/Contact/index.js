@@ -7,6 +7,7 @@ import Map from "../../../assets/others/map.jpg";
 import ImageHeader from "../../contents/ImageHeader";
 import Meta from "../../contents/Meta";
 import Loader from "../../contents/Loader";
+import { BASE_URL } from "../../../api";
 
 const ContactCard = styled.div`
   display: flex;
@@ -86,6 +87,7 @@ const SocialMedia = styled.div`
   i {
     padding-right: 45px;
     font-size: 28px;
+    cursor: pointer;
   }
 `;
 
@@ -137,7 +139,7 @@ const Contact = () => {
       e.stopPropagation();
     } else {
       setIsLoading(true);
-      await fetch("/api/contact/send", {
+      await fetch(`${BASE_URL}/api/contact/send`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -183,7 +185,6 @@ const Contact = () => {
       <ContactCard className="container">
         <Findus>
           <h3>Contact Info</h3>
-          <img width="100px" height="100px" src="/Logo.svg" />
           <Location>
             <span>
               <i className="fas fa-map-marker-alt"></i>

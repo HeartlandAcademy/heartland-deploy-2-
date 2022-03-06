@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { listGalleryAlbums } from "../../../actions/galleryActions";
 
 import GalleryCardLoader from "./GalleryCardLoader";
+import { BASE_URL } from "../../../api";
 
 const Title = styled.div`
   color: #444444;
@@ -178,7 +179,7 @@ const HeartlandGallery = () => {
                       <Card>
                         <CardImage>
                           <img
-                            src={album.images[0]}
+                            src={`${BASE_URL}${album.images[0]}`}
                             alt="album"
                             onError={(e) => {
                               e.target.src = placeholder; //replacement image imported above

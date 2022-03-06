@@ -11,6 +11,7 @@ import { addGalleryAlbums } from "../../../actions/galleryActions";
 import Message from "../../contents/Message";
 import Loader from "../../contents/Loader";
 import { GALLERY_ALBUM_CREATE_RESET } from "../../../actions/types";
+import { BASE_URL } from "../../../api";
 
 const Section = styled.div`
   height: 100vh;
@@ -85,7 +86,7 @@ const AdminImages = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/gallery/uploads",
+        `${BASE_URL}/api/gallery/uploads`,
         formData,
         config
       );

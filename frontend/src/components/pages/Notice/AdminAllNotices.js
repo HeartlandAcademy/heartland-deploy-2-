@@ -10,6 +10,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import Message from "../../contents/Message";
 import { deleteNotices, listNotices } from "../../../actions/noticesActions";
 import PdfModal from "../../contents/PdfModal";
+import { BASE_URL } from "../../../api";
 
 const Whole = styled.div`
   margin: 30px 50px;
@@ -143,7 +144,7 @@ const AdminAllNotices = ({ history }) => {
   };
 
   const singleFileDownloadHandler = async (id) => {
-    const res = await fetch(`/api/notices/${id}/download`);
+    const res = await fetch(`${BASE_URL}/api/notices/${id}/download`);
     const blob = await res.blob();
     download(blob, fileNameGenerator(10));
   };
@@ -227,7 +228,7 @@ const AdminAllNotices = ({ history }) => {
                       className="far fa-eye"
                       onClick={() => {
                         setModalShow(true);
-                        setSelectedNoticeFile(notice.file);
+                        setSelectedNoticeFile(`${BASE_URL}${notice.file}`);
                       }}
                     ></i>
                     <i

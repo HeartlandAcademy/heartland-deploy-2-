@@ -10,6 +10,7 @@ import Loader from "../../contents/Loader";
 import { createEvents } from "../../../actions/eventsActions";
 import { toast } from "react-toastify";
 import { EVENTS_CREATE_RESET } from "../../../actions/types";
+import { BASE_URL } from "../../../api";
 
 const Section = styled.div`
   padding: 30px 40px;
@@ -91,7 +92,7 @@ const AdminEvents = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/events/uploads",
+        `${BASE_URL}/api/events/uploads`,
         formData,
         config
       );

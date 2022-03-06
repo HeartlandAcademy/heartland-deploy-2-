@@ -10,6 +10,7 @@ import defaultloader from "../../assets/default/default-loading.png";
 import { listLatestNews } from "../../actions/newsActions";
 import Message from "../contents/Message";
 import { listUpcomingLatestEvents } from "../../actions/eventsActions";
+import { BASE_URL } from "../../api";
 
 const News = styled.div`
   padding: 50px 45px;
@@ -111,6 +112,9 @@ const SingleEvent = styled.div`
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     cursor: pointer;
+  }
+  @media (max-width: 1200px) {
+    margin-top: 20px;
   }
 `;
 
@@ -247,26 +251,32 @@ const NewsAndEvents = () => {
                 )}
                 {events &&
                   events.map((event) => (
-                    <SingleEvent key={event._id}>
-                      <Card style={{ width: "21rem" }}>
-                        <Card.Img
-                          style={{ height: "60%" }}
-                          variant="top"
-                          src={event.image ? event.image : Background}
-                        />
-                        <Card.Body>
-                          <Card.Title>
-                            {event.date &&
-                              moment(event.date).format("DD-MMM-YYYY")}
-                          </Card.Title>
-                          <Card.Text>
-                            {event.description &&
-                              event.description.substring(0, 140)}
-                            ....
-                          </Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </SingleEvent>
+                    <LinkContainer to="/events">
+                      <SingleEvent key={event._id}>
+                        <Card style={{ width: "21rem" }}>
+                          <Card.Img
+                            style={{ height: "60%" }}
+                            variant="top"
+                            src={
+                              event.image
+                                ? `${BASE_URL}${event.image}`
+                                : Background
+                            }
+                          />
+                          <Card.Body>
+                            <Card.Title>
+                              {event.date &&
+                                moment(event.date).format("DD-MMM-YYYY")}
+                            </Card.Title>
+                            <Card.Text>
+                              {event.description &&
+                                event.description.substring(0, 140)}
+                              ....
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                      </SingleEvent>
+                    </LinkContainer>
                   ))}
               </>
             )}

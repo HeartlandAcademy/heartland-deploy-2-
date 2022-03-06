@@ -10,6 +10,7 @@ import Message from "../../contents/Message";
 import { createDownload } from "../../../actions/downloadsActions";
 import { toast } from "react-toastify";
 import { FILE_CREATE_RESET } from "../../../actions/types";
+import { BASE_URL } from "../../../api";
 
 const Section = styled.div`
   height: 100vh;
@@ -69,7 +70,7 @@ const AdminDownloads = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/downloads/uploads",
+        `${BASE_URL}/api/downloads/uploads`,
         formData,
         config
       );

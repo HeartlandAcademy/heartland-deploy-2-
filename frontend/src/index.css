@@ -25,6 +25,11 @@
   font-size: 15px;
 }
 
+.navbar li {
+  list-style-type: none;
+  text-decoration: none;
+}
+
 .navbar-light .navbar-nav .nav-link {
   color: #3459e6;
 }
@@ -40,6 +45,12 @@
 
 .active {
   color: #111 !important;
+}
+        
+.selected a{
+  color: #111 !important;
+  border-radius: 2px !important;
+  border-bottom: 3px solid #111 !important;
 }
 
 .drop-active {

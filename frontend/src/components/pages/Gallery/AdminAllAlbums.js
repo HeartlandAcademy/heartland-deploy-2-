@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import placeholder from "../../../assets/default/placeholder.png";
 import GalleryCardLoader from "./GalleryCardLoader";
+import { BASE_URL } from "../../../api";
 
 const AlbumsContainer = styled.div`
   padding: 10px 20px;
@@ -138,7 +139,7 @@ const ActionButton = styled.div`
   }
 `;
 
-const AdminAllAlbums = ({ history }) => {
+const AdminAllAlbums = () => {
   const dispatch = useDispatch();
 
   const settings = useSelector((state) => state.settings);
@@ -213,7 +214,7 @@ const AdminAllAlbums = ({ history }) => {
                   <Card darkmode={darkMode}>
                     <CardImage>
                       <img
-                        src={album.images[0] || placeholder}
+                        src={`${BASE_URL}${album.images[0]}` || placeholder}
                         alt="Album"
                         onError={(e) => {
                           e.target.src = placeholder; //replacement image imported above

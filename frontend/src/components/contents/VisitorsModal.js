@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Message from "./Message";
 import { createVisitorsTestimonials } from "../../actions/testimonialsActions";
 import Loader from "./Loader";
+import { BASE_URL } from "../../api";
 
 export default function VisitorsModal(props) {
   const [fullName, setFullName] = useState("");
@@ -48,7 +49,7 @@ export default function VisitorsModal(props) {
         },
       };
       const { data } = await axios.post(
-        "/api/testimonials/uploads",
+        `${BASE_URL}/api/testimonials/uploads`,
         formData,
         config
       );

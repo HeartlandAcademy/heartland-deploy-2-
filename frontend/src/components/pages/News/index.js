@@ -162,7 +162,7 @@ const News = () => {
           <Row className="g-4 p-4 m-4">
             {searchInput.length > 1
               ? filteredResults.map((n) => (
-                  <Col lg={4} xl={4} md={6}>
+                  <Col lg={4} xl={4} md={6} key={n._id}>
                     <Card style={{ height: "100%" }}>
                       {n.image ? (
                         <Card.Img
@@ -172,7 +172,7 @@ const News = () => {
                           alt="sdf"
                         />
                       ) : (
-                        <img src={BlogPicture} alt="sdf" />
+                        <img src={BlogPicture} alt="111" />
                       )}
                       <Card.Body style={{ padding: "13px" }}>
                         <CardInfo>
@@ -198,13 +198,13 @@ const News = () => {
                 ))
               : news &&
                 currentNews.map((n) => (
-                  <Col lg={4} xl={4} md={6}>
+                  <Col lg={4} xl={4} md={6} key={n._id}>
                     <Card style={{ height: "100%" }}>
                       {n.image ? (
                         <Card.Img
                           style={{ height: "100%" }}
                           variant="top"
-                          src={n.image}
+                          src={`${BASE_URL}${n.image}`}
                           alt="sdf"
                         />
                       ) : (

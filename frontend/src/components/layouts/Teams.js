@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Card } from "react-bootstrap";
 import { listTeams } from "../../actions/teamsActions";
 import Message from "../contents/Message";
+import { BASE_URL } from "../../api";
 
 const Team = styled.div`
   background-color: #111;
@@ -69,13 +70,14 @@ const Teams = () => {
           autoPlayInterval={2000}
           animationDuration={2000}
           animationType="fadeout"
+          disableButtonsControls
           infinite
         >
           {teams &&
             teams.map((team) => (
               <Heartland key={team._id}>
                 <Card style={{ width: "14rem", margin: "20px" }}>
-                  <Card.Img variant="top" src={team.image} />
+                  <Card.Img variant="top" src={`${BASE_URL}${team.image}`} />
                   <Card.Body>
                     <Card.Title>{team.fullName}</Card.Title>
                     <Card.Text>{team.desc}</Card.Text>

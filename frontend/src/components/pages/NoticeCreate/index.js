@@ -10,6 +10,7 @@ import { createNotices } from "../../../actions/noticesActions";
 import Message from "../../contents/Message";
 import { toast } from "react-toastify";
 import { NOTICES_CREATE_RESET } from "../../../actions/types";
+import { BASE_URL } from "../../../api";
 
 const Section = styled.div`
   height: 100vh;
@@ -70,7 +71,7 @@ const AdminNotices = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/notices/uploads",
+        `${BASE_URL}/api/notices/uploads`,
         formData,
         config
       );

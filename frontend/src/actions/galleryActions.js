@@ -114,7 +114,7 @@ export const gallerySingleAlbum = (id) => async (dispatch) => {
   try {
     dispatch({ type: SINGLE_ALBUM_REQUEST });
 
-    const { data } = await axios.get(`/api/gallery/albums/${id}`);
+    const { data } = await axios.get(`${BASE_URL}/api/gallery/albums/${id}`);
 
     dispatch({
       type: SINGLE_ALBUM_SUCCESS,

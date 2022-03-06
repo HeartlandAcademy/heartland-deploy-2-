@@ -11,6 +11,7 @@ import PdfModal from "../../contents/PdfModal";
 import Meta from "../../contents/Meta";
 import { Container, Placeholder } from "react-bootstrap";
 import { listNotices } from "../../../actions/noticesActions";
+import { BASE_URL } from "../../../api";
 
 const NoNotice = styled.div`
   padding: 140px 60px;
@@ -74,7 +75,7 @@ const Notice = () => {
   };
 
   const singleFileDownloadHandler = async (id) => {
-    const res = await fetch(`/api/notices/${id}/download`);
+    const res = await fetch(`${BASE_URL}/api/notices/${id}/download`);
     const blob = await res.blob();
     download(blob, fileNameGenerator(10));
   };
@@ -149,7 +150,7 @@ const Notice = () => {
                         className="far fa-eye"
                         onClick={() => {
                           setModalShow(true);
-                          setSelectedNoticeFile(notice.file);
+                          setSelectedNoticeFile(`${BASE_URL}${notice.file}`);
                         }}
                       ></i>
                       <i

@@ -7,9 +7,10 @@ import download from "downloadjs";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import Logo from "../../assets/others/Logo2.png";
+import Logo from "../../assets/others/Logo1.png";
 import Loader from "./Loader";
 import { listLatestNotices } from "../../actions/noticesActions";
+import { BASE_URL } from "../../api";
 
 const ExtraSidebar = styled.div`
   margin-left: 20px;
@@ -121,7 +122,7 @@ const Extra = () => {
   };
 
   const singleFileDownloadHandler = async (id) => {
-    const res = await fetch(`/api/notices/${id}/download`);
+    const res = await fetch(`${BASE_URL}/api/notices/${id}/download`);
     const blob = await res.blob();
     download(blob, fileNameGenerator(10));
   };

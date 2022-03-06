@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 
-import Logo from "../../assets/others/Logo2.png";
+import Logo from "../../assets/others/Logo1.png";
 import Extra from "../contents/Extra";
 
 const TopNav = styled.div`
@@ -219,21 +219,24 @@ const Header = () => {
         </a>
         <NavLinks className="ms-auto" id="navbarNavDropdown">
           <ul className="navbar-nav navbarNav">
-            <li className="nav-item">
-              <StyledLink exact activeClassName="active" to="/">
+            <StyledLink exact activeClassName="selected" to="/">
+              <li className="nav-item">
                 <a className="nav-link">Home</a>
-              </StyledLink>
-            </li>
-            <li className="nav-item">
-              <StyledLink exact activeClassName="active" to="/school">
+              </li>
+            </StyledLink>
+
+            <StyledLink exact activeClassName="selected" to="/school">
+              <li className="nav-item">
                 <a className="nav-link">School</a>
-              </StyledLink>
-            </li>
-            <li className="nav-item">
-              <StyledLink exact activeClassName="active" to="/college">
+              </li>
+            </StyledLink>
+
+            <StyledLink exact activeClassName="selected" to="/college">
+              <li className="nav-item">
                 <a className="nav-link">College</a>
-              </StyledLink>
-            </li>
+              </li>
+            </StyledLink>
+
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
@@ -249,35 +252,37 @@ const Header = () => {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                <StyledLink exact activeClassName="active" to="/hafamily/bod">
+                <StyledLink exact activeClassName="selected" to="/hafamily/bod">
                   <a className="dropdown-item">BOD</a>
                 </StyledLink>
                 <StyledLink
                   exact
-                  activeClassName="active"
+                  activeClassName="selected"
                   to="/hafamily/honorary"
                 >
                   <a className="dropdown-item">Honorary Advisors</a>
                 </StyledLink>
                 <StyledLink
                   exact
-                  activeClassName="active"
+                  activeClassName="selected"
                   to="/hafamily/staffs"
                 >
                   <a className="dropdown-item">Staffs</a>
                 </StyledLink>
               </div>
             </li>
-            <li className="nav-item">
-              <StyledLink exact activeClassName="active" to="/scholarship">
+
+            <StyledLink exact activeClassName="selected" to="/scholarship">
+              <li className="nav-item">
                 <a className="nav-link">Scholarship</a>
-              </StyledLink>
-            </li>
-            <li className="nav-item">
-              <StyledLink exact activeClassName="active" to="/alumni">
+              </li>
+            </StyledLink>
+
+            <StyledLink exact activeClassName="selected" to="/alumni">
+              <li className="nav-item">
                 <a className="nav-link">Alumni</a>
-              </StyledLink>
-            </li>
+              </li>
+            </StyledLink>
 
             <li className="nav-item dropdown">
               <a
@@ -294,20 +299,28 @@ const Header = () => {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                <StyledLink exact activeClassName="active" to="/gallery/albums">
+                <StyledLink
+                  exact
+                  activeClassName="selected"
+                  to="/gallery/albums"
+                >
                   <a className="dropdown-item">Albums</a>
                 </StyledLink>
-                <StyledLink exact activeClassName="active" to="/gallery/videos">
+                <StyledLink
+                  exact
+                  activeClassName="selected"
+                  to="/gallery/videos"
+                >
                   <a className="dropdown-item">Videos</a>
                 </StyledLink>
               </div>
             </li>
 
-            <li className="nav-item">
-              <StyledLink exact activeClassName="active" to="/contact">
+            <StyledLink exact activeClassName="selected" to="/contact">
+              <li className="nav-item">
                 <a className="nav-link">Contact</a>
-              </StyledLink>
-            </li>
+              </li>
+            </StyledLink>
           </ul>
         </NavLinks>
         <Bar>

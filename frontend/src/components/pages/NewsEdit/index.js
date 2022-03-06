@@ -104,7 +104,7 @@ const AdminEditNews = ({ history, match }) => {
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("formFile", file);
     setUploading(true);
 
     try {
@@ -114,7 +114,7 @@ const AdminEditNews = ({ history, match }) => {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/uploads`,
+        `${BASE_URL}/api/news/uploads`,
         formData,
         config
       );
