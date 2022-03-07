@@ -3,6 +3,18 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
+
 const SocialMedia = styled.div`
   a {
     color: #fff;
@@ -85,35 +97,35 @@ const Footer = () => {
               <h5 className="text-uppercase text-white">Useful Links</h5>
 
               <ul className="list-unstyled mb-0">
-                <Link to="/">
+                <StyledLink to="/">
                   <li>
                     <a className="text-white">Home</a>
                   </li>
-                </Link>
+                </StyledLink>
 
-                <Link to="/careers">
+                <StyledLink to="/careers">
                   <li>
                     <a className="text-white">Careers</a>
                   </li>
-                </Link>
+                </StyledLink>
 
-                <Link to="/about">
+                <StyledLink to="/about">
                   <li>
                     <a className="text-white">About Us</a>
                   </li>
-                </Link>
+                </StyledLink>
 
-                <Link to="/news">
+                <StyledLink to="/news">
                   <li>
                     <a className="text-white">News</a>
                   </li>
-                </Link>
+                </StyledLink>
 
-                <Link to="/gallery/albums">
+                <StyledLink to="/gallery/albums">
                   <li>
                     <a className="text-white">Gallery</a>
                   </li>
-                </Link>
+                </StyledLink>
               </ul>
             </div>
             <div className="col-lg-3 col-md-6 mb-4 mb-md-0">

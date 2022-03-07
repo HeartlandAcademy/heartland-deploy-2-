@@ -13,6 +13,7 @@ import { BASE_URL } from "../../api";
 const Team = styled.div`
   background-color: #111;
   padding: 100px;
+  margin-bottom: -120px;
 `;
 
 const Title = styled.div`

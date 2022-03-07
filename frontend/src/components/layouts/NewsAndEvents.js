@@ -48,7 +48,7 @@ const NoNews = styled.div`
 const NewsSection = styled.div`
   flex: 1.5;
   overflow-y: auto;
-  height: 430px;
+  height: 570px;
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
     box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
