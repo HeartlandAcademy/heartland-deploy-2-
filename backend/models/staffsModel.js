@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const staffsSchema = mongoose.Schema({
+  image: {
+    type: String,
+    required: true,
+  },
   fullName: {
     type: String,
     required: [true, "Please add full name"],
@@ -12,8 +16,13 @@ const staffsSchema = mongoose.Schema({
     unique: true,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      "Please add a valid email",
+      "Please add a valid email address",
     ],
+  },
+  position: {
+    type: String,
+    required: [true, "Please add position"],
+    maxlength: [1000, "Position field can not be more than 1000 characters"],
   },
   phone: {
     type: String,

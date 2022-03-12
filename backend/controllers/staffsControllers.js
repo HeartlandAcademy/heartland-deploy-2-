@@ -27,19 +27,23 @@ const deleteStaffs = asyncHandler(async (req, res) => {
 // @route   POST /api/staffs
 // @access  Private
 const createStaffs = asyncHandler(async (req, res) => {
-  const { fullName, email, phone } = req.body;
+  const { image, fullName, email, position, phone } = req.body;
 
   const staff = await Staffs.create({
+    image,
     fullName,
     email,
+    position,
     phone,
   });
 
   if (staff) {
     res.status(201).json({
       _id: staff._id,
+      image: staff.image,
       fullName: staff.fullName,
       email: staff.email,
+      position: staff.position,
       phone: staff.phone,
     });
   } else {

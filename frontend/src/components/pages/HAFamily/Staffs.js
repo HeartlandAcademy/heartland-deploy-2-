@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Table, Placeholder } from "react-bootstrap";
+import { Placeholder, Col, Card, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 
 import ImageHeader from "../../contents/ImageHeader";
@@ -8,6 +8,8 @@ import test from "../../../assets/imageheaderphotos/test.JPG";
 import { listStaffs } from "../../../actions/staffsActions";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
+import { BASE_URL } from "../../../api";
+import defaultImage from "../../../assets/default/default-loading.png";
 
 const Section1 = styled.div`
   margin-bottom: 80px;
@@ -21,6 +23,12 @@ const Section1 = styled.div`
   }
 `;
 
+const NoStaffs = styled.div`
+  font-size: 28px;
+  margin: 150px;
+  text-align: center;
+`;
+
 const Staffs = () => {
   const availableStaffs = useSelector((state) => state.availableStaffs);
   const { loading, staffs, error } = availableStaffs;
@@ -31,87 +39,37 @@ const Staffs = () => {
     dispatch(listStaffs());
   }, [dispatch]);
 
-  const TableLoader = () => {
+  const StaffCardLoader = () => {
     return (
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <Placeholder as="p" animation="glow">
-                <Placeholder xs={4} />
+      <Col lg={4} xl={4} md={6}>
+        <Card style={{ height: "100%" }}>
+          <Card.Img
+            style={{ height: "100%" }}
+            variant="top"
+            src={defaultImage}
+            alt="default"
+          />
+
+          <Card.Body style={{ padding: "13px" }}>
+            <Card.Title>
+              <Placeholder as={Card.Title} animation="glow">
+                <Placeholder xs={12} />
               </Placeholder>
-            </td>
-            <td>
+            </Card.Title>
+            <Card.Text>
               <Placeholder as="p" animation="glow">
-                <Placeholder xs={9} />
+                <Placeholder xs={8} />
               </Placeholder>
-            </td>
-            <td>
               <Placeholder as="p" animation="glow">
-                <Placeholder xs={4} />
+                <Placeholder xs={8} />
               </Placeholder>
-            </td>
-          </tr>
-          <tr>
-            <td>
               <Placeholder as="p" animation="glow">
-                <Placeholder xs={4} />
+                <Placeholder xs={8} />
               </Placeholder>
-            </td>
-            <td>
-              <Placeholder as="p" animation="glow">
-                <Placeholder xs={9} />
-              </Placeholder>
-            </td>
-            <td>
-              <Placeholder as="p" animation="glow">
-                <Placeholder xs={4} />
-              </Placeholder>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <Placeholder as="p" animation="glow">
-                <Placeholder xs={4} />
-              </Placeholder>
-            </td>
-            <td>
-              <Placeholder as="p" animation="glow">
-                <Placeholder xs={9} />
-              </Placeholder>
-            </td>
-            <td>
-              <Placeholder as="p" animation="glow">
-                <Placeholder xs={4} />
-              </Placeholder>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <Placeholder as="p" animation="glow">
-                <Placeholder xs={4} />
-              </Placeholder>
-            </td>
-            <td>
-              <Placeholder as="p" animation="glow">
-                <Placeholder xs={9} />
-              </Placeholder>
-            </td>
-            <td>
-              <Placeholder as="p" animation="glow">
-                <Placeholder xs={4} />
-              </Placeholder>
-            </td>
-          </tr>
-        </tbody>
-      </Table>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Col>
     );
   };
 
@@ -120,30 +78,52 @@ const Staffs = () => {
       <Meta title="HA Family | Staffs" />
       <ImageHeader mtitle="HA Family" title="Staffs" image={test} />
       <Section1 className="container">
-        <h3>STAFFS</h3>
+        <h3>HA STAFFS</h3>
         {loading ? (
-          <TableLoader />
+          <Row className="g-4 p-4 m-4">
+            <StaffCardLoader />
+            <StaffCardLoader />
+            <StaffCardLoader />
+          </Row>
         ) : error ? (
           <Message varaint="danger">{error}</Message>
         ) : (
-          <Table striped bordered hover responsive>
-            <thead>
-              <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-              </tr>
-            </thead>
-            <tbody>
-              {staffs.map((staff) => (
-                <tr key={staff._id}>
-                  <td>{staff.fullName}</td>
-                  <td>{staff.email}</td>
-                  <td>{staff.phone}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <>
+            {staffs && staffs.length === 0 && (
+              <NoStaffs>
+                There was an error while fetching the data. Try Again Later
+              </NoStaffs>
+            )}
+            <Row className="g-4 p-4 m-4">
+              {staffs &&
+                staffs.map((staff) => (
+                  <Col lg={4} xl={4} md={6} key={staff._id}>
+                    <Card style={{ height: "100%" }}>
+                      {staff.image ? (
+                        <Card.Img
+                          style={{ height: "100%" }}
+                          variant="top"
+                          src={`${BASE_URL}${staff.image}`}
+                          alt={staff.fullName}
+                        />
+                      ) : (
+                        <img src={test} alt="sdf" />
+                      )}
+                      <Card.Body style={{ padding: "13px" }}>
+                        <Card.Title className="mb-3">
+                          Name: {staff.fullName}
+                        </Card.Title>
+                        <Card.Text>
+                          <p>Postion: {staff.position}</p>
+                          <p>Email: {staff.email}</p>
+                          <p>Phone No: {staff.phone}</p>
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+            </Row>
+          </>
         )}
       </Section1>
     </>

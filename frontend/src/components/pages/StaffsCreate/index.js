@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Table, Button } from "react-bootstrap";
+import { Button, ListGroup, Image } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { deleteStaffs, listStaffs } from "../../../actions/staffsActions";
@@ -9,10 +9,10 @@ import Message from "../../contents/Message";
 import StaffsModal from "../../contents/StaffModal";
 import { toast } from "react-toastify";
 import { STAFFS_CREATE_RESET } from "../../../actions/types";
+import { BASE_URL } from "../../../api";
 
 const StaffContainer = styled.div`
   padding: 30px 40px;
-  height: 100vh;
   i {
     cursor: pointer;
     &:hover {
@@ -41,7 +41,27 @@ const ButtonContent = styled.div`
   margin-top: 10px;
 `;
 
-const TableSection = styled.div``;
+const StaffDetail = styled.div`
+  h3 {
+    color: ${(props) => (props.darkmode ? "#fff" : "#111")};
+  }
+  h4 {
+    color: ${(props) => (props.darkmode ? "#fff" : "#111")};
+  }
+`;
+
+const StaffContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 60px;
+`;
+
+const NoStaffs = styled.div`
+  font-size: 20px;
+  height: 100vh;
+  margin-top: 200px;
+  text-align: center;
+`;
 
 const AdminStaffs = ({ history }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -96,12 +116,12 @@ const AdminStaffs = ({ history }) => {
             onClick={() => setModalShow(true)}
             className={darkMode ? "btn-dark" : "btn-primary"}
           >
-            <i className="fas fa-plus"></i> New
+            <i className="fas fa-plus" /> New
           </Button>
         </ButtonContent>
         <StaffsModal show={modalShow} onHide={() => setModalShow(false)} />
       </Title>
-      <TableSection>
+      <>
         {deleteError ? <Message variant="danger">{deleteError}</Message> : ""}
         {createError ? <Message variant="danger">{deleteError}</Message> : ""}
         {loading ? (
@@ -109,40 +129,50 @@ const AdminStaffs = ({ history }) => {
         ) : error ? (
           <Message variant="danger">{error}</Message>
         ) : (
-          <Table
-            responsive
-            striped
-            bordered
-            hover
-            variant={darkMode ? "dark" : "white"}
-          >
-            <thead>
-              <tr>
-                <th>Full Name</th>
-                <th>Phone Number</th>
-                <th>Email Address</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {staffs.map((staff) => (
-                <tr key={staff._id}>
-                  <td>{staff.fullName}</td>
-                  <td>{staff.email}</td>
-                  <td>{staff.phone}</td>
-
-                  <td style={{ textAlign: "center" }}>
-                    <i
-                      className="fas fa-trash"
-                      onClick={() => staffDeleteHandler(staff._id)}
-                    ></i>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <>
+            {staffs && staffs.length === 0 && (
+              <NoStaffs>Staff List is Empty.</NoStaffs>
+            )}
+            <ListGroup as="ol" numbered>
+              {staffs &&
+                staffs.map((staff) => (
+                  <ListGroup.Item
+                    className={
+                      darkMode
+                        ? "d-flex justify-content-between align-items-start bg-dark text-white"
+                        : "d-flex justify-content-between align-items-start bg-light text-dark"
+                    }
+                    key={staff._id}
+                  >
+                    <StaffContent>
+                      <div>
+                        <Image
+                          src={`${BASE_URL}${staff.image}`}
+                          height="180px"
+                          width="240px"
+                          alt="staff"
+                        />
+                      </div>
+                      <StaffDetail darkmode={darkMode}>
+                        <h4>Full Name: {staff.fullName}</h4>
+                        <h4>Position: {staff.position}</h4>
+                        <h4>Email: {staff.email}</h4>
+                        <h4>Phone No: {staff.phone}</h4>
+                        <Button
+                          size="sm"
+                          className="btn-danger mt-1"
+                          onClick={() => staffDeleteHandler(staff._id)}
+                        >
+                          Delete
+                        </Button>
+                      </StaffDetail>
+                    </StaffContent>
+                  </ListGroup.Item>
+                ))}
+            </ListGroup>
+          </>
         )}
-      </TableSection>
+      </>
     </StaffContainer>
   );
 };

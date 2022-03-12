@@ -107,6 +107,8 @@ const AdminRegistration = ({ match, history }) => {
               <h4>Address: {registration.address}</h4>
               <h4>Preference: {registration.preference}</h4>
 
+              {registration.lvl && <h4>Level: {registration.lvl}</h4>}
+
               {registration.faculty && <h4>Faculty: {registration.faculty}</h4>}
 
               <h4>

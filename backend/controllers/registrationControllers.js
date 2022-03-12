@@ -1,7 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Registration from "../models/registrationModel.js";
 import axios from "axios";
-import path from "path";
 
 // @desc    Fetch all Registrations
 // @route   GET /api/registration
@@ -49,6 +48,7 @@ const createRegistrations = asyncHandler(async (req, res) => {
     phone,
     address,
     preference,
+    lvl,
     faculty,
     markSheet,
     ppPhoto,
@@ -71,6 +71,7 @@ const createRegistrations = asyncHandler(async (req, res) => {
     phone,
     address,
     preference,
+    lvl,
     faculty,
     markSheet,
     ppPhoto,
@@ -88,6 +89,7 @@ const createRegistrations = asyncHandler(async (req, res) => {
       phone: registration.phone,
       address: registration.address,
       preference: registration.preference,
+      lvl: registration.preference,
       faculty: registration.faculty,
       markSheet: registration.markSheet,
       ppPhoto: registration.ppPhoto,

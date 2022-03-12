@@ -45,6 +45,12 @@ const registrationSchema = mongoose.Schema(
         "Senior Higher Secondary",
       ],
     },
+    lvl: {
+      type: String,
+      required: function () {
+        return true ? this.preference !== "Senior Higher Secondary" : false;
+      },
+    },
     faculty: {
       type: String,
       required: function () {

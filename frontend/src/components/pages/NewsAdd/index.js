@@ -201,6 +201,7 @@ const AdminNews = ({ history }) => {
         <Form.Control.Feedback>
           Select to change the section
         </Form.Control.Feedback>
+
         <Form.Group controlId="image" className="mb-3">
           <Form.Label>Choose Image (If Any)</Form.Label>
           <Form.Control

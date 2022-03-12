@@ -101,7 +101,7 @@ const AdminAllNews = () => {
         </ButtonContent>
       </Title>
       <AllNews>
-        {news && news.length === 0 ? (
+        {news && news.length === 0 && (
           <NoNews>
             Sorry we couldn't find any latest news. Please stay updated.
             <div>
@@ -114,8 +114,6 @@ const AdminAllNews = () => {
               </button>
             </div>
           </NoNews>
-        ) : (
-          ""
         )}
         {loading ? (
           <Loader />
@@ -143,7 +141,7 @@ const AdminAllNews = () => {
                     </p>
                   </div>
                   <LinkContainer to={`/admin/news/${n._id}/edit`}>
-                    <i className="fas fa-pencil-alt"></i>
+                    <i className="fas fa-pencil-alt" />
                   </LinkContainer>
                   <i
                     style={{ marginLeft: "15px" }}

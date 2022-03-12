@@ -10,6 +10,7 @@ import {
 } from "../controllers/registrationControllers.js";
 
 import { protect } from "../middleware/authMiddleware.js";
+import asyncHandler from "express-async-handler";
 
 const router = express.Router();
 
@@ -153,9 +154,13 @@ router.post("/uploads/ppphoto", upload, (req, res) => {
   res.send(ppphotoFile[0].path);
 });
 
-router.post("/uploads/application", upload, (req, res) => {
-  const applicationFile = req.files.application;
-  res.send(applicationFile[0].path);
-});
+router.post(
+  "/uploads/application",
+  upload,
+  asyncHandler(async (req, res) => {
+    const applicationFile = req.files.application;
+    res.send(applicationFile[0].path);
+  })
+);
 
 export default router;

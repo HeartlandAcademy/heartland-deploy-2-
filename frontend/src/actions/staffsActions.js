@@ -34,7 +34,7 @@ export const listStaffs = () => async (dispatch) => {
 };
 
 export const createStaffs =
-  (fullName, email, phone) => async (dispatch, getState) => {
+  (image, fullName, email, position, phone) => async (dispatch, getState) => {
     try {
       dispatch({ type: STAFFS_CREATE_REQUEST });
 
@@ -51,7 +51,7 @@ export const createStaffs =
 
       const { data } = await axios.post(
         `${BASE_URL}/api/staffs`,
-        { fullName, email, phone },
+        { image, fullName, email, position, phone },
         config
       );
 

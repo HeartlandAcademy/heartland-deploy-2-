@@ -62,6 +62,7 @@ const Registration = ({ history }) => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [preference, setPreference] = useState("Preschool");
+  const [lvl, setLvl] = useState("");
   const [faculty, setFaculty] = useState("");
   const [markSheet, setMarkSheet] = useState("");
   const [markSheetUpload, setMarkSheetUpload] = useState(false);
@@ -74,6 +75,7 @@ const Registration = ({ history }) => {
   const [attachApplicationUpload, setAttachApplicationUpload] = useState(false);
   const [token, setToken] = useState("");
   const [showError, setShowError] = useState(false);
+  const [showError1, setShowError1] = useState(false);
   const [validated, setValidated] = useState(false);
   const [fileError1, setFileError1] = useState(false);
   const [fileError2, setFileError2] = useState(false);
@@ -236,6 +238,7 @@ const Registration = ({ history }) => {
   };
 
   const registrationHandler = (event) => {
+    console.log(lvl);
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -244,8 +247,11 @@ const Registration = ({ history }) => {
     } else {
       if (token === "") {
         setShowError(true);
+      } else if (lvl === "") {
+        setShowError1(true);
       } else {
         setShowError(false);
+        setShowError1(false);
         dispatch(
           createNewRegistrations(
             firstName,
@@ -254,6 +260,7 @@ const Registration = ({ history }) => {
             phone,
             address,
             preference,
+            lvl,
             faculty,
             markSheet,
             ppPhoto,
@@ -286,7 +293,10 @@ const Registration = ({ history }) => {
       <Container>
         <Section1 className="container registerForm">
           {showError && (
-            <Message variant="danger">Please fill out the reCAPTCHA </Message>
+            <Message variant="danger">Please fill out the reCAPTCHA</Message>
+          )}
+          {showError1 && (
+            <Message variant="danger">Please Select Level Value</Message>
           )}
           {error && <Message variant="danger">{error}</Message>}
 
@@ -401,6 +411,134 @@ const Registration = ({ history }) => {
               </Form.Select>
             </FloatingLabel>
 
+            {preference === "Preschool" && (
+              <div className="mb-4">
+                <Form.Check
+                  inline
+                  label="Nursery"
+                  name="group1"
+                  type="radio"
+                  value={"Nursery"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline1`}
+                />
+                <Form.Check
+                  inline
+                  label="Kindergarten"
+                  name="group1"
+                  type="radio"
+                  value={"Kindergarten"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline2`}
+                />
+              </div>
+            )}
+
+            {preference === "Primary" && (
+              <div className="mb-4">
+                <Form.Check
+                  inline
+                  label="1"
+                  name="group1"
+                  type="radio"
+                  value={"1"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline1`}
+                />
+                <Form.Check
+                  inline
+                  label="2"
+                  name="group1"
+                  type="radio"
+                  value={"2"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline2`}
+                />
+                <Form.Check
+                  inline
+                  label="3"
+                  name="group1"
+                  type="radio"
+                  value={"3"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline2`}
+                />
+                <Form.Check
+                  inline
+                  label="4"
+                  name="group1"
+                  type="radio"
+                  value={"4"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline2`}
+                />
+                <Form.Check
+                  inline
+                  label="5"
+                  name="group1"
+                  type="radio"
+                  value={"5"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline2`}
+                />
+              </div>
+            )}
+
+            {preference === "Lower Secondary" && (
+              <div className="mb-4">
+                <Form.Check
+                  inline
+                  label="6"
+                  name="group1"
+                  type="radio"
+                  value={"6"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline1`}
+                />
+                <Form.Check
+                  inline
+                  label="7"
+                  name="group1"
+                  type="radio"
+                  value={"7"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline2`}
+                />
+                <Form.Check
+                  inline
+                  label="8"
+                  name="group1"
+                  type="radio"
+                  value={"8"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline2`}
+                />
+              </div>
+            )}
+
+            {preference === "Junior Higher Secondary" && (
+              <div className="mb-4">
+                <Form.Check
+                  inline
+                  label="9"
+                  name="group1"
+                  type="radio"
+                  value={"9"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline1`}
+                />
+                <Form.Check
+                  inline
+                  label="10"
+                  name="group1"
+                  type="radio"
+                  value={"10"}
+                  onChange={(e) => setLvl(e.target.value)}
+                  id={`inline2`}
+                />
+              </div>
+            )}
+
             {preference === "Senior Higher Secondary" && (
               <FloatingLabel controlId="floatingSelect" label="Faculty">
                 <Form.Select
@@ -468,7 +606,7 @@ const Registration = ({ history }) => {
               </Form.Group>
             )}
 
-            <h4>Application Form</h4>
+            <h4>Application</h4>
 
             <FloatingLabel
               controlId="floatingTextarea2"
