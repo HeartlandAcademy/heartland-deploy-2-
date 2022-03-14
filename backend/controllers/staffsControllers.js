@@ -5,7 +5,7 @@ import Staffs from "../models/staffsModel.js";
 // @route   GET /api/staffs
 // @access  Public
 const getStaffs = asyncHandler(async (req, res) => {
-  const staffs = await Staffs.find({});
+  const staffs = await Staffs.find({}).sort({ fullName: 1 });
   res.json(staffs);
 });
 

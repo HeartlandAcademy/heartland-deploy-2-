@@ -207,8 +207,7 @@ const Footer = () => {
         className="text-center p-3"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
       >
-        Copyright © {`${getYear()}`}, Heartland Academy | Powered by R.K.
-        Multipurpose
+        Copyright © {`${getYear()}`}, Heartland Academy
       </div>
     </footer>
   );
