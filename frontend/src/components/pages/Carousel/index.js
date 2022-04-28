@@ -146,13 +146,15 @@ const AdminAllCarousel = ({ history }) => {
               <NoCarousel>
                 Sorry we couldn't find any added Carousel. Please stay updated.
                 <div>
-                  <button
-                    className={
-                      darkMode ? "btn btn-dark mt-4" : "btn btn-primary mt-4"
-                    }
-                  >
-                    Add Some
-                  </button>
+                  <LinkContainer to={`/admin/carousel`}>
+                    <button
+                      className={
+                        darkMode ? "btn btn-dark mt-4" : "btn btn-primary mt-4"
+                      }
+                    >
+                      Add Some
+                    </button>
+                  </LinkContainer>
                 </div>
               </NoCarousel>
             ) : (

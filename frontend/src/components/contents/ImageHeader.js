@@ -13,6 +13,9 @@ const StyledLink = styled(NavLink)`
     text-decoration: none;
   }
   color: #fff;
+  &:hover {
+    color: rgb(0, 148, 68);
+  }
 `;
 
 const Section1 = styled.div`

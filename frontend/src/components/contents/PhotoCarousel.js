@@ -9,6 +9,7 @@ import { listCarousel } from "../../actions/carouselActions";
 import Message from "./Message";
 
 import default2 from "../../assets/default/default2.png";
+import { BASE_URL } from "../../api";
 
 const fadeInTop = keyframes` 
   from {
@@ -133,7 +134,7 @@ const PhotoCarousel = () => {
             <Carousel.Item interval={3300} key={c._id}>
               <img
                 className="d-block w-100"
-                src={c.image}
+                src={`${BASE_URL}${c.image}`}
                 alt="Carousel Images"
               />
               <Carousel.Caption>
