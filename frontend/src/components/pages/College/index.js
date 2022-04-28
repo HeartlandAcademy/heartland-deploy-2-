@@ -389,9 +389,9 @@ const College = () => {
                         <li> English</li>
                         <li> Nepali</li>
                         <li> Social</li>
-                        <li> Major English</li>
                         <li> Child Development and Learning</li>
                         <li> Computer Science</li>
+                        <li> Major English</li>
                         <li> Instructional Pedagogy & Evaluation</li>
                         <li> Teaching Practice</li>
                         <li> Startup Project</li>
