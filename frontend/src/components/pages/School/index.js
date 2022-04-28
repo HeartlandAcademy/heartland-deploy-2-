@@ -13,6 +13,7 @@ import Back from "../../../assets/others/Background.jpg";
 import Meta from "../../contents/Meta";
 import { listStudentsTestimonials } from "../../../actions/testimonialsActions";
 import { BASE_URL } from "../../../api";
+import { LinkContainer } from "react-router-bootstrap";
 
 const Section1 = styled.div`
   margin-top: 20px;
@@ -291,7 +292,9 @@ const School = () => {
             </h4>
             <h5>Mr. Patrick Frank Price</h5>
             <h5>(CEO of CLCR Australia / HA Project Director)</h5>
-            <button className="btn btn-warning">More Videos</button>
+            <LinkContainer to={"/gallery/videos"}>
+              <button className="btn btn-warning">More Videos</button>
+            </LinkContainer>
           </Info>
           <VideoSection>Video Section</VideoSection>
         </MainMessage>

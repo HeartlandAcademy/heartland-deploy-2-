@@ -20,10 +20,12 @@ const StyledLink = styled(NavLink)`
 
 const Section1 = styled.div`
   background-image: url(${(props) => props.img});
+  background-color: rgba(255, 255, 255, 0.1);
+  background-blend-mode: lighten;
   background-attachment: fixed;
   display: grid;
   justify-content: center;
-  padding: 65px;
+  padding: 70px;
   margin-bottom: 18px;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -32,7 +34,7 @@ const Section1 = styled.div`
 
 const Title = styled.div`
   text-align: center;
-  background-color: #1b1b36;
+  /* background-color: #1b1b36; */
   padding: 18px 28px;
   h3 {
     color: #fff;
@@ -46,7 +48,7 @@ const Title = styled.div`
 const ImageHeader = ({ mtitle, title, image }) => {
   return (
     <Section1 img={image}>
-      <Title>
+      <Title className="bg-custom">
         <h3>{mtitle}</h3>
         <h5>
           <StyledLink exact to="/">

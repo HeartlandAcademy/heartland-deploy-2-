@@ -61,21 +61,6 @@ const Footer = () => {
           >
             <i className="fab fa-instagram"></i>
           </a>
-          <a
-            className="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-          >
-            <i className="fab fa-linkedin-in"></i>
-          </a>
-
-          <a
-            className="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-          >
-            <i className="fab fa-github"></i>
-          </a>
         </SocialMedia>
 
         <section className="mb-5 p-2">
@@ -185,16 +170,6 @@ const Footer = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <i className="fab fa-instagram mt-3 mr-2"></i>Instagram
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#!"
-                    target="_blank"
-                    className="text-white"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <i className="fab fa-github mt-3 mr-2"></i>Github
                   </a>
                 </li>
               </ul>

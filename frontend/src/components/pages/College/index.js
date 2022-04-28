@@ -128,6 +128,7 @@ const ProgramTitle = styled.h1`
   font-size: 50px;
   text-align: center;
   padding: 10px;
+  margin-bottom: 13px;
 `;
 
 const CollegeProgram = styled.div`
@@ -140,6 +141,16 @@ const CollegeProgram = styled.div`
   p {
     font-size: 20px;
     text-align: center;
+  }
+`;
+
+const ProgramList = styled.ul`
+  list-style: none;
+  li {
+    font-size: 18px;
+    &:before {
+      content: "✓";
+    }
   }
 `;
 
@@ -270,9 +281,20 @@ const College = () => {
                     show={scienceModalShow}
                     onHide={() => setScienceModalShow(false)}
                     title="Science"
-                    desc="English, Nepali, Social/Mathematics, Physics, Chemistry,
-                    Biology, Computer Science, STEM project, Startup Project, 
-                    Internship Program"
+                    desc={
+                      <ProgramList>
+                        <li> English</li>
+                        <li> Nepali</li>
+                        <li> Social/Mathematics</li>
+                        <li> Physics</li>
+                        <li> Chemistry</li>
+                        <li> Biology</li>
+                        <li> Computer Science</li>
+                        <li> STEM project</li>
+                        <li> Startup Project</li>
+                        <li> Internship Program</li>
+                      </ProgramList>
+                    }
                   />
                 </div>
               </div>
@@ -310,8 +332,20 @@ const College = () => {
                     show={managementModalShow}
                     onHide={() => setManagementModalShow(false)}
                     title="Management"
-                    desc="English, Nepali, Social, Accountancy, Economics, Computer
-                    Science, Hotel Management, Startup Project, Internship Program"
+                    desc={
+                      <ProgramList>
+                        <li> English</li>
+                        <li> Nepali</li>
+                        <li> Social</li>
+                        <li> Accountancy</li>
+                        <li> Economics</li>
+                        <li> Computer</li>
+                        <li> Science</li>
+                        <li> Hotel Management</li>
+                        <li> Startup Project</li>
+                        <li> Internship Program</li>
+                      </ProgramList>
+                    }
                   />
                 </div>
               </div>
@@ -350,9 +384,20 @@ const College = () => {
                     show={educationModalShow}
                     onHide={() => setEducationModalShow(false)}
                     title="Education"
-                    desc="English, Nepali, Social, Child Development and Learning,
-                    Major English, Computer Science, Instructional Pedagogy & Evaluation,
-                    Teaching practice, Startup Project, Internship Program"
+                    desc={
+                      <ProgramList>
+                        <li> English</li>
+                        <li> Nepali</li>
+                        <li> Social</li>
+                        <li> Child Development and Learning</li>
+                        <li> Major English</li>
+                        <li> Computer Science</li>
+                        <li> Instructional Pedagogy & Evaluation</li>
+                        <li> Teaching Practice</li>
+                        <li> Startup Project</li>
+                        <li> Internship Program</li>
+                      </ProgramList>
+                    }
                   />
                 </div>
               </div>
