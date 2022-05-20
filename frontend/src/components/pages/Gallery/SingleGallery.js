@@ -36,6 +36,7 @@ const Title = styled.h2`
 const ImagesContainer = styled.div`
   padding: 10px 20px;
   min-height: 100vh;
+  overflow: hidden;
 `;
 
 const SingleAlbum = ({ match }) => {
@@ -90,7 +91,11 @@ const SingleAlbum = ({ match }) => {
         <>
           <Title>{albumImages && albumImages.name}</Title>
           <ImagesContainer>
-            <Gallery images={imageCollection} backdropClosesModal={true} />
+            <Gallery
+              images={imageCollection}
+              margin={5}
+              backdropClosesModal={true}
+            />
           </ImagesContainer>
         </>
       )}
