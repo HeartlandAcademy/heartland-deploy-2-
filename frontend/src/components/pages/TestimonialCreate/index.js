@@ -7,7 +7,6 @@ import { Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-import StudentsModal from "../../contents/StudentsModal";
 import VisitorsModal from "../../contents/VisitorsModal";
 import Message from "../../contents/Message";
 import Loader from "../../contents/Loader";
@@ -26,6 +25,7 @@ import {
   deleteVisitorsTestimonials,
 } from "../../../actions/testimonialsActions";
 import { BASE_URL } from "../../../api";
+import StudentsModal from "../../contents/StudentsModal";
 
 const Section = styled.div`
   padding: 30px 40px;

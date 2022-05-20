@@ -3,6 +3,8 @@ import { Modal } from "react-bootstrap";
 import { listModal } from "../../actions/modalActions";
 import { useSelector, useDispatch } from "react-redux";
 
+import { BASE_URL } from "../../../api";
+
 import defaultLoading from "../../assets/default/default-loading.png";
 
 export default function PopupModal(props) {
@@ -31,9 +33,10 @@ export default function PopupModal(props) {
             {modal && modal.length === 0 ? (
               ""
             ) : (
+              // eslint-disable-next-line jsx-a11y/img-redundant-alt
               <img
                 className="d-block w-100"
-                src={modal && modal[0].image}
+                src={`${BASE_URL}${modal && modal[0].image}`}
                 alt="Modal Image"
               />
             )}
