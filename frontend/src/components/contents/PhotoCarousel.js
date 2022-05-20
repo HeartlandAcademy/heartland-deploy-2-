@@ -62,7 +62,6 @@ const ConBtn = styled.button`
 
 const CarouselHead = styled.p`
   font-size: 18px;
-  color: rgb(221, 221, 221);
   text-transform: uppercase;
   margin-bottom: 8px;
   animation-name: ${fadeInBottom};
@@ -71,10 +70,22 @@ const CarouselHead = styled.p`
 
 const CarouselInfo = styled.h2`
   font-size: 26px;
+  color: #fff;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 7px;
   animation-name: ${fadeInTop};
   animation-duration: 3s;
+`;
+
+const CarouselDescContent = styled.div`
+  padding: 10px 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  @media (max-width: 700px) {
+    padding: 5px 0px;
+  }
+  @media (max-width: 400px) {
+    display: none;
+  }
 `;
 
 const PhotoCarousel = () => {
@@ -131,15 +142,18 @@ const PhotoCarousel = () => {
             </Carousel.Caption>
           </Carousel.Item>
           {carousel.map((c) => (
-            <Carousel.Item interval={3300} key={c._id}>
+            <Carousel.Item interval={3300000} key={c._id}>
               <img
                 className="d-block w-100"
                 src={`${BASE_URL}${c.image}`}
                 alt="Carousel Images"
               />
+
               <Carousel.Caption>
-                <CarouselHead>{c.title}</CarouselHead>
-                <CarouselInfo>{c.description}</CarouselInfo>
+                <CarouselDescContent>
+                  <CarouselHead>{c.title}</CarouselHead>
+                  <CarouselInfo>{c.description}</CarouselInfo>
+                </CarouselDescContent>
               </Carousel.Caption>
             </Carousel.Item>
           ))}
