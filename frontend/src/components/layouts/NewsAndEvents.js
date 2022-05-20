@@ -48,7 +48,7 @@ const NoNews = styled.div`
 const NewsSection = styled.div`
   flex: 1.5;
   overflow-y: auto;
-  height: 570px;
+  height: 450px;
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
     box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
@@ -257,11 +257,12 @@ const NewsAndEvents = () => {
                           <Card.Img
                             style={{ height: "60%" }}
                             variant="top"
-                            src={
-                              event.image
-                                ? `${BASE_URL}${event.image}`
-                                : Background
-                            }
+                            // src={
+                            //   event.image
+                            //     ? `${BASE_URL}${event.image}`
+                            //     : Background
+                            // }
+                            src="http://157.245.58.127:5000/uploads/eventsImages/image-1652192565481.png"
                           />
                           <Card.Body>
                             <Card.Title>
