@@ -25,7 +25,7 @@ import {
   deleteVisitorsTestimonials,
 } from "../../../actions/testimonialsActions";
 import { BASE_URL } from "../../../api";
-import StudentsModal from "../../contents/StudentsModal";
+import StudentModal from "../../contents/StudentModal";
 
 const Section = styled.div`
   padding: 30px 40px;
@@ -441,7 +441,7 @@ const TestimonialCreate = ({ history }) => {
               <i className="fas fa-plus"></i> New
             </Button>
           </ButtonContent>
-          <StudentsModal
+          <StudentModal
             show={studentModalShow}
             onHide={() => setStudentModalShow(false)}
           />
