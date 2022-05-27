@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { ListGroup, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../../contents/Loader";
-import Message from "../../contents/Message";
-import { deleteEvents, listEventsAdmin } from "../../../actions/eventsActions";
-import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import { deleteEvents, listEventsAdmin } from "../../../actions/eventsActions";
+import { LinkContainer } from "react-router-bootstrap";
 import { Pagination } from "../../contents/Pagination";
+import Loader from "../../contents/Loader";
+import Message from "../../contents/Message";
 
 const NewsContainer = styled.div`
   padding: 10px 50px;

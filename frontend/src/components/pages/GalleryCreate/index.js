@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { useSelector, useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-import { useSelector, useDispatch } from "react-redux";
 import { addGalleryAlbums } from "../../../actions/galleryActions";
-import Message from "../../contents/Message";
-import Loader from "../../contents/Loader";
 import { GALLERY_ALBUM_CREATE_RESET } from "../../../actions/types";
 import { BASE_URL } from "../../../api";
+import Message from "../../contents/Message";
+import Loader from "../../contents/Loader";
 
 const Section = styled.div`
   height: 100vh;

@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+
 import { Placeholder, Col, Card, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 
+import { listStaffs } from "../../../actions/staffsActions";
+import { BASE_URL } from "../../../api";
 import ImageHeader from "../../contents/ImageHeader";
 import test from "../../../assets/imageheaderphotos/test.JPG";
-import { listStaffs } from "../../../actions/staffsActions";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
-import { BASE_URL } from "../../../api";
 import defaultImage from "../../../assets/default/default-loading.png";
 
 const Section1 = styled.div`

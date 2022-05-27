@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 
 import { Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
+
+import { deleteCarousel, listCarousel } from "../../../actions/carouselActions";
 import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
-import { LinkContainer } from "react-router-bootstrap";
-import { deleteCarousel, listCarousel } from "../../../actions/carouselActions";
-import { toast } from "react-toastify";
 
 const Whole = styled.div`
   margin: 30px 50px;

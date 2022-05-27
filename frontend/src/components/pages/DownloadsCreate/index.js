@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import Loader from "../../contents/Loader";
-import Message from "../../contents/Message";
+
 import { createDownload } from "../../../actions/downloadsActions";
 import { toast } from "react-toastify";
 import { FILE_CREATE_RESET } from "../../../actions/types";
 import { BASE_URL } from "../../../api";
+import Loader from "../../contents/Loader";
+import Message from "../../contents/Message";
 
 const Section = styled.div`
   height: 100vh;

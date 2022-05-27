@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-import Loader from "../../contents/Loader";
+import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+
+import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import ModalImageViewer from "../../contents/ModalImageViewer";
 import { deleteModal } from "../../../actions/modalActions";

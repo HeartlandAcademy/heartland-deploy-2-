@@ -1,5 +1,3 @@
-import React from "react";
-
 const ControlPanel = (props) => {
   const { pageNumber, numPages, setPageNumber, scale, setScale } = props;
 

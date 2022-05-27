@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
-import { useSelector, useDispatch } from "react-redux";
-import { LinkContainer } from "react-router-bootstrap";
 import {
   listCareerDetails,
   updateCareer,

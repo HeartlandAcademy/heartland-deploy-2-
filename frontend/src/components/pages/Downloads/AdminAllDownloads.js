@@ -1,19 +1,20 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
-import download from "downloadjs";
 
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { LinkContainer } from "react-router-bootstrap";
+import download from "downloadjs";
+
 import {
   deleteDownload,
   listDownloads,
 } from "../../../actions/downloadsActions";
+import { BASE_URL } from "../../../api";
 import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import { LinkContainer } from "react-router-bootstrap";
-import { BASE_URL } from "../../../api";
 
 const Whole = styled.div`
   margin: 30px 50px;

@@ -1,13 +1,15 @@
 /* eslint-disable no-useless-escape */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+
 import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 
+import { listGalleryVideos } from "../../../actions/galleryActions";
+import { deleteTeams, listTeams } from "../../../actions/teamsActions";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
 import ImageHeader from "../../contents/ImageHeader";
-import { listGalleryVideos } from "../../../actions/galleryActions";
 import CardLoader from "../../contents/CardLoader";
 import test from "../../../assets/imageheaderphotos/test.JPG";
 

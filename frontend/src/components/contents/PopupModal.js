@@ -1,10 +1,11 @@
 import { useEffect } from "react";
+
 import { Modal } from "react-bootstrap";
-import { listModal } from "../../actions/modalActions";
 import { useSelector, useDispatch } from "react-redux";
 
-import defaultLoading from "../../assets/default/default-loading.png";
+import { listModal } from "../../actions/modalActions";
 import { BASE_URL } from "../../api";
+import defaultLoading from "../../assets/default/default-loading.png";
 
 export default function PopupModal(props) {
   const addedModal = useSelector((state) => state.addedModal);

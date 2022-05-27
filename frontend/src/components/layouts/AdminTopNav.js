@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { sidebarToggler, adminModeChanger } from "../../actions/settingActions";
-import SettingsModal from "../contents/SettingModal";
 import { logOut } from "../../actions/userActions";
-import { useHistory } from "react-router-dom";
+import SettingsModal from "../contents/SettingModal";
 
 const Navbar = styled.div`
   height: 70px;

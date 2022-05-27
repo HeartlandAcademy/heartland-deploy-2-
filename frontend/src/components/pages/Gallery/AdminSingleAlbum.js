@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
-import Gallery from "react-grid-gallery";
-import { gallerySingleAlbum } from "../../../actions/galleryActions";
-import styled from "styled-components";
 import { LinkContainer } from "react-router-bootstrap";
 import { Button, Placeholder } from "react-bootstrap";
-import Message from "../../contents/Message";
 
-import CardLoader from "../../contents/CardLoader";
+import { gallerySingleAlbum } from "../../../actions/galleryActions";
 import { BASE_URL } from "../../../api";
+import Gallery from "react-grid-gallery";
+import styled from "styled-components";
+import Message from "../../contents/Message";
+import CardLoader from "../../contents/CardLoader";
 
 const AlbumSection = styled.div`
   padding: 20px 40px;

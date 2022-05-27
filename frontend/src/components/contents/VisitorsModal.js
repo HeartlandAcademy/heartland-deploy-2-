@@ -1,13 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 import { Modal, Button, Form, Container } from "react-bootstrap";
 import { toast } from "react-toastify";
-import Message from "./Message";
+
+import { BASE_URL } from "../../api";
 import { createVisitorsTestimonials } from "../../actions/testimonialsActions";
 import Loader from "./Loader";
-import { BASE_URL } from "../../api";
+import Message from "./Message";
 
 export default function VisitorsModal(props) {
   const [fullName, setFullName] = useState("");

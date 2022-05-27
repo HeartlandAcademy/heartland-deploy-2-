@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import { Row, Placeholder } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
-import { useDispatch, useSelector } from "react-redux";
+import { listVisitorsTestimonials } from "../../../actions/testimonialsActions";
+import { BASE_URL } from "../../../api";
 import ProgramModal from "../../contents/ProgramModal";
-
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
-import { listVisitorsTestimonials } from "../../../actions/testimonialsActions";
-
 import college from "../../../assets/imageheaderphotos/college.jpg";
 import ImageHeader from "../../contents/ImageHeader";
 import scienceImage from "../../../assets/collegePrograms/sciencelab.jpg";
 import managementImage from "../../../assets/collegePrograms/management.jpg";
 import educationImage from "../../../assets/collegePrograms/education.jpg";
 import "./index.css";
-import { BASE_URL } from "../../../api";
 
 const Section1 = styled.div`
   padding: 20px 5px;

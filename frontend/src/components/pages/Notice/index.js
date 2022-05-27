@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import moment from "moment";
 import download from "downloadjs";
+import { Container, Placeholder } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 
 import ImageHeader from "../../contents/ImageHeader";
 import School from "../../../assets/others/School4.jpg";
-import { useSelector, useDispatch } from "react-redux";
 import Message from "../../contents/Message";
 import PdfModal from "../../contents/PdfModal";
 import Meta from "../../contents/Meta";
-import { Container, Placeholder } from "react-bootstrap";
 import { listNotices } from "../../../actions/noticesActions";
 import { BASE_URL } from "../../../api";
 

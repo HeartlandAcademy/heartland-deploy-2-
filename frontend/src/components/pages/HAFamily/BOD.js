@@ -1,5 +1,6 @@
-import React from "react";
 import styled from "styled-components";
+
+import { Container } from "react-bootstrap";
 
 import ImageHeader from "../../contents/ImageHeader";
 import director from "../../../assets/BOD/director.png";
@@ -7,7 +8,6 @@ import principal from "../../../assets/BOD/principal.png";
 import president from "../../../assets/BOD/president.png";
 import executive from "../../../assets/BOD/executive.png";
 import test from "../../../assets/imageheaderphotos/test.JPG";
-import { Container } from "react-bootstrap";
 import Meta from "../../contents/Meta";
 
 const Message0 = styled.div`

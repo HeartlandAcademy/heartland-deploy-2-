@@ -1,16 +1,17 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
+
 import { useSelector, useDispatch } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-
 import { Form, Button } from "react-bootstrap";
-import Loader from "../../contents/Loader";
-import axios from "axios";
-import Message from "../../contents/Message";
-import { createCarousel } from "../../../actions/carouselActions";
 import { toast } from "react-toastify";
+import axios from "axios";
+
+import { createCarousel } from "../../../actions/carouselActions";
 import { CAROUSEL_CREATE_RESET } from "../../../actions/types";
 import { BASE_URL } from "../../../api";
+import Loader from "../../contents/Loader";
+import Message from "../../contents/Message";
 
 const Section = styled.div`
   padding: 90px 40px;

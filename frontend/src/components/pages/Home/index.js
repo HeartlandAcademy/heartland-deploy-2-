@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 
+import { listModal } from "../../../actions/modalActions";
 import PhotoCarousel from "../../contents/PhotoCarousel";
 import Details from "../../layouts/Details";
 import Teams from "../../layouts/Teams";
@@ -8,7 +10,6 @@ import NewsAndEvents from "../../layouts/NewsAndEvents";
 import Partners from "../../layouts/Partners";
 import PopupModal from "../../contents/PopupModal";
 import Meta from "../../contents/Meta";
-import { listModal } from "../../../actions/modalActions";
 
 const Home = () => {
   const [modalShow, setModalShow] = useState(false);

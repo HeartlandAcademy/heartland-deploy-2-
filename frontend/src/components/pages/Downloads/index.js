@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+
+import { useSelector, useDispatch } from "react-redux";
+import { Container, Placeholder } from "react-bootstrap";
 import download from "downloadjs";
 import moment from "moment";
 
+import { listDownloads } from "../../../actions/downloadsActions";
+import { BASE_URL } from "../../../api";
 import ImageHeader from "../../contents/ImageHeader";
 import School from "../../../assets/others/School4.jpg";
 import Meta from "../../contents/Meta";
-import { useSelector, useDispatch } from "react-redux";
-import { Container, Placeholder } from "react-bootstrap";
-import { listDownloads } from "../../../actions/downloadsActions";
 import Message from "../../contents/Message";
-import { BASE_URL } from "../../../api";
 
 const NoDownloads = styled.div`
   padding: 140px 60px;

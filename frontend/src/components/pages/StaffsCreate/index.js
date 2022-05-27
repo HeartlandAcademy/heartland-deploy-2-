@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import styled from "styled-components";
 
 import { Button, ListGroup, Image } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
+import { toast } from "react-toastify";
+
+import { STAFFS_CREATE_RESET } from "../../../actions/types";
+import { BASE_URL } from "../../../api";
 import { deleteStaffs, listStaffs } from "../../../actions/staffsActions";
 import Loader from "../../contents/Loader";
 import Message from "../../contents/Message";
 import StaffsModal from "../../contents/StaffModal";
-import { toast } from "react-toastify";
-import { STAFFS_CREATE_RESET } from "../../../actions/types";
-import { BASE_URL } from "../../../api";
 
 const StaffContainer = styled.div`
   padding: 30px 40px;

@@ -1,16 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import parse from "html-react-parser";
 import DOMPurify from "dompurify";
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../../contents/Loader";
-import Message from "../../contents/Message";
-
-import ImageHeader from "../../contents/ImageHeader";
-import heartland from "../../../assets/carousel/heartland.jpg";
-import Meta from "../../contents/Meta";
+import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import {
   Container,
@@ -20,11 +15,15 @@ import {
   Button,
   Placeholder,
 } from "react-bootstrap";
-import { listCareerDetails } from "../../../actions/careersActions";
 
+import { listCareerDetails } from "../../../actions/careersActions";
 import { CAREERS_CREATE_RESET } from "../../../actions/types";
-import { Link } from "react-router-dom";
 import { BASE_URL } from "../../../api";
+import ImageHeader from "../../contents/ImageHeader";
+import heartland from "../../../assets/carousel/heartland.jpg";
+import Meta from "../../contents/Meta";
+import Loader from "../../contents/Loader";
+import Message from "../../contents/Message";
 
 const Title = styled.div`
   color: rgb(1, 34, 55);

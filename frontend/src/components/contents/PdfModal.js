@@ -1,7 +1,9 @@
 import { useState } from "react";
+
 import { Modal, Button } from "react-bootstrap";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+
 import ControlPanel from "./ControlPanel";
 
 export default function PdfModal(props) {
@@ -13,7 +15,6 @@ export default function PdfModal(props) {
   function onDocumentLoadSuccess({ numPages }) {
     setIsLoading(false);
     setNumPages(numPages);
-    console.log("sdfsdfs");
   }
   return (
     <Modal

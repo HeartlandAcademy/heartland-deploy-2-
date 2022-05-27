@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
@@ -7,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Card } from "react-bootstrap";
 import { listTeams } from "../../actions/teamsActions";
-import Message from "../contents/Message";
 import { BASE_URL } from "../../api";
+import Message from "../contents/Message";
 
 const Team = styled.div`
   background-color: #111;

@@ -1,13 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 import { Modal, Button, Form, Container } from "react-bootstrap";
 import { toast } from "react-toastify";
-import Message from "./Message";
-import Loader from "./Loader";
+
 import { createStudentsTestimonials } from "../../actions/testimonialsActions";
 import { BASE_URL } from "../../api";
+import Message from "./Message";
+import Loader from "./Loader";
 
 export default function StudentsModal(props) {
   const [fullName, setFullName] = useState("");

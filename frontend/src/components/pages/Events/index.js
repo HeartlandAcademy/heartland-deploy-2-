@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+
+import { useDispatch, useSelector } from "react-redux";
+import { Card, Placeholder } from "react-bootstrap";
 import moment from "moment";
 
 import ImageHeader from "../../contents/ImageHeader";
 import calendar from "../../../assets/others/calendar.jpg";
-import { Card, Placeholder } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
 import { Pagination } from "../../contents/Pagination";

@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+
 import { Tab, Row, Col, Nav, Placeholder } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
-import { useDispatch, useSelector } from "react-redux";
+import { listStudentsTestimonials } from "../../../actions/testimonialsActions";
+import { BASE_URL } from "../../../api";
 import Message from "../../contents/Message";
-
 import ImageHeader from "../../contents/ImageHeader";
 import test from "../../../assets/imageheaderphotos/test.JPG";
 import Back from "../../../assets/others/Background.jpg";
 import Meta from "../../contents/Meta";
-import { listStudentsTestimonials } from "../../../actions/testimonialsActions";
-import { BASE_URL } from "../../../api";
-import { LinkContainer } from "react-router-bootstrap";
 
 const Section1 = styled.div`
   margin-top: 20px;

@@ -1,5 +1,6 @@
-import { Modal, Button } from "react-bootstrap";
 import styled from "styled-components";
+
+import { Modal, Button } from "react-bootstrap";
 
 const Title = styled.h3`
   font-weight: 600;

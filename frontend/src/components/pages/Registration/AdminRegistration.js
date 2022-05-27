@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Accordion, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+
 import {
   deleteRegistration,
   listRegistrationDetails,
 } from "../../../actions/registrationActions";
-import Loader from "../../contents/Loader";
-import { toast } from "react-toastify";
-import Message from "../../contents/Message";
 import { BASE_URL } from "../../../api";
 import {
   REGISTRATION_DELETE_RESET,
   REGISTRATION_DETAILS_RESET,
 } from "../../../actions/types";
+import Loader from "../../contents/Loader";
+import Message from "../../contents/Message";
 
 const Section = styled.div`
   margin: 60px 10px;

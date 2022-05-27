@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
-import { Row, Button } from "react-bootstrap";
 
+import { Row, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { LinkContainer } from "react-router-bootstrap";
+import { deleteCareer, listCareers } from "../../../actions/careersActions";
+
 import Message from "../../contents/Message";
 import Loader from "../../contents/Loader";
-import { deleteCareer, listCareers } from "../../../actions/careersActions";
-import { toast } from "react-toastify";
 
 const Section = styled.div`
   padding: 50px 10px;

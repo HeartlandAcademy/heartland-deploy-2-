@@ -1,6 +1,5 @@
-import React from "react";
-import { LinkContainer } from "react-router-bootstrap";
 import styled from "styled-components";
+import { LinkContainer } from "react-router-bootstrap";
 
 import Student from "../../assets/others/Student.jpg";
 

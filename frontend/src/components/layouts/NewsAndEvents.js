@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import moment from "moment";
 
 import { Card, Placeholder } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Background from "../../assets/others/Background.jpg";
-import defaultloader from "../../assets/default/default-loading.png";
+
+import { listUpcomingLatestEvents } from "../../actions/eventsActions";
 import { listLatestNews } from "../../actions/newsActions";
 import Message from "../contents/Message";
-import { listUpcomingLatestEvents } from "../../actions/eventsActions";
-import { BASE_URL } from "../../api";
+import defaultloader from "../../assets/default/default-loading.png";
 
 const News = styled.div`
   padding: 50px 45px;

@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
 
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/others/Logo1.png";
 import Extra from "../contents/Extra";
 

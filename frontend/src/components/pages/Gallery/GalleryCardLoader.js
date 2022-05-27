@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-
 import { Placeholder } from "react-bootstrap";
+
 import defaultImage from "../../../assets/default/default-loading.png";
 
 const CardItem = styled.div`

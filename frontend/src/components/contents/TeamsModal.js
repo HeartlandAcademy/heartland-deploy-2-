@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 import { Modal, Button, Form, Container } from "react-bootstrap";
-import { createStaffs } from "../../actions/staffsActions";
 import { toast } from "react-toastify";
-import Message from "./Message";
+
 import { createTeams } from "../../actions/teamsActions";
-import Loader from "./Loader";
 import { BASE_URL } from "../../api";
+import Message from "./Message";
+import Loader from "./Loader";
 
 export default function TeamsModal(props) {
   const [fullName, setFullName] = useState("");

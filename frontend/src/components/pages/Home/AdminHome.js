@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import Clock from "react-clock";
 import "react-clock/dist/Clock.css";
-
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { LinkContainer } from "react-router-bootstrap";
+
 import { listNews } from "../../../actions/newsActions";
 import { listNotices } from "../../../actions/noticesActions";
 import { listStaffs } from "../../../actions/staffsActions";
@@ -12,14 +15,12 @@ import {
   deleteRegistration,
   listRegistrations,
 } from "../../../actions/registrationActions";
-import Loader from "../../contents/Loader";
-import Message from "../../contents/Message";
-import { toast } from "react-toastify";
-import { LinkContainer } from "react-router-bootstrap";
 import {
   REGISTRATION_DELETE_RESET,
   REGISTRATION_DETAILS_RESET,
 } from "../../../actions/types";
+import Loader from "../../contents/Loader";
+import Message from "../../contents/Message";
 
 const Section = styled.div`
   margin: 60px 10px;

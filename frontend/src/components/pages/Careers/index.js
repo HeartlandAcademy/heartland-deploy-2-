@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { Container, Row, Col, Placeholder } from "react-bootstrap";
+import { useEffect } from "react";
 import styled from "styled-components";
+
+import { Container, Row, Col, Placeholder } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 
-import { useDispatch, useSelector } from "react-redux";
-
+import { listCareers } from "../../../actions/careersActions";
 import Meta from "../../contents/Meta";
 import heartland from "../../../assets/carousel/heartland.jpg";
 import ImageHeader from "../../contents/ImageHeader";
-import { listCareers } from "../../../actions/careersActions";
 import Message from "../../contents/Message";
 
 const Title = styled.div`

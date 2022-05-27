@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Placeholder, Row, Col, Card } from "react-bootstrap";
@@ -7,13 +8,13 @@ import { Placeholder, Row, Col, Card } from "react-bootstrap";
 import newspaper from "../../../assets/others/newspaper.jpg";
 import BlogPicture from "../../../assets/others/blogpicture.jpg";
 import ImageHeader from "../../contents/ImageHeader";
-import { listNews } from "../../../actions/newsActions";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
-import { Pagination } from "../../contents/Pagination";
 import defaultImage from "../../../assets/default/default-loading.png";
 import "./index.css";
 import { BASE_URL } from "../../../api";
+import { Pagination } from "../../contents/Pagination";
+import { listNews } from "../../../actions/newsActions";
 
 const Title = styled.h2`
   font-weight: 700;

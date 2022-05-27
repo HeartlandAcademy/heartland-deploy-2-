@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
 import { Carousel } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import heartland from "../../assets/carousel/heartland.jpg";
 import { LinkContainer } from "react-router-bootstrap";
-import { listCarousel } from "../../actions/carouselActions";
-import Message from "./Message";
 
-import default2 from "../../assets/default/default2.png";
+import { listCarousel } from "../../actions/carouselActions";
 import { BASE_URL } from "../../api";
+
+import heartland from "../../assets/carousel/heartland.jpg";
+import Message from "./Message";
+import default2 from "../../assets/default/default2.png";
 
 const fadeInTop = keyframes` 
   from {

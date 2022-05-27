@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+
 import { Link } from "react-router-dom";
 import { Button, Row, Col, Placeholder, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import { listLatestNews, listNewsDetails } from "../../../actions/newsActions";
+import { BASE_URL } from "../../../api";
 import Message from "../../contents/Message";
 import Newspaper from "../../../assets/others/newspaper.jpg";
 import ImageHeader from "../../contents/ImageHeader";
 import defaultImage from "../../../assets/default/default-loading.png";
 import Meta from "../../contents/Meta";
-import { BASE_URL } from "../../../api";
 
 const Title = styled.h2`
   margin-bottom: 28px;

@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import useWindowDimensions from "../helpers/windowLength";
+
 import { sidebarToggler } from "../../actions/settingActions";
+import useWindowDimensions from "../helpers/windowLength";
 
 const StyledLink = styled(NavLink)`
   text-decoration: none;

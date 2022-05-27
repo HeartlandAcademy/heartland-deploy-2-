@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
+
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 
+import { BASE_URL } from "../../../api";
 import Map from "../../../assets/others/map.jpg";
 import ImageHeader from "../../contents/ImageHeader";
 import Meta from "../../contents/Meta";
 import Loader from "../../contents/Loader";
-import { BASE_URL } from "../../../api";
 
 const ContactCard = styled.div`
   display: flex;

@@ -1,21 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import axios from "axios";
 
+import axios from "axios";
 import { Form, Row, Col, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import ReCAPTCHA from "react-google-recaptcha";
-
 import Background from "../../../assets/others/Background.jpg";
-import { toast, ToastContainer } from "react-toastify";
+import Loader from "../../contents/Loader";
 import Meta from "../../contents/Meta";
 import Message from "../../contents/Message";
+import "./index.css";
 import { REGISTRATION_CREATE_RESET } from "../../../actions/types";
 import { createNewRegistrations } from "../../../actions/registrationActions";
-
-import "./index.css";
-import Loader from "../../contents/Loader";
 import { BASE_URL } from "../../../api";
 
 const RegisterHeader = styled.div`

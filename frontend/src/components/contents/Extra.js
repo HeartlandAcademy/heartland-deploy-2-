@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
-import Offcanvas from "react-bootstrap/Offcanvas";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { LinkContainer } from "react-router-bootstrap";
-import download from "downloadjs";
 
+import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
 
-import Logo from "../../assets/others/Logo1.png";
-import Loader from "./Loader";
 import { listLatestNotices } from "../../actions/noticesActions";
 import { BASE_URL } from "../../api";
+
+import Offcanvas from "react-bootstrap/Offcanvas";
+import download from "downloadjs";
+import Logo from "../../assets/others/Logo1.png";
+import Loader from "./Loader";
 
 const ExtraSidebar = styled.div`
   margin-left: 20px;

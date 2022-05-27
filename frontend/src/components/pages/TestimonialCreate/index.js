@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-
 import { Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -10,9 +10,9 @@ import { toast } from "react-toastify";
 import VisitorsModal from "../../contents/VisitorsModal";
 import Message from "../../contents/Message";
 import Loader from "../../contents/Loader";
-
-import { deleteTeams, listTeams } from "../../../actions/teamsActions";
+import StudentModal from "../../contents/StudentModal";
 import TeamsModal from "../../contents/TeamsModal";
+import { deleteTeams, listTeams } from "../../../actions/teamsActions";
 import {
   TEAMS_CREATE_RESET,
   TESTIMONIALS_STUDENTS_CREATE_RESET,
@@ -25,7 +25,6 @@ import {
   deleteVisitorsTestimonials,
 } from "../../../actions/testimonialsActions";
 import { BASE_URL } from "../../../api";
-import StudentModal from "../../contents/StudentModal";
 
 const Section = styled.div`
   padding: 30px 40px;

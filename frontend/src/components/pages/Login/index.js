@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Form, Button, InputGroup, ToastContainer } from "react-bootstrap";
 
+import { useDispatch, useSelector } from "react-redux";
+import { Form, Button, InputGroup } from "react-bootstrap";
+
+import { login } from "../../../actions/userActions";
+import { adminModeChanger } from "../../../actions/settingActions";
 import Logo from "../../../assets/others/Logo.jpg";
 import Message from "../../contents/Message";
 import Loader from "../../contents/Loader";
-import { login } from "../../../actions/userActions";
-import { adminModeChanger } from "../../../actions/settingActions";
 
 const LoginForm = styled.div`
   display: flex;

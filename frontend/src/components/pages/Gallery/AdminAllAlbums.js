@@ -1,20 +1,21 @@
-import React, { useEffect } from "react";
-import moment from "moment";
+import { useEffect } from "react";
 import styled from "styled-components";
 
-import {
-  deleteGalleryAlbums,
-  listGalleryAlbums,
-} from "../../../actions/galleryActions";
-import Message from "../../contents/Message";
+import moment from "moment";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import {
+  deleteGalleryAlbums,
+  listGalleryAlbums,
+} from "../../../actions/galleryActions";
+import { BASE_URL } from "../../../api";
+import Message from "../../contents/Message";
 import placeholder from "../../../assets/default/placeholder.png";
 import GalleryCardLoader from "./GalleryCardLoader";
-import { BASE_URL } from "../../../api";
 
 const AlbumsContainer = styled.div`
   padding: 10px 20px;
