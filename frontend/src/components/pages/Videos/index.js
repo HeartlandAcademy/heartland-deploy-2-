@@ -6,7 +6,6 @@ import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 
 import { listGalleryVideos } from "../../../actions/galleryActions";
-import { deleteTeams, listTeams } from "../../../actions/teamsActions";
 import Message from "../../contents/Message";
 import Meta from "../../contents/Meta";
 import ImageHeader from "../../contents/ImageHeader";

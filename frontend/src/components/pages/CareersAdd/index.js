@@ -51,7 +51,6 @@ const CareerAdd = ({ history }) => {
   const [careerDesc, setCareerDesc] = useState("");
   const [note, setNote] = useState("");
   const [validated, setValidated] = useState(false);
-  const [showError, setShowError] = useState(false);
 
   const settings = useSelector((state) => state.settings);
   const { darkMode } = settings;
@@ -74,7 +73,6 @@ const CareerAdd = ({ history }) => {
     setCareerSpecs("");
     setCareerDesc("");
     setNote("");
-    setShowError(false);
   }
 
   useEffect(() => {
