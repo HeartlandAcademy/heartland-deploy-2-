@@ -131,8 +131,8 @@ router
   .delete(protect, deleteRegistration);
 
 router.post("/uploads/marksheet", upload, (req, res) => {
-  const marksheetFile = req.files.marksheet[0];
-  res.send(marksheetFile.path);
+  const marksheetFile = req.files.marksheet;
+  res.send(marksheetFile[0].path);
 });
 
 router.post("/uploads/characterCf", upload, (req, res) => {

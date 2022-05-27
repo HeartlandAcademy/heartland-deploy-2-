@@ -565,7 +565,7 @@ const Registration = ({ history }) => {
                 <Form.Text id="passwordHelpBlock" muted>
                   <span className="text-danger ">
                     <i className="fas fa-exclamation-circle"></i> Please add
-                    valid file
+                    valid file (Only PDF | WORD))
                   </span>
                 </Form.Text>
               )}
@@ -583,7 +583,7 @@ const Registration = ({ history }) => {
                 <Form.Text id="passwordHelpBlock" muted>
                   <span className="text-danger ">
                     <i className="fas fa-exclamation-circle"></i> Please add
-                    valid file
+                    valid file (Only PNG | JPG)
                   </span>
                 </Form.Text>
               )}
@@ -598,7 +598,7 @@ const Registration = ({ history }) => {
                   <Form.Text id="passwordHelpBlock" muted>
                     <span className="text-danger ">
                       <i className="fas fa-exclamation-circle"></i> Please add
-                      valid file
+                      valid file (Only PDF | PNG | JPG)
                     </span>
                   </Form.Text>
                 )}
@@ -633,7 +633,7 @@ const Registration = ({ history }) => {
                 <Form.Text id="passwordHelpBlock" muted>
                   <span className="text-danger ">
                     <i className="fas fa-exclamation-circle"></i> Please add
-                    valid file
+                    valid file (Only PDF | MS WORD | DOCX)
                   </span>
                 </Form.Text>
               )}
