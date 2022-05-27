@@ -130,18 +130,9 @@ router
   .get(protect, getRegistrationById)
   .delete(protect, deleteRegistration);
 
-router.post("/uploads/marksheet", (req, res) => {
-  // const marksheetFile = req.files.marksheet[0];
-  // res.send(marksheetFile.path);
-  upload(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      console.log("1" + err);
-    } else if (err) {
-      console.log("2" + err);
-    }
-    const marksheetFile = req.files.marksheet[0];
-    res.send(marksheetFile.path);
-  });
+router.post("/uploads/marksheet", upload, (req, res) => {
+  const marksheetFile = req.files.marksheet[0];
+  res.send(marksheetFile.path);
 });
 
 router.post("/uploads/characterCf", upload, (req, res) => {
