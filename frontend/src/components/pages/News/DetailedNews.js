@@ -195,7 +195,7 @@ const DetailedNews = ({ match }) => {
                     <LatestPostCard>
                       <LatestPostImage>
                         {news.image ? (
-                          <img src={news.image} alt="Latest" />
+                          <img src={`${BASE_URL}${news.image}`} alt="Latest" />
                         ) : (
                           <img src={Newspaper} alt="Latest" />
                         )}
