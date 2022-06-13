@@ -19,21 +19,33 @@ const Section2 = styled.div`
   margin-top: 30px;
 `;
 
+const AimSection = styled.div`
+  h4 {
+    color: rgb(1, 34, 55);
+  }
+  ul {
+    color: #111;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 29px;
+  }
+`;
+
 const Section3 = styled.div`
   text-align: justify;
   color: #111;
   margin-bottom: 30px;
-  h2 {
-    font-weight: 700;
+  h4 {
+    font-weight: 600;
     color: rgb(1, 34, 55);
-    font-size: 50px;
-    text-align: center;
+    font-size: 40px;
   }
   p {
     text-align: justify;
     color: #111;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 29px;
   }
 `;
 
@@ -64,11 +76,29 @@ const AboutUs = () => {
           and system of International standards.
         </p>
       </Section1>
+
+      <AimSection className="container">
+        <h4>HA Aims at . . . .</h4>
+        <ul>
+          <li>Encompassing extensive &amp; interactive environment.</li>
+          <li>
+            Child Centered Curriculum to develop their motor skills – cognitive,
+            physical, social, emotional and sensorial.
+          </li>
+          <li>Ensuring a harmonious, purposeful and secure environment.</li>
+          <li>
+            Providing quality education to the children which develops them as
+            stars to illuminate the society.
+          </li>
+        </ul>
+      </AimSection>
+
       <Section2>
         <Missions />
       </Section2>
+
       <Section3 className="container">
-        <h2>Our Core Features</h2>
+        <h4>Our Core Features</h4>
         <p>
           Heartland Academy is strongly guided by the principle and perspective,
           childhood is short, let children enjoy being children and enjoy their

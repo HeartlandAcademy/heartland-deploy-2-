@@ -14,13 +14,38 @@ import defaultImage from "../../../assets/default/default-loading.png";
 
 const Section1 = styled.div`
   margin-bottom: 80px;
-  h3 {
-    font-weight: 700;
-    color: rgb(1, 34, 55);
-    position: relative;
-    font-size: 50px;
-    text-align: center;
-    margin: 50px;
+`;
+
+const Title = styled.div`
+  color: #444444;
+  max-width: 420px;
+  margin: auto;
+  font-weight: 700;
+  color: rgb(1, 34, 55);
+  position: relative;
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 40px;
+  &:before {
+    position: absolute;
+    content: "";
+    background: #3459e6;
+    width: 75px;
+    height: 1px;
+    bottom: -18px;
+    left: 50%;
+    margin-left: -45px;
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    background: #3459e6;
+    width: 75px;
+    height: 1px;
+    bottom: -22px;
+    left: 50%;
+    margin-left: -30px;
   }
 `;
 
@@ -79,7 +104,7 @@ const Staffs = () => {
       <Meta title="HA Family | Staffs" />
       <ImageHeader mtitle="HA Family" title="Staffs" image={test} />
       <Section1 className="container">
-        <h3>HA STAFFS</h3>
+        <Title>HA STAFFS</Title>
         {loading ? (
           <Row className="g-4 p-4 m-4">
             <StaffCardLoader />

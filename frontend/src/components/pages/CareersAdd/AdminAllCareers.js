@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { Row, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LinkContainer } from "react-router-bootstrap";
 import { deleteCareer, listCareers } from "../../../actions/careersActions";
@@ -47,6 +48,15 @@ const CareerCard = styled.div`
   h4 {
     color: ${(props) => (props.darkmode ? "#fff" : "#111")};
   }
+`;
+
+const NoCareer = styled.div`
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin-top: 200px;
+  text-align: center;
 `;
 
 const ButtonContainer = styled.div`
@@ -105,33 +115,53 @@ const AdminAllCareers = () => {
         ) : error ? (
           <Message variant="danger">{error}</Message>
         ) : (
-          <Row xs={1} sm={3} md={4} className="p-4 justify-content-center">
-            {careers &&
-              careers.map((career) => (
-                <CareerCard
-                  className="col card p-3 m-4"
-                  darkmode={darkMode}
-                  key={career._id}
-                >
-                  <h4>{career.title}</h4>
-                  <p>
-                    <i className="fas fa-map-marker-alt"></i> {career.location}
-                  </p>
-                  <ButtonContainer>
-                    <LinkContainer to={`/admin/careers/${career._id}`}>
-                      <Button variant="light">View</Button>
-                    </LinkContainer>
-
-                    <Button
-                      variant="danger"
-                      onClick={() => deleteCareerHandler(career._id)}
+          <>
+            {careers && careers.length === 0 && (
+              <NoCareer>
+                Sorry we couldn't find any available careers. Please stay
+                updated.
+                <div>
+                  <Link to="/admin/careers/add/new">
+                    <button
+                      className={
+                        darkMode ? "btn btn-dark mt-4" : "btn btn-primary mt-4"
+                      }
                     >
-                      Delete
-                    </Button>
-                  </ButtonContainer>
-                </CareerCard>
-              ))}
-          </Row>
+                      Add Some
+                    </button>
+                  </Link>
+                </div>
+              </NoCareer>
+            )}
+            <Row xs={1} sm={3} md={4} className="p-4 justify-content-center">
+              {careers &&
+                careers.map((career) => (
+                  <CareerCard
+                    className="col card p-3 m-4"
+                    darkmode={darkMode}
+                    key={career._id}
+                  >
+                    <h4>{career.title}</h4>
+                    <p>
+                      <i className="fas fa-map-marker-alt"></i>{" "}
+                      {career.location}
+                    </p>
+                    <ButtonContainer>
+                      <LinkContainer to={`/admin/careers/${career._id}`}>
+                        <Button variant="light">View</Button>
+                      </LinkContainer>
+
+                      <Button
+                        variant="danger"
+                        onClick={() => deleteCareerHandler(career._id)}
+                      >
+                        Delete
+                      </Button>
+                    </ButtonContainer>
+                  </CareerCard>
+                ))}
+            </Row>
+          </>
         )}
       </Content>
     </Section>

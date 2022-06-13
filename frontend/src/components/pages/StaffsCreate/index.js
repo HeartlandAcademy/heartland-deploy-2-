@@ -38,6 +38,10 @@ const Title = styled.div`
   }
 `;
 
+const Content = styled.div`
+  min-height: 100vh;
+`;
+
 const ButtonContent = styled.div`
   margin-top: 10px;
 `;
@@ -46,7 +50,7 @@ const StaffDetail = styled.div`
   h3 {
     color: ${(props) => (props.darkmode ? "#fff" : "#111")};
   }
-  h4 {
+  h5 {
     color: ${(props) => (props.darkmode ? "#fff" : "#111")};
   }
 `;
@@ -122,7 +126,7 @@ const AdminStaffs = ({ history }) => {
         </ButtonContent>
         <StaffsModal show={modalShow} onHide={() => setModalShow(false)} />
       </Title>
-      <>
+      <Content>
         {deleteError ? <Message variant="danger">{deleteError}</Message> : ""}
         {createError ? <Message variant="danger">{deleteError}</Message> : ""}
         {loading ? (
@@ -155,10 +159,10 @@ const AdminStaffs = ({ history }) => {
                         />
                       </div>
                       <StaffDetail darkmode={darkMode}>
-                        <h4>Full Name: {staff.fullName}</h4>
-                        <h4>Position: {staff.position}</h4>
-                        <h4>Email: {staff.email}</h4>
-                        <h4>Phone No: {staff.phone}</h4>
+                        <h5>Full Name: {staff.fullName}</h5>
+                        <h5>Position: {staff.position}</h5>
+                        <h5>Email: {staff.email}</h5>
+                        <h5>Phone No: {staff.phone}</h5>
                         <Button
                           size="sm"
                           className="btn-danger mt-1"
@@ -173,7 +177,7 @@ const AdminStaffs = ({ history }) => {
             </ListGroup>
           </>
         )}
-      </>
+      </Content>
     </StaffContainer>
   );
 };
