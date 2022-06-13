@@ -68,3 +68,9 @@
   justify-content: center;
   align-items: center;
 }
+
+.adminMsgTxt {
+  font-size: 18px;
+  color: #111;
+  text-align: justify;
+}

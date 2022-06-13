@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { Row, Placeholder } from "react-bootstrap";
+import { Row, Placeholder, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -127,7 +127,7 @@ const ProgramTitle = styled.h1`
   font-size: 50px;
   text-align: center;
   padding: 10px;
-  margin-bottom: 13px;
+  margin-bottom: 15px;
 `;
 
 const CollegeProgram = styled.div`
@@ -245,6 +245,7 @@ const College = () => {
           </ul>
         </p>
       </Section1>
+
       <ProgramTitle>I'm looking for....</ProgramTitle>
       <CollegeProgram className="container">
         <Row className="text-center py-3">
@@ -404,6 +405,35 @@ const College = () => {
           </div>
         </Row>
       </CollegeProgram>
+
+      <Card className="container mb-5">
+        <Card.Body>
+          <Card.Title className="pt-3">Message from Administrator</Card.Title>
+          <Card.Body className="adminMsgTxt">
+            Dear students and parents, On behalf of Heartland family, I am
+            delighted to welcome you to our college. This year, Heartland
+            college is entering into 13 th year of service to the country’s
+            academic sector. During all these years, we have prioritized
+            teaching learning to move towards achieving our primary vision of
+            becoming the center of academic excellence. We are committed towards
+            our mission to endow our students with skills and attributes of an
+            ingenious problem solver and critical thinker. We at Heartland are
+            very aware that we can easily fall into the trap of conventional
+            teaching. We understand that we have to embrace an interactive
+            teaching approach with extensive practical works, field works,
+            project works etc. that can make learning a real life experience.
+            This is only way to prepare our students to confidently face the
+            challenges of the highly competitive world and career progression
+            and also nurture them to become responsible human beings who are
+            capable to effectively deliver the needs of a developing nation. I
+            once again welcome you all to join our family. I hope we will work
+            together to explore the world of knowledge for better wisdom
+            together and make your time with us extremely learning and
+            educative. <p>All The Best for Your Bright Academic Career!!!</p>
+          </Card.Body>
+        </Card.Body>
+      </Card>
+
       <MainMessage>
         <Title>Some Awesome Words From Our Visitors</Title>
         {loading ? (
