@@ -14,7 +14,7 @@ import Message from "../../contents/Message";
 const Title = styled.div`
   color: rgb(1, 34, 55);
   font-size: 50px;
-  margin: 50px 0;
+  margin: 30px 0;
   span {
     border-bottom: 3px solid rgb(0, 148, 68);
   }
@@ -56,14 +56,15 @@ const Careers = () => {
         <Title>
           <span>Career At HA</span>
         </Title>
-        <h5 style={{ textAlign: "justify" }}>
-          Join Us. For over two decades, we’ve worked with Lorem, ipsum dolor
+        <h5 style={{ textAlign: "justify" }} className="mb-5">
+          {/* Join Us. For over two decades, we’ve worked with Lorem, ipsum dolor
           sit amet consectetur adipisicing elit. Corporis error ut provident vel
           repellendus nihil atque possimus aliquam, mollitia tempora neque
           voluptate debitis illum veniam.Numquam blanditiis dignissimos
           laboriosam illum ut officia. Nam aperiam autem nesciunt perferendis
           id. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas
-          nulla sequi pariatur quam animi ipsum molestias assumenda cumque
+          nulla sequi pariatur quam animi ipsum molestias assumenda cumque */}
+          Join Us. The Future Awaits You.
         </h5>
 
         {loading ? (

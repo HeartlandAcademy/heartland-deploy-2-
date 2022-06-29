@@ -55,7 +55,7 @@ const Teams = () => {
   return (
     <>
       <Team>
-        <Title>Heatland Executive Team</Title>
+        <Title>Heartland Executive Team</Title>
       </Team>
 
       {loading ? (

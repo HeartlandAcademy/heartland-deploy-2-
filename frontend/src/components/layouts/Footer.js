@@ -143,7 +143,7 @@ const Footer = () => {
               <ul className="list-unstyled mb-0">
                 <li>
                   <a
-                    href="#!"
+                    href="https://www.facebook.com/Heartlandacademy.edu.np"
                     target="_blank"
                     className="text-white"
                     style={{ textDecoration: "none" }}
@@ -153,7 +153,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="#!"
+                    href="https://twitter.com/heartland_info"
                     target="_blank"
                     className="text-white"
                     style={{ textDecoration: "none" }}
@@ -163,7 +163,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="#!"
+                    href="https://www.instagram.com/heartland_academy/"
                     target="_blank"
                     className="text-white"
                     style={{ textDecoration: "none" }}

@@ -255,13 +255,15 @@ const Header = () => {
                 <StyledLink exact activeClassName="selected" to="/hafamily/bod">
                   <a className="dropdown-item">BOD</a>
                 </StyledLink>
-                <StyledLink
+
+                {/* <StyledLink
                   exact
                   activeClassName="selected"
                   to="/hafamily/honorary"
                 >
                   <a className="dropdown-item">Honorary Advisors</a>
-                </StyledLink>
+                </StyledLink> */}
+
                 <StyledLink
                   exact
                   activeClassName="selected"
@@ -373,7 +375,7 @@ const Header = () => {
                   <a>BOD</a>
                 </StyledLink>
               </li>
-              <li>
+              {/* <li>
                 <StyledLink
                   exact
                   activeClassName="drop-active"
@@ -381,7 +383,7 @@ const Header = () => {
                 >
                   <a>Honorary Advisors</a>
                 </StyledLink>
-              </li>
+              </li> */}
               <li>
                 <StyledLink
                   exact

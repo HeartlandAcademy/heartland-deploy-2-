@@ -110,6 +110,17 @@ const Partners = () => {
             <img src={rotary} alt="rotary" />
             <img src={currambena} alt="currambena" />
             <img src={mathletics} alt="mathletics" />
+
+            <img src={clcr} alt="clcr" />
+            <img src={chatswood} alt="chatswood" />
+            <img src={gdg} alt="gdg" />
+            <img src={LBW} alt="lbw" />
+            <img src={pilgrims} alt="pilgrims" />
+            <img src={roomtoread} alt="roomtoread" />
+            <img src={ravenswood} alt="ravenswood" />
+            <img src={rotary} alt="rotary" />
+            <img src={currambena} alt="currambena" />
+            <img src={mathletics} alt="mathletics" />
           </Logos>
           {/* <Logos>
             <img src={clcr} alt="clcr" />
