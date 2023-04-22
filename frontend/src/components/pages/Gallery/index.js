@@ -179,7 +179,7 @@ const HeartlandGallery = () => {
                       <Card>
                         <CardImage>
                           <img
-                            src={`${BASE_URL}${album.images[0]}`}
+                            src={album.images[0]}
                             alt="album"
                             onError={(e) => {
                               e.target.src = placeholder; //replacement image imported above

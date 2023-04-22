@@ -146,7 +146,7 @@ const PhotoCarousel = () => {
             <Carousel.Item interval={3300000} key={c._id}>
               <img
                 className="d-block w-100"
-                src={`${BASE_URL}${c.image}`}
+                src={c.image}
                 alt="Carousel Images"
               />
 

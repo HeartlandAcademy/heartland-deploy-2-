@@ -215,7 +215,7 @@ const AdminAllAlbums = () => {
                   <Card darkmode={darkMode}>
                     <CardImage>
                       <img
-                        src={`${BASE_URL}${album.images[0]}` || placeholder}
+                        src={album.images[0] || placeholder}
                         alt="Album"
                         onError={(e) => {
                           e.target.src = placeholder; //replacement image imported above

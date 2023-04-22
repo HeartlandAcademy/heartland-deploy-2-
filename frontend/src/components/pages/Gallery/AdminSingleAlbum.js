@@ -61,8 +61,8 @@ const AdminSingleAlbum = ({ match }) => {
       let data = [];
       albumImages.images.forEach((img, index) => {
         data[index] = {
-          src: `${BASE_URL}${img}`,
-          thumbnail: `${BASE_URL}${img}`,
+          src: img,
+          thumbnail: img,
           thumbnailWidth: 320,
           thumbnailHeight: 174,
         };

@@ -36,7 +36,7 @@ export default function PopupModal(props) {
               // eslint-disable-next-line jsx-a11y/img-redundant-alt
               <img
                 className="d-block w-100"
-                src={`${BASE_URL}${modal && modal[0].image}`}
+                src={modal && modal[0].image}
                 alt="Modal Image"
               />
             )}

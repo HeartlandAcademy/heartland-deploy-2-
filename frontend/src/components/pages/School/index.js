@@ -342,7 +342,11 @@ const School = () => {
                   <Msg>"{student.message}"</Msg>
                   <Profile>
                     <ImageCard>
-                      <img src={`${BASE_URL}${student.image}`} alt="student" />
+                      <img
+                        src={student.image}
+                        alt="student"
+                        style={{ objectFit: "cover" }}
+                      />
                     </ImageCard>
                     <Name>{student.fullName}</Name>
                     <Desc>{student.desc}</Desc>

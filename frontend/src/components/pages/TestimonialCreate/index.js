@@ -404,10 +404,7 @@ const TestimonialCreate = ({ history }) => {
                 teams.map((team) => (
                   <Heartland key={team._id}>
                     <Card style={{ width: "15rem", margin: "20px" }}>
-                      <Card.Img
-                        variant="top"
-                        src={`${BASE_URL}${team.image}`}
-                      />
+                      <Card.Img variant="top" src={team.image} />
                       <Card.Body
                         style={{
                           backgroundColor: darkMode ? "#202124" : "#fff",
@@ -480,10 +477,7 @@ const TestimonialCreate = ({ history }) => {
                     <Msg>{student.message}</Msg>
                     <Profile>
                       <ImageCard>
-                        <img
-                          src={`${BASE_URL}${student.image}`}
-                          alt="student"
-                        />
+                        <img src={student.image} alt="student" />
                       </ImageCard>
                       <Name darkmode={darkMode}>{student.fullName}</Name>
                       <Desc>{student.desc}</Desc>
@@ -544,7 +538,7 @@ const TestimonialCreate = ({ history }) => {
                   <VisitorMessageCard darkmode={darkMode} key={visitor._id}>
                     <VisitorMsg>{visitor.message}</VisitorMsg>
                     <VisitorProfile>
-                      <img src={`${BASE_URL}${visitor.image}`} alt="student" />
+                      <img src={visitor.image} alt="student" />
                       <ProfileDesc darkmode={darkMode}>
                         <h6>{visitor.fullName}</h6>
                         <p>{visitor.desc}</p>

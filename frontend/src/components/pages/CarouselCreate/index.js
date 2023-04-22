@@ -62,7 +62,7 @@ const AdminCarousel = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/carousel/uploads`,
+        `${BASE_URL}/api/upload`,
         formData,
         config
       );
@@ -154,6 +154,7 @@ const AdminCarousel = ({ history }) => {
             onChange={uploadFileHandler}
             ref={ref}
             required
+            accept="image/*"
           />
           {fileError && (
             <Form.Text id="passwordHelpBlock" muted>

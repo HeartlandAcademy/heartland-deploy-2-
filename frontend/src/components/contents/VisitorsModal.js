@@ -50,7 +50,7 @@ export default function VisitorsModal(props) {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/testimonials/uploads`,
+        `${BASE_URL}/api/upload`,
         formData,
         config
       );
@@ -122,6 +122,7 @@ export default function VisitorsModal(props) {
                 ref={ref}
                 required
                 onChange={uploadFileHandler}
+                accept="image/*"
               />
               <Form.Control.Feedback type="invalid">
                 Please add valid image

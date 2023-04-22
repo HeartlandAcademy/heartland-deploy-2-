@@ -115,7 +115,7 @@ const AdminEditNews = ({ history, match }) => {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/news/uploads`,
+        `${BASE_URL}/api/upload`,
         formData,
         config
       );
@@ -230,7 +230,12 @@ const AdminEditNews = ({ history, match }) => {
 
         <Form.Group controlId="image" className="mb-3">
           <Form.Label>Select New Image (If Any)</Form.Label>
-          <Form.Control type="file" onChange={uploadFileHandler} ref={ref} />
+          <Form.Control
+            type="file"
+            onChange={uploadFileHandler}
+            ref={ref}
+            accept="image/*"
+          />
           {fileError && (
             <Form.Text id="passwordHelpBlock" muted>
               <span className="text-danger ">

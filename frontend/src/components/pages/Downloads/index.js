@@ -71,10 +71,47 @@ const Downloads = () => {
     return result;
   };
 
-  const singleFileDownloadHandler = async (id) => {
-    const res = await fetch(`${BASE_URL}/api/downloads/${id}/download`);
+  function getFileType(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const arr = new Uint8Array(reader.result).subarray(0, 4);
+        let header = "";
+        for (let i = 0; i < arr.length; i++) {
+          header += arr[i].toString(16);
+        }
+        switch (header) {
+          case "89504e47":
+            resolve("image/png");
+            break;
+          case "47494638":
+            resolve("image/gif");
+            break;
+          case "25504446":
+            resolve("application/pdf");
+            break;
+          case "504b0304":
+            resolve("application/zip");
+            break;
+          default:
+            resolve("");
+            break;
+        }
+      };
+      reader.onerror = () => {
+        reject();
+      };
+      reader.readAsArrayBuffer(blob);
+    });
+  }
+
+  const singleFileDownloadHandler = async (fileUrl) => {
+    const res = await fetch(fileUrl);
     const blob = await res.blob();
-    download(blob, fileNameGenerator(10));
+    const fileType = await getFileType(blob);
+    const fileName =
+      fileNameGenerator(10) + (fileType ? "." + fileType.split("/")[1] : "");
+    download(blob, fileName);
   };
 
   const DownloadCardLoader = () => {
@@ -102,6 +139,8 @@ const Downloads = () => {
       </DownloadCard>
     );
   };
+
+  console.log("DOWNLOADING", downloads);
 
   return (
     <>
@@ -133,7 +172,7 @@ const Downloads = () => {
               )}
               {downloads &&
                 downloads.map((download) => (
-                  <DownloadCard className="card">
+                  <DownloadCard className="card" key={download?._id}>
                     <h4>{download.title}</h4>
                     <h6>
                       {download.createdAt &&
@@ -144,7 +183,9 @@ const Downloads = () => {
                     <DownloadButton>
                       <i
                         className="fas fa-arrow-circle-down"
-                        onClick={() => singleFileDownloadHandler(download._id)}
+                        onClick={() =>
+                          singleFileDownloadHandler(download?.file)
+                        }
                       ></i>
                     </DownloadButton>
                   </DownloadCard>

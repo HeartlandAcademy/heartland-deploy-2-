@@ -72,7 +72,7 @@ const AdminNotices = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/notices/uploads`,
+        `${BASE_URL}/api/upload`,
         formData,
         config
       );
@@ -190,6 +190,7 @@ const AdminNotices = ({ history }) => {
               ref={ref}
               onChange={uploadFileHandler}
               required
+              accept=".pdf"
             />
             {fileError && (
               <Form.Text id="passwordHelpBlock" muted>

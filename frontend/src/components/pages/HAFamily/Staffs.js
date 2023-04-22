@@ -127,9 +127,13 @@ const Staffs = () => {
                     <Card style={{ height: "100%" }}>
                       {staff.image ? (
                         <Card.Img
-                          style={{ height: "100%" }}
+                          style={{
+                            height: "100%",
+                            objectFit: "cover",
+                            maxHeight: "250px",
+                          }}
                           variant="top"
-                          src={`${BASE_URL}${staff.image}`}
+                          src={staff.image}
                           alt={staff.fullName}
                         />
                       ) : (

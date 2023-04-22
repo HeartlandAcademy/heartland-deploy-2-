@@ -69,7 +69,7 @@ const AdminNews = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/news/uploads`,
+        `${BASE_URL}/api/upload`,
         formData,
         config
       );
@@ -210,6 +210,7 @@ const AdminNews = ({ history }) => {
             required
             ref={ref}
             onChange={uploadFileHandler}
+            accept="image/*"
           />
           {fileError && (
             <Form.Text id="passwordHelpBlock" muted>

@@ -71,7 +71,7 @@ const AdminDownloads = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/downloads/uploads`,
+        `${BASE_URL}/api/upload`,
         formData,
         config
       );

@@ -469,10 +469,14 @@ const College = () => {
           >
             {visitorsTestimonials &&
               visitorsTestimonials.visitors.map((visitor) => (
-                <MessageCard key={visitor._id}>
-                  <Msg>"{visitor.message}"</Msg>
+                <MessageCard key={visitor?._id}>
+                  <Msg>"{visitor?.message}"</Msg>
                   <Profile>
-                    <img src={`${BASE_URL}${visitor.image}`} alt="student" />
+                    <img
+                      src={visitor?.image}
+                      alt="student"
+                      style={{ objectFit: "cover" }}
+                    />
                     <ProfileDesc>
                       <h6>{visitor.fullName}</h6>
                       <p>{visitor.desc}</p>

@@ -72,7 +72,7 @@ const AdminModal = () => {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/modal/uploads`,
+        `${BASE_URL}/api/upload`,
         formData,
         config
       );
@@ -146,6 +146,7 @@ const AdminModal = () => {
                 type="file"
                 ref={ref}
                 required
+                accept="image/*"
                 onChange={uploadFileHandler}
               />
               <Form.Control.Feedback type="invalid">

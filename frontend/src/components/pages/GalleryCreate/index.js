@@ -72,7 +72,6 @@ const AdminImages = ({ history }) => {
   }, [successCreate, history]);
 
   const uploadFileHandler = async (e) => {
-    console.log("sdfsdfsdf");
     var formData = new FormData();
     for (const key of Object.keys(e.target.files)) {
       formData.append("images", e.target.files[key]);
@@ -86,7 +85,7 @@ const AdminImages = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/gallery/uploads`,
+        `${BASE_URL}/api/uploads`,
         formData,
         config
       );
@@ -156,6 +155,7 @@ const AdminImages = ({ history }) => {
               onChange={uploadFileHandler}
               multiple
               required
+              accept="image/*"
             />
             {fileError && (
               <Form.Text id="passwordHelpBlock" muted>

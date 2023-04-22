@@ -56,18 +56,18 @@ const AdminEvents = ({ history }) => {
 
   const dispatch = useDispatch();
 
-  const ref = useRef();
+  // const ref = useRef();
 
-  const reset = () => {
-    ref.current.value = "";
-  };
+  // const reset = () => {
+  //   ref.current.value = "";
+  // };
 
   function clearForm() {
     setTitle("");
     setDescription("");
     setDate("");
     setImage("");
-    reset();
+    // reset();
     setUploading(false);
   }
 
@@ -93,7 +93,7 @@ const AdminEvents = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/events/uploads`,
+        `${BASE_URL}/api/upload`,
         formData,
         config
       );
@@ -167,9 +167,14 @@ const AdminEvents = ({ history }) => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group controlId="image" className="mb-3">
+        {/* <Form.Group controlId="image" className="mb-3">
           <Form.Label>Select Image (If any)</Form.Label>
-          <Form.Control type="file" ref={ref} onChange={uploadFileHandler} />
+          <Form.Control
+            type="file"
+            ref={ref}
+            onChange={uploadFileHandler}
+            accept="image/*"
+          />
           {fileError && (
             <Form.Text id="passwordHelpBlock" muted>
               <span className="text-danger ">
@@ -179,7 +184,7 @@ const AdminEvents = ({ history }) => {
             </Form.Text>
           )}
           {uploading && <Loader />}
-        </Form.Group>
+        </Form.Group> */}
 
         <Form.Group className="mb-3" controlId="formBasicTitle">
           <Form.Label>Event Description</Form.Label>

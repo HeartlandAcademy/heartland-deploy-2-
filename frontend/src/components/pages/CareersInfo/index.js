@@ -154,7 +154,7 @@ const CareersInfo = ({ match }) => {
           },
         };
         const { data } = await axios.post(
-          `${BASE_URL}/api/careers/uploads`,
+          `${BASE_URL}/api/upload`,
           formData,
           config
         );

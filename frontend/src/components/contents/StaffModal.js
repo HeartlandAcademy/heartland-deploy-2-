@@ -48,7 +48,7 @@ export default function StaffsModal(props) {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/staffs/uploads`,
+        `${BASE_URL}/api/upload`,
         formData,
         config
       );
@@ -131,6 +131,7 @@ export default function StaffsModal(props) {
                   required
                   ref={ref}
                   onChange={uploadFileHandler}
+                  accept="image/*"
                 />
                 {fileError && (
                   <Form.Text id="passwordHelpBlock" muted>

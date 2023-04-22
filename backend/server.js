@@ -19,6 +19,7 @@ import testimonialsRoutes from "./routes/testimonialsRoutes.js";
 import fileDownloadRoutes from "./routes/fileDownloadRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -44,6 +45,7 @@ app.use("/api/teams", teamsRoutes);
 app.use("/api/careers", careerRoutes);
 app.use("/api/testimonials", testimonialsRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api", uploadRoutes);
 
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

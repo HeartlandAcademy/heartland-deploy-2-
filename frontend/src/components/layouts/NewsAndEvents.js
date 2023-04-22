@@ -11,6 +11,8 @@ import { listLatestNews } from "../../actions/newsActions";
 import Message from "../contents/Message";
 import defaultloader from "../../assets/default/default-loading.png";
 
+import Calendar from "../../assets/others/calendar.jpg";
+
 const News = styled.div`
   padding: 50px 45px;
   span {
@@ -254,14 +256,14 @@ const NewsAndEvents = () => {
                       <SingleEvent key={event._id}>
                         <Card style={{ width: "21rem" }}>
                           <Card.Img
-                            style={{ height: "60%" }}
+                            style={{ height: "60%", objectFit: "cover" }}
                             variant="top"
                             // src={
                             //   event.image
                             //     ? `${BASE_URL}${event.image}`
                             //     : Background
                             // }
-                            src="http://157.245.58.127:5000/uploads/eventsImages/image-1652192565481.png"
+                            src={Calendar}
                           />
                           <Card.Body>
                             <Card.Title>

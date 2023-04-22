@@ -152,10 +152,11 @@ const AdminStaffs = ({ history }) => {
                     <StaffContent>
                       <div>
                         <Image
-                          src={`${BASE_URL}${staff.image}`}
+                          src={staff.image}
                           height="180px"
                           width="240px"
                           alt="staff"
+                          style={{ objectFit: "cover" }}
                         />
                       </div>
                       <StaffDetail darkmode={darkMode}>

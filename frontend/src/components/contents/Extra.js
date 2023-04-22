@@ -122,10 +122,47 @@ const Extra = () => {
     return result;
   };
 
-  const singleFileDownloadHandler = async (id) => {
-    const res = await fetch(`${BASE_URL}/api/notices/${id}/download`);
+  function getFileType(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const arr = new Uint8Array(reader.result).subarray(0, 4);
+        let header = "";
+        for (let i = 0; i < arr.length; i++) {
+          header += arr[i].toString(16);
+        }
+        switch (header) {
+          case "89504e47":
+            resolve("image/png");
+            break;
+          case "47494638":
+            resolve("image/gif");
+            break;
+          case "25504446":
+            resolve("application/pdf");
+            break;
+          case "504b0304":
+            resolve("application/zip");
+            break;
+          default:
+            resolve("");
+            break;
+        }
+      };
+      reader.onerror = () => {
+        reject();
+      };
+      reader.readAsArrayBuffer(blob);
+    });
+  }
+
+  const singleFileDownloadHandler = async (fileUrl) => {
+    const res = await fetch(fileUrl);
     const blob = await res.blob();
-    download(blob, fileNameGenerator(10));
+    const fileType = await getFileType(blob);
+    const fileName =
+      fileNameGenerator(10) + (fileType ? "." + fileType.split("/")[1] : "");
+    download(blob, fileName);
   };
 
   return (
@@ -172,7 +209,9 @@ const Extra = () => {
                         {notice.title}{" "}
                         <i
                           className="fas fa-long-arrow-alt-down"
-                          onClick={() => singleFileDownloadHandler(notice._id)}
+                          onClick={() =>
+                            singleFileDownloadHandler(notice?.file)
+                          }
                         ></i>
                       </li>
                     ))}
