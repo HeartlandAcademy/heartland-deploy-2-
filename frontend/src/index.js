@@ -6,10 +6,17 @@ import "./assets/bootstrap.min.css";
 import "./index.css";
 import "./assets/myColor.css";
 import store from "./store";
+import SubDomainApp from "./components/SubDomainApp";
+
+const hostname = window.location.hostname;
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    {hostname && hostname === "womenscenter.heartlandacademy.edu.np" ? (
+      <SubDomainApp />
+    ) : (
+      <App />
+    )}
   </Provider>,
   document.querySelector("#root")
 );

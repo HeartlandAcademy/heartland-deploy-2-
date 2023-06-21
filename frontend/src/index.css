@@ -46,11 +46,16 @@
 .active {
   color: #111 !important;
 }
-        
-.selected a{
+
+.selected a {
   color: #111 !important;
   border-radius: 2px !important;
   border-bottom: 3px solid #111 !important;
+}
+
+.altSelected a {
+  color: #232323 !important;
+  opacity: 0.7;
 }
 
 .drop-active {
@@ -97,6 +102,26 @@
   opacity: 0.8;
   animation: zoom-in-zoom-out 10s;
   transition: transform 0.3s ease;
+}
+
+.altCarousel img {
+  height: 90vh !important;
+  margin-left: auto;
+  margin-right: auto;
+  background-size: cover;
+  object-fit: cover;
+  opacity: 0.8;
+  animation: zoom-in-zoom-out 10s;
+  transition: transform 0.3s ease;
+}
+
+.altCarousel > div > .active {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(35 35 35 / var(--tw-bg-opacity)) !important;
+}
+
+.altCarousel > div > div > div {
+  bottom: 15.35rem;
 }
 
 .carousel-item {
