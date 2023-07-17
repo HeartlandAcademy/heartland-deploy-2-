@@ -40,13 +40,13 @@ const Home = () => {
     {
       id: 1,
       icon: "TestIcon",
-      title: "Effective strategy",
-      desc: "Lorem ipsum dolor sit amet consectetur adipiscing elit do eiusmod tempor.",
+      title: "Our Goals:",
+      desc: "To build the future female leaders of Nepal and provide as many educational opportunities to young women across the country as possible.",
     },
     {
       id: 1,
       icon: "TestIcon",
-      title: "Effective strategy",
+      title: "OUR VISION",
       desc: "Lorem ipsum dolor sit amet consectetur adipiscing elit do eiusmod tempor.",
     },
     {
