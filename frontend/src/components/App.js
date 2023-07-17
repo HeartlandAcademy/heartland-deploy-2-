@@ -62,6 +62,7 @@ import Alumni from "./pages/Alumni";
 import Scholarship from "./pages/Scholarship";
 import Events from "./pages/Events";
 import College from "./pages/College";
+import WomenCenter from "./pages/women";
 import NotFoundPage from "./contents/404";
 import Careers from "./pages/Careers";
 import CareersInfo from "./pages/CareersInfo";
@@ -204,6 +205,8 @@ const App = () => {
                 <Route path="/registration" component={Registration} exact />
                 <Route path="/school" component={School} exact />
                 <Route path="/college" component={College} exact />
+                <Route path="/women-center" component={WomenCenter} exact />
+
                 <Route
                   path="/gallery/albums"
                   component={HeartlandGallery}

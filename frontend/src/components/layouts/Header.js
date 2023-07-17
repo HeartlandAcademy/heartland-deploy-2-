@@ -237,6 +237,12 @@ const Header = () => {
               </li>
             </StyledLink>
 
+            <StyledLink exact activeClassName="selected" to="/women-center">
+              <li className="nav-item">
+                <a className="nav-link">Women Center</a>
+              </li>
+            </StyledLink>
+
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
