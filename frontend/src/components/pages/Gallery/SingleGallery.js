@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Button, Placeholder } from "react-bootstrap";
 
-import { BASE_URL } from "../../../api";
 import { gallerySingleAlbum } from "../../../actions/galleryActions";
 import Gallery from "react-grid-gallery";
 import CardLoader from "../../contents/CardLoader";

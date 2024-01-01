@@ -48,18 +48,12 @@ const AltFooter = () => {
               </p>
             </div>
             <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 className="text-uppercase text-white">Our Services</h5>
+              <h5 className="text-uppercase text-white">Quick Links</h5>
 
               <ul className="list-unstyled mb-0">
                 <StyledLink to="/">
                   <li>
                     <a className="text-white">Home</a>
-                  </li>
-                </StyledLink>
-
-                <StyledLink to="/careers">
-                  <li>
-                    <a className="text-white">Careers</a>
                   </li>
                 </StyledLink>
 
@@ -69,9 +63,9 @@ const AltFooter = () => {
                   </li>
                 </StyledLink>
 
-                <StyledLink to="/news">
+                <StyledLink to="/contact">
                   <li>
-                    <a className="text-white">News</a>
+                    <a className="text-white">Contact</a>
                   </li>
                 </StyledLink>
 
@@ -113,7 +107,7 @@ const AltFooter = () => {
               <ul className="list-unstyled mb-0">
                 <li>
                   <a
-                    href="https://www.facebook.com/Heartlandacademy.edu.np"
+                    href="https://www.facebook.com/heartlandcentreforwomen"
                     target="_blank"
                     className="text-white"
                     style={{ textDecoration: "none" }}
@@ -151,7 +145,7 @@ const AltFooter = () => {
         className="text-center p-3"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
       >
-        Copyright © {`${getYear()}`}, Heartland Academy
+        Copyright © {`${getYear()}`}, Heartland Academy, Center for Women
       </div>
     </footer>
   );

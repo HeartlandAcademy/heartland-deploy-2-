@@ -11,33 +11,27 @@ import { useSelector } from "react-redux";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import WLogin from "./pages/_womenSection/login";
 
 import AltHeader from "./layouts/AltHeader";
 import Home from "./pages/_womenSection/home";
-import School from "./pages/School";
-import Contact from "./pages/Contact";
 import Footer from "./layouts/AltFooter";
-import BOD from "./pages/HAFamily/BOD";
-import Honorary from "./pages/HAFamily/Honorary";
-import Staffs from "./pages/HAFamily/Staffs";
-import News from "./pages/News";
-import DetailedNews from "./pages/News/DetailedNews";
-import Login from "./pages/Login";
-import HeartlandGallery from "./pages/Gallery";
-import Videos from "./pages/Videos";
-import TestimonailCreate from "./pages/TestimonialCreate";
-import SingleGallery from "./pages/Gallery/SingleGallery";
-import Notice from "./pages/Notice";
-import Downloads from "./pages/Downloads";
-import AboutUs from "./pages/AboutUs";
-import Registration from "./pages/Registration";
-import Alumni from "./pages/Alumni";
-import Scholarship from "./pages/Scholarship";
-import Events from "./pages/Events";
-import College from "./pages/College";
+import AboutUs from "./pages/_womenSection/about";
 import NotFoundPage from "./contents/404";
-import Careers from "./pages/Careers";
-import CareersInfo from "./pages/CareersInfo";
+import WomenGallery from "./pages/_womenSection/Gallery/index";
+import WomenSingleGallery from "./pages/_womenSection/Gallery/SingleGallery";
+import WContact from "./pages/Contact/WomenContact";
+
+import AdminWModal from "./pages/ModalCreate/WModalCreate";
+import WAdminImages from "./pages/GalleryCreate/WGalleryCreate";
+import AdminTopNav from "./layouts/AdminTopNav";
+import AdminWomenNav from "./layouts/AdminWomenNav";
+import AdminWCarousel from "./pages/CarouselCreate/WCarouselCreate";
+import AdminAllWCarousel from "./pages/Carousel/WCarousel";
+import AdminGallery from "./pages/_womenSection/Gallery/AdminGallery";
+import AdminSingleGallery from "./pages/_womenSection/Gallery/AdminSingleGallery";
+import Admin404 from "./contents/Admin404";
+import WTestimonialCreate from "./pages/TestimonialCreate/WTestimonialCreate";
 
 const Menu = styled.div`
   display: flex;
@@ -54,39 +48,87 @@ const Whole = styled.div`
 `;
 
 const SubDomainApp = () => {
+  const settings = useSelector((state) => state.settings);
+  const { adminMode, darkMode, sidebarToggle } = settings;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   return (
     <Router>
-      <AltHeader />
-      <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/about" component={AboutUs} exact />
-        <Route path="/registration" component={Registration} exact />
-        <Route path="/school" component={School} exact />
-        <Route path="/college" component={College} exact />
-        <Route path="/gallery/albums" component={HeartlandGallery} exact />
-        <Route path="/gallery/albums/:id" component={SingleGallery} exact />
-        <Route path="/gallery/videos" component={Videos} exact />
-        <Route path="/contact" component={Contact} exact />
-        <Route path="/hafamily/bod" component={BOD} exact />
-        <Route path="/hafamily/honorary" component={Honorary} exact />
+      {adminMode && adminMode && userInfo && userInfo ? (
+        <>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            theme={darkMode ? "dark" : "light"}
+            limit={3}
+          />
+          <AdminTopNav />
+          <Menu style={{ background: darkMode ? "#303134" : "#fff" }}>
+            <AdminWomenNav />
+            <Whole darkmode={darkMode} sidebar={sidebarToggle}>
+              <Switch>
+                <Route path="/" exact>
+                  <Redirect to="/admin/carousel" />
+                </Route>
+                <Route path="/admin/home" exact>
+                  <Redirect to="/admin/carousel" />
+                </Route>
 
-        <Route path="/hafamily/staffs" component={Staffs} exact />
-        <Route path="/alumni" component={Alumni} exact />
-        <Route path="/scholarship" component={Scholarship} exact />
-        <Route path="/news" component={News} exact />
-        <Route path="/events" component={Events} exact />
-        <Route path="/news/:id" component={DetailedNews} exact />
-        <Route path="/notice" component={Notice} exact />
-        <Route path="/downloads" component={Downloads} exact />
-        <Route path="/careers" component={Careers} exact />
-        <Route path="/careers/:id" component={CareersInfo} exact />
+                <Route path="/admin/modal" component={AdminWModal} exact />
+                <Route
+                  path="/admin/carousel"
+                  component={AdminWCarousel}
+                  exact
+                />
+                <Route
+                  path="/admin/carousel/all"
+                  component={AdminAllWCarousel}
+                  exact
+                />
 
-        {/* Admin */}
-        <Route path="/admin/login" component={Login} exact />
+                <Route path="/admin/albums" component={WAdminImages} exact />
+                <Route
+                  path="/admin/albums/all"
+                  component={AdminGallery}
+                  exact
+                />
+                <Route
+                  path="/admin/albums/all/:id"
+                  component={AdminSingleGallery}
+                  exact
+                />
 
-        <Route path="/" component={NotFoundPage} />
-      </Switch>
-      <Footer />
+                <Route
+                  path="/admin/testimonials"
+                  component={WTestimonialCreate}
+                  exact
+                />
+
+                <Route exact component={Admin404} />
+              </Switch>
+            </Whole>
+          </Menu>
+        </>
+      ) : (
+        <>
+          <AltHeader />
+          <>
+            <Switch>
+              <Route path="/" component={Home} exact />
+              <Route path="/about" component={AboutUs} exact />
+              <Route path="/gallery" component={WomenGallery} exact />
+              <Route path="/gallery/:id" component={WomenSingleGallery} exact />
+              <Route path="/contact" component={WContact} exact />
+
+              <Route path="/admin/login" component={WLogin} exact />
+
+              <Route path="/" component={NotFoundPage} />
+            </Switch>
+          </>
+          <Footer />
+        </>
+      )}
     </Router>
   );
 };

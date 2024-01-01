@@ -7,6 +7,9 @@ import {
   createCarousel,
   deleteCarousel,
   getCarousel,
+  getWCarousel,
+  createWCarousel,
+  deleteWCarousel,
 } from "../controllers/carouselControllers.js";
 
 const router = express.Router();
@@ -43,8 +46,10 @@ const upload = multer({
 });
 
 router.route("/").get(getCarousel).post(protect, createCarousel);
+router.route("/sub-domain").get(getWCarousel).post(protect, createWCarousel);
 
 router.route("/:id").delete(protect, deleteCarousel);
+router.route("/sub-domain/:id").delete(protect, deleteWCarousel);
 
 router.post("/uploads", upload.single("formFile"), (req, res) => {
   res.send(`/${req.file.path}`);

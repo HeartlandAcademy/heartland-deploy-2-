@@ -18,7 +18,11 @@ import {
   galleryVideosCreateReducer,
   galleryVideosDeleteReducer,
   galleryVideosReducer,
+  galleryWAlbumCreateReducer,
+  galleryWAlbumDeleteReducer,
+  galleryWAlbumsReducer,
   singleGalleryAlbumReducer,
+  singleWGalleryAlbumReducer,
 } from "./reducers/galleryReducers";
 import settingReducers from "./reducers/settingReducers";
 import {
@@ -47,8 +51,11 @@ import {
 } from "./reducers/downloadsReducers";
 import {
   availableCarouselReducer,
+  availableWCarouselReducer,
   carouselCreateReducer,
   carouselDeleteReducer,
+  wCarouselCreateReducer,
+  wCarouselDeleteReducer,
 } from "./reducers/carouselReducers";
 import {
   createRegistrationsReducer,
@@ -58,8 +65,11 @@ import {
 } from "./reducers/registrationReducers";
 import {
   addedModalReducer,
+  addedWModalReducer,
   modalCreateReducer,
   modalDeleteReducer,
+  wModalCreateReducer,
+  wModalDeleteReducer,
 } from "./reducers/modalReducers";
 import {
   addedTeamsReducer,
@@ -69,10 +79,13 @@ import {
 import {
   addedStudentsTestimonialsReducer,
   addedVisitorsTestimonialsReducer,
+  addedWomenTestimonialsReducer,
   studentsTestimonialsCreateReducer,
   studentsTestimonialsDeleteReducer,
   visitorsTestimonialsCreateReducer,
   visitorsTestimonialsDeleteReducer,
+  womenTestimonialsCreateReducer,
+  womenTestimonialsDeleteReducer,
 } from "./reducers/testimonialsReducers";
 import {
   careerCreateReducer,
@@ -92,9 +105,15 @@ const reducer = combineReducers({
   availableCarousel: availableCarouselReducer,
   carouselCreate: carouselCreateReducer,
   carouselDelete: carouselDeleteReducer,
+  availableWCarousel: availableWCarouselReducer,
+  carouselWCreate: wCarouselCreateReducer,
+  carouselWDelete: wCarouselDeleteReducer,
   addedModal: addedModalReducer,
   modalCreate: modalCreateReducer,
   modalDelete: modalDeleteReducer,
+  addedWModal: addedWModalReducer,
+  wModalCreate: wModalCreateReducer,
+  wModalDelete: wModalDeleteReducer,
   addedTeams: addedTeamsReducer,
   teamsCreate: teamsCreateReducer,
   teamsDelete: teamsDeleteReducer,
@@ -104,15 +123,22 @@ const reducer = combineReducers({
   addedVisitorsTestimonials: addedVisitorsTestimonialsReducer,
   visitorsTestimonialsCreate: visitorsTestimonialsCreateReducer,
   visitorsTestimonialsDelete: visitorsTestimonialsDeleteReducer,
+  addedWomenTestimonials: addedWomenTestimonialsReducer,
+  womenTestimonialsCreate: womenTestimonialsCreateReducer,
+  womenTestimonialsDelete: womenTestimonialsDeleteReducer,
   upcomingEvents: upcomingEventsReducer,
   upcomingAdminEvents: upcomingAdminEventsReducer,
   upcomingLatestEvents: upcomingLatestEventsReducer,
   eventsCreate: eventsCreateReducer,
   eventsDelete: eventsDeleteReducer,
   galleryAlbums: galleryAlbumsReducer,
+  galleryWAlbums: galleryWAlbumsReducer,
   galleryAlbumCreate: galleryAlbumCreateReducer,
+  galleryWAlbumCreate: galleryWAlbumCreateReducer,
   galleryAlbumDelete: galleryAlbumDeleteReducer,
+  galleryWAlbumDelete: galleryWAlbumDeleteReducer,
   singleGalleryAlbum: singleGalleryAlbumReducer,
+  singleWGalleryAlbum: singleWGalleryAlbumReducer,
   galleryVideos: galleryVideosReducer,
   galleryVideosCreate: galleryVideosCreateReducer,
   galleryVideosDelete: galleryVideosDeleteReducer,

@@ -5,6 +5,9 @@ import {
   ADDED_TESTIMONIALS_VISITORS_FAIL,
   ADDED_TESTIMONIALS_VISITORS_REQUEST,
   ADDED_TESTIMONIALS_VISITORS_SUCCESS,
+  ADDED_TESTIMONIALS_WOMEN_FAIL,
+  ADDED_TESTIMONIALS_WOMEN_REQUEST,
+  ADDED_TESTIMONIALS_WOMEN_SUCCESS,
   TESTIMONIALS_STUDENTS_CREATE_FAIL,
   TESTIMONIALS_STUDENTS_CREATE_REQUEST,
   TESTIMONIALS_STUDENTS_CREATE_RESET,
@@ -19,6 +22,13 @@ import {
   TESTIMONIALS_VISITORS_DELETE_FAIL,
   TESTIMONIALS_VISITORS_DELETE_REQUEST,
   TESTIMONIALS_VISITORS_DELETE_SUCCESS,
+  TESTIMONIALS_WOMEN_CREATE_FAIL,
+  TESTIMONIALS_WOMEN_CREATE_REQUEST,
+  TESTIMONIALS_WOMEN_CREATE_RESET,
+  TESTIMONIALS_WOMEN_CREATE_SUCCESS,
+  TESTIMONIALS_WOMEN_DELETE_FAIL,
+  TESTIMONIALS_WOMEN_DELETE_REQUEST,
+  TESTIMONIALS_WOMEN_DELETE_SUCCESS,
 } from "../actions/types";
 
 export const addedStudentsTestimonialsReducer = (state = {}, action) => {
@@ -28,6 +38,19 @@ export const addedStudentsTestimonialsReducer = (state = {}, action) => {
     case ADDED_TESTIMONIALS_STUDENTS_SUCCESS:
       return { loading: false, studentsTestimonials: action.payload };
     case ADDED_TESTIMONIALS_STUDENTS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const addedWomenTestimonialsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADDED_TESTIMONIALS_WOMEN_REQUEST:
+      return { loading: true, womenTestimonials: [] };
+    case ADDED_TESTIMONIALS_WOMEN_SUCCESS:
+      return { loading: false, womenTestimonials: action.payload };
+    case ADDED_TESTIMONIALS_WOMEN_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -53,6 +76,25 @@ export const studentsTestimonialsCreateReducer = (state = {}, action) => {
   }
 };
 
+export const womenTestimonialsCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case TESTIMONIALS_WOMEN_CREATE_REQUEST:
+      return { loading: true };
+    case TESTIMONIALS_WOMEN_CREATE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        womenTestimonials: action.payload,
+      };
+    case TESTIMONIALS_WOMEN_CREATE_FAIL:
+      return { loading: false, error: action.payload };
+    case TESTIMONIALS_WOMEN_CREATE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
 export const studentsTestimonialsDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case TESTIMONIALS_STUDENTS_DELETE_REQUEST:
@@ -60,6 +102,19 @@ export const studentsTestimonialsDeleteReducer = (state = {}, action) => {
     case TESTIMONIALS_STUDENTS_DELETE_SUCCESS:
       return { loading: false, success: true };
     case TESTIMONIALS_STUDENTS_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const womenTestimonialsDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case TESTIMONIALS_WOMEN_DELETE_REQUEST:
+      return { loading: true };
+    case TESTIMONIALS_WOMEN_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case TESTIMONIALS_WOMEN_DELETE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

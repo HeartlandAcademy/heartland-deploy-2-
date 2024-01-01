@@ -1,11 +1,20 @@
 import asyncHandler from "express-async-handler";
 import Modal from "../models/modalModel.js";
+import WModal from "../models/womenModalModel.js";
 
 // @desc    Fetch Modal
 // @route   GET /api/modal
 // @access  Public
 const getModal = asyncHandler(async (req, res) => {
   const modal = await Modal.find({}).sort({ _id: -1 }).limit(1);
+  res.json(modal);
+});
+
+// @desc    Fetch Women Modal
+// @route   GET /api/modal/sub-domain
+// @access  Public
+const getWModal = asyncHandler(async (req, res) => {
+  const modal = await WModal.find({}).sort({ _id: -1 }).limit(1);
   res.json(modal);
 });
 
@@ -23,26 +32,19 @@ const deleteModal = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Create Modal
-// @route   POST /api/modal
+// @desc    Delete Women Modal
+// @route   DELETE /api/modal/sub-domain/:id
 // @access  Private
-// const createModal = asyncHandler(async (req, res) => {
-//   const { image } = req.body;
-
-//   const modal = await Modal.create({
-//     image,
-//   });
-
-//   if (modal) {
-//     res.status(201).json({
-//       _id: modal._id,
-//       image: modal.image,
-//     });
-//   } else {
-//     res.status(400);
-//     throw new Error("Invalid Modal Data");
-//   }
-// });
+const deleteWModal = asyncHandler(async (req, res) => {
+  const singleModal = await WModal.findById(req.params.id);
+  if (singleModal) {
+    await singleModal.remove();
+    res.json({ message: "Modal Deleted Successfully" });
+  } else {
+    res.status(404);
+    throw new Error("Modal not found");
+  }
+});
 
 // @desc    Create Modal
 // @route   POST /api/modal
@@ -78,4 +80,45 @@ const createModal = asyncHandler(async (req, res) => {
   }
 });
 
-export { getModal, deleteModal, createModal };
+// @desc    Create Women Modal
+// @route   POST /api/modal/sub-domain
+// @access  Private
+const createWModal = asyncHandler(async (req, res) => {
+  const modal = await WModal.findOne();
+
+  if (modal) {
+    const { image } = req.body;
+    modal.image = req.body.image || modal.image;
+
+    const updatedModal = await modal.save();
+
+    res.json({
+      _id: updatedModal._id,
+      image: updatedModal.image,
+    });
+  } else {
+    const { image } = req.body;
+    const newModal = await WModal.create({
+      image,
+    });
+
+    if (newModal) {
+      res.status(201).json({
+        _id: newModal._id,
+        image: newModal.image,
+      });
+    } else {
+      res.status(400);
+      throw new Error("Invalid Modal Data");
+    }
+  }
+});
+
+export {
+  getModal,
+  deleteModal,
+  createModal,
+  getWModal,
+  deleteWModal,
+  createWModal,
+};

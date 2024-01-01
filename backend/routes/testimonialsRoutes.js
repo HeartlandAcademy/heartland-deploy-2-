@@ -10,6 +10,9 @@ import {
   deleteVisitorsTestimonials,
   getStudentsTestimonials,
   getVisitorsTestimonials,
+  getWTestimonials,
+  createWTestimonial,
+  deleteWomenTestimonial,
 } from "../controllers/testimonialsControllers.js";
 
 const router = express.Router();
@@ -58,6 +61,10 @@ router
   .post(protect, createVisitorsTestimonials);
 
 router.route("/visitors/:id").delete(protect, deleteVisitorsTestimonials);
+
+router.route("/").get(getWTestimonials).post(protect, createWTestimonial);
+
+router.route("/:id").delete(protect, deleteWomenTestimonial);
 
 router.post("/uploads", upload.single("formFile"), (req, res) => {
   res.send(`/${req.file.path}`);

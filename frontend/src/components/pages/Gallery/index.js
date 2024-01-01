@@ -7,9 +7,8 @@ import { Button, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 
-import { BASE_URL } from "../../../api";
 import { listGalleryAlbums } from "../../../actions/galleryActions";
-import GalleryCardLoader from "./GalleryCardLoader";
+import GalleryCardLoader from "../../contents/GalleryCardLoader";
 import test from "../../../assets/imageheaderphotos/test.JPG";
 import placeholder from "../../../assets/default/placeholder.png";
 import ImageHeader from "../../contents/ImageHeader";

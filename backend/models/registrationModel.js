@@ -47,29 +47,29 @@ const registrationSchema = mongoose.Schema(
     },
     lvl: {
       type: String,
-      required: function () {
-        return true ? this.preference !== "Senior Higher Secondary" : false;
-      },
+      // required: function () {
+      //   return true ? this.preference !== "Senior Higher Secondary" : false;
+      // },
     },
     faculty: {
       type: String,
-      required: function () {
-        return true ? this.preference === "Senior Higher Secondary" : false;
-      },
+      // required: function () {
+      //   return true ? this.preference === "Senior Higher Secondary" : false;
+      // },
     },
     markSheet: {
       type: String,
-      required: true,
+      // required: true,
     },
     ppPhoto: {
       type: String,
-      required: true,
+      // required: true,
     },
     characterCerf: {
       type: String,
-      required: function () {
-        return true ? this.preference === "Senior Higher Secondary" : false;
-      },
+      // required: function () {
+      //   return true ? this.preference === "Senior Higher Secondary" : false;
+      // },
     },
     application: {
       type: String,
@@ -77,9 +77,9 @@ const registrationSchema = mongoose.Schema(
     },
     attachApplication: {
       type: String,
-      required: function () {
-        return true ? this.application === "" : false;
-      },
+      // required: function () {
+      //   return true ? this.application === "" : false;
+      // },
     },
   },
   {

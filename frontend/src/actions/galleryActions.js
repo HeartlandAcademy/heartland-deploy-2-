@@ -22,6 +22,18 @@ import {
   GALLERY_ALBUM_DELETE_REQUEST,
   GALLERY_ALBUM_DELETE_SUCCESS,
   GALLERY_ALBUM_DELETE_FAIL,
+  WGALLERY_ALBUMS_REQUEST,
+  WGALLERY_ALBUMS_SUCCESS,
+  WGALLERY_ALBUMS_FAIL,
+  WGALLERY_ALBUM_CREATE_REQUEST,
+  WGALLERY_ALBUM_CREATE_SUCCESS,
+  WGALLERY_ALBUM_CREATE_FAIL,
+  WGALLERY_ALBUM_DELETE_REQUEST,
+  WGALLERY_ALBUM_DELETE_SUCCESS,
+  WGALLERY_ALBUM_DELETE_FAIL,
+  SINGLE_WALBUM_REQUEST,
+  SINGLE_WALBUM_SUCCESS,
+  SINGLE_WALBUM_FAIL,
 } from "./types";
 
 export const listGalleryAlbums = () => async (dispatch) => {
@@ -37,6 +49,27 @@ export const listGalleryAlbums = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GALLERY_ALBUMS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listWGalleryAlbums = () => async (dispatch) => {
+  try {
+    dispatch({ type: WGALLERY_ALBUMS_REQUEST });
+
+    const { data } = await axios.get(`${BASE_URL}/api/gallery`);
+
+    dispatch({
+      type: WGALLERY_ALBUMS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: WGALLERY_ALBUMS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -82,6 +115,43 @@ export const addGalleryAlbums =
     }
   };
 
+export const addWGalleryAlbums =
+  (name, images) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: WGALLERY_ALBUM_CREATE_REQUEST });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        `${BASE_URL}/api/gallery`,
+        { name, images },
+        config
+      );
+
+      dispatch({
+        type: WGALLERY_ALBUM_CREATE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: WGALLERY_ALBUM_CREATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
 export const deleteGalleryAlbums = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: GALLERY_ALBUM_DELETE_REQUEST });
@@ -110,6 +180,34 @@ export const deleteGalleryAlbums = (id) => async (dispatch, getState) => {
   }
 };
 
+export const deleteWGalleryAlbums = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: WGALLERY_ALBUM_DELETE_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`${BASE_URL}/api/gallery/${id}`, config);
+
+    dispatch({ type: WGALLERY_ALBUM_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: WGALLERY_ALBUM_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 export const gallerySingleAlbum = (id) => async (dispatch) => {
   try {
     dispatch({ type: SINGLE_ALBUM_REQUEST });
@@ -123,6 +221,27 @@ export const gallerySingleAlbum = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SINGLE_ALBUM_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const gallerySingleWAlbum = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: SINGLE_WALBUM_REQUEST });
+
+    const { data } = await axios.get(`${BASE_URL}/api/gallery/${id}`);
+
+    dispatch({
+      type: SINGLE_WALBUM_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: SINGLE_WALBUM_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

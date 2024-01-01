@@ -5,7 +5,6 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Button, Placeholder } from "react-bootstrap";
 
 import { gallerySingleAlbum } from "../../../actions/galleryActions";
-import { BASE_URL } from "../../../api";
 import Gallery from "react-grid-gallery";
 import styled from "styled-components";
 import Message from "../../contents/Message";

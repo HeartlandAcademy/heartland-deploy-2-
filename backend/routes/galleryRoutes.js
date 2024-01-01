@@ -10,6 +10,10 @@ import {
   getAlbum,
   getAlbums,
   getVideos,
+  getWomenAlbums,
+  createWomenAlbum,
+  getWomenAlbum,
+  deleteWomenAlbum,
 } from "../controllers/galleryControllers.js";
 
 const router = express.Router();
@@ -49,6 +53,8 @@ router.route("/albums").get(getAlbums).post(protect, createAlbum);
 router.route("/videos").get(getVideos).post(protect, createVideos);
 router.route("/albums/:id").get(getAlbum).delete(protect, deleteAlbum);
 router.route("/videos/:id").delete(protect, deleteVideos);
+router.route("/").get(getWomenAlbums).post(protect, createWomenAlbum);
+router.route("/:id").get(getWomenAlbum).delete(protect, deleteWomenAlbum);
 
 router.post("/uploads", upload.array("images"), (req, res, next) => {
   const reqFiles = [];
@@ -59,7 +65,6 @@ router.post("/uploads", upload.array("images"), (req, res, next) => {
   // for (var i = 0; i < req.files.length; i++) {
   //   reqFiles.push("/" + req.files[i].path);
   // }
-  console.log("Hello" + reqFiles);
   res.send(reqFiles);
 });
 

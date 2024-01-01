@@ -5,7 +5,7 @@ import { Carousel } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 
-import { listCarousel } from "../../actions/carouselActions";
+import { listWCarousel } from "../../actions/carouselActions";
 
 import mainImage from "../../assets/others/main-carousel.jpg";
 import Message from "./Message";
@@ -95,13 +95,13 @@ const CarouselDescContent = styled.div`
 `;
 
 const AltCarousel = () => {
-  const availableCarousel = useSelector((state) => state.availableCarousel);
-  const { loading, carousel, error } = availableCarousel;
+  const availableWCarousel = useSelector((state) => state.availableWCarousel);
+  const { loading, wCarousel: carousel, error } = availableWCarousel;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(listCarousel());
+    dispatch(listWCarousel());
   }, [dispatch]);
 
   const CarouselLoader = () => {
@@ -127,11 +127,16 @@ const AltCarousel = () => {
       ) : (
         <Carousel fade className="altCarousel">
           <Carousel.Item interval={33300}>
-            <img className="d-block w-100" src={mainImage} alt="First slide" />
+            <img
+              className="d-block w-100 wcarousel"
+              src={mainImage}
+              alt="First slide"
+            />
             <Carousel.Caption>
-              <CarouselHead>Welcome To Heartland Academy</CarouselHead>
+              <CarouselHead>Heartland Academy Centre for Women</CarouselHead>
               <CarouselInfo>
-                Creating Opportunities Through Education
+                Supported by The Centre for Learning and Childrens Rights
+                (CLCR), Australia, and Women for Change.
               </CarouselInfo>
               <Welcome>
                 <LinkContainer to="/about">

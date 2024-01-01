@@ -1,0 +1,8 @@
+.txt-input {
+  background: transparent;
+  border: 1px solid #ebebeb;
+  border-radius: 0;
+  box-shadow: none !important;
+  height: 50px;
+  padding-left: 25px;
+}

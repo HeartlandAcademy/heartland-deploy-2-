@@ -1,22 +1,126 @@
 import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+import Ava1 from "../../../assets/others/user.JPG";
 
 import { listModal } from "../../../actions/modalActions";
 import PhotoCarousel from "../../contents/AltCarousel";
-import Details from "../../layouts/Details";
-import Teams from "../../layouts/Teams";
-import NewsAndEvents from "../../layouts/NewsAndEvents";
-import Partners from "../../layouts/Partners";
-import PopupModal from "../../contents/PopupModal";
+import WPartners from "../../layouts/WPartners";
 import Meta from "../../contents/Meta";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { LuGoal } from "react-icons/lu";
+import { FaBinoculars } from "react-icons/fa";
+import { HiAcademicCap } from "react-icons/hi2";
+import { LuSchool } from "react-icons/lu";
+import styled from "styled-components";
 
-import Heartland from "../../../assets/carousel/heartland.jpg";
-import CLCR from "../../../assets/Partners/clcr.png";
-import chatswood from "../../../assets/Partners/chatswood.jpg";
-import GDG from "../../../assets/Partners/gdg.png";
-import ravenswood from "../../../assets/Partners/ravenswood.png";
+const MainTextWrapper = styled.div`
+  h4 {
+    font-size: 36px;
+    line-height: 1.3;
+    color: #141517;
+    font-weight: 700;
+    transition: all .3s ease-out 0s;
+    font-family: "Urbanist", sans-serif;
+    @media (max-width: 560px) {
+      font-size: 30px; 
+    }
+  }
+  h6 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #575757;
+    line-height: 26px;
+    @media (max-width: 560px) {
+      font-size: 14px; 
+    }
+  }
+  p {
+    font-size: 15px;
+    color: rgb(150, 150, 150);
+    line-height: 25px;
+    margin-bottom: 40px;
+    @media (max-width: 560px) {
+      font-size: 13px; 
+    }
+  }
+}
+`;
+
+const TextWrapper = styled.div`
+  h4 {
+    color: #1a1729;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    margin-bottom: 15px;
+    transition: all .3s;
+    font-family: "Urbanist", sans-serif;
+    @media (max-width: 560px) {
+      font-size: 23px; 
+    }
+
+  }
+  span {
+    color: #625f71;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    margin-bottom: 0;
+    transition: all .3s;
+    @media (max-width: 560px) {
+      font-size: 14px; 
+    }
+  }
+}
+`;
+
+const MsgWrapper = styled.div`
+  h4 {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: #21a7d0;
+    @media (max-width: 560px) {
+      font-size: 16px;
+    }
+  }
+  p {
+    font-size: 18px;
+    line-height: 30px;
+    color: #505050;
+    text-align: justify;
+    @media (max-width: 560px) {
+      font-size: 15px;
+      line-height: 25px;
+    }
+  }
+`;
+
+const MsgInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  @media (max-width: 560px) {
+    align-items: center;
+    margin-top: 20px;
+  }
+  h5 {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 400;
+    color: #505050;
+    margin-top: 13px;
+  }
+  h6 {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 500;
+    color: #505050;
+  }
+`;
 
 const Home = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -39,54 +143,66 @@ const Home = () => {
   const aboutData = [
     {
       id: 1,
-      icon: "TestIcon",
-      title: "Our Goals:",
+      icon: <LuGoal size={70} color="#111" />,
+      title: "Our Goals",
       desc: "To build the future female leaders of Nepal and provide as many educational opportunities to young women across the country as possible.",
     },
     {
       id: 1,
-      icon: "TestIcon",
+      icon: <FaBinoculars size={70} color="#111" />,
       title: "OUR VISION",
-      desc: "Lorem ipsum dolor sit amet consectetur adipiscing elit do eiusmod tempor.",
+      desc: `
+      To be a leading college, offering top-notch education and championing scholarships for young women to enhance their future prospects in various fields.
+     `,
     },
     {
       id: 1,
-      title: "Effective strategy",
-      icon: "TestIcon",
-      desc: "Lorem ipsum dolor sit amet consectetur adipiscing elit do eiusmod tempor.",
+      icon: <HiAcademicCap size={70} color="#111" />,
+      title: "Academic Excellence",
+      desc: "Deliver exceptional education, fostering critical thinking and strong foundations in various disciplines.",
     },
     {
       id: 1,
-      icon: "TestIcon",
-      title: "Effective strategy",
-      desc: "Lorem ipsum dolor sit amet consectetur adipiscing elit do eiusmod tempor.",
+      icon: <LuSchool size={70} color="#111" />,
+      title: "Inclusive Environment",
+      desc: "Promote diversity, creating a welcoming, supportive space for students from all backgrounds.",
     },
   ];
 
   return (
     <>
-      <Meta />
+      <Meta title={"Heartland Academy | Women Section"} />
       {/* <PopupModal show={modalShow} onHide={() => setModalShow(false)} /> */}
 
       <PhotoCarousel />
       <Container>
-        <Row style={{ padding: "10rem 0" }}>
-          <Col md={4}>
-            <h4>ABOUT COMPANY</h4>
-            <h2>We combine design, thinking and technical</h2>
-
-            <Button variant="outlined">DISCOVER</Button>
+        <Row style={{ padding: "5rem 0" }}>
+          <Col md={12} lg={4}>
+            <MainTextWrapper>
+              <h4>Welcome to the Heartland Centre for Women’s College...</h4>
+              <h6>
+                where empowerment meets education. Join us on a journey of
+                growth and skill-building with courses in Law, Culinary Arts,
+                and Medical Studies. Our commitment is to mold the next
+                generation of female leaders, offering 100% scholarships and a
+                vibrant learning environment.{" "}
+              </h6>
+              <p>
+                "Explore your potential with us, where innovation and excellence
+                thrive!"
+              </p>
+            </MainTextWrapper>
           </Col>
-          <Col md={8}>
+          <Col md={12} lg={8}>
             <Row>
               {aboutData?.map((list) => (
                 <Col sm={6} className="pb-4">
                   <div className="d-flex gap-4 pb-4">
-                    <h5>{list?.icon}</h5>
-                    <div>
+                    <div>{list?.icon}</div>
+                    <TextWrapper>
                       <h4>{list?.title}</h4>
                       <span className="mt-2">{list?.desc}</span>
-                    </div>
+                    </TextWrapper>
                   </div>
                 </Col>
               ))}
@@ -96,6 +212,52 @@ const Home = () => {
       </Container>
 
       <div
+        style={{
+          background: "rgb(247 248 252)",
+          padding: "70px 0",
+        }}
+      >
+        <Container>
+          <MsgWrapper>
+            <h4>About Us</h4>
+            <p>
+              I am pleased to welcome you to Heartland Academy! We are committed
+              to providing you with the best possible practical education. We
+              have a dedicated faculty who are passionate about teaching and
+              learning. We also offer a wide range of academic and
+              extracurricular opportunities, so you can find your passion and
+              make lifelong friends. In addition to your academic studies, we
+              also want you to focus on your physical and social potentiality in
+              a supporting and stimulating learning environment. We believe that
+              it is important to be well-rounded individuals, so we offer a
+              variety of vocational training and projects that will help you
+              develop your idea and leadership. We are also committed to
+              creating a safe and inclusive environment for all girls. We
+              believe that everyone deserves to feel respected and valued,
+              regardless of their background or beliefs. I am confident that you
+              will have a wonderful experience at Heartland Academy. I am here
+              to support you in any way that I can. Welcome to the Heartland
+              Academy family!
+            </p>
+          </MsgWrapper>
+          <MsgInfo>
+            <img
+              src={Ava1}
+              alt="img"
+              style={{
+                height: "110px",
+                width: "110px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+            <h5>Head of College Studies,</h5>
+            <h6>Chanda Koirala</h6>
+          </MsgInfo>
+        </Container>
+      </div>
+
+      {/* <div
         style={{
           background: "rgb(247 248 252)",
           padding: "70px 0",
@@ -200,116 +362,8 @@ const Home = () => {
             </div>
           </div>
         </Container>
-      </div>
-
-      <div></div>
-
-      <NewsAndEvents />
-      <Teams />
-      <Partners />
-      {/* <section
-        style={{
-          position: "relative",
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
-          padding: "100px 0",
-          opacity: 1,
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            backgroundImage: { Heartland },
-            backgroundSize: "cover",
-            width: "100%",
-          }}
-        />
-        <div
-          style={{
-            opacity: 0.75,
-            backgroundColor: "rgb(55 65 98)",
-          }}
-        />
-        <div className="container">
-
-        </div>
-      </section> */}
-      <section
-        style={{
-          opacity: 1,
-          padding: "90px 0",
-          position: "relative",
-          backgroundSize: "cover",
-          backgroundPosition: "fixed",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            backgroundImage: `url(${Heartland})`,
-            willChange: "transform",
-            position: "absolute",
-            top: "0px",
-            left: "0",
-            width: "100%",
-            height: "100vh",
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: "0px",
-            left: "0",
-            width: "100%",
-            height: "100vh",
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            opacity: 0.75,
-            backgroundColor: "rgb(55 65 98)",
-          }}
-        />
-        <div className="container">
-          <div
-            className="d-flex"
-            style={{
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <div className="relative text-left sm:mb-[30px] sm:text-center col-xl-7 col-md-8 col-sm-10">
-              <h2
-                className="heading-4 font-serif font-semibold text-white mb-0"
-                style={{
-                  fontSize: "2.85rem",
-                  lineHeight: "3.4rem",
-                  textAlign: "left",
-                }}
-              >
-                Gearing your company through an innovative strategy
-              </h2>
-            </div>
-            <div
-              className="col-xl-5 col-md-4"
-              style={{
-                textAlign: "right",
-                padding: "18px 0",
-                marginTop: "23px",
-                fontWeight: 600,
-              }}
-            >
-              <a
-                aria-label="link for company"
-                style={{ color: "#fff", textDecoration: "none" }}
-                href="/"
-              >
-                DISCOVER HA
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div> */}
+      <WPartners />
     </>
   );
 };

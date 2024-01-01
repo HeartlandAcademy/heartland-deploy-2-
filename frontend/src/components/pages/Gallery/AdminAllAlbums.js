@@ -12,10 +12,9 @@ import {
   deleteGalleryAlbums,
   listGalleryAlbums,
 } from "../../../actions/galleryActions";
-import { BASE_URL } from "../../../api";
 import Message from "../../contents/Message";
 import placeholder from "../../../assets/default/placeholder.png";
-import GalleryCardLoader from "./GalleryCardLoader";
+import GalleryCardLoader from "../../contents/GalleryCardLoader";
 
 const AlbumsContainer = styled.div`
   padding: 10px 20px;

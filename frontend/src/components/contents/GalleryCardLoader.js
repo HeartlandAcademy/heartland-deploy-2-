@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Placeholder } from "react-bootstrap";
 
-import defaultImage from "../../../assets/default/default-loading.png";
+import defaultImage from "../../assets/default/default-loading.png";
 
 const CardItem = styled.div`
   display: flex;
@@ -68,10 +68,10 @@ const ActionButton = styled.div`
   }
 `;
 
-const GalleryCardLoader = () => {
+const GalleryCardLoader = ({ style = null }) => {
   return (
     <CardItem>
-      <Card>
+      <Card style={style}>
         <CardImage>
           <img src={defaultImage} alt="default" />
         </CardImage>

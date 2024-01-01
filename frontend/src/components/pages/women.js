@@ -27,11 +27,15 @@ const Section1 = styled.div`
 const Women = () => {
   return (
     <>
-      <Meta title="Women Center" />
-      <ImageHeader mtitle="Women Center" title="Women Center" image={test} />
+      <Meta title="Women's Center" />
+      <ImageHeader
+        mtitle="Women's Center"
+        title="Women's Center"
+        image={test}
+      />
       <Section1 className="container">
         <div>
-          <h3>Women Center</h3>
+          <h3>Women's Center</h3>
           <h5>Who are we:</h5>
           <p>
             Heartland Academy’s Centre for Women (HCW) is a pioneer women’s only

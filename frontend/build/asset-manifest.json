@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.9261949a.chunk.css",
-    "main.js": "/static/js/main.d797d4e2.chunk.js",
-    "main.js.map": "/static/js/main.d797d4e2.chunk.js.map",
+    "main.js": "/static/js/main.6d2164df.chunk.js",
+    "main.js.map": "/static/js/main.6d2164df.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.4eab1d6a.js",
     "runtime-main.js.map": "/static/js/runtime-main.4eab1d6a.js.map",
     "static/css/2.05d25173.chunk.css": "/static/css/2.05d25173.chunk.css",
@@ -35,7 +35,7 @@
     "static/media/mathletics.7fac61d9.png": "/static/media/mathletics.7fac61d9.png",
     "static/media/newspaper.369ec399.jpg": "/static/media/newspaper.369ec399.jpg",
     "static/media/president.971593fc.png": "/static/media/president.971593fc.png",
-    "static/media/principal.38e477e2.png": "/static/media/principal.38e477e2.png",
+    "static/media/principal.e3a81b54.png": "/static/media/principal.e3a81b54.png",
     "static/media/ravenswood.43ef7dc9.png": "/static/media/ravenswood.43ef7dc9.png",
     "static/media/rotary.f5ee91ad.svg": "/static/media/rotary.f5ee91ad.svg",
     "static/media/sciencelab.2eda1e11.jpg": "/static/media/sciencelab.2eda1e11.jpg",
@@ -47,6 +47,6 @@
     "static/css/2.05d25173.chunk.css",
     "static/js/2.b4c79115.chunk.js",
     "static/css/main.9261949a.chunk.css",
-    "static/js/main.d797d4e2.chunk.js"
+    "static/js/main.6d2164df.chunk.js"
   ]
 }

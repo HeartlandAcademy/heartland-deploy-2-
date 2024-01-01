@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Testimonials from "../models/testimonialsModel.js";
+import WTestimonials from "../models/womenTestimonialsModel.js";
 
 // @desc    Fetch all Student Testimonials
 // @route   GET /api/testimonials/students
@@ -10,6 +11,14 @@ const getStudentsTestimonials = asyncHandler(async (req, res) => {
     { students: 1 }
   ).select("-_id");
   res.json(studentsTestimonials);
+});
+
+// @desc    Fetch all Women Testimonials
+// @route   GET /api/wtestimonials
+// @access  Public
+const getWTestimonials = asyncHandler(async (req, res) => {
+  const womenTestimonials = await WTestimonials.find({}).sort({ _id: -1 });
+  res.json(womenTestimonials);
 });
 
 // @desc    Create Student Testimonials
@@ -34,37 +43,60 @@ const createStudentTestimonials = asyncHandler(async (req, res) => {
   } else {
     res.json("Testimonial Not Found");
   }
+});
 
-  // if (studentsTestimonials) {
+// @desc    Create Women Testimonials
+// @route   POST /api/wtestimonials
+// @access  Private
+const createWTestimonial = asyncHandler(async (req, res) => {
+  const { fullName, image, desc, message } = req.body;
 
-  //   console.log(studentsTestimonials._id);
+  const testimonial = await WTestimonials.create({
+    fullName,
+    image,
+    desc,
+    message,
+  });
 
-  //   studentsTestimonials.push(studentTestimonialData);
-
-  //   // await studentsTestimonials.save();
-
-  //   res.status(201).json({ message: "Testimonial Added" });
-  // } else {
-  //   res.status(404);
-  //   throw new Error("Testimonial not Found");
-  // }
+  if (testimonial) {
+    res.status(201).json({
+      fullName: testimonial.fullName,
+      image: testimonial.image,
+      desc: testimonial.desc,
+      message: testimonial.message,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid Testimonial Data");
+  }
 });
 
 // @desc    Delete Student Testimonial
 // @route   DELETE /api/testimonials/students/:id
 // @access  Private
 const deleteStudentTestimonial = asyncHandler(async (req, res) => {
-  console.log("test");
   const studentsTestimonials = await Testimonials.find({}).updateMany({
     $pull: {
       students: { _id: req.params.id },
     },
   });
 
-  console.log("random");
-  console.log(studentsTestimonials);
-
   if (studentsTestimonials) {
+    res.status(201).json({ message: "Testimonial Deleted" });
+  } else {
+    res.json("Testimonial Not Found");
+  }
+});
+
+// @desc    Delete Women Testimonial
+// @route   DELETE /api/wtestimonials/:id
+// @access  Private
+const deleteWomenTestimonial = asyncHandler(async (req, res) => {
+  const womenTestimonials = await WTestimonials.findById(req.params.id);
+
+  if (womenTestimonials) {
+    await WTestimonials.remove();
+
     res.status(201).json({ message: "Testimonial Deleted" });
   } else {
     res.json("Testimonial Not Found");
@@ -130,4 +162,7 @@ export {
   createVisitorsTestimonials,
   deleteStudentTestimonial,
   deleteVisitorsTestimonials,
+  getWTestimonials,
+  createWTestimonial,
+  deleteWomenTestimonial,
 };

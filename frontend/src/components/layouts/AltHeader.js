@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/others/Logo1.png";
 import Extra from "../contents/Extra";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const TopNav = styled.div`
   display: flex;
@@ -146,14 +147,38 @@ const AltHeader = () => {
     setSideBar(false);
   };
 
+  const router = useHistory();
+
   return (
     <>
       <TopNav>
         <span style={{ display: "flex", gap: "1.8rem" }}>
-          <i class="fab fa-facebook-f"></i>
-          <i class="fab fa-whatsapp"></i>
-          <i class="fab fa-twitter"></i>
-          <i class="fab fa-viber"></i>
+          <a
+            rel="noopener noreferrer"
+            href="https://www.facebook.com/heartlandcentreforwomen"
+            target="_blank"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <a
+            rel="noopener noreferrer"
+            href="https://api.whatsapp.com/send?phone=9843445346"
+            target="_blank"
+          >
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          {/* <a
+            rel="noopener noreferrer"
+            href="https://www.facebook.com/heartlandcentreforwomen"
+            target="_blank"
+          >
+            <i class="fab fa-twitter"></i>
+          </a> */}
+
+          <a href="viber://add?number=9843445346">
+            <i class="fab fa-viber"></i>
+          </a>
         </span>
         <span>
           {" "}
@@ -165,7 +190,7 @@ const AltHeader = () => {
               fontSize: "13px",
             }}
           >
-            <i className="fas fa-phone-alt mr-2"></i> 01-523 7058 | 01-523 7283
+            <i className="fas fa-phone-alt mr-2"></i> 01-5906017
           </span>
           <Number
             style={{
@@ -175,6 +200,17 @@ const AltHeader = () => {
             }}
           >
             <i className="fas fa-map-marker-alt mr-2"></i> Bafal-13, Kathmandu
+          </Number>
+          <Number
+            onClick={() => router.push("/admin/login")}
+            style={{
+              borderLeft: "1px solid #dee2e6",
+              padding: "15px 0 15px 18px",
+              fontSize: "14px",
+              cursor: "pointer",
+            }}
+          >
+            Login
           </Number>
         </span>
       </TopNav>

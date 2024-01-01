@@ -7,6 +7,9 @@ import {
   createModal,
   deleteModal,
   getModal,
+  getWModal,
+  createWModal,
+  deleteWModal,
 } from "../controllers/modalControllers.js";
 
 const router = express.Router();
@@ -43,8 +46,10 @@ const upload = multer({
 });
 
 router.route("/").get(getModal).post(protect, createModal);
+router.route("/sub-domain").get(getWModal).post(protect, createWModal);
 
 router.route("/:id").delete(protect, deleteModal);
+router.route("/sub-domain/:id").delete(protect, deleteWModal);
 
 router.post("/uploads", upload.single("formFile"), (req, res) => {
   res.send(`/${req.file.path}`);

@@ -4,11 +4,13 @@ import colors from "colors";
 import users from "./data/users.js";
 import news from "./data/news.js";
 import albums from "./data/albums.js";
+import wAlbums from "./data/wAlbums.js";
 import User from "./models/userModel.js";
 import News from "./models/newsModel.js";
 import Events from "./models/eventsModel.js";
 import connectDB from "./config/db.js";
 import Album from "./models/albumModel.js";
+import WAlbum from "./models/womenAlbumModel.js";
 import Teams from "./models/teamsModel.js";
 import Video from "./models/videoModel.js";
 import videos from "./data/videos.js";
@@ -39,6 +41,7 @@ const importData = async () => {
   try {
     await User.deleteMany();
     await Album.deleteMany();
+    await WAlbum.deleteMany();
     await Video.deleteMany();
     await News.deleteMany();
     await Events.deleteMany();
@@ -66,6 +69,8 @@ const importData = async () => {
     await Events.insertMany(sampleEvents);
     await Staffs.insertMany(staffs);
     await Album.insertMany(albums);
+    await WAlbum.insertMany(wAlbums);
+
     await Video.insertMany(videos);
     await Notices.insertMany(notices);
     await FileDownload.insertMany(downloads);

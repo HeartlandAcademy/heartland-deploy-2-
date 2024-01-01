@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Album from "../models/albumModel.js";
 import Video from "../models/videoModel.js";
+import WAlbum from "../models/womenAlbumModel.js";
 
 // @desc    Fetch all Albums
 // @route   GET /api/gallery/albums
@@ -103,6 +104,63 @@ const deleteVideos = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Fetch all Women Section Albums
+// @route   GET /api/albums
+// @access  Public
+const getWomenAlbums = asyncHandler(async (req, res) => {
+  const albums = await WAlbum.find({}).sort({ _id: -1 });
+  res.json(albums);
+});
+
+// @desc    Fetch WOMEN Album by id
+// @route   GET /api/albums/:id
+// @access  Public
+const getWomenAlbum = asyncHandler(async (req, res) => {
+  const album = await WAlbum.findById(req.params.id);
+  if (album) {
+    res.json(album);
+  } else {
+    res.status(404);
+    throw new Error("Album Not Found");
+  }
+});
+
+// @desc    Create WOMEN Album
+// @route   POST /api/albums
+// @access  Private
+const createWomenAlbum = asyncHandler(async (req, res) => {
+  const { name, images } = req.body;
+  console.log(images);
+  const album = await WAlbum.create({
+    name,
+    images,
+  });
+  if (album) {
+    res.status(201).json({
+      _id: album._id,
+      name: album.name,
+      images: album.images,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid Album Data");
+  }
+});
+
+// @desc    Delete WOMEN Album
+// @route   DELETE /api/albums/:id
+// @access  Private
+const deleteWomenAlbum = asyncHandler(async (req, res) => {
+  const album = await WAlbum.findById(req.params.id);
+  if (album) {
+    await album.remove();
+    res.json({ message: "Album Deleted Successfully" });
+  } else {
+    res.status(404);
+    throw new Error("Album not found");
+  }
+});
+
 export {
   getAlbums,
   getAlbum,
@@ -111,4 +169,8 @@ export {
   getVideos,
   createVideos,
   deleteVideos,
+  getWomenAlbums,
+  getWomenAlbum,
+  createWomenAlbum,
+  deleteWomenAlbum,
 };
