@@ -99,41 +99,42 @@ export const createModal = (image) => async (dispatch, getState) => {
   }
 };
 
-export const createWModal = (image) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: WMODAL_CREATE_REQUEST });
+export const createWModal =
+  (image, thumbnail) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: WMODAL_CREATE_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
 
-    const { data } = await axios.post(
-      `${BASE_URL}/api/modal/sub-domain`,
-      { image },
-      config
-    );
+      const { data } = await axios.post(
+        `${BASE_URL}/api/modal/sub-domain`,
+        { image, thumbnail },
+        config
+      );
 
-    dispatch({
-      type: WMODAL_CREATE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: WMODAL_CREATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      dispatch({
+        type: WMODAL_CREATE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: WMODAL_CREATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const deleteModal = (id) => async (dispatch, getState) => {
   try {

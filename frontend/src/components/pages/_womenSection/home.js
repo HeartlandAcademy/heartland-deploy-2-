@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import Ava1 from "../../../assets/others/user.JPG";
+import { Modal } from "react-bootstrap";
 
-import { listModal } from "../../../actions/modalActions";
+import { listWModal } from "../../../actions/modalActions";
 import PhotoCarousel from "../../contents/AltCarousel";
 import WPartners from "../../layouts/WPartners";
 import Meta from "../../contents/Meta";
@@ -13,6 +14,9 @@ import { FaBinoculars } from "react-icons/fa";
 import { HiAcademicCap } from "react-icons/hi2";
 import { LuSchool } from "react-icons/lu";
 import styled from "styled-components";
+import Loader from "../../contents/Loader";
+import defaultLoading from "../../../assets/default/default-loading.png";
+import useProgressiveImg from "../../../hooks/useProgressiveImg";
 
 const MainTextWrapper = styled.div`
   h4 {
@@ -123,22 +127,37 @@ const MsgInfo = styled.div`
 `;
 
 const Home = () => {
-  const [modalShow, setModalShow] = useState(false);
-
-  const addedModal = useSelector((state) => state.addedModal);
-  const { modal } = addedModal;
+  const addedWModal = useSelector((state) => state.addedWModal);
+  const { loading, wModal: modal } = addedWModal;
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(listModal());
-  }, [dispatch]);
+  const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
 
   useEffect(() => {
-    if (modal && modal.length !== 0) {
-      setModalShow(true);
+    dispatch(listWModal());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (modal && modal[0]?.thumbnail) {
+  //     setModalShow(true);
+  //   }
+  // }, [modal]);
+
+  useEffect(() => {
+    if (modal && modal[0]?.thumbnail) {
+      const img = new Image();
+      img.src = modal[0]?.thumbnail;
+      img.onload = () => {
+        setThumbnailLoaded(true);
+      };
     }
   }, [modal]);
+
+  const [src, { blur }] = useProgressiveImg(
+    modal && modal[0]?.thumbnail,
+    modal && modal[0]?.image
+  );
 
   const aboutData = [
     {
@@ -171,8 +190,7 @@ const Home = () => {
 
   return (
     <>
-      <Meta title={"Heartland Academy | Women Section"} />
-      {/* <PopupModal show={modalShow} onHide={() => setModalShow(false)} /> */}
+      <Meta title={"Heartland Academy | Center For Women"} />
 
       <PhotoCarousel />
       <Container>
@@ -364,6 +382,38 @@ const Home = () => {
         </Container>
       </div> */}
       <WPartners />
+
+      <Modal
+        show={thumbnailLoaded && !loading}
+        onHide={() => setThumbnailLoaded(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton />
+        <Modal.Body>
+          {loading ? (
+            <img className="d-block w-100" src={defaultLoading} alt="default" />
+          ) : (
+            <>
+              {modal && modal.length === 0 ? (
+                ""
+              ) : (
+                // eslint-disable-next-line jsx-a11y/img-redundant-alt
+                <img
+                  className="d-block w-100"
+                  alt="Modal Image"
+                  src={src}
+                  style={{
+                    filter: blur ? "blur(20px)" : "none",
+                    transition: blur ? "none" : "filter 0.3s ease-out",
+                  }}
+                />
+              )}
+            </>
+          )}
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

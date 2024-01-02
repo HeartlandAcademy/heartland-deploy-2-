@@ -42,6 +42,8 @@ const EmptyModal = styled.div`
 
 const AdminWModal = () => {
   const [modalImage, setModalImage] = useState("");
+  const [modalThumbnail, setModalThumbnail] = useState("");
+
   const [uploading, setUploading] = useState(false);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [toastAddShow, setToastAddShow] = useState(false);
@@ -72,12 +74,15 @@ const AdminWModal = () => {
         },
       };
       const { data } = await axios.post(
-        `${BASE_URL}/api/upload`,
+        `${BASE_URL}/api/upload-blur`,
         formData,
         config
       );
 
-      setModalImage(data);
+      setModalImage(data?.originalImageURL);
+      setModalThumbnail(data?.blurredImageURL);
+
+      console.log("data", data);
       setUploading(false);
       setFileUploadError(false);
     } catch (error) {
@@ -113,7 +118,7 @@ const AdminWModal = () => {
     event.preventDefault();
     const file = event.target;
     console.log(file);
-    dispatch(createWModal(modalImage));
+    dispatch(createWModal(modalImage, modalThumbnail));
     setToastAddShow(true);
     reset();
   };

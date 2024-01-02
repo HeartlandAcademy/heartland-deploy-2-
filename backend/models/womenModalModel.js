@@ -6,6 +6,10 @@ const modalSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add image"],
     },
+    thumbnail: {
+      type: String,
+      required: [true, "Please add thumbnail"],
+    },
   },
   {
     timestamps: true,

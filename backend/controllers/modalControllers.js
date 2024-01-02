@@ -89,23 +89,27 @@ const createWModal = asyncHandler(async (req, res) => {
   if (modal) {
     const { image } = req.body;
     modal.image = req.body.image || modal.image;
+    modal.thumbnail = req.body.thumbnail || modal.thumbnail;
 
     const updatedModal = await modal.save();
 
     res.json({
       _id: updatedModal._id,
       image: updatedModal.image,
+      thumbnail: updatedModal.thumbnail,
     });
   } else {
-    const { image } = req.body;
+    const { image, thumbnail } = req.body;
     const newModal = await WModal.create({
       image,
+      thumbnail,
     });
 
     if (newModal) {
       res.status(201).json({
         _id: newModal._id,
         image: newModal.image,
+        thumbnail: newModal.thumbnail,
       });
     } else {
       res.status(400);
