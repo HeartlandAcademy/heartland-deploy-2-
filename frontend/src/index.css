@@ -436,3 +436,11 @@ input:checked + .darkModeSlider {
 .wcarousel {
   object-position: top;
 }
+
+.tabWrapper li .nav-link {
+  font-weight: 500;
+}
+
+.tabWrapper li .nav-link.active {
+  color: #fff !important;
+}

@@ -145,7 +145,7 @@ const AltFooter = () => {
         className="text-center p-3"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
       >
-        Copyright © {`${getYear()}`}, Heartland Academy, Center for Women
+        Copyright © {`${getYear()}`}, Heartland Academy, Centre for Women
       </div>
     </footer>
   );

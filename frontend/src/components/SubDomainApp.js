@@ -32,6 +32,7 @@ import AdminGallery from "./pages/_womenSection/Gallery/AdminGallery";
 import AdminSingleGallery from "./pages/_womenSection/Gallery/AdminSingleGallery";
 import Admin404 from "./contents/Admin404";
 import WTestimonialCreate from "./pages/TestimonialCreate/WTestimonialCreate";
+import HWCClinic from "./pages/_womenSection/hcwClinic";
 
 const Menu = styled.div`
   display: flex;
@@ -117,6 +118,7 @@ const SubDomainApp = () => {
             <Switch>
               <Route path="/" component={Home} exact />
               <Route path="/about" component={AboutUs} exact />
+              <Route path="/clinic" component={HWCClinic} exact />
               <Route path="/gallery" component={WomenGallery} exact />
               <Route path="/gallery/:id" component={WomenSingleGallery} exact />
               <Route path="/contact" component={WContact} exact />

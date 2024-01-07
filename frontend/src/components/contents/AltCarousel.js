@@ -145,7 +145,7 @@ const AltCarousel = () => {
               </Welcome>
             </Carousel.Caption>
           </Carousel.Item>
-          {carousel.map((c) => (
+          {carousel?.map((c) => (
             <Carousel.Item interval={3300000} key={c._id}>
               <img
                 className="d-block w-100"
@@ -155,8 +155,8 @@ const AltCarousel = () => {
 
               <Carousel.Caption>
                 <CarouselDescContent>
-                  <CarouselHead>{c.title}</CarouselHead>
-                  <CarouselInfo>{c.description}</CarouselInfo>
+                  <CarouselHead>{c?.title ?? ""}</CarouselHead>
+                  <CarouselInfo>{c?.description ?? ""}</CarouselInfo>
                 </CarouselDescContent>
               </Carousel.Caption>
             </Carousel.Item>

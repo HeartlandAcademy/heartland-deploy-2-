@@ -12,11 +12,12 @@ const hostname = window.location.hostname;
 
 ReactDOM.render(
   <Provider store={store}>
-    {hostname && hostname === "womenscenter.heartlandacademy.edu.np" ? (
+    {/* {hostname && hostname === "womenscentre.heartlandacademy.edu.np" ? (
       <SubDomainApp />
     ) : (
       <App />
-    )}
+    )} */}
+    <SubDomainApp />
   </Provider>,
   document.querySelector("#root")
 );

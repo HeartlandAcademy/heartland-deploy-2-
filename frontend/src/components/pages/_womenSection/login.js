@@ -118,7 +118,7 @@ const WomenLogin = ({ location, history }) => {
         <Content>
           <h5>Heartland Academy</h5>
 
-          <h3>Center for Women</h3>
+          <h3>Centre for Women</h3>
           <p>
             "Supported by The Centre for Learning and Childrens Rights (CLCR),
             Australia, and Women for Change."
