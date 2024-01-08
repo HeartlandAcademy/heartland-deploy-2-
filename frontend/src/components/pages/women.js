@@ -20,22 +20,22 @@ const Section1 = styled.div`
     position: relative;
   }
   ul {
-    margin-bottom: 80px;
+    margin-bottom: 20px;
   }
 `;
 
 const Women = () => {
   return (
     <>
-      <Meta title="Women's Center" />
+      <Meta title="Women's Centre" />
       <ImageHeader
-        mtitle="Women's Center"
-        title="Women's Center"
+        mtitle="Women's Centre"
+        title="Women's Centre"
         image={test}
       />
       <Section1 className="container">
         <div>
-          <h3>Women's Center</h3>
+          <h3>Women's Centre</h3>
           <h5>Who are we:</h5>
           <p>
             Heartland Academy’s Centre for Women (HCW) is a pioneer women’s only
@@ -88,6 +88,24 @@ const Women = () => {
             </li>
             <li>Peaceful, learning friendly environment.</li>
           </ul>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            marginBottom: "30px",
+            alignItems: "center",
+          }}
+        >
+          <h4 style={{ margin: 0 }}>For more information please visit:</h4>
+          <a
+            href="https://www.womenscentre.heartlandacademy.edu.np"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <p style={{ margin: 0 }}>Women's Centre </p>
+          </a>
         </div>
       </Section1>
     </>

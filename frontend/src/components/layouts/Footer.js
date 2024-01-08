@@ -135,6 +135,16 @@ const Footer = () => {
                     Learn more about CLCR
                   </a>
                 </li>
+
+                <li>
+                  <a
+                    href="https://www.womencentre.heartlandacademy.edu.np/about"
+                    target="_blank"
+                    className="text-white"
+                  >
+                    About Women Centre
+                  </a>
+                </li>
               </ul>
             </div>
             <div className="col-lg-3 col-md-6 mb-4 mb-md-0">

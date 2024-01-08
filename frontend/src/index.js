@@ -17,7 +17,7 @@ ReactDOM.render(
     ) : (
       <App />
     )} */}
-    <SubDomainApp />
+    <App />
   </Provider>,
   document.querySelector("#root")
 );

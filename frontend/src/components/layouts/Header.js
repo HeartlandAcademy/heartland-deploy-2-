@@ -237,9 +237,9 @@ const Header = () => {
               </li>
             </StyledLink>
 
-            <StyledLink exact activeClassName="selected" to="/women-center">
+            <StyledLink exact activeClassName="selected" to="/women-centre">
               <li className="nav-item">
-                <a className="nav-link">Women Center</a>
+                <a className="nav-link">Women Centre</a>
               </li>
             </StyledLink>
 

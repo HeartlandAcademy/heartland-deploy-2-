@@ -205,7 +205,7 @@ const App = () => {
                 <Route path="/registration" component={Registration} exact />
                 <Route path="/school" component={School} exact />
                 <Route path="/college" component={College} exact />
-                <Route path="/women-center" component={WomenCenter} exact />
+                <Route path="/women-centre" component={WomenCenter} exact />
 
                 <Route
                   path="/gallery/albums"
