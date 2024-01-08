@@ -281,7 +281,7 @@ const coursesInfo = [
   },
   {
     id: 2,
-    title: "Health Management",
+    title: "Hotel Management",
     image: `${HMImg}`,
   },
   {
