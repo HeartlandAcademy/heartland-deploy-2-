@@ -100,7 +100,7 @@ const Women = () => {
         >
           <h4 style={{ margin: 0 }}>For more information please visit:</h4>
           <a
-            href="https://www.womenscentre.heartlandacademy.edu.np"
+            href="https://womenscentre.heartlandacademy.edu.np/"
             target="_blank"
             rel="noopener noreferrer"
           >
