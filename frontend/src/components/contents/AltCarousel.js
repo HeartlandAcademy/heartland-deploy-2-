@@ -71,6 +71,9 @@ const CarouselHead = styled.p`
   letter-spacing: -2px;
   padding-bottom: 10px;
   margin-bottom: 30px;
+  @media (max-width: 577px) {
+    font-size: 44px;
+  }
 `;
 
 const CarouselInfo = styled.h2`
@@ -125,7 +128,7 @@ const AltCarousel = () => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Carousel fade className="altCarousel">
+        <Carousel fade className="altCarousel alt1-carousel">
           <Carousel.Item interval={33300}>
             <img
               className="d-block w-100 wcarousel"

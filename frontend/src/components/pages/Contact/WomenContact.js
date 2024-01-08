@@ -35,7 +35,6 @@ const MainInfo = styled.div`
 `;
 
 const CardInfo = styled.div`
-  box-shadow: 0 5px 15px 0 rgba(62, 65, 159, 0.1);
   padding: 40px;
   text-align: center;
 `;
@@ -61,6 +60,7 @@ const TxtWrapper = styled.div`
     color: #625f71;
     font-size: 18px;
     line-height: 1.8em;
+    word-break: break-all;
     }
   }
 `;
@@ -150,8 +150,8 @@ const WContact = () => {
 
       <Container>
         <MainInfo>
-          <Row>
-            <Col>
+          <Row style={{ columnGap: "20px" }} className="card-row">
+            <Col className="card-col">
               <CardInfo>
                 <IconWrapper>
                   <MdLocationPin size={42} />
@@ -162,7 +162,7 @@ const WContact = () => {
                 </TxtWrapper>
               </CardInfo>
             </Col>
-            <Col>
+            <Col className="card-col">
               <CardInfo>
                 <IconWrapper>
                   <HiOutlineMail size={42} />
@@ -173,7 +173,7 @@ const WContact = () => {
                 </TxtWrapper>
               </CardInfo>
             </Col>
-            <Col>
+            <Col className="card-col">
               <CardInfo>
                 <IconWrapper>
                   <LuPhone size={42} />

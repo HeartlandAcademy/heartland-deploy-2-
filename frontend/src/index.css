@@ -124,6 +124,12 @@
   bottom: 15.35rem;
 }
 
+.alt1-carousel > div > div > div {
+  @media screen and (max-width: 684px) {
+    bottom: 10.35rem;
+  }
+}
+
 .carousel-item {
   transition: transform 0.3s ease-in-out;
 }
@@ -443,4 +449,34 @@ input:checked + .darkModeSlider {
 
 .tabWrapper li .nav-link.active {
   color: #fff !important;
+}
+
+.card-row {
+  @media screen and (max-width: 788px) {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    > div {
+      width: 90%;
+    }
+  }
+}
+
+.card-col {
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: calc(100% / 3);
+  transition: all 0.4s ease;
+  box-shadow: 0 5px 15px 0 rgba(62, 65, 159, 0.1);
+  @media screen and (max-width: 996px) {
+    > div {
+      padding: 20px;
+    }
+  }
+  @media screen and (max-width: 788px) {
+    width: 100%;
+    > div {
+      padding: 20px;
+    }
+  }
 }

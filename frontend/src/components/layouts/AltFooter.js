@@ -77,10 +77,10 @@ const AltFooter = () => {
               </ul>
             </div>
             <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 className="text-uppercase text-white">Links To CLCR</h5>
+              <h5 className="text-uppercase text-white">Helpful Links</h5>
 
               <ul className="list-unstyled mb-0">
-                <li>
+                <li className="mb-2">
                   <a
                     href="https://www.forchildrights.org"
                     target="_blank"
@@ -90,13 +90,29 @@ const AltFooter = () => {
                   </a>
                 </li>
 
-                <li>
+                <li className="mb-2">
                   <a
                     href="https://www.forchildrights.org"
                     target="_blank"
                     className="text-white"
                   >
                     Learn more about CLCR
+                  </a>
+                </li>
+
+                <li className="mb-2">
+                  <a
+                    href="https://www.heartlandacademy.edu.np/about"
+                    target="_blank"
+                    className="text-white"
+                  >
+                    Introduction to Heartland
+                  </a>
+                </li>
+
+                <li className="mb-2">
+                  <a href="/clinic" target="_blank" className="text-white">
+                    HWC Clinic
                   </a>
                 </li>
               </ul>
@@ -123,16 +139,6 @@ const AltFooter = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <i className="fab fa-twitter mt-3 mr-2"></i>Twitter
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.instagram.com/heartland_academy/"
-                    target="_blank"
-                    className="text-white"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <i className="fab fa-instagram mt-3 mr-2"></i>Instagram
                   </a>
                 </li>
               </ul>

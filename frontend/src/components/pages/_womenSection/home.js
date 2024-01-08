@@ -32,6 +32,7 @@ const MainTextWrapper = styled.div`
     font-family: "Urbanist", sans-serif;
     @media (max-width: 560px) {
       font-size: 30px; 
+      line-height: normal;
     }
   }
   h6 {
