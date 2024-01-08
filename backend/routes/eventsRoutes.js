@@ -4,10 +4,13 @@ import multer from "multer";
 
 import {
   createEvents,
+  createWEvents,
   deleteEvents,
+  deleteWEvents,
   getEvents,
   getLatestEvents,
   getUpcomingEvents,
+  getWEvents,
 } from "../controllers/eventsControllers.js";
 import { protect } from "../middleware/authMiddleware.js";
 const router = express.Router();
@@ -45,9 +48,12 @@ const upload = multer({
 
 router.route("/").get(protect, getEvents).post(protect, createEvents);
 
+router.route("/sub-domain").get(getWEvents).post(protect, createWEvents);
+
 router.get("/upcomingevents", getUpcomingEvents);
 router.get("/upcoming", getLatestEvents);
 router.route("/:id").delete(protect, deleteEvents);
+router.route("/sub-domain/:id").delete(protect, deleteWEvents);
 
 router.post("/uploads", upload.single("image"), (req, res) => {
   res.send(`/${req.file.path}`);

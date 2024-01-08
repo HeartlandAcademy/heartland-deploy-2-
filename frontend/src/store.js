@@ -31,6 +31,9 @@ import {
   upcomingAdminEventsReducer,
   upcomingEventsReducer,
   upcomingLatestEventsReducer,
+  upcomingWEventsReducer,
+  wEventsCreateReducer,
+  wEventsDeleteReducer,
 } from "./reducers/eventsReducers";
 import {
   availableStaffsReducer,
@@ -127,10 +130,13 @@ const reducer = combineReducers({
   womenTestimonialsCreate: womenTestimonialsCreateReducer,
   womenTestimonialsDelete: womenTestimonialsDeleteReducer,
   upcomingEvents: upcomingEventsReducer,
+  upcomingWEvents: upcomingWEventsReducer,
   upcomingAdminEvents: upcomingAdminEventsReducer,
   upcomingLatestEvents: upcomingLatestEventsReducer,
   eventsCreate: eventsCreateReducer,
+  wEventsCreate: wEventsCreateReducer,
   eventsDelete: eventsDeleteReducer,
+  wEventsDelete: wEventsDeleteReducer,
   galleryAlbums: galleryAlbumsReducer,
   galleryWAlbums: galleryWAlbumsReducer,
   galleryAlbumCreate: galleryAlbumCreateReducer,

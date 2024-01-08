@@ -15,6 +15,16 @@ import {
   UPCOMING_LATEST_EVENTS_FAIL,
   UPCOMING_LATEST_EVENTS_REQUEST,
   UPCOMING_LATEST_EVENTS_SUCCESS,
+  UPCOMING_WEVENTS_FAIL,
+  UPCOMING_WEVENTS_REQUEST,
+  UPCOMING_WEVENTS_SUCCESS,
+  WEVENTS_CREATE_FAIL,
+  WEVENTS_CREATE_REQUEST,
+  WEVENTS_CREATE_RESET,
+  WEVENTS_CREATE_SUCCESS,
+  WEVENTS_DELETE_FAIL,
+  WEVENTS_DELETE_REQUEST,
+  WEVENTS_DELETE_SUCCESS,
 } from "../actions/types";
 
 export const upcomingEventsReducer = (state = { events: [] }, action) => {
@@ -24,6 +34,19 @@ export const upcomingEventsReducer = (state = { events: [] }, action) => {
     case UPCOMING_EVENTS_SUCCESS:
       return { loading: false, events: action.payload };
     case UPCOMING_EVENTS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const upcomingWEventsReducer = (state = { wEvents: [] }, action) => {
+  switch (action.type) {
+    case UPCOMING_WEVENTS_REQUEST:
+      return { loading: true, wEvents: [] };
+    case UPCOMING_WEVENTS_SUCCESS:
+      return { loading: false, wEvents: action.payload };
+    case UPCOMING_WEVENTS_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -66,6 +89,21 @@ export const eventsCreateReducer = (state = {}, action) => {
   }
 };
 
+export const wEventsCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case WEVENTS_CREATE_REQUEST:
+      return { loading: true };
+    case WEVENTS_CREATE_SUCCESS:
+      return { loading: false, success: true, wEvents: action.payload };
+    case WEVENTS_CREATE_FAIL:
+      return { loading: false, error: action.payload };
+    case WEVENTS_CREATE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
 export const eventsDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case EVENTS_DELETE_REQUEST:
@@ -73,6 +111,19 @@ export const eventsDeleteReducer = (state = {}, action) => {
     case EVENTS_DELETE_SUCCESS:
       return { loading: false, success: true };
     case EVENTS_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const wEventsDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case WEVENTS_DELETE_REQUEST:
+      return { loading: true };
+    case WEVENTS_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case WEVENTS_DELETE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

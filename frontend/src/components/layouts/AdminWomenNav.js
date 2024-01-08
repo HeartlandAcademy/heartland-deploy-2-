@@ -134,6 +134,18 @@ const AdminWomenNav = () => {
 
           <li>
             <StyledLink
+              to="/admin/events"
+              activeClassName={darkMode ? "active" : "ractive"}
+            >
+              <a href="/admin/events">
+                <i className="far fa-calendar-alt"></i>
+                <h4>Events</h4>
+              </a>
+            </StyledLink>
+          </li>
+
+          <li>
+            <StyledLink
               to="/admin/modal"
               activeClassName={darkMode ? "active" : "ractive"}
             >

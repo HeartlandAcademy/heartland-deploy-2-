@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import Ava1 from "../../../assets/others/user.JPG";
@@ -17,6 +17,10 @@ import styled from "styled-components";
 import Loader from "../../contents/Loader";
 import defaultLoading from "../../../assets/default/default-loading.png";
 import useProgressiveImg from "../../../hooks/useProgressiveImg";
+
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import { listWEvents } from "../../../actions/eventsActions";
 
 const MainTextWrapper = styled.div`
   h4 {
@@ -126,6 +130,19 @@ const MsgInfo = styled.div`
   }
 `;
 
+const EventTitle = styled.h2`
+  font-size: 55px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 75px;
+  margin: 10px 0 80px 0;
+  text-align: center;
+  font-family: "Urbanist", sans-serif;
+  @media (max-width: 577px) {
+    font-size: 40px;
+  }
+`;
+
 const Home = () => {
   const addedWModal = useSelector((state) => state.addedWModal);
   const { loading, wModal: modal } = addedWModal;
@@ -188,6 +205,27 @@ const Home = () => {
     },
   ];
 
+  useEffect(() => {
+    dispatch(listWEvents());
+  }, []);
+
+  const upcomingWEvents = useSelector((state) => state.upcomingWEvents);
+  const { loading: wLoading, wEvents } = upcomingWEvents;
+
+  const [upcomingEvents, setUpcomingEvents] = React.useState([]);
+
+  useEffect(() => {
+    if (wEvents) {
+      const formattedEvent = wEvents?.map((evt) => ({
+        id: evt?._id,
+        title: evt?.title,
+        start: evt?.startDate,
+        end: evt?.endDate,
+      }));
+      setUpcomingEvents(formattedEvent);
+    }
+  }, [wEvents, wLoading]);
+
   return (
     <>
       <Meta title={"Heartland Academy | Center For Women"} />
@@ -228,6 +266,16 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
+
+      <div className="container p-5">
+        <EventTitle>Upcoming Events</EventTitle>
+        <FullCalendar
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
+          weekends={false}
+          events={upcomingEvents ?? []}
+        />
+      </div>
 
       <div
         style={{

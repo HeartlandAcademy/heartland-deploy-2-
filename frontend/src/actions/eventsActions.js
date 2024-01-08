@@ -16,6 +16,15 @@ import {
   UPCOMING_LATEST_EVENTS_FAIL,
   UPCOMING_LATEST_EVENTS_REQUEST,
   UPCOMING_LATEST_EVENTS_SUCCESS,
+  UPCOMING_WEVENTS_FAIL,
+  UPCOMING_WEVENTS_REQUEST,
+  UPCOMING_WEVENTS_SUCCESS,
+  WEVENTS_CREATE_FAIL,
+  WEVENTS_CREATE_REQUEST,
+  WEVENTS_CREATE_SUCCESS,
+  WEVENTS_DELETE_FAIL,
+  WEVENTS_DELETE_REQUEST,
+  WEVENTS_DELETE_SUCCESS,
 } from "./types";
 
 export const listEvents = () => async (dispatch) => {
@@ -31,6 +40,27 @@ export const listEvents = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPCOMING_EVENTS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listWEvents = () => async (dispatch) => {
+  try {
+    dispatch({ type: UPCOMING_WEVENTS_REQUEST });
+
+    const { data } = await axios.get(`${BASE_URL}/api/events/sub-domain`);
+
+    dispatch({
+      type: UPCOMING_WEVENTS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPCOMING_WEVENTS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -106,6 +136,43 @@ export const createEvents =
     }
   };
 
+export const createWEvents =
+  (title, description, startDate, endDate) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: WEVENTS_CREATE_REQUEST });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        `${BASE_URL}/api/events/sub-domain`,
+        { title, description, startDate, endDate },
+        config
+      );
+
+      dispatch({
+        type: WEVENTS_CREATE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: WEVENTS_CREATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
 export const deleteEvents = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: EVENTS_DELETE_REQUEST });
@@ -126,6 +193,34 @@ export const deleteEvents = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: EVENTS_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteWEvents = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: WEVENTS_DELETE_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`${BASE_URL}/api/events/sub-domain/${id}`, config);
+
+    dispatch({ type: WEVENTS_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: WEVENTS_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

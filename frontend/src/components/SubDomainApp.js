@@ -23,6 +23,9 @@ import WomenSingleGallery from "./pages/_womenSection/Gallery/SingleGallery";
 import WContact from "./pages/Contact/WomenContact";
 
 import AdminWModal from "./pages/ModalCreate/WModalCreate";
+import AdminWEvents from "./pages/EventsAdd/WEventsAdd";
+import AdminAllWEvents from "./pages/Events/AdminAllWEvents";
+
 import WAdminImages from "./pages/GalleryCreate/WGalleryCreate";
 import AdminTopNav from "./layouts/AdminTopNav";
 import AdminWomenNav from "./layouts/AdminWomenNav";
@@ -75,6 +78,13 @@ const SubDomainApp = () => {
                 <Route path="/admin/home" exact>
                   <Redirect to="/admin/carousel" />
                 </Route>
+
+                <Route path="/admin/events" component={AdminWEvents} exact />
+                <Route
+                  path="/admin/events/all"
+                  component={AdminAllWEvents}
+                  exact
+                />
 
                 <Route path="/admin/modal" component={AdminWModal} exact />
                 <Route

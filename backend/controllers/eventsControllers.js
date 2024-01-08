@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Events from "../models/eventsModel.js";
+import WEvents from "../models/womenEventModel.js";
 
 // @desc    Get Events upto date
 // @route   GET /api/events/upcomingevents
@@ -27,11 +28,33 @@ const getEvents = asyncHandler(async (req, res) => {
   res.json(events);
 });
 
+// @desc    Fetch All Women Events
+// @route   GET /api/wevents
+// @access  Private
+const getWEvents = asyncHandler(async (req, res) => {
+  const events = await WEvents.find({}).sort({ date: 1 });
+  res.json(events);
+});
+
 // @desc    Delete Events
 // @route   DELETE /api/events/:id
 // @access  Private
 const deleteEvents = asyncHandler(async (req, res) => {
   const singleEvents = await Events.findById(req.params.id);
+  if (singleEvents) {
+    await singleEvents.remove();
+    res.json({ message: "Events Deleted Successfully" });
+  } else {
+    res.status(404);
+    throw new Error("Events not found");
+  }
+});
+
+// @desc    Delete Women Events
+// @route   DELETE /api/wevents/:id
+// @access  Private
+const deleteWEvents = asyncHandler(async (req, res) => {
+  const singleEvents = await WEvents.findById(req.params.id);
   if (singleEvents) {
     await singleEvents.remove();
     res.json({ message: "Events Deleted Successfully" });
@@ -70,6 +93,33 @@ const createEvents = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Create Women events
+// @route   POST /api/events
+// @access  Private
+const createWEvents = asyncHandler(async (req, res) => {
+  const { title, description, startDate, endDate } = req.body;
+
+  const events = await WEvents.create({
+    title,
+    description,
+    startDate,
+    endDate,
+  });
+
+  if (events) {
+    res.status(201).json({
+      _id: events._id,
+      title: events.title,
+      description: events.description,
+      startDate: events.startDate,
+      endDate: events.endDate,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid Events Data");
+  }
+});
+
 // @desc    Fetch upcoming 2 events
 // @route   GET /api/events/upcoming
 // @access  Public
@@ -91,4 +141,7 @@ export {
   deleteEvents,
   createEvents,
   getLatestEvents,
+  getWEvents,
+  deleteWEvents,
+  createWEvents,
 };
