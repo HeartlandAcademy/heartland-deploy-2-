@@ -242,7 +242,7 @@ const AltHeader = () => {
             <StyledLink exact activeClassName="altSelected" to="/clinic">
               <li className="nav-item">
                 <a className="nav-link" style={{ color: "#232323" }}>
-                  HWC Clinic
+                  HCW Clinic
                 </a>
               </li>
             </StyledLink>
@@ -287,7 +287,7 @@ const AltHeader = () => {
 
           <NavDropDownItem>
             <StyledLink exact activeClassName="drop-active" to="/clinic">
-              <a>HWC Clinic</a>
+              <a>HCW Clinic</a>
             </StyledLink>
           </NavDropDownItem>
 

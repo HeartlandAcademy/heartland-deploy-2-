@@ -260,12 +260,12 @@ const School = () => {
                   strengths and potential areas of development Develop a model
                   of a broadly based teaching and learning environment
                   influencing the development of generic capacities Promote
-                  student centered learning.
+                  student centred learning.
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <h3>Why Us?</h3>
                   Democratic education - Non-violent environment - Project based
-                  learning - Child centered learning - Tech savvy classrooms -
+                  learning - Child centred learning - Tech savvy classrooms -
                   Resourceful library - Trained teaching staff - Peaceful
                   location - Passion for excellence
                 </Tab.Pane>
@@ -273,7 +273,7 @@ const School = () => {
                   <h3>Strength...</h3>
                   The main strength of this democratic and violence-free school
                   is to help produce manpower needed for the challenging world.
-                  For that, the CLCR (The Center of Learning and Children’s
+                  For that, the CLCR (The Centre of Learning and Children’s
                   Rights) Australia has been remained as the backbone of the
                   school. Not only the CLCR has been assisting to train the
                   staff members but also providing financial as well as resource

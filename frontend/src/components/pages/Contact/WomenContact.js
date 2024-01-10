@@ -186,7 +186,7 @@ const WContact = () => {
             </Col>
           </Row>
         </MainInfo>
-        <QueTitle>Have Any Question?</QueTitle>
+        <QueTitle>Have Any Questions?</QueTitle>
 
         <ContactCard>
           <InputForm>
@@ -270,7 +270,7 @@ const WContact = () => {
 
       <Section2>
         <iframe
-          title="Heartland Women Center"
+          title="Heartland Women Centre"
           style={{ width: "100%", height: "450px", border: "none" }}
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.4737663599335!2d85.28409147618106!3d27.7026549256972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb197dff19f97d%3A0x9f37e999e2547d3!2sHeartland%20Academy%2C%20Center%20for%20Women!5e0!3m2!1sen!2snp!4v1704144236535!5m2!1sen!2snp"
         ></iframe>

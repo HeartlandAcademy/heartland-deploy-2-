@@ -329,7 +329,7 @@ const AboutUs = () => {
             Culinary arts and Medical studies with the finest educators across
             Nepal, with frequent guest lecturers from Australia, New Zealand and
             global leaders of industry from across the globe. For selected
-            student group HA offers 100% scholarship as well as incomparable
+            student groups HA offers 100% scholarship as well as incomparable
             educational experiences and practical opportunities that will set
             you up for strong employment prospects post college graduation. We
             foster student creativity, individual choices, teamwork, mutual
@@ -356,7 +356,7 @@ const AboutUs = () => {
         <List>
           <IoMdCheckmark color="#2467ec" />
           <h5>
-            Child Centered Curriculum to develop their motor skills – cognitive,
+            Child Centred Curriculum to develop their motor skills – cognitive,
             physical, social, emotional and sensorial.
           </h5>
         </List>

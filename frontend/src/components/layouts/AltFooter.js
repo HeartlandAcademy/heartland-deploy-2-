@@ -112,7 +112,7 @@ const AltFooter = () => {
 
                 <li className="mb-2">
                   <a href="/clinic" target="_blank" className="text-white">
-                    HWC Clinic
+                    HCW Clinic
                   </a>
                 </li>
               </ul>
@@ -131,7 +131,7 @@ const AltFooter = () => {
                     <i className="fab fa-facebook-f mt-3 mr-2"></i>Facebook
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href="https://twitter.com/heartland_info"
                     target="_blank"
@@ -140,7 +140,7 @@ const AltFooter = () => {
                   >
                     <i className="fab fa-twitter mt-3 mr-2"></i>Twitter
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>

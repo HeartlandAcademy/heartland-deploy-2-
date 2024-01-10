@@ -229,7 +229,7 @@ const Home = () => {
 
   return (
     <>
-      <Meta title={"Heartland Academy | Center For Women"} />
+      <Meta title={"Heartland Academy | Centre For Women"} />
 
       <PhotoCarousel />
       <Container>
@@ -286,7 +286,7 @@ const Home = () => {
       >
         <Container>
           <MsgWrapper>
-            <h4>About Us</h4>
+            <h4>Message from Head of College Studies</h4>
             <p>
               I am pleased to welcome you to Heartland Academy! We are committed
               to providing you with the best possible practical education. We
@@ -299,7 +299,7 @@ const Home = () => {
               it is important to be well-rounded individuals, so we offer a
               variety of vocational training and projects that will help you
               develop your idea and leadership. We are also committed to
-              creating a safe and inclusive environment for all girls. We
+              creating a safe and inclusive environment for all young women. We
               believe that everyone deserves to feel respected and valued,
               regardless of their background or beliefs. I am confident that you
               will have a wonderful experience at Heartland Academy. I am here

@@ -53,13 +53,13 @@ const HWCClinic = () => {
 
       <div className="container">
         <ClinicWrapper>
-          <h4>HWC Clinic</h4>
+          <h4>HCW Clinic</h4>
           <p>
             HCW Cervical Cancer and Menstrual health clinic. Not only serving as
-            a centre for educational tertiary excellence, HCW will also operate
-            a high impact, low cost health care centre/ clinic. HCW’s clinic
-            will offer and coordinate the following services to women and
-            families of all ages, castes and circumstances across Nepal:
+            a centre for educational tertiary excellence, HCW operates a high
+            impact, low cost health care centre/ clinic. HCW’s clinic offers and
+            coordinate the following services to women and families of all ages,
+            castes and circumstances across Nepal:
           </p>
 
           <ul>

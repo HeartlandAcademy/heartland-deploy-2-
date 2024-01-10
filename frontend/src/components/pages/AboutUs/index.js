@@ -57,7 +57,7 @@ const AboutUs = () => {
       <Section1 className="container">
         <p>
           <strong>Heartland Academy (HA)</strong> is an internationally
-          supported democratic school practicing non-violent and child centered
+          supported democratic school practicing non-violent and child centred
           education. With the motto,
           <strong>"Creating opportunity Through Education"</strong>. Heartland
           Academy has been expanded into Higher Secondary Education up to class
@@ -82,7 +82,7 @@ const AboutUs = () => {
         <ul>
           <li>Encompassing extensive &amp; interactive environment.</li>
           <li>
-            Child Centered Curriculum to develop their motor skills – cognitive,
+            Child Centred Curriculum to develop their motor skills – cognitive,
             physical, social, emotional and sensorial.
           </li>
           <li>Ensuring a harmonious, purposeful and secure environment.</li>

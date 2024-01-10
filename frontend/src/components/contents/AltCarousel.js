@@ -139,7 +139,7 @@ const AltCarousel = () => {
               <CarouselHead>Heartland Academy Centre for Women</CarouselHead>
               <CarouselInfo>
                 Supported by The Centre for Learning and Childrens Rights
-                (CLCR), Australia, and Women for Change.
+                (CLCR), Australia, Women for Change and the LBW Trust.
               </CarouselInfo>
               <Welcome>
                 <LinkContainer to="/about">
