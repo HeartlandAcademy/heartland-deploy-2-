@@ -178,8 +178,8 @@ const AdminAllDownloads = ({ history }) => {
               </NoDownload>
             )}
             {downloads &&
-              downloads.map((download) => (
-                <Available darkmode={darkMode}>
+              downloads.map((download, key) => (
+                <Available darkmode={darkMode} key={key}>
                   <DownloadDetails darkmode={darkMode}>
                     <h4>{download.title}</h4>
                     <h5>{download.originalFile}</h5>

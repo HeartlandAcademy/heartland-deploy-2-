@@ -40,7 +40,9 @@ const AltFooter = () => {
         <section className="mt-3">
           <div className="row">
             <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 className="text-uppercase text-white">HA (Womens Center)</h5>
+              <h5 className="text-uppercase text-white">
+                HA (Centre for Women)
+              </h5>
               <p>
                 Heartland Academy(HA) is a democratic school practicing quality
                 and non-violent education which provides co-educational

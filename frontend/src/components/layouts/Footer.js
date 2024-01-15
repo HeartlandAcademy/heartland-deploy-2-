@@ -138,7 +138,7 @@ const Footer = () => {
 
                 <li>
                   <a
-                    href="https://www.womencentre.heartlandacademy.edu.np/about"
+                    href="https://womenscentre.heartlandacademy.edu.np/about"
                     target="_blank"
                     className="text-white"
                   >

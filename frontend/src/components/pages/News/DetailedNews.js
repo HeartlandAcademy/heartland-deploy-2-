@@ -192,8 +192,8 @@ const DetailedNews = ({ match }) => {
             ) : (
               <>
                 {newsLatest &&
-                  newsLatest.map((news) => (
-                    <LatestPostCard>
+                  newsLatest.map((news, index) => (
+                    <LatestPostCard key={index}>
                       <LatestPostImage>
                         {news.image ? (
                           <img src={`${BASE_URL}${news.image}`} alt="Latest" />

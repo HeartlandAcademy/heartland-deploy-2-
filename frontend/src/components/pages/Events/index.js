@@ -121,8 +121,8 @@ const Events = () => {
                   ""
                 )}
                 {events &&
-                  currentEvents.map((event) => (
-                    <EventCard className="card">
+                  currentEvents.map((event, index) => (
+                    <EventCard className="card" key={index}>
                       <Card.Body>
                         <h4>
                           <i className="far fa-calendar-alt"></i>{" "}

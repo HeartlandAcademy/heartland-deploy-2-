@@ -225,48 +225,6 @@ const CourseTxt = styled.div`
   }
 `;
 
-const items = [
-  {
-    id: 1,
-    fullName: "New Name",
-    image: `${defaultImg}`,
-    desc: "New Manager",
-    msg: "This is msg",
-  },
-  {
-    id: 2,
-    fullName: "New Name 2",
-    image: `${defaultImg}`,
-
-    desc: "New Manager",
-    msg: "This is msg",
-  },
-  {
-    id: 3,
-    fullName: "New Name 33",
-    image: `${defaultImg}`,
-
-    desc: "New Manager",
-    msg: "This is msg",
-  },
-  {
-    id: 4,
-    fullName: "New Name 44",
-    image: `${defaultImg}`,
-
-    desc: "New Manager",
-    msg: "This is msg",
-  },
-  {
-    id: 5,
-    fullName: "New Name 55",
-    image: `${defaultImg}`,
-
-    desc: "New Manager",
-    msg: "This is msg",
-  },
-];
-
 const responsive = {
   0: { items: 1 },
   568: { items: 2 },
@@ -310,7 +268,7 @@ const AboutUs = () => {
       <MainAboutWrapper className="container">
         <AbtContent>
           <h4>About Us</h4>
-          <h2>Welcome to Hearland Academy Women Section</h2>
+          <h2>Welcome to Heartland's centre for Women</h2>
           <p>
             It is with immense pleasure that we welcome you to our Heartland
             Centre for Women’s (HCW) college and tertiary education webpage.
@@ -356,8 +314,8 @@ const AboutUs = () => {
         <List>
           <IoMdCheckmark color="#2467ec" />
           <h5>
-            Child Centred Curriculum to develop their motor skills – cognitive,
-            physical, social, emotional and sensorial.
+            Women's Centred Curriculum to develop their motor skills –
+            cognitive, physical, social, emotional and sensorial.
           </h5>
         </List>
         <List>

@@ -252,7 +252,7 @@ const WTestimonialCreate = ({ history }) => {
                     <Desc>{testimonial.desc}</Desc>
                   </Profile>
                   <span onClick={() => deleteHandler(testimonial._id)}>
-                    <i class="fas fa-trash"></i>
+                    <i className="fas fa-trash"></i>
                   </span>
                 </MessageCard>
               ))}

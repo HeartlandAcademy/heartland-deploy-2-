@@ -85,12 +85,13 @@ const SingleAlbum = ({ match }) => {
             plugins={[lgThumbnail, lgZoom]}
             elementClassNames="img-grid"
           >
-            {albumImages?.images?.map((image) => (
+            {albumImages?.images?.map((image, index) => (
               <a
                 href={image}
                 style={{
                   height: "300px",
                 }}
+                key={index}
               >
                 <img
                   alt="img1"

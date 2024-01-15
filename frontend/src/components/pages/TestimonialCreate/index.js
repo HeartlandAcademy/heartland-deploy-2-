@@ -414,7 +414,7 @@ const TestimonialCreate = ({ history }) => {
                         <Card.Text>
                           <p>{team.desc}</p>
                           <span onClick={() => teamDeleteHandler(team._id)}>
-                            <i class="fas fa-trash"></i>
+                            <i className="fas fa-trash"></i>
                           </span>
                         </Card.Text>
                       </Card.Body>
@@ -483,7 +483,7 @@ const TestimonialCreate = ({ history }) => {
                       <Desc>{student.desc}</Desc>
                     </Profile>
                     <span onClick={() => studentDeleteHandler(student._id)}>
-                      <i class="fas fa-trash"></i>
+                      <i className="fas fa-trash"></i>
                     </span>
                   </MessageCard>
                 ))}
@@ -545,7 +545,7 @@ const TestimonialCreate = ({ history }) => {
                       </ProfileDesc>
                     </VisitorProfile>
                     <span onClick={() => visitorDeleteHandler(visitor._id)}>
-                      <i class="fas fa-trash"></i>
+                      <i className="fas fa-trash"></i>
                     </span>
                   </VisitorMessageCard>
                 ))}

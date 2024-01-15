@@ -168,8 +168,8 @@ const Notice = () => {
                 ""
               )}
               {notices &&
-                notices.map((notice) => (
-                  <NoticeCard className="card">
+                notices.map((notice, index) => (
+                  <NoticeCard className="card" key={index}>
                     <h4>{notice.title}</h4>
                     <h6>
                       {notice.date && moment(notice.date).format("DD-MMM-YYYY")}

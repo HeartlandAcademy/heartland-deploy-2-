@@ -332,8 +332,8 @@ const AdminHome = () => {
                   </p>
                 </span>
               )}
-              {registrations.map((registration) => (
-                <RegistrationBody darkmode={darkMode}>
+              {registrations.map((registration, index) => (
+                <RegistrationBody darkmode={darkMode} key={index}>
                   <div>
                     <LinkContainer
                       to={`/admin/home/registration/${registration._id}`}

@@ -158,7 +158,7 @@ const AltHeader = () => {
             href="https://www.facebook.com/heartlandcentreforwomen"
             target="_blank"
           >
-            <i class="fab fa-facebook-f"></i>
+            <i className="fab fa-facebook-f"></i>
           </a>
 
           <a
@@ -166,18 +166,18 @@ const AltHeader = () => {
             href="https://api.whatsapp.com/send?phone=9843445346"
             target="_blank"
           >
-            <i class="fab fa-whatsapp"></i>
+            <i className="fab fa-whatsapp"></i>
           </a>
           {/* <a
             rel="noopener noreferrer"
             href="https://www.facebook.com/heartlandcentreforwomen"
             target="_blank"
           >
-            <i class="fab fa-twitter"></i>
+            <i className="fab fa-twitter"></i>
           </a> */}
 
           <a href="viber://add?number=9843445346">
-            <i class="fab fa-viber"></i>
+            <i className="fab fa-viber"></i>
           </a>
         </span>
         <span>

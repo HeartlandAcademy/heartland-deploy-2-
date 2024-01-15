@@ -334,8 +334,8 @@ const School = () => {
             infinite
           >
             {studentsTestimonials &&
-              studentsTestimonials.students.map((student) => (
-                <MessageCard>
+              studentsTestimonials.students.map((student, index) => (
+                <MessageCard key={index}>
                   <Top>
                     <i className="fas fa-quote-left"></i>
                   </Top>
