@@ -107,7 +107,6 @@ const HWCClinic = () => {
                   <Document file={BrochureEng}>
                     <Page pageNumber={1} scale={scale} />
                     <Page pageNumber={2} scale={scale} />
-                    <Page pageNumber={3} scale={scale} />
                   </Document>
                 </section>
               </div>
