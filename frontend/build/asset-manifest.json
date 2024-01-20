@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.daaed97c.chunk.css",
-    "main.js": "/static/js/main.b76bfb37.chunk.js",
-    "main.js.map": "/static/js/main.b76bfb37.chunk.js.map",
+    "main.js": "/static/js/main.97c6f151.chunk.js",
+    "main.js.map": "/static/js/main.97c6f151.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.4eab1d6a.js",
     "runtime-main.js.map": "/static/js/runtime-main.4eab1d6a.js.map",
     "static/css/2.d03e6237.chunk.css": "/static/css/2.d03e6237.chunk.css",
-    "static/js/2.8dc172e6.chunk.js": "/static/js/2.8dc172e6.chunk.js",
-    "static/js/2.8dc172e6.chunk.js.map": "/static/js/2.8dc172e6.chunk.js.map",
+    "static/js/2.522b7cbb.chunk.js": "/static/js/2.522b7cbb.chunk.js",
+    "static/js/2.522b7cbb.chunk.js.map": "/static/js/2.522b7cbb.chunk.js.map",
     "3bc629d5f743a1772f7a775c5f5fb0c1.js": "/3bc629d5f743a1772f7a775c5f5fb0c1.js",
     "3bc629d5f743a1772f7a775c5f5fb0c1.js.LICENSE.txt": "/3bc629d5f743a1772f7a775c5f5fb0c1.js.LICENSE.txt",
     "index.html": "/index.html",
     "static/css/2.d03e6237.chunk.css.map": "/static/css/2.d03e6237.chunk.css.map",
     "static/css/main.daaed97c.chunk.css.map": "/static/css/main.daaed97c.chunk.css.map",
-    "static/js/2.8dc172e6.chunk.js.LICENSE.txt": "/static/js/2.8dc172e6.chunk.js.LICENSE.txt",
+    "static/js/2.522b7cbb.chunk.js.LICENSE.txt": "/static/js/2.522b7cbb.chunk.js.LICENSE.txt",
     "static/media/Background.dae6f884.jpg": "/static/media/Background.dae6f884.jpg",
     "static/media/LBW.ed1b9d17.webp": "/static/media/LBW.ed1b9d17.webp",
     "static/media/Logo.27ec414c.jpg": "/static/media/Logo.27ec414c.jpg",
@@ -22,7 +22,7 @@
     "static/media/Student.7c0d0e2e.jpg": "/static/media/Student.7c0d0e2e.jpg",
     "static/media/about1.21894813.jpg": "/static/media/about1.21894813.jpg",
     "static/media/blogpicture.ebaa52a0.jpg": "/static/media/blogpicture.ebaa52a0.jpg",
-    "static/media/brochure-eng.df919fad.pdf": "/static/media/brochure-eng.df919fad.pdf",
+    "static/media/brochure-eng.e0bfc6a2.pdf": "/static/media/brochure-eng.e0bfc6a2.pdf",
     "static/media/brochure-nep.b513a761.jpg": "/static/media/brochure-nep.b513a761.jpg",
     "static/media/calendar.c090c2f2.jpg": "/static/media/calendar.c090c2f2.jpg",
     "static/media/chatswood.aac8c26d.jpg": "/static/media/chatswood.aac8c26d.jpg",
@@ -56,8 +56,8 @@
   "entrypoints": [
     "static/js/runtime-main.4eab1d6a.js",
     "static/css/2.d03e6237.chunk.css",
-    "static/js/2.8dc172e6.chunk.js",
+    "static/js/2.522b7cbb.chunk.js",
     "static/css/main.daaed97c.chunk.css",
-    "static/js/main.b76bfb37.chunk.js"
+    "static/js/main.97c6f151.chunk.js"
   ]
 }
