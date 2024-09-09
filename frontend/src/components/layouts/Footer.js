@@ -38,28 +38,6 @@ const Footer = () => {
           >
             <i className="fab fa-facebook-f"></i>
           </a>
-          <a
-            className="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-          >
-            <i className="fab fa-twitter"></i>
-          </a>
-          <a
-            className="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-          >
-            <i className="fab fa-google"></i>
-          </a>
-
-          <a
-            className="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-          >
-            <i className="fab fa-instagram"></i>
-          </a>
         </SocialMedia>
 
         <section className="mb-5 p-2">
@@ -142,7 +120,7 @@ const Footer = () => {
                     target="_blank"
                     className="text-white"
                   >
-                    About Women Centre
+                    About Womens Centre
                   </a>
                 </li>
               </ul>
@@ -159,26 +137,6 @@ const Footer = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <i className="fab fa-facebook-f mt-3 mr-2"></i>Facebook
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://twitter.com/heartland_info"
-                    target="_blank"
-                    className="text-white"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <i className="fab fa-twitter mt-3 mr-2"></i>Twitter
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.instagram.com/heartland_academy/"
-                    target="_blank"
-                    className="text-white"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <i className="fab fa-instagram mt-3 mr-2"></i>Instagram
                   </a>
                 </li>
               </ul>

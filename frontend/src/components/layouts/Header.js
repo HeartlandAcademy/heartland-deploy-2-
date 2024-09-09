@@ -239,7 +239,7 @@ const Header = () => {
 
             <StyledLink exact activeClassName="selected" to="/women-centre">
               <li className="nav-item">
-                <a className="nav-link">Women Centre</a>
+                <a className="nav-link">The Heartland Centre forWomen</a>
               </li>
             </StyledLink>
 
@@ -252,14 +252,14 @@ const Header = () => {
                 aria-expanded="false"
                 style={{ color: "#3459e6" }}
               >
-                HA Family
+                Heartland Governance
               </a>
               <div
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
                 <StyledLink exact activeClassName="selected" to="/hafamily/bod">
-                  <a className="dropdown-item">BOD</a>
+                  <a className="dropdown-item">CLCR Australia</a>
                 </StyledLink>
 
                 {/* <StyledLink
@@ -275,7 +275,7 @@ const Header = () => {
                   activeClassName="selected"
                   to="/hafamily/staffs"
                 >
-                  <a className="dropdown-item">Staffs</a>
+                  <a className="dropdown-item">CLCR Nepal and The Karuna Trust</a>
                 </StyledLink>
               </div>
             </li>
@@ -288,7 +288,7 @@ const Header = () => {
 
             <StyledLink exact activeClassName="selected" to="/alumni">
               <li className="nav-item">
-                <a className="nav-link">Alumni</a>
+                <a className="nav-link">News and Upcoming Updates</a>
               </li>
             </StyledLink>
 
@@ -301,7 +301,7 @@ const Header = () => {
                 aria-expanded="false"
                 style={{ color: "#3459e6" }}
               >
-                Gallery
+                Gallery and Partners
               </a>
               <div
                 className="dropdown-menu"

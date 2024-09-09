@@ -5,7 +5,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 
 import { BASE_URL } from "../../../api";
-import Map from "../../../assets/others/map.jpg";
+import Map from "../../../assets/others/heartlands.jpg";
 import ImageHeader from "../../contents/ImageHeader";
 import Meta from "../../contents/Meta";
 import Loader from "../../contents/Loader";
@@ -218,9 +218,7 @@ const Contact = () => {
           </Number>
           <SocialMedia>
             <i className="fab fa-facebook-f"></i>
-            <i className="fab fa-twitter"></i>
-            <i className="fab fa-instagram"></i>
-            <i className="fab fa-linkedin-in"></i>
+            
           </SocialMedia>
         </Findus>
         <InputForm>

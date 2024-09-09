@@ -29,13 +29,13 @@ const Women = () => {
     <>
       <Meta title="Women's Centre" />
       <ImageHeader
-        mtitle="Women's Centre"
-        title="Women's Centre"
+        mtitle="The Heartland Centre for Women"
+        title="The Heartland Centre for Women"
         image={test}
       />
       <Section1 className="container">
         <div>
-          <h3>Women's Centre</h3>
+          <h3>The Heartland Centre for Women</h3>
           <h5>Who are we:</h5>
           <p>
             Heartland Academy’s Centre for Women (HCW) is a pioneer women’s only
@@ -53,7 +53,7 @@ const Women = () => {
             <img
               src={mainImage}
               alt="img"
-              height="500px"
+              height="600px"
               width={"100%"}
               style={{ objectFit: "cover", borderRadius: "12px" }}
             />

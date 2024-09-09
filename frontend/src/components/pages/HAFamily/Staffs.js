@@ -102,9 +102,9 @@ const Staffs = () => {
   return (
     <>
       <Meta title="HA Family | Staffs" />
-      <ImageHeader mtitle="HA Family" title="Staffs" image={test} />
+      <ImageHeader mtitle="CLCR Nepal and The Karuna Trust" title="CLCR Nepal and The Karuna Trusts" image={test} />
       <Section1 className="container">
-        <Title>HA STAFFS</Title>
+        <Title>CLCR Nepal and The Karuna Trust</Title>
         {loading ? (
           <Row className="g-4 p-4 m-4">
             <StaffCardLoader />

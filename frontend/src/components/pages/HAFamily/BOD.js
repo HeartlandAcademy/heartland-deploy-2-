@@ -136,7 +136,7 @@ const BOD = () => {
   return (
     <>
       <Meta title="HA Family | BOD" />
-      <ImageHeader mtitle="HA Family" title="BOD" image={test} />
+      <ImageHeader mtitle="CLCR Australia" title="BOD" image={test} />
       <Container>
         <Message0>
           <img src={director} alt="BOD" />

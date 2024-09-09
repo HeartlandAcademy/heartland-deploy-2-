@@ -27,8 +27,8 @@ const Title = styled.div`
 const Alumni = () => {
   return (
     <>
-      <Meta title="Alumni" />
-      <ImageHeader mtitle="Alumni" title="Alumni" image={test} />
+      <Meta title="News and Upcoming Updates" />
+      <ImageHeader mtitle="News and Upcoming Updates" title="News and Upcoming Updates" image={test} />
       <Section1 className="container">
         <Title>Heartland Alumni Network Division (HAND)</Title>
         <p>

@@ -268,7 +268,7 @@ const AboutUs = () => {
       <MainAboutWrapper className="container">
         <AbtContent>
           <h4>About Us</h4>
-          <h2>Welcome to Heartland's centre for Women</h2>
+          <h2>Welcome to Heartland's Centre for Women</h2>
           <p>
             It is with immense pleasure that we welcome you to our Heartland
             Centre for Women’s (HCW) college and tertiary education webpage.
