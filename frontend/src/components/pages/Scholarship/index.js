@@ -31,19 +31,22 @@ const Scholarship = () => {
         <div>
           <h3>Scholarship Provision</h3>
           <p>
-            Heartland is the school not for profit with service orientation and
-            providing scholarship opportunities to the underprivileged families
-            across the country. The families are informed to apply for
-            scholarship and they submit required documents in right format along
-            with their local government recommendation letter. The collected
-            documents are verified with scholarship committee at Heartland and
-            needy documents are sent to CLCR for final approval. The selected
-            students are given 100% scholarship to study at Heartland up to year
-            12. Also, those students are supported with 2 pairs of school
-            uniform each year along with stationery materials and educational
-            tours throughout the year as they need.
-          </p>
+            Heartland is a not-for-profit school with a service orientation, 
+            providing scholarship opportunities to the underprivileged families 
+            across the country from Nursery to grade 12 (tertiary sector). The 
+            process is one in which, existing Heartland families are informed 
+            throughout the academic session regarding application dates for scholarship. 
+            Upon application they must submit documentation specified by the school along 
+            with their local government recommendation letter. The collected documents are 
+            verified with the school’s scholarship committee at Heartland and then sent onto
+            CLCR Australia/ Nepal for consideration. The selected students are given 100% 
+            scholarship to study at Heartland up to year 12. Also, those students are supported 
+            with 2 pairs of the schools uniform each year along with stationery materials and funding 
+            for educational tours throughout the year as part of extra-curricular activities.
 
+              We provide several different scholarships based on the following criteria.
+          </p>
+          
           <p>
             We provide a number of scholarships based on the following criteria.
             All the scholarships are 100% and covers the both academic sessions.
@@ -57,6 +60,11 @@ const Scholarship = () => {
             </li>
             <li>Scholarship for the children of disabled parents</li>
           </ul>
+          <p>
+          For all enquiries regarding this process, please contact the school on the email and contact details below: <br/> 
+(Email: info@heartlandacademy.edu.np,)
+(Contact No: 977 - 01-523 7058, 977 - 01-523 7283)
+          </p>
         </div>
       </Section1>
     </>
